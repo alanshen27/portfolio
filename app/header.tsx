@@ -8,7 +8,7 @@ export function Header() {
   const subtitle = `Student & Developer · ${LOCATION}`
   
   return (
-    <div className="relative mb-12 -mt-20">
+    <div className="relative mb-12">
       <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg">
         <Image 
           src="/banner.jpg" 
