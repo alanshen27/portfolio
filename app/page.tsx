@@ -15,10 +15,25 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
+  EDUCATION,
+  SKILLS,
+  CERTIFICATIONS,
+  AWARDS,
+  PUBLICATIONS,
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
+  SUMMARY,
+  NAME,
+  type Project,
+  type WorkExperience,
+  type Education,
+  type Skill,
+  type Certification,
+  type Award,
+  type Publication,
 } from './data'
+import Image from 'next/image'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -39,11 +54,23 @@ const TRANSITION_SECTION = {
   duration: 0.3,
 }
 
-type ProjectVideoProps = {
-  src: string
+type ProjectMediaProps = {
+  video?: string
+  image?: string
+  alt: string
 }
 
-function ProjectVideo({ src }: ProjectVideoProps) {
+function ProjectMedia({ video, image, alt }: ProjectMediaProps) {
+  const mediaUrl = video || image
+  
+  if (!mediaUrl) {
+    return (
+      <div className="aspect-video w-full rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center">
+        <span className="text-zinc-400">No media</span>
+      </div>
+    )
+  }
+
   return (
     <MorphingDialog
       transition={{
@@ -53,23 +80,43 @@ function ProjectVideo({ src }: ProjectVideoProps) {
       }}
     >
       <MorphingDialogTrigger>
+        {video ? (
         <video
-          src={src}
+            src={video}
           autoPlay
           loop
           muted
           className="aspect-video w-full cursor-zoom-in rounded-xl"
         />
+        ) : (
+          <Image
+            src={image!}
+            alt={alt}
+            width={800}
+            height={450}
+            className="aspect-video w-full cursor-zoom-in rounded-xl object-cover"
+          />
+        )}
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
         <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
+          {video ? (
           <video
-            src={src}
+              src={video}
             autoPlay
             loop
             muted
             className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
           />
+          ) : (
+            <Image
+              src={image!}
+              alt={alt}
+              width={1920}
+              height={1080}
+              className="aspect-video h-[50vh] w-full rounded-xl object-cover md:h-[70vh]"
+            />
+          )}
         </MorphingDialogContent>
         <MorphingDialogClose
           className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
@@ -137,8 +184,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Focused on creating intuitive and performant web experiences.
-            Bridging the gap between design and development.
+            {SUMMARY}
           </p>
         </div>
       </motion.section>
@@ -150,15 +196,20 @@ export default function Personal() {
         <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project) => (
-            <div key={project.name} className="space-y-2">
+            <div key={project.id} className="space-y-2">
               <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+                <ProjectMedia 
+                  video={project.video} 
+                  image={project.image}
+                  alt={project.name}
+                />
               </div>
               <div className="px-1">
                 <a
                   className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
                   href={project.link}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {project.name}
                   <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
@@ -179,11 +230,8 @@ export default function Personal() {
         <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
-            <a
+            <div
               className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
-              rel="noopener noreferrer"
               key={job.id}
             >
               <Spotlight
@@ -191,7 +239,17 @@ export default function Personal() {
                 size={64}
               />
               <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row justify-between">
+                <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-y-0">
+                  <div className="flex items-start gap-3">
+                    {job.image && (
+                      <Image 
+                        src={job.image} 
+                        alt={job.company}
+                        width={48}
+                        height={48}
+                        className="rounded-lg object-cover"
+                      />
+                    )}
                   <div>
                     <h4 className="font-normal dark:text-zinc-100">
                       {job.title}
@@ -199,13 +257,257 @@ export default function Personal() {
                     <p className="text-zinc-500 dark:text-zinc-400">
                       {job.company}
                     </p>
+                      {job.description && (
+                        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                          {job.description}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 md:text-base">
                     {job.start} - {job.end}
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Education</h3>
+        <div className="flex flex-col space-y-2">
+          {EDUCATION.map((edu) => (
+            <div
+              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+              key={edu.id}
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-y-0">
+                  <div className="flex items-start gap-3">
+                    {edu.image && (
+                      <Image 
+                        src={edu.image} 
+                        alt={edu.institution}
+                        width={48}
+                        height={48}
+                        className="rounded-lg object-cover"
+                      />
+                    )}
+                    <div>
+                      <h4 className="font-normal dark:text-zinc-100">
+                        {edu.institution}
+                      </h4>
+                      <p className="text-zinc-500 dark:text-zinc-400">
+                        {edu.degree}
+                      </p>
+                      {edu.location && (
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                          {edu.location}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 md:text-base">
+                    {edu.start} - {edu.end}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Awards & Honors</h3>
+        <div className="flex flex-col space-y-3">
+          {AWARDS.map((award) => (
+            <div
+              key={award.id}
+              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <div className="flex flex-col space-y-2 sm:flex-row sm:gap-4 sm:space-y-0">
+                  {award.image && (
+                    <Image 
+                      src={award.image} 
+                      alt={award.title}
+                      width={120}
+                      height={120}
+                      className="rounded-lg object-cover"
+                    />
+                  )}
+                  <div className="flex-1">
+                    <h4 className="font-normal dark:text-zinc-100">
+                      {award.title}
+                    </h4>
+                    {award.description && (
+                      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                        {award.description}
+                      </p>
+                    )}
+                    {award.date && (
+                      <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                        {award.date}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Skills</h3>
+        <div className="flex flex-wrap gap-2">
+          {SKILLS.map((skill) => (
+            <div
+              key={skill.id}
+              className="group relative inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-sm transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            >
+              {skill.image && (
+                <Image 
+                  src={skill.image} 
+                  alt={skill.name}
+                  width={20}
+                  height={20}
+                  className="rounded"
+                />
+              )}
+              <span>{skill.name}</span>
+              {skill.level && (
+                <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                  {skill.level}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Certifications</h3>
+        <div className="flex flex-col space-y-3">
+          {CERTIFICATIONS.map((cert) => (
+            <div
+              key={cert.id}
+              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <div className="flex flex-col space-y-2 sm:flex-row sm:gap-4 sm:space-y-0 sm:items-center">
+                  {cert.image && (
+                    <Image 
+                      src={cert.image} 
+                      alt={cert.name}
+                      width={80}
+                      height={80}
+                      className="rounded-lg object-contain"
+                    />
+                  )}
+                  <div className="flex-1">
+                    <h4 className="font-normal dark:text-zinc-100">
+                      {cert.name}
+                    </h4>
+                    {cert.issuer && (
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        {cert.issuer}
+                      </p>
+                    )}
+                    {cert.date && (
+                      <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+                        {cert.date}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Publications</h3>
+        <div className="flex flex-col space-y-3">
+          {PUBLICATIONS.map((pub) => (
+            <div
+              key={pub.id}
+              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <div className="flex flex-col space-y-2 sm:flex-row sm:gap-4 sm:space-y-0">
+                  {pub.image && (
+                    <Image 
+                      src={pub.image} 
+                      alt={pub.title}
+                      width={120}
+                      height={120}
+                      className="rounded-lg object-cover"
+                    />
+                  )}
+                  <div className="flex-1">
+                    {pub.link ? (
+                      <a 
+                        href={pub.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative inline-block font-normal dark:text-zinc-100"
+                      >
+                        {pub.title}
+                        <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
+                      </a>
+                    ) : (
+                      <h4 className="font-normal dark:text-zinc-100">
+                        {pub.title}
+                      </h4>
+                    )}
+                    {pub.description && (
+                      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                        {pub.description}
+                      </p>
+                    )}
+                    {pub.date && (
+                      <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                        {pub.date}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </motion.section>
