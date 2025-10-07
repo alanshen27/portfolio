@@ -160,21 +160,25 @@ export const CERTIFICATIONS: Certification[] = [
 export const AWARDS: Award[] = [
   {
     title: 'HackHarvard 2025 China – 1st Place',
-    description: 'Overall Winner',
+    description: '1rst place; "Best Overall Hack" Winner',
     image: '/hackharvardchina.JPG',
     id: 'award1',
   },
   {
     title: 'Empower 3.0 Hacks – 3rd place',
+    description: '3rd place; "Coding" track; 450+ participants in total;',
     image: '/empower3.0.png',
     id: 'award2',
   },
   {
     title: 'USACO Silver',
+    description: 'Ranked 603 / 1883 among all pre-college participants in this division',
+    image: '/usaco.png',
     id: 'award3',
   },
   {
     title: 'HackHarvard 2025 – Compile the Decade Invitational',
+    description: 'Invited as one of only 2 high school teams to participate.',
     image: '/hackharvard2025.JPG',
     id: 'award4',
   },
