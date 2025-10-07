@@ -243,4 +243,4 @@ export const SUMMARY = 'High school student at Institut Le Rosey with achievemen
 
 export const NAME = 'Alan Shen'
 
-export const LOCATION = 'Tartegnin, Vaud, Switzerland'
+export const LOCATION = 'Switzerland • China • Singapore'
