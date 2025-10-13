@@ -76,25 +76,32 @@ export type SocialLink = {
 
 export const PROJECTS: Project[] = [
   {
+    name: 'Studious',
+    description: 'Modern learning management platform with AI-powered insights for class management and assignments.',
+    link: 'https://www.studious.sh',
+    image: '/studious.png',
+    id: 'project1',
+  },
+  {
     name: 'Scribe',
     description: 'AI-powered note-taking and transcription tool. Winner of HackHarvard 2025 China.',
     link: '',
     image: 'https://media.licdn.com/dms/image/v2/D4E2DAQFtundNWVST4w/profile-treasury-image-shrink_800_800/B4EZkKIpHhHgAc-/0/1756811671926?e=1760450400&v=beta&t=pWaIc6FXh6D5llLNZ3t8k8P03wZm2Ji0rn7gxDeEJmU',
-    id: 'project1',
+    id: 'project2',
   },
   {
     name: 'Synapse',
     description: 'Neural network visualization and analysis platform.',
-    link: '',
+    link: 'https://youtu.be/nuEoH_5YOi4',
     image: '/synapsehackharvard2025.png',
-    id: 'project2',
+    id: 'project3',
   },
   {
     name: 'Hive',
     description: 'Collaborative project management system.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
     image: '/hiveempower3.0.png',
-    id: 'project3',
+    id: 'project4',
   },
 ]
 
