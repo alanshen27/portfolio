@@ -386,9 +386,14 @@ export const EMAIL = 'alan.shen27@gmail.com'
 export const HEADLINE =
   "USACO Gold ’26 | VEX Excellence Award, Worlds Qualifier ’26 | Forthcoming Cambridge University Press '25 | Aspiring National Second Class Athlete | 3x Hackathon Podium | 2x Founder"
 
+export const TAGLINE =
+  'Building education systems at the intersection of AI, product, and competition.'
+
 export const SUMMARY =
   "High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin."
 
 export const NAME = 'Alan Shen'
 
 export const LOCATION = 'Geneva Metropolitan Area'
+
+export const ROLE = 'Founder · Developer · Student'

@@ -1,37 +1,38 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { DM_Sans, Syne } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
-import { ThemeProvider } from 'next-themes'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff',
+  themeColor: '#f3f6f8',
 }
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://alanshen.me/'),
   alternates: {
-    canonical: '/'
+    canonical: '/',
   },
   title: {
-    default: 'Alan Shen — Student, Founder & Developer',
-    template: '%s | Alan Shen'
+    default: 'Alan Shen — Founder, Developer & Student',
+    template: '%s | Alan Shen',
   },
   description:
-    "High school student at Institut Le Rosey. 2× founder (Studious, Scribe), USACO Gold ’26, VEX Worlds Qualifier (Excellence Award), 3× hackathon podium (HackHarvard, HackMIT CHN, Empower 3.0), and research author forthcoming with Cambridge University Press 2026.",
-};
+    'High school student at Institut Le Rosey. 2× founder (Studious, Scribe), USACO Gold ’26, VEX Worlds Qualifier, hackathon podium finisher, and research author forthcoming with Cambridge University Press 2026.',
+}
 
-const geist = Geist({
-  variable: '--font-geist',
+const syne = Syne({
+  variable: '--font-syne',
   subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export default function RootLayout({
@@ -40,24 +41,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
-      >
-        <ThemeProvider
-          enableSystem={true}
-          attribute="class"
-          storageKey="theme"
-          defaultTheme="system"
-        >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
-              {/* <Header /> */}
-              {children}
-              {/* <Footer /> */}
-            </div>
-          </div>
-        </ThemeProvider>
+    <html lang="en">
+      <body className={`${syne.variable} ${dmSans.variable} antialiased`}>
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

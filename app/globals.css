@@ -2,14 +2,6 @@
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:is(.dark *));
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -18,6 +10,41 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 28%, white);
+    color: var(--color-ink);
+  }
+}
+
+@theme {
+  --color-bg: #eef3f6;
+  --color-bg-elevated: #ffffff;
+  --color-ink: #12181f;
+  --color-ink-soft: #4a5560;
+  --color-ink-faint: #7a8794;
+  --color-line: #d5dde4;
+  --color-accent: #0f6e6e;
+  --color-accent-deep: #0a4f4f;
+  --color-mist: #dce7ee;
+  --color-lake: #b7cdd8;
+  --color-panel-mist: #e4eef4;
+  --color-panel-lake: #d5e6ef;
+  --color-panel-wash: #ebf3f7;
+  --color-ghost: #d8e0e6;
+
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -29,4 +56,62 @@
   --sh-jsxliterals: #7aa2f7;
   --sh-property: #73daca;
   --sh-entity: #e0af68;
+}
+
+.bg-atmosphere {
+  background:
+    radial-gradient(120% 80% at 100% -10%, var(--color-lake) 0%, transparent 55%),
+    radial-gradient(90% 70% at -10% 20%, var(--color-mist) 0%, transparent 50%),
+    linear-gradient(180deg, #eef3f6 0%, var(--color-bg) 40%, #f8fafb 100%);
+}
+
+.section-pad {
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+.section-max {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+}
+
+/* Diagonal band between major sections */
+.section-slant {
+  position: relative;
+}
+
+.section-slant::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: -2.5rem;
+  height: 2.5rem;
+  background: inherit;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+/* Giant ghost index numbers — meant to clip at row edges */
+.ghost-index {
+  color: var(--color-ghost);
+  -webkit-text-stroke: 0;
+}
+
+.overflow-rail {
+  overflow: hidden;
+}
+
+.panel-bokeh {
+  background-color: var(--color-panel-mist);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(255 180 120 / 0.28) 0%, transparent 18%),
+    radial-gradient(circle at 78% 22%, rgb(120 180 220 / 0.35) 0%, transparent 22%),
+    radial-gradient(circle at 62% 72%, rgb(255 255 255 / 0.55) 0%, transparent 16%),
+    radial-gradient(circle at 28% 78%, rgb(140 200 190 / 0.22) 0%, transparent 20%),
+    radial-gradient(circle at 88% 58%, rgb(255 200 140 / 0.18) 0%, transparent 14%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
 }
