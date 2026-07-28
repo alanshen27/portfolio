@@ -34,6 +34,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.rosey.ch',
       },
+      {
+        protocol: 'https',
+        hostname: 'distrokid.imgix.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co',
+      },
     ],
   },
 };

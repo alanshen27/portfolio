@@ -9,12 +9,13 @@ import {
 import type { ReactNode } from 'react'
 
 export const easeOut = [0.22, 1, 0.36, 1] as const
+export const easeSnap = [0.16, 1, 0.3, 1] as const
 
 export function Reveal({
   children,
   className = '',
   delay = 0,
-  y = 32,
+  y = 40,
 }: {
   children: ReactNode
   className?: string
@@ -30,10 +31,10 @@ export function Reveal({
   return (
     <motion.div
       className={`min-w-0 ${className}`}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-10% 0px' }}
-      transition={{ duration: 0.7, ease: easeOut, delay }}
+      initial={{ opacity: 0, y, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: '-12% 0px', amount: 0.2 }}
+      transition={{ duration: 0.85, ease: easeSnap, delay }}
     >
       {children}
     </motion.div>
@@ -86,11 +87,12 @@ export function StaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 22 },
+        hidden: { opacity: 0, y: 28, filter: 'blur(8px)' },
         show: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.55, ease: easeOut },
+          filter: 'blur(0px)',
+          transition: { duration: 0.65, ease: easeSnap },
         },
       }}
     >
@@ -188,7 +190,7 @@ export function GhostIndex({
   )
 }
 
-/** Image that clips open on scroll — no zoom / parallax */
+/** Image that clips open on scroll — no zoom / Ken Burns */
 export function ClipImage({
   children,
   className = '',
@@ -207,6 +209,13 @@ export function ClipImage({
         ? 'inset(0 0 0 100%)'
         : 'inset(100% 0 0 0)'
 
+  const slideFrom =
+    direction === 'left'
+      ? { x: '-8%' }
+      : direction === 'right'
+        ? { x: '8%' }
+        : { y: '10%' }
+
   if (reduce) {
     return <div className={`overflow-hidden ${className}`}>{children}</div>
   }
@@ -217,9 +226,113 @@ export function ClipImage({
       initial={{ clipPath: clipFrom }}
       whileInView={{ clipPath: 'inset(0 0 0 0)' }}
       viewport={{ once: true, margin: '-12% 0px' }}
-      transition={{ duration: 1.05, ease: easeOut }}
+      transition={{ duration: 1.15, ease: easeSnap }}
     >
-      <div className="h-full w-full">{children}</div>
+      <motion.div
+        className="h-full w-full"
+        initial={slideFrom}
+        whileInView={{ x: 0, y: 0 }}
+        viewport={{ once: true, margin: '-12% 0px' }}
+        transition={{ duration: 1.25, ease: easeSnap }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/** Corner L-brackets that draw in on view */
+export function AnimatedCorners({
+  className = '',
+  tone = 'accent',
+  inset = '1.25rem',
+  /** Offset left corners past the fixed AS spine */
+  clearSpine = true,
+}: {
+  className?: string
+  tone?: 'accent' | 'white'
+  inset?: string
+  clearSpine?: boolean
+}) {
+  const reduce = useReducedMotion()
+  const border =
+    tone === 'white' ? 'border-white/70' : 'border-accent'
+
+  const leftClass = clearSpine
+    ? 'left-[var(--corner-inset)] md:left-[calc(4rem+var(--corner-inset))] lg:left-[calc(4.5rem+var(--corner-inset))]'
+    : 'left-[var(--corner-inset)]'
+  const rightClass = 'right-[var(--corner-inset)]'
+  const topClass = 'top-[var(--corner-inset)]'
+  const bottomClass = 'bottom-[var(--corner-inset)]'
+
+  const corners = [
+    {
+      pos: `${topClass} ${leftClass}`,
+      cls: `border-t-2 border-l-2 ${border}`,
+    },
+    {
+      pos: `${topClass} ${rightClass}`,
+      cls: `border-t-2 border-r-2 ${border}`,
+    },
+    {
+      pos: `${bottomClass} ${leftClass}`,
+      cls: `border-b-2 border-l-2 ${border}`,
+    },
+    {
+      pos: `${bottomClass} ${rightClass}`,
+      cls: `border-r-2 border-b-2 ${border}`,
+    },
+  ] as const
+
+  return (
+    <div
+      className={`pointer-events-none absolute inset-0 z-20 ${className}`}
+      style={{ ['--corner-inset' as string]: inset }}
+      aria-hidden
+    >
+      {corners.map((c, i) => (
+        <motion.span
+          key={i}
+          className={`absolute h-10 w-10 md:h-14 md:w-14 ${c.pos} ${c.cls}`}
+          initial={reduce ? false : { opacity: 0, scale: 0.6 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.55,
+            delay: 0.15 + i * 0.08,
+            ease: easeSnap,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+export function ScrollCue({ className = '' }: { className?: string }) {
+  const reduce = useReducedMotion()
+
+  return (
+    <motion.div
+      className={`pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2 ${className}`}
+      initial={reduce ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.4, duration: 0.6 }}
+      aria-hidden
+    >
+      <motion.div
+        className="flex flex-col items-center gap-2"
+        animate={reduce ? undefined : { y: [0, 8, 0] }}
+        transition={
+          reduce
+            ? undefined
+            : { duration: 1.8, repeat: Infinity, ease: 'easeInOut' }
+        }
+      >
+        <span className="text-[10px] tracking-[0.28em] text-white/50 uppercase">
+          Scroll
+        </span>
+        <span className="h-8 w-px bg-gradient-to-b from-accent to-transparent" />
+      </motion.div>
     </motion.div>
   )
 }
@@ -246,12 +359,12 @@ export function SplitWords({
         <span key={`${word}-${i}`} className="overflow-hidden inline-block">
           <motion.span
             className="inline-block"
-            initial={{ y: '110%' }}
-            animate={{ y: 0 }}
+            initial={{ y: '110%', rotate: 4 }}
+            animate={{ y: 0, rotate: 0 }}
             transition={{
-              duration: 0.7,
-              ease: easeOut,
-              delay: delay + i * 0.055,
+              duration: 0.75,
+              ease: easeSnap,
+              delay: delay + i * 0.05,
             }}
           >
             {word}
@@ -266,10 +379,12 @@ export function SplitChars({
   text,
   className = '',
   delay = 0,
+  inView = false,
 }: {
   text: string
   className?: string
   delay?: number
+  inView?: boolean
 }) {
   const reduce = useReducedMotion()
   const chars = text.split('')
@@ -288,12 +403,17 @@ export function SplitChars({
         >
           <motion.span
             className="inline-block"
-            initial={{ y: '120%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: '120%', opacity: 0, rotate: 6 }}
+            {...(inView
+              ? {
+                  whileInView: { y: 0, opacity: 1, rotate: 0 },
+                  viewport: { once: true, amount: 0.6 },
+                }
+              : { animate: { y: 0, opacity: 1, rotate: 0 } })}
             transition={{
-              duration: 0.65,
-              ease: easeOut,
-              delay: delay + i * 0.035,
+              duration: 0.7,
+              ease: easeSnap,
+              delay: delay + i * 0.028,
             }}
           >
             {char === ' ' ? '\u00A0' : char}

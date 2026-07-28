@@ -1,3 +1,10 @@
+export type ProjectDeviceKind =
+  | 'laptop'
+  | 'monitor'
+  | 'tvModern'
+  | 'tvVintage'
+  | 'desk'
+
 export type Project = {
   name: string
   description: string
@@ -5,6 +12,10 @@ export type Project = {
   video?: string
   image?: string
   id: string
+  role?: string
+  timeframe?: string
+  points?: string[]
+  device?: ProjectDeviceKind
 }
 
 export type WorkExperience = {
@@ -92,40 +103,80 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'A next-generation LMS integrating AI and LLMs into everyday learning — full-featured, fast, and built for a new generation of education. Sep 2023 – Present.',
+      'A modern LMS for schools — AI in the daily workflow, not bolted on as a demo.',
     link: 'https://www.studious.sh',
     image: '/studious.png',
     id: 'project1',
+    role: 'Founder',
+    timeframe: 'Sep 2023 – Present',
+    device: 'laptop',
+    points: [
+      'Led frontend in Next.js and backend with tRPC.',
+      'Scaled with Pusher sockets, Supabase read replicas, Render load balancing, and Vercel edge delivery.',
+      'Started the Studious School Development Program for under-resourced classrooms.',
+    ],
   },
   {
     name: 'Nomad',
     description:
-      'Campus-focused platform combining an interactive course planner (prerequisite graph, dependency-aware academic plans) with a student social network for discovering classmates, communities, and relevant peers. Built in 36 hours at HackMIT China 2026 — 3rd Place Education Track & Outstanding Impact Award.',
+      'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
     link: 'https://www.linkedin.com/in/alanshen27/',
     image: '/nomad.png',
     id: 'project-nomad',
+    role: 'HackMIT China 2026',
+    timeframe: '36 hours',
+    device: 'desk',
+    points: [
+      '3rd Place, Education Track — Outstanding Impact Award.',
+      'Interactive course planner with prerequisite dependency graphs.',
+      'Social layer for finding classmates, communities, and relevant peers.',
+    ],
   },
   {
     name: 'Scribe',
     description:
-      'AI study assistant that teaches students how to learn properly using structured methods. 1st Place Overall at HackHarvard China 2025. Aug 2025 – Jan 2026.',
+      'AI study assistant that teaches how to learn — structured methods, not just answers.',
     link: 'https://www.scribe.study',
     image: '/scribe.png',
     id: 'project2',
+    role: 'SWE & Co-Founder',
+    timeframe: 'Aug 2025 – Jan 2026',
+    device: 'tvModern',
+    points: [
+      '1st Place Overall at HackHarvard China 2025.',
+      'Led frontend redesign and backend infrastructure.',
+      'Supported inference design for AI-driven study workflows.',
+    ],
   },
   {
     name: 'Synapse',
-    description: 'Neural network visualization and analysis platform.',
+    description:
+      'Neural network visualization and analysis — built for HackHarvard.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     image: '/synapsehackharvard2025.png',
     id: 'project3',
+    role: 'HackHarvard 2025',
+    timeframe: '2025',
+    device: 'monitor',
+    points: [
+      'Interactive viz for inspecting network structure and behavior.',
+      'Full demo walkthrough on YouTube.',
+    ],
   },
   {
     name: 'Hive',
-    description: 'Collaborative project management system.',
+    description:
+      'Collaborative project management — built for Empower 3.0 Hacks.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
     image: '/hiveempower3.0.png',
     id: 'project4',
+    role: 'Empower 3.0',
+    timeframe: '2025',
+    device: 'tvVintage',
+    points: [
+      '3rd Place, Coding track (450+ participants).',
+      'Shared workspace for coordinating collaborative builds.',
+    ],
   },
 ]
 
@@ -358,6 +409,59 @@ export const VOLUNTEERING: Volunteering[] = [
 
 export const BLOG_POSTS: BlogPost[] = []
 
+export type MusicRelease = {
+  title: string
+  artist: string
+  type: string
+  cover: string
+  audio?: string
+  hyperfollow?: string
+  links: { label: string; href: string }[]
+  id: string
+}
+
+export const MUSIC_RELEASES: MusicRelease[] = [
+  {
+    title: "I'd Stay",
+    artist: 'Alan Shen',
+    type: 'Single',
+    cover: '/music/id_stay.png',
+    audio: '/music/id_stay.mp3',
+    hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/id-stay',
+    links: [
+      {
+        label: 'Spotify',
+        href: 'https://open.spotify.com/album/5X1VFHbrMXlR5hUYKNsODZ',
+      },
+      {
+        label: 'Apple Music',
+        href: 'https://music.apple.com/us/album/id-stay-single/1859331014',
+      },
+      {
+        label: 'Deezer',
+        href: 'https://www.deezer.com/album/872144062',
+      },
+      {
+        label: 'iHeartRadio',
+        href: 'https://www.iheart.com/artist/id-48869184/albums/id-365429044',
+      },
+    ],
+    id: 'id-stay',
+  },
+  {
+    title: 'Dreams of the Blue',
+    artist: 'Alan Shen',
+    type: 'Single',
+    cover: '/music/dreams_of_the_blue.png',
+    audio: '/music/dreams_of_the_blue.mp3',
+    hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
+    links: [],
+    id: 'dreams-of-the-blue',
+  },
+]
+
+export const DISTROKID_ARTIST = 'alanshen'
+
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'LinkedIn',
@@ -376,10 +480,21 @@ export const SOCIAL_LINKS: SocialLink[] = [
     link: 'https://scribe.study',
   },
   {
+    label: 'Music',
+    link: 'https://distrokid.com/hyperfollow/alanshen/id-stay',
+  },
+  {
     label: 'Email',
     link: 'mailto:alan.shen27@gmail.com',
   },
 ]
+
+export const SITE_NAV = [
+  { label: 'Work', href: '/work' },
+  { label: 'Path', href: '/path' },
+  { label: 'Music', href: '/music' },
+  { label: 'About', href: '/about' },
+] as const
 
 export const EMAIL = 'alan.shen27@gmail.com'
 
@@ -391,6 +506,18 @@ export const TAGLINE =
 
 export const SUMMARY =
   "High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin."
+
+/** Short home-hero intro — who you are before they scroll. */
+export const HOME_INTRO =
+  'Student at Institut Le Rosey. Founder of Studious and Scribe. I build education products, compete in USACO and VEX, swim for medals, and release music as a violinist and pianist.'
+
+export const PROOF_POINTS: { label: string; href: string }[] = [
+  { label: 'Studious', href: '/work#project1' },
+  { label: 'HackHarvard 1st', href: '/work#project2' },
+  { label: 'USACO Gold', href: '/path' },
+  { label: 'VEX Worlds', href: '/path' },
+  { label: 'ABRSM 8', href: '/music' },
+]
 
 export const NAME = 'Alan Shen'
 

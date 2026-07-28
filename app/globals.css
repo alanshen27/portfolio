@@ -22,26 +22,26 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-accent) 28%, white);
+    background: color-mix(in oklab, var(--color-accent) 35%, white);
     color: var(--color-ink);
   }
 }
 
 @theme {
-  --color-bg: #eef3f6;
+  --color-bg: #e8eef3;
   --color-bg-elevated: #ffffff;
-  --color-ink: #12181f;
-  --color-ink-soft: #4a5560;
-  --color-ink-faint: #7a8794;
-  --color-line: #d5dde4;
-  --color-accent: #0f6e6e;
-  --color-accent-deep: #0a4f4f;
-  --color-mist: #dce7ee;
-  --color-lake: #b7cdd8;
-  --color-panel-mist: #e4eef4;
-  --color-panel-lake: #d5e6ef;
-  --color-panel-wash: #ebf3f7;
-  --color-ghost: #d8e0e6;
+  --color-ink: #0c1218;
+  --color-ink-soft: #3d4853;
+  --color-ink-faint: #6d7a87;
+  --color-line: #c9d4de;
+  --color-accent: #0d6b6b;
+  --color-accent-deep: #084848;
+  --color-mist: #d5e4ee;
+  --color-lake: #a9c4d4;
+  --color-panel-mist: #dfeaf1;
+  --color-panel-lake: #c9dce8;
+  --color-panel-wash: #e7f0f5;
+  --color-ghost: #c5d0d9;
 
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
@@ -62,7 +62,7 @@
   background:
     radial-gradient(120% 80% at 100% -10%, var(--color-lake) 0%, transparent 55%),
     radial-gradient(90% 70% at -10% 20%, var(--color-mist) 0%, transparent 50%),
-    linear-gradient(180deg, #eef3f6 0%, var(--color-bg) 40%, #f8fafb 100%);
+    linear-gradient(180deg, #e4edf3 0%, var(--color-bg) 40%, #f4f8fa 100%);
 }
 
 .section-pad {
@@ -72,42 +72,75 @@
 .section-max {
   margin-inline: auto;
   width: 100%;
-  max-width: 72rem;
+  max-width: 80rem;
 }
 
-/* Diagonal band between major sections */
-.section-slant {
-  position: relative;
+/* Clear the fixed left spine on md+ */
+.spine-pad {
+  padding-left: 0;
 }
 
-.section-slant::before {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  top: -2.5rem;
-  height: 2.5rem;
-  background: inherit;
-  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+@media (min-width: 768px) {
+  .spine-pad {
+    padding-left: 4rem;
+  }
 }
 
-/* Giant ghost index numbers — meant to clip at row edges */
-.ghost-index {
-  color: var(--color-ghost);
-  -webkit-text-stroke: 0;
+@media (min-width: 1024px) {
+  .spine-pad {
+    padding-left: 4.5rem;
+  }
 }
 
 .overflow-rail {
   overflow: hidden;
 }
 
-.panel-bokeh {
-  background-color: var(--color-panel-mist);
-  background-image:
-    radial-gradient(circle at 12% 18%, rgb(255 180 120 / 0.28) 0%, transparent 18%),
-    radial-gradient(circle at 78% 22%, rgb(120 180 220 / 0.35) 0%, transparent 22%),
-    radial-gradient(circle at 62% 72%, rgb(255 255 255 / 0.55) 0%, transparent 16%),
-    radial-gradient(circle at 28% 78%, rgb(140 200 190 / 0.22) 0%, transparent 20%),
-    radial-gradient(circle at 88% 58%, rgb(255 200 140 / 0.18) 0%, transparent 14%);
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.display-smash {
+  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+/* Floating product shot — glass panel, not fake laptop chrome */
+.shot-scene {
+  transform-style: preserve-3d;
+}
+
+.shot-panel {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.shot-img {
+  filter: contrast(1.05) saturate(1.08);
+}
+
+.shot-grain {
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.shot-mirror {
+  transform-style: preserve-3d;
+  perspective: 1200px;
 }
 
 @media (prefers-reduced-motion: reduce) {
