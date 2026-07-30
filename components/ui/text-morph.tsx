@@ -1,11 +1,11 @@
 'use client'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion, Transition, Variants } from 'motion/react'
-import { useMemo, useId } from 'react'
+import { createElement, useMemo, useId } from 'react'
 
 export type TextMorphProps = {
   children: string
-  as?: React.ElementType
+  as?: 'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3'
   className?: string
   style?: React.CSSProperties
   variants?: Variants
@@ -54,25 +54,25 @@ export function TextMorph({
     mass: 0.3,
   }
 
-  return (
-    <Component className={cn(className)} aria-label={children} style={style}>
-      <AnimatePresence mode="popLayout" initial={false}>
-        {characters.map((character) => (
-          <motion.span
-            key={character.id}
-            layoutId={character.id}
-            className="inline-block"
-            aria-hidden="true"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={variants || defaultVariants}
-            transition={transition || defaultTransition}
-          >
-            {character.label}
-          </motion.span>
-        ))}
-      </AnimatePresence>
-    </Component>
+  return createElement(
+    Component,
+    { className: cn(className), 'aria-label': children, style },
+    <AnimatePresence mode="popLayout" initial={false}>
+      {characters.map((character) => (
+        <motion.span
+          key={character.id}
+          layoutId={character.id}
+          className="inline-block"
+          aria-hidden="true"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={variants || defaultVariants}
+          transition={transition || defaultTransition}
+        >
+          {character.label}
+        </motion.span>
+      ))}
+    </AnimatePresence>,
   )
 }
