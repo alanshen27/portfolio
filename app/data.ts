@@ -66,6 +66,9 @@ export type Award = {
 
 export type Publication = {
   title: string
+  authors?: string
+  venue?: string
+  status?: string
   link?: string
   date?: string
   image?: string
@@ -88,6 +91,7 @@ export type Volunteering = {
   end: string
   cause?: string
   description?: string
+  bullets?: string[]
   image?: string
   link?: string
   id: string
@@ -378,32 +382,75 @@ export const AWARDS: Award[] = [
 
 export const PUBLICATIONS: Publication[] = [
   {
-    title: 'API endpoint and its value in Chinese international education',
-    description: 'Feng Xiao, Xuren Shen (2026). Forthcoming.',
-    date: '2026',
-    id: 'pub1',
+    title: 'Training AI for Pragmatics Assessment',
+    authors: 'Xiao, F., Taguchi, N., Li, S. & Shen, A.',
+    venue:
+      'Cambridge University Press · presented at CALICO (Computer Assisted Language Instruction Consortium)',
+    status: 'Forthcoming',
+    date: 'Jun 15, 2026',
+    id: 'pub-pragmatics',
   },
   {
-    title: 'Training AI for Pragmatics Assessment',
-    description:
-      'Xiao, F., Taguchi, N., Li, S. & Shen, A. (May 2025). Computer Assisted Language Learning Consortium (CALICO): San Diego, CA. Forthcoming with Cambridge University Press, 2026.',
-    date: 'May 2025',
-    id: 'pub2',
+    title: 'API endpoint and its value in Chinese international education',
+    authors: 'Xiao, F. & Shen, X.',
+    venue:
+      'Journal of Research on International Chinese Teaching and Learning Resources, Vol. 3, pp. 111–118',
+    status: 'Accepted · forthcoming',
+    date: '2026',
+    id: 'pub-api',
+  },
+  {
+    title: 'Luduan.ai: A System Solution to AI-Enhanced Pedagogy',
+    authors: 'Xiao, F., Wojnicki, H. & Shen, X.',
+    venue:
+      'The 4th Conference on Artificial Intelligence Research in Applied Linguistics · Columbia University',
+    status: 'Conference',
+    date: 'Sep 2026',
+    id: 'pub-luduan',
   },
 ]
 
 export const VOLUNTEERING: Volunteering[] = [
   {
-    role: 'Educator and Developer',
+    role: 'Student Volunteer',
+    organization: 'Casa Draga Casa Concept Association Beius',
+    start: 'Mar 2025',
+    end: 'Jun 2025',
+    cause: 'Disaster & Humanitarian Relief',
+    bullets: [
+      'Built and worked on multiple housing units with 10 classmates in rural Romania (Oradea).',
+      'Visited orphanages and the local liceul for cultural exchange.',
+      'Prepared and performed violin music for the Liceul De Arte Oradea and orphanages.',
+      'Initiated the Studious Student Development Program, bringing AI-empowered education to two local schools.',
+      'Wrote a song and performed it for 60+ students to raise awareness.',
+    ],
+    image: '/alan/romania-house.png',
+    id: 'vol-casa',
+  },
+  {
+    role: 'Educator & Developer',
     organization: 'The Lost Food Project',
-    start: 'October 2025',
+    start: 'Oct 2025',
     end: 'May 2026',
     cause: 'Environment',
     description:
-      'Lead a team of students to develop a web-based game for Earth Day, spreading awareness about food waste.',
+      'Led a team of 4 students building a web-based game for Earth Day to spread awareness about food waste — 3+ hours of playtime across 30+ players, with largely positive feedback.',
     image: '/logos/lostfood.png',
     link: 'https://www.thelostfoodproject.org',
-    id: 'vol1',
+    id: 'vol-lostfood',
+  },
+  {
+    role: 'Student Volunteer',
+    organization: "Association Sur Le Chemin de l'école",
+    start: 'Apr 2023',
+    end: 'Jul 2023',
+    cause: 'Poverty Alleviation',
+    bullets: [
+      'Researched the needs and situation of children in Dharia, India, raising 2,500 CHF.',
+      'Organised a school-wide fundraising event with 3 classmates.',
+      'Hosted a 120-student cadet talent show, organised Indian Night and themed decoration.',
+    ],
+    id: 'vol-chemin',
   },
 ]
 
@@ -490,16 +537,18 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const SITE_NAV = [
-  { label: 'Work', href: '/work' },
-  { label: 'Path', href: '/path' },
-  { label: 'Music', href: '/music' },
-  { label: 'About', href: '/about' },
+  { label: 'Ventures', href: '/#ventures' },
+  { label: 'Competition', href: '/#competition' },
+  { label: 'Research', href: '/#research' },
+  { label: 'Music', href: '/#music' },
+  { label: 'Service', href: '/#service' },
+  { label: 'Contact', href: '/#contact' },
 ] as const
 
 export const EMAIL = 'alan.shen27@gmail.com'
 
 export const HEADLINE =
-  "USACO Gold ’26 | VEX Excellence Award, Worlds Qualifier ’26 | Forthcoming Cambridge University Press '25 | Aspiring National Second Class Athlete | 3x Hackathon Podium | 2x Founder"
+  'USACO Gold ’26 | VEX Excellence Award, Worlds Qualifier ’26 | Forthcoming Cambridge University Press ’26 | Aspiring National Second Class Athlete | 3x Hackathon Podium | 2x Founder'
 
 export const TAGLINE =
   'Building education systems at the intersection of AI, product, and competition.'

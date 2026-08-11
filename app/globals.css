@@ -18,33 +18,32 @@
   body {
     background: var(--color-bg);
     color: var(--color-ink);
-    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-family: var(--font-outfit), system-ui, sans-serif;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-accent) 35%, white);
+    background: color-mix(in oklab, var(--color-accent) 28%, white);
     color: var(--color-ink);
   }
 }
 
 @theme {
-  --color-bg: #e8eef3;
-  --color-bg-elevated: #ffffff;
-  --color-ink: #0c1218;
-  --color-ink-soft: #3d4853;
-  --color-ink-faint: #6d7a87;
-  --color-line: #c9d4de;
-  --color-accent: #0d6b6b;
-  --color-accent-deep: #084848;
-  --color-mist: #d5e4ee;
-  --color-lake: #a9c4d4;
-  --color-panel-mist: #dfeaf1;
-  --color-panel-lake: #c9dce8;
-  --color-panel-wash: #e7f0f5;
-  --color-ghost: #c5d0d9;
+  --color-bg: #eef2f4;
+  --color-bg-elevated: #f8fafb;
+  --color-ink: #10161c;
+  --color-ink-soft: #46525d;
+  --color-ink-faint: #75828f;
+  --color-line: #d3dce3;
+  --color-accent: #15655d;
+  --color-accent-deep: #0c4640;
+  --color-mist: #dce8ef;
+  --color-lake: #9db9c9;
+  --color-panel-wash: #e9f0f4;
 
-  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-jetbrains), ui-monospace, 'SF Mono', SFMono-Regular, monospace;
 }
 
 :root {
@@ -58,93 +57,27 @@
   --sh-entity: #e0af68;
 }
 
-.bg-atmosphere {
-  background:
-    radial-gradient(120% 80% at 100% -10%, var(--color-lake) 0%, transparent 55%),
-    radial-gradient(90% 70% at -10% 20%, var(--color-mist) 0%, transparent 50%),
-    linear-gradient(180deg, #e4edf3 0%, var(--color-bg) 40%, #f4f8fa 100%);
-}
-
 .section-pad {
-  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
 }
 
 .section-max {
   margin-inline: auto;
   width: 100%;
-  max-width: 80rem;
+  max-width: 70rem;
 }
 
-/* Clear the fixed left spine on md+ */
-.spine-pad {
-  padding-left: 0;
+.display-quiet {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  font-optical-sizing: auto;
 }
 
-@media (min-width: 768px) {
-  .spine-pad {
-    padding-left: 4rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .spine-pad {
-    padding-left: 4.5rem;
-  }
-}
-
-.overflow-rail {
-  overflow: hidden;
-}
-
-.noise-overlay {
-  position: relative;
-}
-
-.noise-overlay::after {
-  content: '';
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: 0.045;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.display-smash {
-  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 0.85;
-  text-transform: uppercase;
-}
-
-/* Floating product shot — glass panel, not fake laptop chrome */
-.shot-scene {
-  transform-style: preserve-3d;
-}
-
-.shot-panel {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.shot-img {
-  filter: contrast(1.05) saturate(1.08);
-}
-
-.shot-grain {
-  opacity: 0.045;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.shot-mirror {
-  transform-style: preserve-3d;
-  perspective: 1200px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-  }
+.bg-atmosphere {
+  background:
+    radial-gradient(90% 60% at 85% -5%, var(--color-lake) 0%, transparent 50%),
+    radial-gradient(70% 50% at 0% 30%, var(--color-mist) 0%, transparent 45%),
+    linear-gradient(180deg, #e8eef2 0%, var(--color-bg) 45%, #f5f8fa 100%);
 }

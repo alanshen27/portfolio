@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Sans, Syne } from 'next/font/google'
+import { Fraunces, JetBrains_Mono, Outfit } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
@@ -7,7 +7,7 @@ import { Footer } from './footer'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f3f6f8',
+  themeColor: '#eef2f4',
 }
 
 export const metadata: Metadata = {
@@ -20,19 +20,25 @@ export const metadata: Metadata = {
     template: '%s | Alan Shen',
   },
   description:
-    'High school student at Institut Le Rosey. 2× founder (Studious, Scribe), USACO Gold ’26, VEX Worlds Qualifier, hackathon podium finisher, and research author forthcoming with Cambridge University Press 2026.',
+    'Institut Le Rosey, Class of 2027. 2× founder (Studious, Scribe), USACO Gold ’26, VEX Worlds qualifier, 3× hackathon podium, published researcher (Cambridge University Press, forthcoming), ABRSM Grade 8 violinist and pianist.',
 }
 
-const syne = Syne({
-  variable: '--font-syne',
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
-})
-
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+})
+
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const jetbrains = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+  weight: ['400', '500'],
 })
 
 export default function RootLayout({
@@ -42,7 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${dmSans.variable} antialiased`}>
+      <body
+        className={`${fraunces.variable} ${outfit.variable} ${jetbrains.variable} antialiased`}
+      >
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

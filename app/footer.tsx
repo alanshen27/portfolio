@@ -3,82 +3,58 @@ import { EMAIL, NAME, SITE_NAV, SOCIAL_LINKS } from './data'
 
 export function Footer() {
   const year = new Date().getFullYear()
-  const external = SOCIAL_LINKS.filter((l) => l.label !== 'Email')
+  const external = SOCIAL_LINKS.filter(
+    (l) => l.label === 'LinkedIn' || l.label === 'GitHub' || l.label === 'Music',
+  )
 
   return (
-    <footer className="spine-pad bg-ink text-white">
-      <div className="section-max section-pad grid gap-12 py-16 md:grid-cols-12 md:py-20">
-        <div className="md:col-span-6">
-          <p className="display-smash text-[clamp(2.5rem,6vw,4.5rem)]">
+    <footer className="border-t border-line bg-bg-elevated">
+      <div className="section-max section-pad flex flex-col gap-10 py-14 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="display-quiet text-[clamp(1.6rem,4vw,2.25rem)] text-ink">
             {NAME}
           </p>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-white/65">
-            Founder, developer, and musician — building education systems and
-            releasing music as {NAME}.
+          <p className="mt-3 font-mono text-[11px] tracking-[0.12em] text-ink-faint uppercase">
+            Institut Le Rosey · Class of 2027 · Geneva
           </p>
-          <p className="mt-8 text-xs tracking-[0.2em] text-lake uppercase">
-            Always building the next thing.
-          </p>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="mt-4 inline-block text-sm text-accent transition-opacity hover:opacity-70"
+          >
+            {EMAIL}
+          </a>
         </div>
 
-        <div className="md:col-span-3">
-          <p className="text-xs font-medium tracking-[0.22em] text-white/40 uppercase">
-            Pages
-          </p>
-          <ul className="mt-5 space-y-3 text-sm tracking-wide text-white/75 uppercase">
-            <li>
-              <Link href="/" className="transition-colors hover:text-accent">
-                Home
-              </Link>
-            </li>
-            {SITE_NAV.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="transition-colors hover:text-accent"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="md:col-span-3">
-          <p className="text-xs font-medium tracking-[0.22em] text-white/40 uppercase">
-            Elsewhere
-          </p>
-          <ul className="mt-5 space-y-3 text-sm tracking-wide text-white/75 uppercase">
-            {external.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-accent"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="transition-colors hover:text-accent"
-              >
-                Email
-              </a>
-            </li>
-          </ul>
+        <div className="flex flex-wrap gap-x-7 gap-y-3 text-sm text-ink-soft">
+          {SITE_NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="transition-colors hover:text-ink"
+            >
+              {item.label}
+            </Link>
+          ))}
+          {external.map((link) => (
+            <a
+              key={link.label}
+              href={link.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="section-max section-pad flex flex-col gap-2 py-5 text-xs tracking-[0.16em] text-white/40 uppercase sm:flex-row sm:justify-between">
+      <div className="border-t border-line">
+        <div className="section-max section-pad flex flex-col gap-1 py-4 font-mono text-[11px] tracking-[0.08em] text-ink-faint uppercase sm:flex-row sm:justify-between">
           <span>
             © {year} {NAME}
           </span>
-          <span>Geneva Metropolitan Area</span>
+          <span>Always building the next thing.</span>
         </div>
       </div>
     </footer>
