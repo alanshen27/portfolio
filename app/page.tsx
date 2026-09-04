@@ -6,104 +6,267 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Reveal, SplitChars, easeOut } from '@/components/portfolio-motion'
 import { FieldBackdrop } from '@/components/field-backdrop'
 import { UsacoBoard } from '@/components/viz/usaco-board'
-import { CpGraph } from '@/components/viz/cp-graph'
+import { MedalBars } from '@/components/viz/medal-bars'
+import { PianoRoll } from '@/components/viz/piano-roll'
+import { dateRange } from '@/lib/utils'
 import {
+  AWARDS,
+  EDUCATION,
   EMAIL,
+  FACTS,
+  HIGHLIGHTS,
+  HOME_BIO,
   HOME_INTRO,
+  MUSIC_RELEASES,
   NAME,
+  PROJECT_KIND_LABEL,
   PROJECTS,
+  PUBLICATIONS,
   SKILL_GROUPS,
   SOCIAL_LINKS,
+  VOLUNTEERING,
   WORK_EXPERIENCE,
+  type Project,
 } from './data'
 
-const EXPERIENCE = WORK_EXPERIENCE.filter(
-  (w) => w.company !== 'Institut Le Rosey',
+const FLAGSHIP_IDS = ['project1', 'project2', 'project-notate']
+const FLAGSHIP = FLAGSHIP_IDS.map(
+  (id) => PROJECTS.find((p) => p.id === id) as Project,
+)
+const MORE_BUILDS = PROJECTS.filter((p) => !FLAGSHIP_IDS.includes(p.id))
+
+const ROLES = WORK_EXPERIENCE.filter((w) => w.company !== 'Institut Le Rosey')
+const SWIM = WORK_EXPERIENCE.find((w) => w.company === 'Institut Le Rosey')
+
+const CONTACT_LINKS = SOCIAL_LINKS.filter((l) =>
+  ['GitHub', 'LinkedIn', 'Email'].includes(l.label),
 )
 
-const FEATURED = PROJECTS.filter((p) =>
-  ['project1', 'project2'].includes(p.id),
-)
+function external(href: string) {
+  return href.startsWith('http')
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {}
+}
 
-const GATES = [
-  {
-    href: '/work',
-    kicker: '01',
-    title: 'Work',
-    detail: 'Companies and builds that shipped.',
-  },
-  {
-    href: '/path',
-    kicker: '02',
-    title: 'Path',
-    detail: 'Scores, awards, research, athletics.',
-  },
-  {
-    href: '/music',
-    kicker: '03',
-    title: 'Music',
-    detail: 'Releases, violin, and piano.',
-  },
-] as const
+function linkLabel(href: string) {
+  if (href.includes('youtu')) return 'Demo'
+  if (href.includes('github')) return 'Source'
+  if (href.includes('linkedin')) return 'Context'
+  return 'Live'
+}
+
+function SectionHead({
+  index,
+  title,
+  count,
+  dark = false,
+}: {
+  index: string
+  title: string
+  count?: string
+  dark?: boolean
+}) {
+  return (
+    <div className={`section-head ${dark ? 'border-white/25' : ''}`}>
+      <span className={`idx ${dark ? 'text-white/40' : ''}`}>{index}</span>
+      <h2 className={`eyebrow ${dark ? 'text-accent-bright' : ''}`}>{title}</h2>
+      {count && (
+        <span className={`count ${dark ? 'text-white/40' : ''}`}>{count}</span>
+      )}
+    </div>
+  )
+}
+
+function DossierCard() {
+  return (
+    <div className="card corner-ticks paper-grid relative p-5 md:p-6">
+      <div className="flex items-start gap-4">
+        <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-mist md:h-20 md:w-20">
+          <Image
+            src="/media/portrait/award-ceremony.png"
+            alt="Alan Shen"
+            fill
+            priority
+            className="origin-[50%_24%] scale-[1.9] object-cover object-[50%_24%]"
+            sizes="160px"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="eyebrow-faint">Dossier</p>
+            <p className="eyebrow-faint">alanshen.me</p>
+          </div>
+          <p className="display-quiet mt-1.5 text-xl text-ink">{NAME}</p>
+          <p className="mt-0.5 text-sm text-ink-soft">
+            Founder · Engineer · Violinist
+          </p>
+        </div>
+      </div>
+
+      <dl className="ledger mt-5 text-sm">
+        {FACTS.map((f) => (
+          <div
+            key={f.label}
+            className="grid grid-cols-[6rem_1fr] gap-3 py-2 first:pt-0"
+          >
+            <dt className="eyebrow-faint pt-[3px]">{f.label}</dt>
+            <dd className="text-ink">{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
+        {CONTACT_LINKS.map((l) => (
+          <a
+            key={l.label}
+            href={l.link}
+            {...external(l.link)}
+            className="pill pill-accent transition-colors hover:bg-accent hover:text-white"
+          >
+            {l.label}
+            <span aria-hidden>↗</span>
+          </a>
+        ))}
+        <Link href="/path" className="pill hover:border-ink hover:text-ink">
+          Full record →
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
+  return (
+    <Reveal delay={delay} y={16} className="h-full">
+      <article
+        id={p.id}
+        className="card card-hover flex h-full scroll-mt-28 flex-col"
+      >
+        <a
+          href={p.link}
+          {...external(p.link)}
+          className="group relative block aspect-[16/9] overflow-hidden bg-mist"
+        >
+          {p.image ? (
+            <Image
+              src={p.image}
+              alt={`${p.name} screenshot`}
+              fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          ) : (
+            <PianoRoll className="h-full w-full" />
+          )}
+          <span className="pill pill-ink absolute top-3 left-3">
+            {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
+          </span>
+        </a>
+
+        <div className="flex flex-1 flex-col p-4 md:p-5">
+          <div className="flex items-baseline justify-between gap-3">
+            <h3 className="display-quiet text-xl text-ink">{p.name}</h3>
+            <p className="eyebrow-faint whitespace-nowrap">{p.timeframe}</p>
+          </div>
+          <p className="mt-0.5 text-[13px] text-ink-soft">{p.role}</p>
+          <p className="mt-2.5 text-sm leading-snug text-ink">
+            {p.description}
+          </p>
+          {p.outcome && (
+            <p className="mt-3 border-l-2 border-accent pl-2.5 text-[13px] font-medium text-accent-deep">
+              {p.outcome}
+            </p>
+          )}
+          <ul className="tick-list mt-3 space-y-1.5 text-[13px] leading-snug text-ink-soft">
+            {p.points?.slice(0, 3).map((pt) => <li key={pt}>{pt}</li>)}
+          </ul>
+          <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-4">
+            {p.tags?.map((t) => (
+              <span key={t} className="pill">
+                {t}
+              </span>
+            ))}
+            <a
+              href={p.link}
+              {...external(p.link)}
+              className="row-link ml-auto text-[13px]"
+            >
+              {linkLabel(p.link)} ↗
+            </a>
+          </div>
+        </div>
+      </article>
+    </Reveal>
+  )
+}
 
 export default function Home() {
   const reduce = useReducedMotion()
-  const socials = SOCIAL_LINKS.filter((l) =>
-    ['GitHub', 'LinkedIn', 'Email'].includes(l.label),
-  )
 
   return (
     <div className="bg-atmosphere">
-      {/* Hero — left-aligned editorial, not centered clone */}
-      <section className="relative min-h-[100svh] overflow-hidden pt-20">
+      {/* 00 — Hero: who, one sentence, dossier card, proof strip */}
+      <section className="relative overflow-hidden pt-24 pb-10 md:pt-28 md:pb-14">
         <FieldBackdrop />
-        <div className="section-max section-pad relative z-10 grid min-h-[calc(100svh-5rem)] items-end gap-12 pb-16 md:grid-cols-12 md:pb-20">
-          <div className="md:col-span-7">
+        <div className="section-max section-pad relative z-10 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
             <motion.p
-              className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase"
+              className="eyebrow"
               initial={reduce ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: easeOut }}
             >
-              Institut Le Rosey · Geneva · ’27
+              Institut Le Rosey · IB Diploma · Class of 2027 · Switzerland
             </motion.p>
 
-            <h1 className="display-quiet mt-5 text-[clamp(3.5rem,10vw,6.75rem)] text-ink">
-              <SplitChars text={NAME} delay={0.08} />
+            <h1 className="display-quiet mt-4 text-[clamp(3rem,8vw,5.75rem)] text-ink">
+              <SplitChars text={NAME} delay={0.06} />
             </h1>
 
             <motion.p
-              className="mt-6 max-w-md text-base leading-relaxed text-ink-soft md:text-lg"
+              className="mt-5 max-w-2xl text-lg leading-snug text-ink md:text-[1.35rem]"
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.28, ease: easeOut }}
+              transition={{ duration: 0.55, delay: 0.25, ease: easeOut }}
             >
-              Founder and developer building education systems — with USACO
-              Gold, VEX Worlds, and a violin on the side.
+              {HOME_INTRO}
+            </motion.p>
+
+            <motion.p
+              className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft"
+              initial={reduce ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35, ease: easeOut }}
+            >
+              {HOME_BIO}
             </motion.p>
 
             <motion.div
-              className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4"
+              className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
               initial={reduce ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.42, ease: easeOut }}
+              transition={{ duration: 0.5, delay: 0.45, ease: easeOut }}
             >
               <a
-                href="#work"
-                className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-85"
+                href="#builds"
+                className="inline-flex items-center gap-2 bg-ink px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85"
               >
-                See the work
-                <span aria-hidden>→</span>
+                See the builds
+                <span aria-hidden>↓</span>
               </a>
-              <div className="flex gap-5 text-sm text-ink-soft">
-                {socials.map((l) => (
+              <Link
+                href="/path"
+                className="inline-flex items-center gap-2 border border-ink/25 px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+              >
+                Full record
+                <span aria-hidden>→</span>
+              </Link>
+              <div className="flex gap-4 text-sm text-ink-soft">
+                {CONTACT_LINKS.map((l) => (
                   <a
                     key={l.label}
                     href={l.link}
-                    target={l.label === 'Email' ? undefined : '_blank'}
-                    rel={
-                      l.label === 'Email' ? undefined : 'noopener noreferrer'
-                    }
+                    {...external(l.link)}
                     className="transition-colors hover:text-ink"
                   >
                     {l.label}
@@ -114,118 +277,509 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="md:col-span-5"
+            className="lg:col-span-5"
             initial={reduce ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35, ease: easeOut }}
+            transition={{ duration: 0.7, delay: 0.3, ease: easeOut }}
           >
-            <UsacoBoard />
+            <DossierCard />
           </motion.div>
         </div>
+
+        {/* Proof strip */}
+        <motion.div
+          className="section-max section-pad relative z-10 mt-10 md:mt-12"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: easeOut }}
+        >
+          <ul className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 lg:grid-cols-6">
+            {HIGHLIGHTS.map((h) => (
+              <li key={h.label} className="bg-bg-elevated">
+                <Link
+                  href={h.href}
+                  className="group block h-full p-4 transition-colors hover:bg-panel-wash"
+                >
+                  <p
+                    className={`figure text-ink group-hover:text-accent ${
+                      h.compact
+                        ? 'text-[1.2rem] md:text-[1.3rem]'
+                        : 'text-[1.45rem] md:text-[1.6rem]'
+                    }`}
+                  >
+                    {h.value}
+                  </p>
+                  <p className="eyebrow mt-2">{h.label}</p>
+                  <p className="mt-1 text-[12px] leading-snug text-ink-soft">
+                    {h.detail}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </section>
 
-      {/* About — asymmetric */}
+      {/* 01 — Builds */}
       <section
-        id="about"
-        className="scroll-mt-24 border-t border-line bg-bg-elevated py-20 md:py-28"
+        id="builds"
+        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
       >
-        <div className="section-max section-pad grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-6">
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              About
-            </p>
-            <h2 className="display-quiet mt-4 text-[clamp(1.9rem,4vw,2.8rem)] text-ink">
-              {HOME_INTRO}
-            </h2>
-            <p className="mt-8 font-mono text-[12px] tracking-[0.1em] text-ink-faint">
-              [ {NAME} ]
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <SectionHead
+              index="01"
+              title="Builds"
+              count={`${PROJECTS.length} projects · 2 companies · 3 hackathon podiums`}
+            />
+            <p className="mt-4 max-w-2xl text-sm text-ink-soft">
+              What I make: education software that runs in real classrooms,
+              hackathon builds that placed, and research-grade side projects.
+              Three flagships first, then everything else.
             </p>
           </Reveal>
-          <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.08}>
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <Image
-                src="/media/portrait/award-ceremony.png"
-                alt="Alan Shen"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {FLAGSHIP.map((p, i) => (
+              <ProjectCard key={p.id} p={p} delay={i * 0.05} />
+            ))}
+          </div>
+
+          <Reveal className="mt-8" y={12}>
+            <p className="eyebrow-faint">More builds</p>
+            <ul className="ledger mt-2 border-y border-line">
+              {MORE_BUILDS.map((p) => (
+                <li
+                  key={p.id}
+                  id={p.id}
+                  className="grid scroll-mt-28 gap-x-6 gap-y-1.5 py-3.5 md:grid-cols-12 md:items-baseline"
+                >
+                  <div className="flex items-baseline gap-2.5 md:col-span-3">
+                    <h3 className="text-base font-semibold text-ink">
+                      {p.name}
+                    </h3>
+                    <span className="pill">
+                      {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
+                    </span>
+                  </div>
+                  <p className="text-sm leading-snug text-ink-soft md:col-span-4">
+                    {p.description}
+                  </p>
+                  <p className="text-[13px] font-medium text-accent-deep md:col-span-3">
+                    {p.outcome}
+                  </p>
+                  <div className="flex items-baseline justify-between gap-3 md:col-span-2 md:justify-end">
+                    <span className="eyebrow-faint">{p.role}</span>
+                    <a
+                      href={p.link}
+                      {...external(p.link)}
+                      className="row-link text-[13px]"
+                    >
+                      {linkLabel(p.link)} ↗
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3 flex justify-between text-[13px]">
+              <span className="text-ink-faint">
+                Roles, stack, and placements for each build →
+              </span>
+              <Link href="/work" className="row-link">
+                Open work portfolio →
+              </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Skills — flat rows, no glass card */}
-      <section className="border-t border-line py-16 md:py-20">
+      {/* 02 — Honors */}
+      <section
+        id="honors"
+        className="scroll-mt-20 border-t border-line py-12 md:py-16"
+      >
         <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              Skills
+          <Reveal y={10}>
+            <SectionHead
+              index="02"
+              title="Honors & competition"
+              count={`${AWARDS.length} awards · 2023–2026`}
+            />
+          </Reveal>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
+            <Reveal className="lg:col-span-7" y={14}>
+              <ul className="ledger border-y border-line">
+                {AWARDS.map((a) => (
+                  <li
+                    key={a.id}
+                    className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr]"
+                  >
+                    <p className="eyebrow-faint pt-1">{a.date ?? '—'}</p>
+                    {a.image ? (
+                      <div className="relative hidden h-9 w-9 overflow-hidden bg-panel-wash md:block">
+                        <Image
+                          src={a.image}
+                          alt=""
+                          fill
+                          className="object-contain p-1"
+                          sizes="36px"
+                        />
+                      </div>
+                    ) : (
+                      <span className="hidden md:block" />
+                    )}
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] leading-snug font-semibold text-ink">
+                        {a.title}
+                      </h3>
+                      {a.description && (
+                        <p className="mt-1 text-[13px] leading-snug text-ink-soft">
+                          {a.description}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2 text-[13px]">
+                <p className="text-ink-faint">
+                  Also: ABRSM Grade 8 Violin & Piano · TOEFL iBT 117 / 120
+                </p>
+                <Link href="/path" className="row-link">
+                  Scores, timeline, athletics →
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal className="lg:col-span-5" y={14} delay={0.06}>
+              <UsacoBoard />
+              <div className="card mt-4 p-4">
+                <div className="flex items-baseline justify-between">
+                  <p className="eyebrow">VEX Robotics · 15520X</p>
+                  <p className="eyebrow-faint">Sep 2025 – present</p>
+                </div>
+                <p className="mt-2 text-sm leading-snug text-ink">
+                  Engineer and programmer. Autonomous routines plus the
+                  driver-control interface.
+                </p>
+                <ul className="tick-list mt-2.5 space-y-1 text-[13px] text-ink-soft">
+                  <li>Excellence Award, Alpine Robo Games 2026 → VEX Worlds, Dallas.</li>
+                  <li>3rd skills · 3rd qualifiers at Alpine Robo Games.</li>
+                  <li>4th skills · 7th overall, Swiss Regional (ISBasel).</li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 — Research (dark band) */}
+      <section
+        id="research"
+        className="scroll-mt-20 bg-ink py-12 text-white md:py-16"
+      >
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <SectionHead
+              index="03"
+              title="Research"
+              count={`${PUBLICATIONS.length} papers · co-author`}
+              dark
+            />
+            <p className="mt-4 max-w-2xl text-sm text-white/65">
+              AI-based pragmatics assessment and AI-enhanced pedagogy.
+              Contributing author on all three; one forthcoming from Cambridge
+              University Press with a CALICO conference talk attached.
             </p>
           </Reveal>
-          <ul className="mt-8 divide-y divide-line border-y border-line">
-            {SKILL_GROUPS.map((g, i) => (
-              <Reveal key={g.label} delay={i * 0.04} y={10}>
-                <li className="grid gap-2 py-5 md:grid-cols-12 md:gap-8">
-                  <span className="font-mono text-[11px] tracking-[0.12em] text-ink-faint uppercase md:col-span-3">
-                    {g.label}
-                  </span>
-                  <span className="text-sm text-ink md:col-span-9 md:text-base">
+
+          <ul className="ledger-dark mt-6 border-y border-white/12">
+            {PUBLICATIONS.map((pub, i) => (
+              <Reveal key={pub.id} delay={i * 0.04} y={12}>
+                <li className="grid gap-x-6 gap-y-1.5 py-4 md:grid-cols-12">
+                  <div className="flex flex-wrap items-center gap-2 md:col-span-3 md:flex-col md:items-start">
+                    <span className="pill pill-dark">{pub.status}</span>
+                    <span className="font-mono text-[11px] text-white/45">
+                      {pub.date}
+                    </span>
+                  </div>
+                  <div className="md:col-span-9">
+                    <h3 className="text-base leading-snug font-semibold md:text-lg">
+                      {pub.title}
+                    </h3>
+                    <p className="mt-1 text-[13px] text-white/65">
+                      {pub.authors}
+                    </p>
+                    <p className="mt-0.5 text-[13px] text-white/45 italic">
+                      {pub.venue}
+                    </p>
+                    {pub.presentation && (
+                      <p className="mt-2 text-[13px] text-white/75">
+                        <span className="pill pill-dark mr-2">Talk</span>
+                        {pub.presentation}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 04 — Roles & education */}
+      <section
+        id="roles"
+        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
+      >
+        <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-7">
+            <Reveal y={10}>
+              <SectionHead
+                index="04"
+                title="Roles"
+                count={`${ROLES.length} positions`}
+              />
+            </Reveal>
+            <ul className="ledger mt-4 border-b border-line">
+              {ROLES.map((job, i) => (
+                <Reveal key={job.id} delay={i * 0.03} y={10}>
+                  <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
+                    <p className="eyebrow-faint pt-[3px] md:col-span-3">
+                      {dateRange(job.start, job.end)}
+                    </p>
+                    <div className="md:col-span-9">
+                      <div className="flex flex-wrap items-baseline gap-x-2.5">
+                        <h3 className="text-base font-semibold text-ink">
+                          {job.company}
+                        </h3>
+                        <span className="text-[13px] text-ink-soft">
+                          {job.title}
+                        </span>
+                        {job.link && (
+                          <a
+                            href={job.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="row-link ml-auto text-[12px]"
+                          >
+                            Visit ↗
+                          </a>
+                        )}
+                      </div>
+                      <ul className="tick-list mt-1.5 space-y-1 text-[13px] leading-snug text-ink-soft">
+                        {job.bullets?.slice(0, 2).map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-5">
+            <Reveal y={10}>
+              <SectionHead index="04b" title="Education" />
+            </Reveal>
+            <ul className="ledger mt-4 border-b border-line">
+              {EDUCATION.map((e) => (
+                <li key={e.id} className="py-3.5">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-[15px] font-semibold text-ink">
+                      {e.institution}
+                    </h3>
+                    <span className="eyebrow-faint whitespace-nowrap">
+                      {dateRange(e.start, e.end)}
+                    </span>
+                  </div>
+                  <p className="mt-0.5 text-[13px] text-ink-soft">
+                    {e.degree}
+                    {e.location ? ` · ${e.location}` : ''}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            <Reveal className="mt-8" y={10}>
+              <SectionHead index="04c" title="Stack" />
+            </Reveal>
+            <ul className="ledger mt-4 border-b border-line">
+              {SKILL_GROUPS.filter((g) => g.label !== 'Music').map((g) => (
+                <li
+                  key={g.label}
+                  className="grid grid-cols-[6.5rem_1fr] gap-3 py-2.5"
+                >
+                  <span className="eyebrow-faint pt-[3px]">{g.label}</span>
+                  <span className="text-[13px] leading-snug text-ink">
                     {g.items}
                   </span>
                 </li>
-              </Reveal>
-            ))}
-          </ul>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* Experience — open timeline */}
-      <section className="border-t border-line bg-bg-elevated py-16 md:py-24">
+      {/* 05 — Music & athletics */}
+      <section
+        id="beyond"
+        className="scroll-mt-20 border-t border-line py-12 md:py-16"
+      >
         <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              Experience
-            </p>
-            <h2 className="display-quiet mt-3 text-[clamp(1.8rem,4vw,2.5rem)] text-ink">
-              Founding. Building. Competing.
-            </h2>
+          <Reveal y={10}>
+            <SectionHead
+              index="05"
+              title="Music & athletics"
+              count="ABRSM Grade 8 ×2 · 14 medals"
+            />
           </Reveal>
-          <ul className="mt-12 divide-y divide-line border-y border-line">
-            {EXPERIENCE.map((job, i) => (
-              <Reveal key={job.id} delay={i * 0.04} y={14}>
-                <li className="grid gap-3 py-8 md:grid-cols-12 md:gap-8">
-                  <div className="md:col-span-3">
-                    <p className="font-mono text-[11px] text-ink-faint uppercase">
-                      {job.start} – {job.end}
-                    </p>
+
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            <Reveal y={14}>
+              <div className="card card-hover grid h-full gap-0 sm:grid-cols-5">
+                <div className="relative min-h-[180px] sm:col-span-2">
+                  <Image
+                    src="/media/music/violin-performance.png"
+                    alt="Alan Shen performing on violin"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 100vw, 20vw"
+                  />
+                </div>
+                <div className="p-4 sm:col-span-3 md:p-5">
+                  <div className="flex items-baseline justify-between">
+                    <p className="eyebrow">Music</p>
+                    <Link href="/music" className="row-link text-[12px]">
+                      Listen →
+                    </Link>
                   </div>
-                  <div className="md:col-span-4">
-                    <h3 className="display-quiet text-xl text-ink">
-                      {job.company}
-                    </h3>
-                    <p className="mt-1 text-sm text-ink-soft">{job.title}</p>
-                    {job.link && (
-                      <a
-                        href={job.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-2 inline-block text-sm text-accent hover:opacity-70"
-                      >
-                        Visit →
-                      </a>
-                    )}
-                  </div>
-                  <ul className="space-y-2 md:col-span-5">
-                    {job.bullets?.slice(0, 3).map((b) => (
+                  <h3 className="display-quiet mt-2 text-xl text-ink">
+                    Violin & piano, ABRSM Grade 8 in both.
+                  </h3>
+                  <p className="mt-2 text-[13px] leading-snug text-ink-soft">
+                    Orchestra and solo stage performance, from concert halls to
+                    orphanages in Romania. Two singles released under my own
+                    name.
+                  </p>
+                  <ul className="ledger mt-3 border-t border-line">
+                    {MUSIC_RELEASES.map((r) => (
                       <li
-                        key={b}
-                        className="border-l border-accent/35 pl-3 text-sm leading-relaxed text-ink-soft"
+                        key={r.id}
+                        className="flex items-center gap-3 py-2 text-[13px]"
                       >
-                        {b}
+                        <span className="relative h-8 w-8 shrink-0 overflow-hidden bg-mist">
+                          <Image
+                            src={r.cover}
+                            alt=""
+                            fill
+                            className="object-cover"
+                            sizes="32px"
+                          />
+                        </span>
+                        <span className="font-medium text-ink">{r.title}</span>
+                        <span className="eyebrow-faint">{r.type}</span>
+                        {r.hyperfollow && (
+                          <a
+                            href={r.hyperfollow}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="row-link ml-auto text-[12px]"
+                          >
+                            Stream ↗
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal y={14} delay={0.05}>
+              <div className="card card-hover grid h-full gap-0 sm:grid-cols-5">
+                <div className="p-4 sm:col-span-3 md:p-5">
+                  <div className="flex items-baseline justify-between">
+                    <p className="eyebrow">Athletics</p>
+                    <Link href="/path#athletics" className="row-link text-[12px]">
+                      Every meet →
+                    </Link>
+                  </div>
+                  <h3 className="display-quiet mt-2 text-xl text-ink">
+                    Competitive swimmer, 2× team MVP.
+                  </h3>
+                  <p className="mt-2 text-[13px] leading-snug text-ink-soft">
+                    {SWIM?.title} at Le Rosey since {SWIM?.start.split(' ')[1]}.
+                    IM, freestyle, relays, open water. School record in 2023.
+                  </p>
+                  <MedalBars className="mt-4" />
+                </div>
+                <div className="relative order-first min-h-[180px] sm:order-none sm:col-span-2">
+                  <Image
+                    src="/media/swim/medals-rooftop.png"
+                    alt="Swimming medals"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 20vw"
+                  />
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 06 — Service */}
+      <section
+        id="service"
+        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
+      >
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <SectionHead
+              index="06"
+              title="Service"
+              count={`${VOLUNTEERING.length} programmes`}
+            />
+          </Reveal>
+          <ul className="ledger mt-4 border-b border-line">
+            {VOLUNTEERING.map((v, i) => (
+              <Reveal key={v.id} delay={i * 0.03} y={10}>
+                <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
+                  <div className="md:col-span-3">
+                    <p className="eyebrow-faint">{dateRange(v.start, v.end)}</p>
+                    <p className="mt-1 text-[12px] text-ink-faint">{v.cause}</p>
+                  </div>
+                  <div className="md:col-span-9">
+                    <div className="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 className="text-base font-semibold text-ink">
+                        {v.organization}
+                      </h3>
+                      <span className="text-[13px] text-ink-soft">{v.role}</span>
+                      {v.link && (
+                        <a
+                          href={v.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="row-link ml-auto text-[12px]"
+                        >
+                          Visit ↗
+                        </a>
+                      )}
+                    </div>
+                    {v.description && (
+                      <p className="mt-1.5 text-[13px] leading-snug text-ink-soft">
+                        {v.description}
+                      </p>
+                    )}
+                    {v.bullets && (
+                      <ul className="tick-list mt-1.5 space-y-1 text-[13px] leading-snug text-ink-soft">
+                        {v.bullets.slice(0, 3).map((b) => <li key={b}>{b}</li>)}
+                      </ul>
+                    )}
+                  </div>
                 </li>
               </Reveal>
             ))}
@@ -233,130 +787,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured work */}
+      {/* 07 — Contact */}
       <section
-        id="work"
-        className="scroll-mt-24 border-t border-line py-16 md:py-24"
+        id="contact"
+        className="scroll-mt-20 border-t border-line py-14 md:py-20"
       >
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              Featured
-            </p>
-            <h2 className="display-quiet mt-3 text-[clamp(1.8rem,4vw,2.5rem)] text-ink">
-              Two companies. One mission.
+        <div className="section-max section-pad grid gap-8 lg:grid-cols-12">
+          <Reveal className="lg:col-span-7" y={10}>
+            <SectionHead index="07" title="Contact" />
+            <h2 className="display-quiet mt-5 text-[clamp(1.7rem,4vw,2.6rem)] text-ink">
+              Happy to talk about any of this.
             </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-12 md:grid-cols-2">
-            {FEATURED.map((p, i) => (
-              <Reveal key={p.id} delay={i * 0.06} y={18}>
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-mist">
-                    {p.image && (
-                      <Image
-                        src={p.image}
-                        alt={`${p.name} screenshot`}
-                        fill
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                        sizes="(max-width: 768px) 100vw, 45vw"
-                      />
-                    )}
-                  </div>
-                  <p className="mt-4 font-mono text-[11px] tracking-[0.14em] text-ink-faint uppercase">
-                    {p.role} · {p.timeframe}
-                  </p>
-                  <h3 className="display-quiet mt-1.5 text-2xl text-ink group-hover:text-accent">
-                    {p.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                    {p.description}
-                  </p>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-10" y={10}>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 text-sm text-accent hover:opacity-70"
+            <a
+              href={`mailto:${EMAIL}`}
+              className="display-quiet mt-4 inline-block border-b border-ink/25 pb-1 text-[clamp(1.1rem,3vw,1.7rem)] break-all text-ink transition-colors hover:border-ink"
             >
-              Every build
-              <span aria-hidden>→</span>
-            </Link>
+              {EMAIL}
+            </a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {SOCIAL_LINKS.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.link}
+                  {...external(l.link)}
+                  className="pill hover:border-ink hover:text-ink"
+                >
+                  {l.label} ↗
+                </a>
+              ))}
+            </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* CP — dark signature band */}
-      <section className="bg-ink py-16 text-white md:py-24">
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-lake uppercase">
-              Competitive programming
-            </p>
-            <h2 className="display-quiet mt-3 text-[clamp(1.8rem,4vw,2.6rem)]">
-              Perfect Silver. Straight to Gold.
-            </h2>
-          </Reveal>
-          <div className="mt-10 grid items-center gap-10 lg:grid-cols-2">
-            <Reveal delay={0.06}>
-              <div className="border border-white/15 bg-white/[0.03] p-5 md:p-6">
-                <p className="font-mono text-[10px] tracking-[0.16em] text-white/40 uppercase">
-                  Graph search · BFS
-                </p>
-                <CpGraph className="mt-3" tone="dark" />
-              </div>
-            </Reveal>
-            <Reveal delay={0.1} className="flex flex-col justify-center">
-              <p className="font-mono text-[12px] tracking-[0.1em] text-white/45 uppercase">
-                USACO · Feb 2026 · 1000 / 1000
-              </p>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">
-                Binary search until the answer snaps into place — then the
-                division board updates. That score is how I got to Gold.
-              </p>
-              <Link
-                href="/path"
-                className="mt-8 inline-flex items-center gap-2 text-sm text-lake hover:opacity-70"
-              >
-                Full competition record
-                <span aria-hidden>→</span>
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Index / gates — editorial, not cards */}
-      <section className="border-t border-line py-16 md:py-24">
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              Index
-            </p>
-          </Reveal>
-          <ul className="mt-8 divide-y divide-line border-y border-line">
-            {GATES.map((g, i) => (
-              <Reveal key={g.href} delay={i * 0.05} y={12}>
-                <li>
+          <Reveal className="lg:col-span-5" y={10} delay={0.05}>
+            <p className="eyebrow-faint">Deep dives</p>
+            <ul className="ledger mt-2 border-y border-line">
+              {[
+                {
+                  href: '/work',
+                  title: 'Work',
+                  detail: 'Every build with role, stack, and placement',
+                },
+                {
+                  href: '/path',
+                  title: 'Path',
+                  detail: 'Scores, awards, research, athletics, service',
+                },
+                {
+                  href: '/music',
+                  title: 'Music',
+                  detail: 'Releases with players and store links',
+                },
+              ].map((g) => (
+                <li key={g.href}>
                   <Link
                     href={g.href}
-                    className="group flex flex-wrap items-baseline justify-between gap-4 py-7"
+                    className="group flex items-baseline justify-between gap-4 py-3"
                   >
-                    <div className="flex items-baseline gap-5">
-                      <span className="font-mono text-[11px] text-ink-faint">
-                        {g.kicker}
-                      </span>
-                      <span className="display-quiet text-3xl text-ink transition-colors group-hover:text-accent md:text-4xl">
-                        {g.title}
-                      </span>
-                    </div>
-                    <span className="text-sm text-ink-soft">{g.detail}</span>
+                    <span className="display-quiet text-lg text-ink group-hover:text-accent">
+                      {g.title}
+                    </span>
+                    <span className="text-[13px] text-ink-soft">{g.detail}</span>
                     <span
                       aria-hidden
                       className="text-accent transition-transform group-hover:translate-x-1"
@@ -365,31 +854,8 @@ export default function Home() {
                     </span>
                   </Link>
                 </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section
-        id="contact"
-        className="scroll-mt-24 border-t border-line bg-bg-elevated py-20 md:py-28"
-      >
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
-              Contact
-            </p>
-            <h2 className="display-quiet mt-3 text-[clamp(1.9rem,4.5vw,2.8rem)] text-ink">
-              Let’s talk.
-            </h2>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="display-quiet mt-8 inline-block border-b border-ink/25 pb-1 text-[clamp(1.2rem,3.5vw,2rem)] break-all text-ink transition-colors hover:border-ink"
-            >
-              {EMAIL}
-            </a>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>

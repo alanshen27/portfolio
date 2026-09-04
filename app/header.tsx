@@ -36,18 +36,33 @@ export function Header() {
           </Link>
 
           <nav
-            className="hidden items-center gap-7 md:flex"
+            className="hidden items-center gap-6 md:flex"
             aria-label="Primary"
           >
-            {SITE_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-[13px] text-ink-soft transition-colors hover:text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {SITE_NAV.map((item, i) => {
+              const isPage = !item.href.includes('#')
+              const active = isPage && pathname.startsWith(item.href)
+              const firstPage =
+                isPage && SITE_NAV.findIndex((n) => !n.href.includes('#')) === i
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`relative text-[13px] transition-colors hover:text-ink ${
+                    active ? 'text-ink' : 'text-ink-soft'
+                  } ${firstPage ? 'ml-2 border-l border-line pl-6' : ''}`}
+                >
+                  {item.label}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className="absolute -bottom-1.5 left-0 h-px w-full bg-accent"
+                    />
+                  )}
+                </Link>
+              )
+            })}
             <a
               href={`mailto:${EMAIL}`}
               className="border border-ink/20 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:bg-ink hover:text-white"
@@ -103,18 +118,46 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-baseline gap-4 border-b border-line py-4"
+                      className="flex items-baseline gap-4 border-b border-line py-3"
                     >
                       <span className="font-mono text-[11px] text-accent">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="display-quiet text-[clamp(1.9rem,9vw,2.6rem)]">
+                      <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
                         {item.label}
+                      </span>
+                      <span className="ml-auto font-mono text-[10px] tracking-[0.12em] text-ink-faint uppercase">
+                        {item.href.includes('#') ? 'Home' : 'Page'}
                       </span>
                     </Link>
                   </motion.li>
                 ))}
               </ul>
+              <div className="mt-6 flex flex-wrap gap-2">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="pill pill-accent"
+                  onClick={() => setOpen(false)}
+                >
+                  Email ↗
+                </a>
+                <a
+                  href="https://github.com/alanshen27"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pill"
+                >
+                  GitHub ↗
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/alanshen27"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pill"
+                >
+                  LinkedIn ↗
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
