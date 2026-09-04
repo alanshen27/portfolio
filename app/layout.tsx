@@ -21,6 +21,25 @@ export const metadata: Metadata = {
   },
   description:
     'High school founder and developer. Studious & Scribe, USACO Gold, VEX Worlds, research, and music.',
+  openGraph: {
+    type: 'website',
+    url: 'https://alanshen.me/',
+    title: 'Alan Shen | High School Founder & Developer',
+    description:
+      'Studious & Scribe founder. USACO Gold, VEX Worlds qualifier, forthcoming Cambridge University Press research, ABRSM Grade 8 violin & piano.',
+    images: [
+      {
+        url: '/media/site/banner.jpg',
+        width: 4032,
+        height: 3024,
+        alt: 'Alan Shen performing violin on stage',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/media/site/banner.jpg'],
+  },
 }
 
 const outfit = Outfit({

@@ -136,19 +136,39 @@ export default function WorkPage() {
                     id={project.id}
                     className="grid scroll-mt-24 gap-6 lg:grid-cols-12 lg:gap-10"
                   >
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="card bg-mist relative block aspect-[16/10] overflow-hidden lg:col-span-5"
-                    >
-                      <Visual p={project} />
-                      <span className="pill pill-ink absolute top-3 left-3">
-                        {project.kind
-                          ? PROJECT_KIND_LABEL[project.kind]
-                          : 'Build'}
-                      </span>
-                    </a>
+                    <div className="lg:col-span-5">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="card bg-mist relative block aspect-[16/10] overflow-hidden"
+                      >
+                        <Visual p={project} />
+                        <span className="pill pill-ink absolute top-3 left-3">
+                          {project.kind
+                            ? PROJECT_KIND_LABEL[project.kind]
+                            : 'Build'}
+                        </span>
+                      </a>
+                      {project.photo && (
+                        <figure className="mt-2 flex items-center gap-3">
+                          <div className="bg-mist relative h-14 w-24 shrink-0 overflow-hidden">
+                            <Image
+                              src={project.photo}
+                              alt={
+                                project.photoCaption ?? `${project.name} team`
+                              }
+                              fill
+                              className="object-cover"
+                              sizes="96px"
+                            />
+                          </div>
+                          <figcaption className="eyebrow-faint leading-snug">
+                            {project.photoCaption}
+                          </figcaption>
+                        </figure>
+                      )}
+                    </div>
 
                     <div className="lg:col-span-7">
                       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
