@@ -237,7 +237,7 @@ export default function Home() {
         >
           <div className="bg-mist relative aspect-[21/7] overflow-hidden md:aspect-[21/6]">
             <Image
-              src="/media/music/violin-wide.png"
+              src="/media/site/banner.jpg"
               alt="Alan Shen performing violin on stage"
               fill
               priority

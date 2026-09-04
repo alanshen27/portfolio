@@ -639,7 +639,7 @@ export const STAGE_PHOTOS: { src: string; alt: string; caption: string }[] = [
     caption: 'Solo · close',
   },
   {
-    src: '/media/music/violin-wide.png',
+    src: '/media/site/banner.jpg',
     alt: 'Wide shot of Alan Shen performing violin on a lit stage',
     caption: 'Solo · stage',
   },
