@@ -81,7 +81,7 @@ function DossierCard() {
   return (
     <div className="card corner-ticks paper-grid relative p-5 md:p-6">
       <div className="flex items-start gap-4">
-        <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-mist md:h-20 md:w-20">
+        <div className="bg-mist relative h-16 w-16 shrink-0 overflow-hidden md:h-20 md:w-20">
           <Image
             src="/media/portrait/award-ceremony.png"
             alt="Alan Shen"
@@ -96,8 +96,8 @@ function DossierCard() {
             <p className="eyebrow-faint">Dossier</p>
             <p className="eyebrow-faint">alanshen.me</p>
           </div>
-          <p className="display-quiet mt-1.5 text-xl text-ink">{NAME}</p>
-          <p className="mt-0.5 text-sm text-ink-soft">
+          <p className="display-quiet text-ink mt-1.5 text-xl">{NAME}</p>
+          <p className="text-ink-soft mt-0.5 text-sm">
             Founder · Engineer · Violinist
           </p>
         </div>
@@ -115,13 +115,13 @@ function DossierCard() {
         ))}
       </dl>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
+      <div className="border-line mt-5 flex flex-wrap gap-2 border-t pt-4">
         {CONTACT_LINKS.map((l) => (
           <a
             key={l.label}
             href={l.link}
             {...external(l.link)}
-            className="pill pill-accent transition-colors hover:bg-accent hover:text-white"
+            className="pill pill-accent hover:bg-accent transition-colors hover:text-white"
           >
             {l.label}
             <span aria-hidden>↗</span>
@@ -145,7 +145,7 @@ function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
         <a
           href={p.link}
           {...external(p.link)}
-          className="group relative block aspect-[16/9] overflow-hidden bg-mist"
+          className="group bg-mist relative block aspect-[16/9] overflow-hidden"
         >
           {p.image ? (
             <Image
@@ -165,19 +165,19 @@ function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
 
         <div className="flex flex-1 flex-col p-4 md:p-5">
           <div className="flex items-baseline justify-between gap-3">
-            <h3 className="display-quiet text-xl text-ink">{p.name}</h3>
+            <h3 className="display-quiet text-ink text-xl">{p.name}</h3>
             <p className="eyebrow-faint whitespace-nowrap">{p.timeframe}</p>
           </div>
-          <p className="mt-0.5 text-[13px] text-ink-soft">{p.role}</p>
-          <p className="mt-2.5 text-sm leading-snug text-ink">
+          <p className="text-ink-soft mt-0.5 text-[13px]">{p.role}</p>
+          <p className="text-ink mt-2.5 text-sm leading-snug">
             {p.description}
           </p>
           {p.outcome && (
-            <p className="mt-3 border-l-2 border-accent pl-2.5 text-[13px] font-medium text-accent-deep">
+            <p className="border-accent text-accent-deep mt-3 border-l-2 pl-2.5 text-[13px] font-medium">
               {p.outcome}
             </p>
           )}
-          <ul className="tick-list mt-3 space-y-1.5 text-[13px] leading-snug text-ink-soft">
+          <ul className="tick-list text-ink-soft mt-3 space-y-1.5 text-[13px] leading-snug">
             {p.points?.slice(0, 3).map((pt) => <li key={pt}>{pt}</li>)}
           </ul>
           <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-4">
@@ -219,12 +219,12 @@ export default function Home() {
               Institut Le Rosey · IB Diploma · Class of 2027 · Switzerland
             </motion.p>
 
-            <h1 className="display-quiet mt-4 text-[clamp(3rem,8vw,5.75rem)] text-ink">
+            <h1 className="display-quiet text-ink mt-4 text-[clamp(3rem,8vw,5.75rem)]">
               <SplitChars text={NAME} delay={0.06} />
             </h1>
 
             <motion.p
-              className="mt-5 max-w-2xl text-lg leading-snug text-ink md:text-[1.35rem]"
+              className="text-ink mt-5 max-w-2xl text-lg leading-snug md:text-[1.35rem]"
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.25, ease: easeOut }}
@@ -233,7 +233,7 @@ export default function Home() {
             </motion.p>
 
             <motion.p
-              className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft"
+              className="text-ink-soft mt-4 max-w-xl text-sm leading-relaxed"
               initial={reduce ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35, ease: easeOut }}
@@ -249,25 +249,25 @@ export default function Home() {
             >
               <a
                 href="#builds"
-                className="inline-flex items-center gap-2 bg-ink px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85"
+                className="bg-ink inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85"
               >
                 See the builds
                 <span aria-hidden>↓</span>
               </a>
               <Link
                 href="/path"
-                className="inline-flex items-center gap-2 border border-ink/25 px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+                className="border-ink/25 text-ink hover:border-ink inline-flex items-center gap-2 border px-4 py-2.5 text-sm font-medium transition-colors"
               >
                 Full record
                 <span aria-hidden>→</span>
               </Link>
-              <div className="flex gap-4 text-sm text-ink-soft">
+              <div className="text-ink-soft flex gap-4 text-sm">
                 {CONTACT_LINKS.map((l) => (
                   <a
                     key={l.label}
                     href={l.link}
                     {...external(l.link)}
-                    className="transition-colors hover:text-ink"
+                    className="hover:text-ink transition-colors"
                   >
                     {l.label}
                   </a>
@@ -293,12 +293,12 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5, ease: easeOut }}
         >
-          <ul className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 lg:grid-cols-6">
+          <ul className="border-line bg-line grid grid-cols-2 gap-px border sm:grid-cols-3 lg:grid-cols-6">
             {HIGHLIGHTS.map((h) => (
               <li key={h.label} className="bg-bg-elevated">
                 <Link
                   href={h.href}
-                  className="group block h-full p-4 transition-colors hover:bg-panel-wash"
+                  className="group hover:bg-panel-wash block h-full p-4 transition-colors"
                 >
                   <p
                     className={`figure text-ink group-hover:text-accent ${
@@ -310,7 +310,7 @@ export default function Home() {
                     {h.value}
                   </p>
                   <p className="eyebrow mt-2">{h.label}</p>
-                  <p className="mt-1 text-[12px] leading-snug text-ink-soft">
+                  <p className="text-ink-soft mt-1 text-[12px] leading-snug">
                     {h.detail}
                   </p>
                 </Link>
@@ -323,7 +323,7 @@ export default function Home() {
       {/* 01 — Builds */}
       <section
         id="builds"
-        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
+        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad">
           <Reveal y={10}>
@@ -332,7 +332,7 @@ export default function Home() {
               title="Builds"
               count={`${PROJECTS.length} projects · 2 companies · 3 hackathon podiums`}
             />
-            <p className="mt-4 max-w-2xl text-sm text-ink-soft">
+            <p className="text-ink-soft mt-4 max-w-2xl text-sm">
               What I make: education software that runs in real classrooms,
               hackathon builds that placed, and research-grade side projects.
               Three flagships first, then everything else.
@@ -347,7 +347,7 @@ export default function Home() {
 
           <Reveal className="mt-8" y={12}>
             <p className="eyebrow-faint">More builds</p>
-            <ul className="ledger mt-2 border-y border-line">
+            <ul className="ledger border-line mt-2 border-y">
               {MORE_BUILDS.map((p) => (
                 <li
                   key={p.id}
@@ -355,17 +355,17 @@ export default function Home() {
                   className="grid scroll-mt-28 gap-x-6 gap-y-1.5 py-3.5 md:grid-cols-12 md:items-baseline"
                 >
                   <div className="flex items-baseline gap-2.5 md:col-span-3">
-                    <h3 className="text-base font-semibold text-ink">
+                    <h3 className="text-ink text-base font-semibold">
                       {p.name}
                     </h3>
                     <span className="pill">
                       {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
                     </span>
                   </div>
-                  <p className="text-sm leading-snug text-ink-soft md:col-span-4">
+                  <p className="text-ink-soft text-sm leading-snug md:col-span-4">
                     {p.description}
                   </p>
-                  <p className="text-[13px] font-medium text-accent-deep md:col-span-3">
+                  <p className="text-accent-deep text-[13px] font-medium md:col-span-3">
                     {p.outcome}
                   </p>
                   <div className="flex items-baseline justify-between gap-3 md:col-span-2 md:justify-end">
@@ -396,7 +396,7 @@ export default function Home() {
       {/* 02 — Honors */}
       <section
         id="honors"
-        className="scroll-mt-20 border-t border-line py-12 md:py-16"
+        className="border-line scroll-mt-20 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad">
           <Reveal y={10}>
@@ -409,7 +409,7 @@ export default function Home() {
 
           <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
             <Reveal className="lg:col-span-7" y={14}>
-              <ul className="ledger border-y border-line">
+              <ul className="ledger border-line border-y">
                 {AWARDS.map((a) => (
                   <li
                     key={a.id}
@@ -417,7 +417,7 @@ export default function Home() {
                   >
                     <p className="eyebrow-faint pt-1">{a.date ?? '—'}</p>
                     {a.image ? (
-                      <div className="relative hidden h-9 w-9 overflow-hidden bg-panel-wash md:block">
+                      <div className="bg-panel-wash relative hidden h-9 w-9 overflow-hidden md:block">
                         <Image
                           src={a.image}
                           alt=""
@@ -430,11 +430,11 @@ export default function Home() {
                       <span className="hidden md:block" />
                     )}
                     <div className="min-w-0">
-                      <h3 className="text-[15px] leading-snug font-semibold text-ink">
+                      <h3 className="text-ink text-[15px] leading-snug font-semibold">
                         {a.title}
                       </h3>
                       {a.description && (
-                        <p className="mt-1 text-[13px] leading-snug text-ink-soft">
+                        <p className="text-ink-soft mt-1 text-[13px] leading-snug">
                           {a.description}
                         </p>
                       )}
@@ -459,12 +459,15 @@ export default function Home() {
                   <p className="eyebrow">VEX Robotics · 15520X</p>
                   <p className="eyebrow-faint">Sep 2025 – present</p>
                 </div>
-                <p className="mt-2 text-sm leading-snug text-ink">
+                <p className="text-ink mt-2 text-sm leading-snug">
                   Engineer and programmer. Autonomous routines plus the
                   driver-control interface.
                 </p>
-                <ul className="tick-list mt-2.5 space-y-1 text-[13px] text-ink-soft">
-                  <li>Excellence Award, Alpine Robo Games 2026 → VEX Worlds, Dallas.</li>
+                <ul className="tick-list text-ink-soft mt-2.5 space-y-1 text-[13px]">
+                  <li>
+                    Excellence Award, Alpine Robo Games 2026 → VEX Worlds,
+                    Dallas.
+                  </li>
                   <li>3rd skills · 3rd qualifiers at Alpine Robo Games.</li>
                   <li>4th skills · 7th overall, Swiss Regional (ISBasel).</li>
                 </ul>
@@ -477,7 +480,7 @@ export default function Home() {
       {/* 03 — Research (dark band) */}
       <section
         id="research"
-        className="scroll-mt-20 bg-ink py-12 text-white md:py-16"
+        className="bg-ink scroll-mt-20 py-12 text-white md:py-16"
       >
         <div className="section-max section-pad">
           <Reveal y={10}>
@@ -531,7 +534,7 @@ export default function Home() {
       {/* 04 — Roles & education */}
       <section
         id="roles"
-        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
+        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
@@ -542,7 +545,7 @@ export default function Home() {
                 count={`${ROLES.length} positions`}
               />
             </Reveal>
-            <ul className="ledger mt-4 border-b border-line">
+            <ul className="ledger border-line mt-4 border-b">
               {ROLES.map((job, i) => (
                 <Reveal key={job.id} delay={i * 0.03} y={10}>
                   <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
@@ -551,10 +554,10 @@ export default function Home() {
                     </p>
                     <div className="md:col-span-9">
                       <div className="flex flex-wrap items-baseline gap-x-2.5">
-                        <h3 className="text-base font-semibold text-ink">
+                        <h3 className="text-ink text-base font-semibold">
                           {job.company}
                         </h3>
-                        <span className="text-[13px] text-ink-soft">
+                        <span className="text-ink-soft text-[13px]">
                           {job.title}
                         </span>
                         {job.link && (
@@ -568,10 +571,10 @@ export default function Home() {
                           </a>
                         )}
                       </div>
-                      <ul className="tick-list mt-1.5 space-y-1 text-[13px] leading-snug text-ink-soft">
-                        {job.bullets?.slice(0, 2).map((b) => (
-                          <li key={b}>{b}</li>
-                        ))}
+                      <ul className="tick-list text-ink-soft mt-1.5 space-y-1 text-[13px] leading-snug">
+                        {job.bullets
+                          ?.slice(0, 2)
+                          .map((b) => <li key={b}>{b}</li>)}
                       </ul>
                     </div>
                   </li>
@@ -584,18 +587,18 @@ export default function Home() {
             <Reveal y={10}>
               <SectionHead index="04b" title="Education" />
             </Reveal>
-            <ul className="ledger mt-4 border-b border-line">
+            <ul className="ledger border-line mt-4 border-b">
               {EDUCATION.map((e) => (
                 <li key={e.id} className="py-3.5">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-[15px] font-semibold text-ink">
+                    <h3 className="text-ink text-[15px] font-semibold">
                       {e.institution}
                     </h3>
                     <span className="eyebrow-faint whitespace-nowrap">
                       {dateRange(e.start, e.end)}
                     </span>
                   </div>
-                  <p className="mt-0.5 text-[13px] text-ink-soft">
+                  <p className="text-ink-soft mt-0.5 text-[13px]">
                     {e.degree}
                     {e.location ? ` · ${e.location}` : ''}
                   </p>
@@ -606,14 +609,14 @@ export default function Home() {
             <Reveal className="mt-8" y={10}>
               <SectionHead index="04c" title="Stack" />
             </Reveal>
-            <ul className="ledger mt-4 border-b border-line">
+            <ul className="ledger border-line mt-4 border-b">
               {SKILL_GROUPS.filter((g) => g.label !== 'Music').map((g) => (
                 <li
                   key={g.label}
                   className="grid grid-cols-[6.5rem_1fr] gap-3 py-2.5"
                 >
                   <span className="eyebrow-faint pt-[3px]">{g.label}</span>
-                  <span className="text-[13px] leading-snug text-ink">
+                  <span className="text-ink text-[13px] leading-snug">
                     {g.items}
                   </span>
                 </li>
@@ -626,7 +629,7 @@ export default function Home() {
       {/* 05 — Music & athletics */}
       <section
         id="beyond"
-        className="scroll-mt-20 border-t border-line py-12 md:py-16"
+        className="border-line scroll-mt-20 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad">
           <Reveal y={10}>
@@ -656,21 +659,21 @@ export default function Home() {
                       Listen →
                     </Link>
                   </div>
-                  <h3 className="display-quiet mt-2 text-xl text-ink">
+                  <h3 className="display-quiet text-ink mt-2 text-xl">
                     Violin & piano, ABRSM Grade 8 in both.
                   </h3>
-                  <p className="mt-2 text-[13px] leading-snug text-ink-soft">
+                  <p className="text-ink-soft mt-2 text-[13px] leading-snug">
                     Orchestra and solo stage performance, from concert halls to
                     orphanages in Romania. Two singles released under my own
                     name.
                   </p>
-                  <ul className="ledger mt-3 border-t border-line">
+                  <ul className="ledger border-line mt-3 border-t">
                     {MUSIC_RELEASES.map((r) => (
                       <li
                         key={r.id}
                         className="flex items-center gap-3 py-2 text-[13px]"
                       >
-                        <span className="relative h-8 w-8 shrink-0 overflow-hidden bg-mist">
+                        <span className="bg-mist relative h-8 w-8 shrink-0 overflow-hidden">
                           <Image
                             src={r.cover}
                             alt=""
@@ -679,7 +682,7 @@ export default function Home() {
                             sizes="32px"
                           />
                         </span>
-                        <span className="font-medium text-ink">{r.title}</span>
+                        <span className="text-ink font-medium">{r.title}</span>
                         <span className="eyebrow-faint">{r.type}</span>
                         {r.hyperfollow && (
                           <a
@@ -703,14 +706,17 @@ export default function Home() {
                 <div className="p-4 sm:col-span-3 md:p-5">
                   <div className="flex items-baseline justify-between">
                     <p className="eyebrow">Athletics</p>
-                    <Link href="/path#athletics" className="row-link text-[12px]">
+                    <Link
+                      href="/path#athletics"
+                      className="row-link text-[12px]"
+                    >
                       Every meet →
                     </Link>
                   </div>
-                  <h3 className="display-quiet mt-2 text-xl text-ink">
+                  <h3 className="display-quiet text-ink mt-2 text-xl">
                     Competitive swimmer, 2× team MVP.
                   </h3>
-                  <p className="mt-2 text-[13px] leading-snug text-ink-soft">
+                  <p className="text-ink-soft mt-2 text-[13px] leading-snug">
                     {SWIM?.title} at Le Rosey since {SWIM?.start.split(' ')[1]}.
                     IM, freestyle, relays, open water. School record in 2023.
                   </p>
@@ -734,7 +740,7 @@ export default function Home() {
       {/* 06 — Service */}
       <section
         id="service"
-        className="scroll-mt-20 border-t border-line bg-bg-elevated py-12 md:py-16"
+        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad">
           <Reveal y={10}>
@@ -744,20 +750,22 @@ export default function Home() {
               count={`${VOLUNTEERING.length} programmes`}
             />
           </Reveal>
-          <ul className="ledger mt-4 border-b border-line">
+          <ul className="ledger border-line mt-4 border-b">
             {VOLUNTEERING.map((v, i) => (
               <Reveal key={v.id} delay={i * 0.03} y={10}>
                 <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
                   <div className="md:col-span-3">
                     <p className="eyebrow-faint">{dateRange(v.start, v.end)}</p>
-                    <p className="mt-1 text-[12px] text-ink-faint">{v.cause}</p>
+                    <p className="text-ink-faint mt-1 text-[12px]">{v.cause}</p>
                   </div>
                   <div className="md:col-span-9">
                     <div className="flex flex-wrap items-baseline gap-x-2.5">
-                      <h3 className="text-base font-semibold text-ink">
+                      <h3 className="text-ink text-base font-semibold">
                         {v.organization}
                       </h3>
-                      <span className="text-[13px] text-ink-soft">{v.role}</span>
+                      <span className="text-ink-soft text-[13px]">
+                        {v.role}
+                      </span>
                       {v.link && (
                         <a
                           href={v.link}
@@ -770,13 +778,15 @@ export default function Home() {
                       )}
                     </div>
                     {v.description && (
-                      <p className="mt-1.5 text-[13px] leading-snug text-ink-soft">
+                      <p className="text-ink-soft mt-1.5 text-[13px] leading-snug">
                         {v.description}
                       </p>
                     )}
                     {v.bullets && (
-                      <ul className="tick-list mt-1.5 space-y-1 text-[13px] leading-snug text-ink-soft">
-                        {v.bullets.slice(0, 3).map((b) => <li key={b}>{b}</li>)}
+                      <ul className="tick-list text-ink-soft mt-1.5 space-y-1 text-[13px] leading-snug">
+                        {v.bullets.slice(0, 3).map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
                       </ul>
                     )}
                   </div>
@@ -790,17 +800,17 @@ export default function Home() {
       {/* 07 — Contact */}
       <section
         id="contact"
-        className="scroll-mt-20 border-t border-line py-14 md:py-20"
+        className="border-line scroll-mt-20 border-t py-14 md:py-20"
       >
         <div className="section-max section-pad grid gap-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-7" y={10}>
             <SectionHead index="07" title="Contact" />
-            <h2 className="display-quiet mt-5 text-[clamp(1.7rem,4vw,2.6rem)] text-ink">
+            <h2 className="display-quiet text-ink mt-5 text-[clamp(1.7rem,4vw,2.6rem)]">
               Happy to talk about any of this.
             </h2>
             <a
               href={`mailto:${EMAIL}`}
-              className="display-quiet mt-4 inline-block border-b border-ink/25 pb-1 text-[clamp(1.1rem,3vw,1.7rem)] break-all text-ink transition-colors hover:border-ink"
+              className="display-quiet border-ink/25 text-ink hover:border-ink mt-4 inline-block border-b pb-1 text-[clamp(1.1rem,3vw,1.7rem)] break-all transition-colors"
             >
               {EMAIL}
             </a>
@@ -819,7 +829,7 @@ export default function Home() {
           </Reveal>
           <Reveal className="lg:col-span-5" y={10} delay={0.05}>
             <p className="eyebrow-faint">Deep dives</p>
-            <ul className="ledger mt-2 border-y border-line">
+            <ul className="ledger border-line mt-2 border-y">
               {[
                 {
                   href: '/work',
@@ -842,10 +852,12 @@ export default function Home() {
                     href={g.href}
                     className="group flex items-baseline justify-between gap-4 py-3"
                   >
-                    <span className="display-quiet text-lg text-ink group-hover:text-accent">
+                    <span className="display-quiet text-ink group-hover:text-accent text-lg">
                       {g.title}
                     </span>
-                    <span className="text-[13px] text-ink-soft">{g.detail}</span>
+                    <span className="text-ink-soft text-[13px]">
+                      {g.detail}
+                    </span>
                     <span
                       aria-hidden
                       className="text-accent transition-transform group-hover:translate-x-1"

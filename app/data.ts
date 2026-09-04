@@ -345,7 +345,8 @@ export const EDUCATION: Education[] = [
     id: 'edu1',
   },
   {
-    institution: 'University of Pennsylvania — Engineering Summer Academy (ESAP)',
+    institution:
+      'University of Pennsylvania — Engineering Summer Academy (ESAP)',
     degree: 'AI and its mathematics · three-week intensive',
     start: 'Jul 2026',
     end: 'Jul 2026',
@@ -436,7 +437,8 @@ export const AWARDS: Award[] = [
     id: 'award1',
   },
   {
-    title: 'HackMIT China 2026 — 3rd Place (Education Track) & Outstanding Impact Award',
+    title:
+      'HackMIT China 2026 — 3rd Place (Education Track) & Outstanding Impact Award',
     description:
       'Podium finish out of 300+ participants during the 2026 HackMIT China Challenge. Built Nomad in 36 hours.',
     date: 'Mar 2026',
@@ -475,7 +477,8 @@ export const AWARDS: Award[] = [
     id: 'award3',
   },
   {
-    title: 'Swiss Group of International Schools Math Competition 2025 — 2nd Place',
+    title:
+      'Swiss Group of International Schools Math Competition 2025 — 2nd Place',
     date: '2025',
     image: '/media/logos/sgis.png',
     id: 'award5',
@@ -604,7 +607,8 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     type: 'Single',
     cover: '/media/audio/dreams-of-the-blue-cover.png',
     audio: '/media/audio/dreams-of-the-blue.mp3',
-    hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
+    hyperfollow:
+      'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
     links: [],
     id: 'dreams-of-the-blue',
   },
@@ -657,7 +661,7 @@ export const TAGLINE =
   'Building education systems at the intersection of AI, product, and competition.'
 
 export const SUMMARY =
-  "High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin."
+  'High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin.'
 
 /** One-sentence positioning — the first thing a reader should absorb. */
 export const HOME_INTRO =

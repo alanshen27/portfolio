@@ -36,7 +36,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
   const rh = h / ROWS
 
   return (
-    <div className={`relative overflow-hidden bg-ink ${className}`} aria-hidden>
+    <div className={`bg-ink relative overflow-hidden ${className}`} aria-hidden>
       <svg viewBox={`0 0 ${w} ${h}`} className="h-full w-full">
         {Array.from({ length: ROWS }).map((_, r) => (
           <rect
@@ -68,7 +68,9 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             y={(ROWS - 1 - n.p) * rh + 1.5}
             width={n.d * cw - 3}
             height={rh - 3}
-            fill={n.ai ? 'var(--color-accent-bright)' : 'rgba(255,255,255,0.82)'}
+            fill={
+              n.ai ? 'var(--color-accent-bright)' : 'rgba(255,255,255,0.82)'
+            }
             initial={reduce ? false : { opacity: 0, scaleX: 0.4 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, margin: '-10% 0px' }}

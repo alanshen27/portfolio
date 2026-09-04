@@ -25,7 +25,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-bg/85 text-ink backdrop-blur-md">
+      <header className="border-line/60 bg-bg/85 text-ink fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md">
         <div className="section-max section-pad flex h-16 items-center justify-between md:h-[4.25rem]">
           <Link
             href="/"
@@ -49,15 +49,15 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`relative text-[13px] transition-colors hover:text-ink ${
+                  className={`hover:text-ink relative text-[13px] transition-colors ${
                     active ? 'text-ink' : 'text-ink-soft'
-                  } ${firstPage ? 'ml-2 border-l border-line pl-6' : ''}`}
+                  } ${firstPage ? 'border-line ml-2 border-l pl-6' : ''}`}
                 >
                   {item.label}
                   {active && (
                     <span
                       aria-hidden
-                      className="absolute -bottom-1.5 left-0 h-px w-full bg-accent"
+                      className="bg-accent absolute -bottom-1.5 left-0 h-px w-full"
                     />
                   )}
                 </Link>
@@ -65,7 +65,7 @@ export function Header() {
             })}
             <a
               href={`mailto:${EMAIL}`}
-              className="border border-ink/20 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:bg-ink hover:text-white"
+              className="border-ink/20 hover:bg-ink border px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:text-white"
             >
               Email
             </a>
@@ -97,7 +97,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-40 bg-bg text-ink md:hidden"
+            className="bg-bg text-ink fixed inset-0 z-40 md:hidden"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -118,15 +118,15 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-baseline gap-4 border-b border-line py-3"
+                      className="border-line flex items-baseline gap-4 border-b py-3"
                     >
-                      <span className="font-mono text-[11px] text-accent">
+                      <span className="text-accent font-mono text-[11px]">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
                         {item.label}
                       </span>
-                      <span className="ml-auto font-mono text-[10px] tracking-[0.12em] text-ink-faint uppercase">
+                      <span className="text-ink-faint ml-auto font-mono text-[10px] tracking-[0.12em] uppercase">
                         {item.href.includes('#') ? 'Home' : 'Page'}
                       </span>
                     </Link>
