@@ -11,8 +11,6 @@ export function Header() {
   const pathname = usePathname()
   const reduce = useReducedMotion()
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const isHome = pathname === '/'
 
   useEffect(() => {
     setOpen(false)
@@ -25,28 +23,13 @@ export function Header() {
     }
   }, [open])
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const light = isHome && !scrolled && !open
-
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          light
-            ? 'bg-transparent text-white'
-            : 'border-b border-line/80 bg-bg/90 text-ink backdrop-blur-md'
-        }`}
-      >
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-bg/85 text-ink backdrop-blur-md">
         <div className="section-max section-pad flex h-16 items-center justify-between md:h-[4.25rem]">
           <Link
             href="/"
-            className="font-[family-name:var(--font-display)] text-xl font-medium tracking-tight md:text-[1.3rem]"
+            className="text-xl font-bold tracking-tight md:text-[1.35rem]"
             aria-label="Alan Shen — Home"
           >
             Alan Shen
@@ -60,18 +43,14 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[13px] tracking-[0.04em] opacity-60 transition-opacity hover:opacity-100"
+                className="text-[13px] text-ink-soft transition-colors hover:text-ink"
               >
                 {item.label}
               </Link>
             ))}
             <a
               href={`mailto:${EMAIL}`}
-              className={`border px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors ${
-                light
-                  ? 'border-white/40 hover:bg-white hover:text-ink'
-                  : 'border-ink/25 hover:bg-ink hover:text-white'
-              }`}
+              className="border border-ink/20 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:bg-ink hover:text-white"
             >
               Email
             </a>
@@ -135,18 +114,6 @@ export function Header() {
                     </Link>
                   </motion.li>
                 ))}
-                <motion.li
-                  initial={reduce ? false : { opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35, duration: 0.4, ease: easeOut }}
-                >
-                  <a
-                    href={`mailto:${EMAIL}`}
-                    className="mt-8 inline-flex font-mono text-[12px] tracking-[0.08em] text-accent uppercase"
-                  >
-                    {EMAIL}
-                  </a>
-                </motion.li>
               </ul>
             </div>
           </motion.div>

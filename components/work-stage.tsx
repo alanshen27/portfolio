@@ -61,7 +61,7 @@ export function WorkStage() {
       {/* 3D machine */}
       <div className="absolute inset-0 z-0 md:left-[8%] lg:left-[5%]">
         <ProjectDeviceCanvas
-          image={project.image ?? '/studious.png'}
+          image={project.image ?? '/media/projects/studious.png'}
           model={(project.device ?? 'laptop') as DeviceModel}
           spinKey={project.id}
           forceActive

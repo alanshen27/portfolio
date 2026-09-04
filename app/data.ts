@@ -69,6 +69,8 @@ export type Publication = {
   authors?: string
   venue?: string
   status?: string
+  /** Attached conference talk / presentation of the same work */
+  presentation?: string
   link?: string
   date?: string
   image?: string
@@ -109,7 +111,7 @@ export const PROJECTS: Project[] = [
     description:
       'A modern LMS for schools — AI in the daily workflow, not bolted on as a demo.',
     link: 'https://www.studious.sh',
-    image: '/studious.png',
+    image: '/media/projects/studious.png',
     id: 'project1',
     role: 'Founder',
     timeframe: 'Sep 2023 – Present',
@@ -125,7 +127,7 @@ export const PROJECTS: Project[] = [
     description:
       'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
     link: 'https://www.linkedin.com/in/alanshen27/',
-    image: '/nomad.png',
+    image: '/media/projects/nomad.png',
     id: 'project-nomad',
     role: 'HackMIT China 2026',
     timeframe: '36 hours',
@@ -141,7 +143,7 @@ export const PROJECTS: Project[] = [
     description:
       'AI study assistant that teaches how to learn — structured methods, not just answers.',
     link: 'https://www.scribe.study',
-    image: '/scribe.png',
+    image: '/media/projects/scribe.png',
     id: 'project2',
     role: 'SWE & Co-Founder',
     timeframe: 'Aug 2025 – Jan 2026',
@@ -157,7 +159,7 @@ export const PROJECTS: Project[] = [
     description:
       'Neural network visualization and analysis — built for HackHarvard.',
     link: 'https://youtu.be/nuEoH_5YOi4',
-    image: '/synapsehackharvard2025.png',
+    image: '/media/projects/synapse.png',
     id: 'project3',
     role: 'HackHarvard 2025',
     timeframe: '2025',
@@ -172,7 +174,7 @@ export const PROJECTS: Project[] = [
     description:
       'Collaborative project management — built for Empower 3.0 Hacks.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
-    image: '/hiveempower3.0.png',
+    image: '/media/projects/hive.png',
     id: 'project4',
     role: 'Empower 3.0',
     timeframe: '2025',
@@ -206,9 +208,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     start: 'August 2025',
     end: 'Present',
     link: 'https://www.scribe.study',
-    image: '/logos/scribe.png',
+    image: '/media/logos/scribe.png',
     bullets: [
-      'Worked as frontend and backend developer with AI-driven workflows to secure a 1st Place Best Overall Hack at HackHarvard China 2025.',
+      'Worked as frontend and backend developer with AI-driven workflows.',
       'Led frontend redesign.',
       'Developed backend infrastructure.',
       'Assisted in inferencing infrastructure and design.',
@@ -221,7 +223,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     start: 'February 2026',
     end: 'Present',
     link: 'https://www.luduan.ai',
-    image: '/logos/luduan.png',
+    image: '/media/logos/luduan.png',
     bullets: [
       'Assisting in frontend rebuild ideation and architecture (unpublished).',
       'Working on migrating features to a new codebase to serve 30+ U.S. institutions.',
@@ -233,9 +235,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Engineer and Programmer — 15520X (MECH_IT_HAPPEN)',
     start: 'September 2025',
     end: 'Present',
-    image: '/logos/vex.jpg',
+    image: '/media/logos/vex.jpg',
     bullets: [
-      'WORLDS QUALIFIER through Excellence Award at Alpine Robo Games 2026 — 3rd place skills, 3rd place qualifiers.',
+      '3rd place skills and 3rd place qualifiers at Alpine Robo Games 2026.',
       'Ranked 4th Skills, 7th Overall at Swiss Regional Competition (Santa Clash @ ISBasel).',
       'Assisted in robot creation and design.',
       'Engineered autonomous control mode.',
@@ -248,11 +250,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Competitive Swimmer',
     start: 'September 2023',
     end: 'Present',
-    image: '/logos/lerosey.png',
+    image: '/media/logos/lerosey.png',
     location: 'Switzerland',
     bullets: [
       '2-year Swimming MVP at Le Rosey.',
-      'Total medals: 14 (8 Gold | 4 Silver | 2 Bronze).',
       'Events: Individual Medley, Freestyle (100 m, 200 m relay, 50×4 IM relay), Medley Relay, Open Water.',
       'ADISR 2025 EHL: Silver 50 m Free; Gold 4×50 Free.',
       'MLS 2025 June/July: Silver (IM); Gold — 100 m Free | 200 m Freestyle Relay | 200 m Medley Relay.',
@@ -272,7 +273,7 @@ export const EDUCATION: Education[] = [
     start: '2022',
     end: '2027',
     location: 'Rolle, Switzerland',
-    image: '/logos/lerosey.png',
+    image: '/media/logos/lerosey.png',
     id: 'edu1',
   },
   {
@@ -297,6 +298,30 @@ export const SKILLS: Skill[] = [
   { name: 'AI / ML Systems', id: 'skill-ai' },
   { name: 'Distributed Infrastructure', id: 'skill-infra' },
   { name: 'Competitive Programming', id: 'skill-cp' },
+]
+
+/** Grouped skills for the home skills matrix */
+export const SKILL_GROUPS: { label: string; items: string }[] = [
+  {
+    label: 'Languages',
+    items: 'TypeScript, C++, Python, JavaScript, SQL',
+  },
+  {
+    label: 'Frameworks',
+    items: 'Next.js, React, tRPC, Motion',
+  },
+  {
+    label: 'Systems & Tools',
+    items: 'Supabase, Pusher, Vercel, Render, Git',
+  },
+  {
+    label: 'Focus',
+    items: 'Competitive programming, AI / ML systems, product design',
+  },
+  {
+    label: 'Music',
+    items: 'ABRSM Grade 8 Violin & Piano, recording, orchestration',
+  },
 ]
 
 export const CERTIFICATIONS: Certification[] = [
@@ -331,7 +356,7 @@ export const AWARDS: Award[] = [
     title: 'HackHarvard 2025 China — 1st Place',
     description: '1st Place Overall, "Best Overall Hack" Winner.',
     date: 'Nov 2025',
-    image: '/logos/hackharvard.svg',
+    image: '/media/logos/hackharvard.svg',
     id: 'award1',
   },
   {
@@ -339,7 +364,7 @@ export const AWARDS: Award[] = [
     description:
       'Podium finish out of 300+ participants during the 2026 HackMIT China Challenge. Built Nomad in 36 hours.',
     date: 'Mar 2026',
-    image: '/logos/hackmit.png',
+    image: '/media/logos/hackmit.png',
     id: 'award-hackmit',
   },
   {
@@ -347,7 +372,7 @@ export const AWARDS: Award[] = [
     description:
       'Achieved 1000 / 1000 in the USACO Silver contest to be directly promoted to USACO Gold.',
     date: 'Feb 2026',
-    image: '/usaco.png',
+    image: '/media/projects/usaco.png',
     id: 'award4',
   },
   {
@@ -355,7 +380,7 @@ export const AWARDS: Award[] = [
     description:
       'Won Excellence Award for VEX Robotics Swiss qualifications and qualified for VEX Worlds in Dallas, Texas. Issued by VEX Robotics.',
     date: 'Feb 2026',
-    image: '/logos/vex.jpg',
+    image: '/media/logos/vex.jpg',
     id: 'award-vex',
   },
   {
@@ -363,19 +388,19 @@ export const AWARDS: Award[] = [
     description:
       'Invited as one of only two high school teams to attend HackHarvard 2025.',
     date: 'Oct 2025',
-    image: '/logos/hackharvard.svg',
+    image: '/media/logos/hackharvard.svg',
     id: 'award2',
   },
   {
     title: 'Empower 3.0 Hacks — 3rd Place',
     description: '3rd Place, "Coding" track; 450+ participants in total.',
-    image: '/empower3.0.png',
+    image: '/media/projects/empower.png',
     id: 'award3',
   },
   {
     title: 'Swiss Group of International Schools Math Competition 2025 — 2nd Place',
     date: '2025',
-    image: '/logos/sgis.png',
+    image: '/media/logos/sgis.png',
     id: 'award5',
   },
 ]
@@ -384,10 +409,11 @@ export const PUBLICATIONS: Publication[] = [
   {
     title: 'Training AI for Pragmatics Assessment',
     authors: 'Xiao, F., Taguchi, N., Li, S. & Shen, A.',
-    venue:
-      'Cambridge University Press · presented at CALICO (Computer Assisted Language Instruction Consortium)',
+    venue: 'Cambridge University Press',
     status: 'Forthcoming',
-    date: 'Jun 15, 2026',
+    date: '2026',
+    presentation:
+      'CALICO — Computer Assisted Language Instruction Consortium · Jun 15, 2026',
     id: 'pub-pragmatics',
   },
   {
@@ -424,7 +450,7 @@ export const VOLUNTEERING: Volunteering[] = [
       'Initiated the Studious Student Development Program, bringing AI-empowered education to two local schools.',
       'Wrote a song and performed it for 60+ students to raise awareness.',
     ],
-    image: '/alan/romania-house.png',
+    image: '/media/service/romania-housing.png',
     id: 'vol-casa',
   },
   {
@@ -435,7 +461,7 @@ export const VOLUNTEERING: Volunteering[] = [
     cause: 'Environment',
     description:
       'Led a team of 4 students building a web-based game for Earth Day to spread awareness about food waste — 3+ hours of playtime across 30+ players, with largely positive feedback.',
-    image: '/logos/lostfood.png',
+    image: '/media/logos/lostfood.png',
     link: 'https://www.thelostfoodproject.org',
     id: 'vol-lostfood',
   },
@@ -472,8 +498,8 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     title: "I'd Stay",
     artist: 'Alan Shen',
     type: 'Single',
-    cover: '/music/id_stay.png',
-    audio: '/music/id_stay.mp3',
+    cover: '/media/audio/id-stay-cover.png',
+    audio: '/media/audio/id-stay.mp3',
     hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/id-stay',
     links: [
       {
@@ -499,8 +525,8 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     title: 'Dreams of the Blue',
     artist: 'Alan Shen',
     type: 'Single',
-    cover: '/music/dreams_of_the_blue.png',
-    audio: '/music/dreams_of_the_blue.mp3',
+    cover: '/media/audio/dreams-of-the-blue-cover.png',
+    audio: '/media/audio/dreams-of-the-blue.mp3',
     hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
     links: [],
     id: 'dreams-of-the-blue',
@@ -537,11 +563,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const SITE_NAV = [
-  { label: 'Ventures', href: '/#ventures' },
-  { label: 'Competition', href: '/#competition' },
-  { label: 'Research', href: '/#research' },
-  { label: 'Music', href: '/#music' },
-  { label: 'Service', href: '/#service' },
+  { label: 'About', href: '/#about' },
+  { label: 'Work', href: '/work' },
+  { label: 'Path', href: '/path' },
+  { label: 'Music', href: '/music' },
   { label: 'Contact', href: '/#contact' },
 ] as const
 
@@ -556,9 +581,30 @@ export const TAGLINE =
 export const SUMMARY =
   "High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin."
 
-/** Short home-hero intro — who you are before they scroll. */
+/** Short home intro — who you are. */
 export const HOME_INTRO =
-  'Student at Institut Le Rosey. Founder of Studious and Scribe. I build education products, compete in USACO and VEX, swim for medals, and release music as a violinist and pianist.'
+  "I've founded Studious and Scribe, shipped hackathon winners, and compete in USACO Gold and VEX Worlds. I care about writing code that solves real problems — and shipping systems that students actually use."
+
+export const PORTFOLIO_GATES = [
+  {
+    label: 'Software & product',
+    title: 'Work Portfolio',
+    href: '/work',
+    detail: 'Studious · Scribe · Nomad · hack builds',
+  },
+  {
+    label: 'Competition & research',
+    title: 'Path Portfolio',
+    href: '/path',
+    detail: 'USACO · VEX · awards · athletics',
+  },
+  {
+    label: 'Stage & releases',
+    title: 'Music Portfolio',
+    href: '/music',
+    detail: 'Singles · ABRSM Grade 8 · orchestra',
+  },
+] as const
 
 export const PROOF_POINTS: { label: string; href: string }[] = [
   { label: 'Studious', href: '/work#project1' },
@@ -572,4 +618,4 @@ export const NAME = 'Alan Shen'
 
 export const LOCATION = 'Geneva Metropolitan Area'
 
-export const ROLE = 'Founder · Developer · Student'
+export const ROLE = 'Founder · Developer · Violinist'

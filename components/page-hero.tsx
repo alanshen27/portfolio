@@ -8,28 +8,23 @@ import {
   useTransform,
 } from 'motion/react'
 import { useRef } from 'react'
-import { MegaTicker } from '@/components/mega-ticker'
-import {
-  AnimatedCorners,
-  SplitChars,
-  SplitWords,
-  easeSnap,
-} from '@/components/portfolio-motion'
+import { SplitChars, easeOut } from '@/components/portfolio-motion'
 
 export function PageHero({
-  label,
+  kicker,
   title,
-  titleLine2,
   description,
   image,
-  ticker,
+  imagePosition = 'center 30%',
+  video,
 }: {
-  label: string
+  kicker: string
   title: string
-  titleLine2?: string
   description?: string
   image?: string
-  ticker?: string[]
+  imagePosition?: string
+  /** Optional muted background loop — image is used as poster/fallback */
+  video?: string
 }) {
   const reduce = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
@@ -37,19 +32,36 @@ export function PageHero({
     target: ref,
     offset: ['start start', 'end start'],
   })
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '16%'])
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.15])
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
+
+  const showVideo = video && !reduce
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden border-b border-line bg-ink pt-20 pb-0 text-white md:pt-24 md:pl-16 lg:pl-[4.5rem]"
+      className="relative overflow-hidden bg-[#050607] pt-32 pb-16 text-white md:pt-40 md:pb-20"
     >
-      {image && (
-        <>
+      {showVideo ? (
+        <motion.div
+          className="absolute inset-0 scale-125"
+          style={reduce ? undefined : { y: imageY }}
+        >
+          <video
+            src={video}
+            poster={image}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden
+            className="h-full w-full object-cover opacity-28"
+            style={{ objectPosition: imagePosition }}
+          />
+        </motion.div>
+      ) : (
+        image && (
           <motion.div
-            className="absolute inset-0 scale-110"
+            className="absolute inset-0 scale-105"
             style={reduce ? undefined : { y: imageY }}
           >
             <Image
@@ -57,53 +69,41 @@ export function PageHero({
               alt=""
               fill
               priority
-              className="object-cover object-[center_22%]"
+              className="object-cover opacity-35"
+              style={{ objectPosition: imagePosition }}
               sizes="100vw"
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-ink/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-        </>
+        )
       )}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050607] via-[#050607]/60 to-[#050607]/35" />
+      <div className="aurora opacity-50" aria-hidden />
 
-      <AnimatedCorners tone="accent" inset="1.5rem" />
-
-      <motion.div
-        className="relative z-10 px-5 pb-10 sm:px-8 md:px-10 md:pb-14 lg:px-12"
-        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-      >
+      <div className="section-max section-pad relative z-10">
         <motion.p
-          className="mb-5 text-xs font-medium tracking-[0.28em] text-lake uppercase"
-          initial={reduce ? false : { opacity: 0, y: 14, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.55, ease: easeSnap }}
+          className="font-mono text-[11px] tracking-[0.2em] text-lake uppercase"
+          initial={reduce ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: easeOut }}
         >
-          {label}
+          {kicker}
         </motion.p>
 
-        <h1 className="font-[family-name:var(--font-display)] text-[clamp(3.8rem,12vw,9rem)] leading-[0.85] font-extrabold tracking-[-0.04em] uppercase">
-          <span className="block">
-            <SplitChars text={title} delay={0.08} />
-          </span>
-          {titleLine2 && (
-            <span className="mt-1 block text-accent">
-              <SplitChars text={titleLine2} delay={0.22} />
-            </span>
-          )}
+        <h1 className="display-quiet mt-4 max-w-4xl text-[clamp(2.6rem,7vw,5rem)]">
+          <SplitChars text={title} delay={0.12} />
         </h1>
 
         {description && (
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/75 md:text-xl">
-            <SplitWords text={description} delay={0.45} />
-          </p>
+          <motion.p
+            className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.4, ease: easeOut }}
+          >
+            {description}
+          </motion.p>
         )}
-      </motion.div>
-
-      {ticker && ticker.length > 0 && (
-        <div className="relative z-10 border-t border-white/10 py-3">
-          <MegaTicker items={ticker} tone="white" speed={22} />
-        </div>
-      )}
+      </div>
     </section>
   )
 }
