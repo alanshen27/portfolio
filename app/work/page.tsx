@@ -2,140 +2,265 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'motion/react'
 import { Reveal } from '@/components/portfolio-motion'
 import { PageHero } from '@/components/page-hero'
 import { ScrollProgress } from '@/components/scroll-progress'
-import { PROJECTS, WORK_EXPERIENCE } from '../data'
+import { PianoRoll } from '@/components/viz/piano-roll'
+import { dateRange } from '@/lib/utils'
+import {
+  PROJECT_KIND_LABEL,
+  PROJECTS,
+  WORK_EXPERIENCE,
+  type Project,
+} from '../data'
 
 function linkLabel(href: string) {
   if (href.includes('youtu')) return 'Watch demo'
+  if (href.includes('github')) return 'Source'
   if (href.includes('linkedin')) return 'Context'
   return 'Open live'
 }
 
+const STAGES = ['Ideate', 'Engineer', 'Verify', 'Launch']
+
+/** Placeholder visual for image-less builds — Foundry's four-stage pipeline. */
+function StageStrip() {
+  return (
+    <div
+      className="bg-ink flex h-full w-full flex-col justify-center gap-3 p-5"
+      aria-hidden
+    >
+      <p className="font-mono text-[10px] tracking-[0.16em] text-white/45 uppercase">
+        Brief → storefront
+      </p>
+      <ol className="grid grid-cols-4 gap-1.5">
+        {STAGES.map((s, i) => (
+          <li
+            key={s}
+            className="border border-white/15 bg-white/[0.04] px-2 py-3 text-center"
+          >
+            <p className="font-mono text-[9px] text-white/40">0{i + 1}</p>
+            <p className="mt-1 text-[11px] font-medium text-white/85">{s}</p>
+          </li>
+        ))}
+      </ol>
+      <p className="font-mono text-[10px] leading-relaxed text-white/45">
+        CAD · PCB · code · verification gates · Shopify checkout
+      </p>
+    </div>
+  )
+}
+
+function Visual({ p }: { p: Project }) {
+  if (p.image) {
+    return (
+      <Image
+        src={p.image}
+        alt={`${p.name} screenshot`}
+        fill
+        className="object-cover object-top"
+        sizes="(max-width: 1024px) 100vw, 40vw"
+      />
+    )
+  }
+  if (p.id === 'project-notate') return <PianoRoll className="h-full w-full" />
+  return <StageStrip />
+}
+
 export default function WorkPage() {
-  const luduan = WORK_EXPERIENCE.find((w) => w.id === 'work3')
+  const roles = WORK_EXPERIENCE.filter((w) => w.company !== 'Institut Le Rosey')
 
   return (
     <>
       <ScrollProgress />
       <PageHero
-        kicker="Work"
-        title="Software & product."
-        description="Companies I founded and projects I shipped — what each one is, what I built, and where it placed."
+        kicker="Work · software & product"
+        title="Every build, with the role and the result."
+        description={`${PROJECTS.length} projects: two companies, three hackathon podiums, and research-grade side builds. Index first, details below.`}
         image="/media/hackathons/hackmit-workspace.jpg"
         imagePosition="center 45%"
       />
 
-      <section className="bg-bg py-16 md:py-24">
-        <div className="section-max section-pad space-y-20 md:space-y-28">
-          {PROJECTS.map((project, i) => (
-            <Reveal key={project.id} y={26}>
-              <article
-                id={project.id}
-                className="grid scroll-mt-28 items-center gap-8 lg:grid-cols-12 lg:gap-12"
-              >
-                <motion.a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  className={`relative block aspect-[16/10] overflow-hidden bg-mist lg:col-span-7 ${
-                    i % 2 === 1 ? 'lg:order-2 lg:col-start-6' : ''
-                  }`}
-                >
-                  {project.image && (
-                    <Image
-                      src={project.image}
-                      alt={`${project.name} screenshot`}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 1024px) 100vw, 58vw"
-                    />
-                  )}
-                </motion.a>
-
-                <div
-                  className={`lg:col-span-5 ${
-                    i % 2 === 1 ? 'lg:order-1 lg:col-start-1' : ''
-                  }`}
-                >
-                  <p className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
-                    {String(i + 1).padStart(2, '0')} · {project.role}
-                    {project.timeframe ? ` · ${project.timeframe}` : ''}
-                  </p>
-                  <h2 className="display-quiet mt-3 text-[clamp(1.8rem,4vw,2.6rem)] text-ink">
-                    {project.name}
-                  </h2>
-                  <p className="mt-3 text-base leading-relaxed text-ink-soft">
-                    {project.description}
-                  </p>
-                  {project.points && (
-                    <ul className="mt-5 space-y-2.5">
-                      {project.points.map((point) => (
-                        <li
-                          key={point}
-                          className="border-l border-accent/40 pl-3 text-sm leading-relaxed text-ink-soft"
-                        >
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+      {/* Index */}
+      <section className="border-line bg-bg-elevated border-b py-8 md:py-10">
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <div className="section-head">
+              <span className="idx">00</span>
+              <h2 className="eyebrow">Index</h2>
+              <span className="count">{PROJECTS.length} entries</span>
+            </div>
+            <ul className="ledger border-line border-b">
+              {PROJECTS.map((p, i) => (
+                <li key={p.id}>
                   <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-sm text-accent transition-opacity hover:opacity-70"
+                    href={`#${p.id}`}
+                    className="group grid gap-x-5 gap-y-1 py-2.5 text-sm md:grid-cols-12 md:items-baseline"
                   >
-                    {linkLabel(project.link)}
-                    <span aria-hidden>↗</span>
+                    <span className="flex items-baseline gap-2.5 md:col-span-3">
+                      <span className="text-ink-faint font-mono text-[11px]">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-ink group-hover:text-accent font-semibold">
+                        {p.name}
+                      </span>
+                      <span className="pill">
+                        {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
+                      </span>
+                    </span>
+                    <span className="text-ink-soft md:col-span-3">
+                      {p.role}
+                    </span>
+                    <span className="text-accent-deep text-[13px] font-medium md:col-span-4">
+                      {p.outcome}
+                    </span>
+                    <span className="eyebrow-faint md:col-span-2 md:text-right">
+                      {p.timeframe}
+                    </span>
                   </a>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-
-          {luduan && (
-            <Reveal y={20}>
-              <div className="flex flex-wrap items-baseline justify-between gap-4 border-y border-line py-7">
-                <div>
-                  <p className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
-                    Also contributing
-                  </p>
-                  <h2 className="display-quiet mt-2 text-2xl text-ink">
-                    {luduan.company}
-                  </h2>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
-                    {luduan.title} · {luduan.start} – {luduan.end}.{' '}
-                    {luduan.bullets?.join(' ')}
-                  </p>
-                </div>
-                <a
-                  href={luduan.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-accent transition-opacity hover:opacity-70"
-                >
-                  Visit ↗
-                </a>
-              </div>
-            </Reveal>
-          )}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-line bg-bg-elevated py-14">
+      {/* Detail blocks */}
+      <section className="bg-bg py-10 md:py-14">
+        <div className="section-max section-pad">
+          <ul className="ledger">
+            {PROJECTS.map((project, i) => (
+              <li key={project.id} className="py-8 first:pt-0 md:py-10">
+                <Reveal y={18}>
+                  <article
+                    id={project.id}
+                    className="grid scroll-mt-24 gap-6 lg:grid-cols-12 lg:gap-10"
+                  >
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card bg-mist relative block aspect-[16/10] overflow-hidden lg:col-span-5"
+                    >
+                      <Visual p={project} />
+                      <span className="pill pill-ink absolute top-3 left-3">
+                        {project.kind
+                          ? PROJECT_KIND_LABEL[project.kind]
+                          : 'Build'}
+                      </span>
+                    </a>
+
+                    <div className="lg:col-span-7">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span className="text-ink-faint font-mono text-[11px]">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <h2 className="display-quiet text-ink text-[clamp(1.5rem,3vw,2.1rem)]">
+                          {project.name}
+                        </h2>
+                        <span className="eyebrow-faint ml-auto">
+                          {project.role}
+                          {project.timeframe ? ` · ${project.timeframe}` : ''}
+                        </span>
+                      </div>
+                      <p className="text-ink mt-2.5 text-base leading-snug">
+                        {project.description}
+                      </p>
+                      {project.outcome && (
+                        <p className="border-accent text-accent-deep mt-3 inline-block border-l-2 pl-2.5 text-sm font-medium">
+                          {project.outcome}
+                        </p>
+                      )}
+                      {project.points && (
+                        <ul className="tick-list text-ink-soft mt-4 grid gap-x-8 gap-y-1.5 text-sm leading-snug md:grid-cols-2">
+                          {project.points.map((point) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
+                      )}
+                      <div className="mt-5 flex flex-wrap items-center gap-1.5">
+                        {project.tags?.map((t) => (
+                          <span key={t} className="pill">
+                            {t}
+                          </span>
+                        ))}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="row-link ml-auto text-sm"
+                        >
+                          {linkLabel(project.link)} ↗
+                        </a>
+                        {project.repo && project.repo !== project.link && (
+                          <a
+                            href={project.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="row-link text-sm"
+                          >
+                            Source ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Roles — where the builds happened */}
+      <section className="border-line bg-bg-elevated border-t py-10 md:py-14">
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <div className="section-head">
+              <span className="idx">→</span>
+              <h2 className="eyebrow">Roles behind the builds</h2>
+              <span className="count">{roles.length} positions</span>
+            </div>
+          </Reveal>
+          <ul className="ledger border-line border-b">
+            {roles.map((job) => (
+              <li
+                key={job.id}
+                className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-12 md:items-baseline"
+              >
+                <p className="eyebrow-faint md:col-span-3">
+                  {dateRange(job.start, job.end)}
+                </p>
+                <p className="md:col-span-3">
+                  <span className="text-ink font-semibold">{job.company}</span>
+                </p>
+                <p className="text-ink-soft text-sm md:col-span-5">
+                  {job.title}
+                </p>
+                <p className="md:col-span-1 md:text-right">
+                  {job.link && (
+                    <a
+                      href={job.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="row-link text-[13px]"
+                    >
+                      Visit ↗
+                    </a>
+                  )}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-line bg-bg border-t py-10">
         <div className="section-max section-pad flex flex-wrap items-end justify-between gap-6">
-          <p className="display-quiet text-[clamp(1.4rem,3vw,2rem)] text-ink">
-            Next: competition & scores.
+          <p className="display-quiet text-ink text-[clamp(1.3rem,2.6vw,1.8rem)]">
+            Next: scores, awards, research, athletics.
           </p>
-          <Link
-            href="/path"
-            className="text-sm text-accent transition-opacity hover:opacity-70"
-          >
+          <Link href="/path" className="row-link text-sm">
             Open path →
           </Link>
         </div>

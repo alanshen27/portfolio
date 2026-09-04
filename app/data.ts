@@ -5,6 +5,8 @@ export type ProjectDeviceKind =
   | 'tvVintage'
   | 'desk'
 
+export type ProjectKind = 'company' | 'hackathon' | 'research' | 'build'
+
 export type Project = {
   name: string
   description: string
@@ -16,6 +18,14 @@ export type Project = {
   timeframe?: string
   points?: string[]
   device?: ProjectDeviceKind
+  /** What kind of thing this is — shown as a label so readers never have to guess */
+  kind?: ProjectKind
+  /** One-line result: placement, scale, or status */
+  outcome?: string
+  /** Stack / domain chips */
+  tags?: string[]
+  /** Source repository when public */
+  repo?: string
 }
 
 export type WorkExperience = {
@@ -116,26 +126,13 @@ export const PROJECTS: Project[] = [
     role: 'Founder',
     timeframe: 'Sep 2023 – Present',
     device: 'laptop',
+    kind: 'company',
+    outcome: 'Live product · School Development Program',
+    tags: ['Next.js', 'tRPC', 'Supabase', 'Pusher'],
     points: [
       'Led frontend in Next.js and backend with tRPC.',
       'Scaled with Pusher sockets, Supabase read replicas, Render load balancing, and Vercel edge delivery.',
       'Started the Studious School Development Program for under-resourced classrooms.',
-    ],
-  },
-  {
-    name: 'Nomad',
-    description:
-      'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
-    link: 'https://www.linkedin.com/in/alanshen27/',
-    image: '/media/projects/nomad.png',
-    id: 'project-nomad',
-    role: 'HackMIT China 2026',
-    timeframe: '36 hours',
-    device: 'desk',
-    points: [
-      '3rd Place, Education Track — Outstanding Impact Award.',
-      'Interactive course planner with prerequisite dependency graphs.',
-      'Social layer for finding classmates, communities, and relevant peers.',
     ],
   },
   {
@@ -148,10 +145,68 @@ export const PROJECTS: Project[] = [
     role: 'SWE & Co-Founder',
     timeframe: 'Aug 2025 – Jan 2026',
     device: 'tvModern',
+    kind: 'company',
+    outcome: '1st Place Overall · HackHarvard China 2025',
+    tags: ['AI workflows', 'Inference', 'Full-stack'],
     points: [
       '1st Place Overall at HackHarvard China 2025.',
       'Led frontend redesign and backend infrastructure.',
       'Supported inference design for AI-driven study workflows.',
+    ],
+  },
+  {
+    name: 'notate',
+    description:
+      'AI music co-writer: sketch on a piano roll, a Transformer continues the phrase, and it plays back through a synth written from scratch.',
+    link: 'https://github.com/alanshen27/notate',
+    repo: 'https://github.com/alanshen27/notate',
+    id: 'project-notate',
+    role: 'Solo build',
+    timeframe: 'May 2026 – Present',
+    kind: 'research',
+    outcome: '~21M-param Transformer · Prelude / Canon / Sinfonia models',
+    tags: ['PyTorch', 'Transformer', 'FastAPI', 'Web Audio'],
+    points: [
+      'Decoder-only Transformer (6×512, 8 heads) trained on REMI-tokenised MIDI — POP909 and larger piano corpora.',
+      'Polyphonic subtractive synth built as a Web Audio AudioWorklet; same DSP drives playback and WAV export.',
+      'Piano-roll UI: sketch → continue with AI → accept / edit → continue again.',
+    ],
+  },
+  {
+    name: 'Foundry',
+    description:
+      'AI-native workspace that takes a physical-product idea from brief to CAD, PCB, verification, storefront, and checkout.',
+    link: 'https://github.com/alanshen27/foundry',
+    repo: 'https://github.com/alanshen27/foundry',
+    id: 'project-foundry',
+    role: 'Penn ESAP 2026',
+    timeframe: 'Jul – Aug 2026',
+    kind: 'build',
+    outcome: 'Ideate → Engineer → Verify → Launch pipeline',
+    tags: ['TypeScript', 'KCL CAD', 'Yjs', 'Shopify'],
+    points: [
+      'Project-aware AI copilot with streaming tool execution and background jobs.',
+      'Mechanical CAD (KCL / Zoo), schematic and PCB workspaces, Monaco editor with Yjs multiplayer.',
+      'Verification gates, then v0-generated storefront and Shopify-backed checkout.',
+    ],
+  },
+  {
+    name: 'Nomad',
+    description:
+      'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
+    link: 'https://www.linkedin.com/in/alanshen27/',
+    image: '/media/projects/nomad.png',
+    id: 'project-nomad',
+    role: 'HackMIT China 2026',
+    timeframe: '36 hours',
+    device: 'desk',
+    kind: 'hackathon',
+    outcome: '3rd Place, Education Track · Outstanding Impact Award',
+    tags: ['Graphs', 'Planning', 'Social'],
+    points: [
+      '3rd Place, Education Track — Outstanding Impact Award.',
+      'Interactive course planner with prerequisite dependency graphs.',
+      'Social layer for finding classmates, communities, and relevant peers.',
     ],
   },
   {
@@ -162,8 +217,11 @@ export const PROJECTS: Project[] = [
     image: '/media/projects/synapse.png',
     id: 'project3',
     role: 'HackHarvard 2025',
-    timeframe: '2025',
+    timeframe: 'Oct 2025',
     device: 'monitor',
+    kind: 'hackathon',
+    outcome: 'Invitational · one of two high-school teams',
+    tags: ['Visualization', 'ML'],
     points: [
       'Interactive viz for inspecting network structure and behavior.',
       'Full demo walkthrough on YouTube.',
@@ -179,12 +237,22 @@ export const PROJECTS: Project[] = [
     role: 'Empower 3.0',
     timeframe: '2025',
     device: 'tvVintage',
+    kind: 'hackathon',
+    outcome: '3rd Place, Coding track · 450+ participants',
+    tags: ['Collaboration', 'Realtime'],
     points: [
       '3rd Place, Coding track (450+ participants).',
       'Shared workspace for coordinating collaborative builds.',
     ],
   },
 ]
+
+export const PROJECT_KIND_LABEL: Record<ProjectKind, string> = {
+  company: 'Company',
+  hackathon: 'Hackathon',
+  research: 'Research build',
+  build: 'Build',
+}
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
@@ -195,10 +263,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://www.studious.sh',
     image: 'https://www.studious.sh/logo.png',
     bullets: [
-      'Led frontend development with Next.js.',
-      'Led backend development with tRPC and React.',
       'Designed scalable infrastructure with sockets (Pusher.js), Supabase read replication, Render with load balancer, and Vercel for minimized geographical latency.',
       'Created the Studious School Development Program, intended to bring modern learning to underprivileged communities.',
+      'Led frontend development with Next.js.',
+      'Led backend development with tRPC and React.',
     ],
     id: 'work1',
   },
@@ -275,6 +343,15 @@ export const EDUCATION: Education[] = [
     location: 'Rolle, Switzerland',
     image: '/media/logos/lerosey.png',
     id: 'edu1',
+  },
+  {
+    institution:
+      'University of Pennsylvania — Engineering Summer Academy (ESAP)',
+    degree: 'AI and its mathematics · three-week intensive',
+    start: 'Jul 2026',
+    end: 'Jul 2026',
+    location: 'Philadelphia, PA',
+    id: 'edu-esap',
   },
   {
     institution: 'Singapore American School',
@@ -360,7 +437,8 @@ export const AWARDS: Award[] = [
     id: 'award1',
   },
   {
-    title: 'HackMIT China 2026 — 3rd Place (Education Track) & Outstanding Impact Award',
+    title:
+      'HackMIT China 2026 — 3rd Place (Education Track) & Outstanding Impact Award',
     description:
       'Podium finish out of 300+ participants during the 2026 HackMIT China Challenge. Built Nomad in 36 hours.',
     date: 'Mar 2026',
@@ -394,11 +472,13 @@ export const AWARDS: Award[] = [
   {
     title: 'Empower 3.0 Hacks — 3rd Place',
     description: '3rd Place, "Coding" track; 450+ participants in total.',
+    date: '2025',
     image: '/media/projects/empower.png',
     id: 'award3',
   },
   {
-    title: 'Swiss Group of International Schools Math Competition 2025 — 2nd Place',
+    title:
+      'Swiss Group of International Schools Math Competition 2025 — 2nd Place',
     date: '2025',
     image: '/media/logos/sgis.png',
     id: 'award5',
@@ -527,7 +607,8 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     type: 'Single',
     cover: '/media/audio/dreams-of-the-blue-cover.png',
     audio: '/media/audio/dreams-of-the-blue.mp3',
-    hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
+    hyperfollow:
+      'https://distrokid.com/hyperfollow/alanshen/dreams-of-the-blue',
     links: [],
     id: 'dreams-of-the-blue',
   },
@@ -563,11 +644,12 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const SITE_NAV = [
-  { label: 'About', href: '/#about' },
+  { label: 'Builds', href: '/#builds' },
+  { label: 'Honors', href: '/#honors' },
+  { label: 'Research', href: '/#research' },
   { label: 'Work', href: '/work' },
   { label: 'Path', href: '/path' },
   { label: 'Music', href: '/music' },
-  { label: 'Contact', href: '/#contact' },
 ] as const
 
 export const EMAIL = 'alan.shen27@gmail.com'
@@ -579,39 +661,74 @@ export const TAGLINE =
   'Building education systems at the intersection of AI, product, and competition.'
 
 export const SUMMARY =
-  "High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin."
+  'High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin.'
 
-/** Short home intro — who you are. */
+/** One-sentence positioning — the first thing a reader should absorb. */
 export const HOME_INTRO =
-  "I've founded Studious and Scribe, shipped hackathon winners, and compete in USACO Gold and VEX Worlds. I care about writing code that solves real problems — and shipping systems that students actually use."
+  'I build education software that students actually use. Also: USACO Gold, VEX Worlds qualifier, forthcoming Cambridge University Press research, and ABRSM Grade 8 on violin and piano.'
 
-export const PORTFOLIO_GATES = [
+/** Slightly longer bio for the About block. */
+export const HOME_BIO =
+  'Founder of Studious (a modern LMS, live since 2023) and co-founder of Scribe (AI study assistant, 1st Place Overall at HackHarvard China 2025). Lately: a Transformer music co-writer, an AI hardware-product workspace built at Penn ESAP, and a VEX robot that qualified for Worlds. Research contributor on AI-based pragmatics assessment. Also a competitive swimmer and violinist.'
+
+/** Proof strip — six numbers a reader can verify in ten seconds. */
+export type Highlight = {
+  value: string
+  label: string
+  detail: string
+  href: string
+  /** Long single-word values render one step smaller so they never break mid-word */
+  compact?: boolean
+}
+
+export const HIGHLIGHTS: Highlight[] = [
   {
-    label: 'Software & product',
-    title: 'Work Portfolio',
-    href: '/work',
-    detail: 'Studious · Scribe · Nomad · hack builds',
-  },
-  {
-    label: 'Competition & research',
-    title: 'Path Portfolio',
+    value: '1000/1000',
+    label: 'USACO',
+    detail: 'Perfect Silver → promoted to Gold, Feb 2026',
     href: '/path',
-    detail: 'USACO · VEX · awards · athletics',
   },
   {
-    label: 'Stage & releases',
-    title: 'Music Portfolio',
-    href: '/music',
-    detail: 'Singles · ABRSM Grade 8 · orchestra',
+    value: '1st',
+    label: 'HackHarvard China ’25',
+    detail: 'Best Overall Hack — Scribe',
+    href: '/work#project2',
   },
-] as const
+  {
+    value: '3rd',
+    label: 'HackMIT China ’26',
+    detail: 'Education Track + Outstanding Impact — Nomad',
+    href: '/work#project-nomad',
+  },
+  {
+    value: 'Worlds',
+    label: 'VEX Robotics ’26',
+    detail: 'Excellence Award, Alpine Robo Games — team 15520X',
+    href: '/path',
+  },
+  {
+    value: 'Forthcoming',
+    compact: true,
+    label: 'Cambridge Univ. Press',
+    detail: 'Training AI for Pragmatics Assessment · CALICO 2026 talk',
+    href: '/#research',
+  },
+  {
+    value: 'Grade 8 ×2',
+    label: 'ABRSM',
+    detail: 'Violin and piano · two released singles',
+    href: '/music',
+  },
+]
 
-export const PROOF_POINTS: { label: string; href: string }[] = [
-  { label: 'Studious', href: '/work#project1' },
-  { label: 'HackHarvard 1st', href: '/work#project2' },
-  { label: 'USACO Gold', href: '/path' },
-  { label: 'VEX Worlds', href: '/path' },
-  { label: 'ABRSM 8', href: '/music' },
+/** Dossier facts — the ID-card column in the hero. */
+export const FACTS: { label: string; value: string; href?: string }[] = [
+  { label: 'School', value: 'Institut Le Rosey, Rolle CH' },
+  { label: 'Programme', value: 'IB Diploma · Class of 2027' },
+  { label: 'Roles', value: 'Founder · Engineer · Violinist' },
+  { label: 'Focus', value: 'EdTech · AI/ML systems · CP' },
+  { label: 'Summer ’26', value: 'Penn ESAP — AI & mathematics' },
+  { label: 'Languages', value: 'TypeScript · C++ · Python' },
 ]
 
 export const NAME = 'Alan Shen'
