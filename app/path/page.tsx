@@ -8,9 +8,7 @@ import { Projection } from '@/components/projection'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { MedalBars } from '@/components/viz/medal-bars'
 import { ScoreRing } from '@/components/viz/score-ring'
-import { CpGraph } from '@/components/viz/cp-graph'
 import { UsacoBoard } from '@/components/viz/usaco-board'
-import { MathField } from '@/components/viz/math-field'
 import { dateRange } from '@/lib/utils'
 import {
   AWARDS,
@@ -22,22 +20,19 @@ import {
 } from '../data'
 
 function Head({
-  index,
   title,
   count,
   dark = false,
 }: {
-  index: string
   title: string
   count?: string
   dark?: boolean
 }) {
   return (
     <div className={`section-head ${dark ? 'border-white/25' : ''}`}>
-      <span className={`idx ${dark ? 'text-white/40' : ''}`}>{index}</span>
-      <h2 className={`eyebrow ${dark ? 'text-accent-bright' : ''}`}>{title}</h2>
+      <h2 className={`title ${dark ? 'text-white' : ''}`}>{title}</h2>
       {count && (
-        <span className={`count ${dark ? 'text-white/40' : ''}`}>{count}</span>
+        <span className={`count ${dark ? 'text-white/45' : ''}`}>{count}</span>
       )}
     </div>
   )
@@ -76,15 +71,12 @@ export default function PathPage() {
         className="border-line bg-bg-elevated/90 border-b backdrop-blur"
       >
         <div className="section-max section-pad flex flex-wrap gap-x-6 gap-y-2 py-3">
-          {CHAPTERS.map((c, i) => (
+          {CHAPTERS.map((c) => (
             <a
               key={c.id}
               href={`#${c.id}`}
               className="text-ink-soft hover:text-ink flex items-baseline gap-2 text-[13px] transition-colors"
             >
-              <span className="text-ink-faint font-mono text-[10px]">
-                {String(i + 1).padStart(2, '0')}
-              </span>
               {c.label}
             </a>
           ))}
@@ -96,10 +88,9 @@ export default function PathPage() {
         id="measured"
         className="border-line bg-bg relative scroll-mt-24 overflow-hidden border-b py-10 md:py-14"
       >
-        <MathField />
         <div className="section-max section-pad relative">
           <Reveal y={10}>
-            <Head index="01" title="Measured" count="USACO · TOEFL · medals" />
+            <Head title="Measured" count="USACO · TOEFL · medals" />
           </Reveal>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
@@ -117,10 +108,6 @@ export default function PathPage() {
               </Reveal>
               <Reveal className="card p-5" delay={0.12} y={14}>
                 <MedalBars />
-              </Reveal>
-              <Reveal className="card p-5 sm:col-span-2" delay={0.14} y={14}>
-                <p className="eyebrow-faint">Graph search · BFS</p>
-                <CpGraph className="mt-3 max-w-md" />
               </Reveal>
             </div>
           </div>
@@ -153,11 +140,7 @@ export default function PathPage() {
         <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-8">
             <Reveal y={10}>
-              <Head
-                index="02"
-                title="Experience"
-                count={`${techWork.length} positions`}
-              />
+              <Head title="Experience" count={`${techWork.length} positions`} />
             </Reveal>
             <ul className="ledger border-line border-b">
               {techWork.map((job, i) => (
@@ -168,7 +151,7 @@ export default function PathPage() {
                     </p>
                     <div className="md:col-span-9">
                       <div className="flex flex-wrap items-baseline gap-x-2.5">
-                        <h3 className="text-ink text-base font-semibold">
+                        <h3 className="text-ink text-base font-medium">
                           {job.company}
                         </h3>
                         <span className="text-ink-soft text-[13px]">
@@ -211,13 +194,13 @@ export default function PathPage() {
           </div>
           <div className="lg:col-span-4">
             <Reveal y={10}>
-              <Head index="02b" title="Education" />
+              <Head title="Education" />
             </Reveal>
             <ul className="ledger border-line border-b">
               {EDUCATION.map((e) => (
                 <li key={e.id} className="py-3.5">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-ink text-[15px] font-semibold">
+                    <h3 className="text-ink text-[15px] font-medium">
                       {e.institution}
                     </h3>
                     <span className="eyebrow-faint whitespace-nowrap">
@@ -243,7 +226,6 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <Head
-              index="03"
               title="Awards & honors"
               count={`${AWARDS.length} entries · 2023–2026`}
             />
@@ -270,7 +252,7 @@ export default function PathPage() {
                     <span className="hidden md:block" />
                   )}
                   <div className="min-w-0">
-                    <h3 className="text-ink text-[15px] leading-snug font-semibold">
+                    <h3 className="text-ink text-[15px] leading-snug font-medium">
                       {award.title}
                     </h3>
                     {award.description && (
@@ -305,7 +287,6 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <Head
-              index="04"
               title="Research"
               count={`${PUBLICATIONS.length} papers · co-author`}
               dark
@@ -318,12 +299,12 @@ export default function PathPage() {
                 <li className="grid gap-x-6 gap-y-1.5 py-4 md:grid-cols-12">
                   <div className="flex flex-wrap items-center gap-2 md:col-span-3 md:flex-col md:items-start">
                     <span className="pill pill-dark">{pub.status}</span>
-                    <span className="font-mono text-[11px] text-white/45">
+                    <span className="text-[12px] text-white/45">
                       {pub.date}
                     </span>
                   </div>
                   <div className="md:col-span-9">
-                    <h3 className="text-base leading-snug font-semibold md:text-lg">
+                    <h3 className="text-base leading-snug font-medium md:text-lg">
                       {pub.title}
                     </h3>
                     <p className="mt-1 text-[13px] text-white/65">
@@ -355,7 +336,6 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <Head
-              index="05"
               title="Athletics"
               count="14 medals · 2× MVP · school record"
               dark
@@ -384,7 +364,7 @@ export default function PathPage() {
                   />
                 </div>
               </div>
-              <p className="mt-3 font-mono text-[11px] tracking-[0.1em] text-white/55 uppercase">
+              <p className="eyebrow-faint mt-3 text-white/55">
                 {swim?.title} · {swim ? dateRange(swim.start, swim.end) : ''}
               </p>
               <MedalBars className="mt-5" tone="dark" />
@@ -410,11 +390,7 @@ export default function PathPage() {
       <section id="service" className="bg-bg scroll-mt-24 py-10 md:py-14">
         <div className="section-max section-pad">
           <Reveal y={10}>
-            <Head
-              index="06"
-              title="Service"
-              count={`${VOLUNTEERING.length} programmes`}
-            />
+            <Head title="Service" count={`${VOLUNTEERING.length} programmes`} />
           </Reveal>
 
           <ul className="ledger border-line border-b">
@@ -453,7 +429,7 @@ export default function PathPage() {
                         </a>
                       )}
                     </div>
-                    <h3 className="text-ink mt-2 text-lg font-semibold">
+                    <h3 className="text-ink mt-2 text-lg font-medium">
                       {v.organization}
                       <span className="text-ink-soft ml-2 text-sm font-normal">
                         {v.role}

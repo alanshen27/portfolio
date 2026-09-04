@@ -81,7 +81,7 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
           <p className="display-quiet truncate text-lg text-ink md:text-xl">
             {track.title}
           </p>
-          <span className="shrink-0 font-mono text-[10px] tracking-[0.12em] text-ink-faint uppercase">
+          <span className="shrink-0 text-[10px] font-medium tracking-[0.12em] text-ink-faint uppercase">
             {track.type}
           </span>
         </div>
@@ -123,7 +123,7 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
                 }}
               />
             </div>
-            <span className="shrink-0 font-mono text-[10px] text-ink-faint tabular-nums">
+            <span className="shrink-0 text-[11px] text-ink-faint tabular-nums">
               {fmt(progress)} / {fmt(duration)}
             </span>
           </div>

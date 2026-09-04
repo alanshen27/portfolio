@@ -24,13 +24,11 @@ export function MedalBars({
   return (
     <div className={className}>
       <div className="flex items-baseline gap-3">
-          <p
-            className={`text-5xl font-bold tracking-tight tabular-nums ${dark ? 'text-white' : 'text-ink'}`}
-          >
+        <p className={`figure text-5xl ${dark ? 'text-white' : 'text-ink'}`}>
           <CountUp to={14} />
         </p>
         <p
-          className={`font-mono text-[11px] tracking-[0.14em] uppercase ${
+          className={`text-[11px] font-medium tracking-[0.12em] uppercase ${
             dark ? 'text-white/55' : 'text-ink-faint'
           }`}
         >
@@ -44,7 +42,7 @@ export function MedalBars({
             className="grid grid-cols-[3.5rem_1fr_1.5rem] items-center gap-3"
           >
             <span
-              className={`font-mono text-[11px] tracking-[0.1em] uppercase ${
+              className={`text-[11px] font-medium tracking-[0.1em] uppercase ${
                 dark ? 'text-white/70' : 'text-ink-soft'
               }`}
             >
@@ -70,7 +68,7 @@ export function MedalBars({
               ))}
             </span>
             <span
-              className={`text-right font-mono text-sm tabular-nums ${
+              className={`text-right font-serif text-base tabular-nums ${
                 dark ? 'text-white' : 'text-ink'
               }`}
             >

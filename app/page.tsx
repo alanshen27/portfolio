@@ -56,22 +56,19 @@ function linkLabel(href: string) {
 }
 
 function SectionHead({
-  index,
   title,
   count,
   dark = false,
 }: {
-  index: string
   title: string
   count?: string
   dark?: boolean
 }) {
   return (
     <div className={`section-head ${dark ? 'border-white/25' : ''}`}>
-      <span className={`idx ${dark ? 'text-white/40' : ''}`}>{index}</span>
-      <h2 className={`eyebrow ${dark ? 'text-accent-bright' : ''}`}>{title}</h2>
+      <h2 className={`title ${dark ? 'text-white' : ''}`}>{title}</h2>
       {count && (
-        <span className={`count ${dark ? 'text-white/40' : ''}`}>{count}</span>
+        <span className={`count ${dark ? 'text-white/45' : ''}`}>{count}</span>
       )}
     </div>
   )
@@ -79,7 +76,7 @@ function SectionHead({
 
 function DossierCard() {
   return (
-    <div className="card corner-ticks paper-grid relative p-5 md:p-6">
+    <div className="card relative p-5 md:p-6">
       <div className="flex items-start gap-4">
         <div className="bg-mist relative h-16 w-16 shrink-0 overflow-hidden md:h-20 md:w-20">
           <Image
@@ -115,19 +112,18 @@ function DossierCard() {
         ))}
       </dl>
 
-      <div className="border-line mt-5 flex flex-wrap gap-2 border-t pt-4">
+      <div className="border-line mt-5 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t pt-4">
         {CONTACT_LINKS.map((l) => (
           <a
             key={l.label}
             href={l.link}
             {...external(l.link)}
-            className="pill pill-accent hover:bg-accent transition-colors hover:text-white"
+            className="rule-link text-sm"
           >
             {l.label}
-            <span aria-hidden>↗</span>
           </a>
         ))}
-        <Link href="/path" className="pill hover:border-ink hover:text-ink">
+        <Link href="/path" className="row-link ml-auto text-sm">
           Full record →
         </Link>
       </div>
@@ -158,38 +154,36 @@ function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
           ) : (
             <PianoRoll className="h-full w-full" />
           )}
-          <span className="pill pill-ink absolute top-3 left-3">
-            {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
-          </span>
         </a>
 
         <div className="flex flex-1 flex-col p-4 md:p-5">
-          <div className="flex items-baseline justify-between gap-3">
-            <h3 className="display-quiet text-ink text-xl">{p.name}</h3>
-            <p className="eyebrow-faint whitespace-nowrap">{p.timeframe}</p>
+          <p className="eyebrow">
+            {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
+            <span className="text-ink-faint"> · {p.role}</span>
+          </p>
+          <div className="mt-1.5 flex items-baseline justify-between gap-3">
+            <h3 className="display-quiet text-ink text-[1.45rem]">{p.name}</h3>
+            <p className="text-ink-faint text-[12px] whitespace-nowrap">
+              {p.timeframe}
+            </p>
           </div>
-          <p className="text-ink-soft mt-0.5 text-[13px]">{p.role}</p>
           <p className="text-ink mt-2.5 text-sm leading-snug">
             {p.description}
           </p>
           {p.outcome && (
-            <p className="border-accent text-accent-deep mt-3 border-l-2 pl-2.5 text-[13px] font-medium">
+            <p className="text-accent-deep mt-3 font-serif text-[15px] italic">
               {p.outcome}
             </p>
           )}
           <ul className="tick-list text-ink-soft mt-3 space-y-1.5 text-[13px] leading-snug">
             {p.points?.slice(0, 3).map((pt) => <li key={pt}>{pt}</li>)}
           </ul>
-          <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-4">
-            {p.tags?.map((t) => (
-              <span key={t} className="pill">
-                {t}
-              </span>
-            ))}
+          <div className="border-line mt-auto flex items-baseline justify-between gap-3 border-t pt-3">
+            <p className="text-ink-faint text-[12px]">{p.tags?.join(' · ')}</p>
             <a
               href={p.link}
               {...external(p.link)}
-              className="row-link ml-auto text-[13px]"
+              className="row-link text-[13px]"
             >
               {linkLabel(p.link)} ↗
             </a>
@@ -207,7 +201,7 @@ export default function Home() {
     <div className="bg-atmosphere">
       {/* 00 — Hero: who, one sentence, dossier card, proof strip */}
       <section className="relative overflow-hidden pt-24 pb-10 md:pt-28 md:pb-14">
-        <FieldBackdrop />
+        <FieldBackdrop math={false} />
         <div className="section-max section-pad relative z-10 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             <motion.p
@@ -224,7 +218,7 @@ export default function Home() {
             </h1>
 
             <motion.p
-              className="text-ink mt-5 max-w-2xl text-lg leading-snug md:text-[1.35rem]"
+              className="display-quiet text-ink mt-5 max-w-2xl text-[1.25rem] leading-[1.25] font-normal md:text-[1.65rem]"
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.25, ease: easeOut }}
@@ -328,7 +322,6 @@ export default function Home() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <SectionHead
-              index="01"
               title="Builds"
               count={`${PROJECTS.length} projects · 2 companies · 3 hackathon podiums`}
             />
@@ -355,9 +348,7 @@ export default function Home() {
                   className="grid scroll-mt-28 gap-x-6 gap-y-1.5 py-3.5 md:grid-cols-12 md:items-baseline"
                 >
                   <div className="flex items-baseline gap-2.5 md:col-span-3">
-                    <h3 className="text-ink text-base font-semibold">
-                      {p.name}
-                    </h3>
+                    <h3 className="display-quiet text-ink text-lg">{p.name}</h3>
                     <span className="pill">
                       {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
                     </span>
@@ -365,7 +356,7 @@ export default function Home() {
                   <p className="text-ink-soft text-sm leading-snug md:col-span-4">
                     {p.description}
                   </p>
-                  <p className="text-accent-deep text-[13px] font-medium md:col-span-3">
+                  <p className="text-accent-deep font-serif text-[14px] italic md:col-span-3">
                     {p.outcome}
                   </p>
                   <div className="flex items-baseline justify-between gap-3 md:col-span-2 md:justify-end">
@@ -401,7 +392,6 @@ export default function Home() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <SectionHead
-              index="02"
               title="Honors & competition"
               count={`${AWARDS.length} awards · 2023–2026`}
             />
@@ -430,7 +420,7 @@ export default function Home() {
                       <span className="hidden md:block" />
                     )}
                     <div className="min-w-0">
-                      <h3 className="text-ink text-[15px] leading-snug font-semibold">
+                      <h3 className="text-ink text-[15px] leading-snug font-medium">
                         {a.title}
                       </h3>
                       {a.description && (
@@ -511,7 +501,6 @@ export default function Home() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <SectionHead
-              index="03"
               title="Research"
               count={`${PUBLICATIONS.length} papers · co-author`}
               dark
@@ -529,12 +518,12 @@ export default function Home() {
                 <li className="grid gap-x-6 gap-y-1.5 py-4 md:grid-cols-12">
                   <div className="flex flex-wrap items-center gap-2 md:col-span-3 md:flex-col md:items-start">
                     <span className="pill pill-dark">{pub.status}</span>
-                    <span className="font-mono text-[11px] text-white/45">
+                    <span className="text-[12px] text-white/45">
                       {pub.date}
                     </span>
                   </div>
                   <div className="md:col-span-9">
-                    <h3 className="text-base leading-snug font-semibold md:text-lg">
+                    <h3 className="display-quiet text-lg leading-snug md:text-xl">
                       {pub.title}
                     </h3>
                     <p className="mt-1 text-[13px] text-white/65">
@@ -565,11 +554,7 @@ export default function Home() {
         <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
             <Reveal y={10}>
-              <SectionHead
-                index="04"
-                title="Roles"
-                count={`${ROLES.length} positions`}
-              />
+              <SectionHead title="Roles" count={`${ROLES.length} positions`} />
             </Reveal>
             <ul className="ledger border-line mt-4 border-b">
               {ROLES.map((job, i) => (
@@ -580,7 +565,7 @@ export default function Home() {
                     </p>
                     <div className="md:col-span-9">
                       <div className="flex flex-wrap items-baseline gap-x-2.5">
-                        <h3 className="text-ink text-base font-semibold">
+                        <h3 className="text-ink text-base font-medium">
                           {job.company}
                         </h3>
                         <span className="text-ink-soft text-[13px]">
@@ -611,13 +596,13 @@ export default function Home() {
 
           <div className="lg:col-span-5">
             <Reveal y={10}>
-              <SectionHead index="04b" title="Education" />
+              <SectionHead title="Education" />
             </Reveal>
             <ul className="ledger border-line mt-4 border-b">
               {EDUCATION.map((e) => (
                 <li key={e.id} className="py-3.5">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-ink text-[15px] font-semibold">
+                    <h3 className="text-ink text-[15px] font-medium">
                       {e.institution}
                     </h3>
                     <span className="eyebrow-faint whitespace-nowrap">
@@ -633,7 +618,7 @@ export default function Home() {
             </ul>
 
             <Reveal className="mt-8" y={10}>
-              <SectionHead index="04c" title="Stack" />
+              <SectionHead title="Stack" />
             </Reveal>
             <ul className="ledger border-line mt-4 border-b">
               {SKILL_GROUPS.filter((g) => g.label !== 'Music').map((g) => (
@@ -660,7 +645,6 @@ export default function Home() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <SectionHead
-              index="05"
               title="Music & athletics"
               count="ABRSM Grade 8 ×2 · 14 medals"
             />
@@ -771,7 +755,6 @@ export default function Home() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <SectionHead
-              index="06"
               title="Service"
               count={`${VOLUNTEERING.length} programmes`}
             />
@@ -786,7 +769,7 @@ export default function Home() {
                   </div>
                   <div className="md:col-span-9">
                     <div className="flex flex-wrap items-baseline gap-x-2.5">
-                      <h3 className="text-ink text-base font-semibold">
+                      <h3 className="text-ink text-base font-medium">
                         {v.organization}
                       </h3>
                       <span className="text-ink-soft text-[13px]">
@@ -830,7 +813,7 @@ export default function Home() {
       >
         <div className="section-max section-pad grid gap-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-7" y={10}>
-            <SectionHead index="07" title="Contact" />
+            <SectionHead title="Contact" />
             <h2 className="display-quiet text-ink mt-5 text-[clamp(1.7rem,4vw,2.6rem)]">
               Happy to talk about any of this.
             </h2>
@@ -840,15 +823,15 @@ export default function Home() {
             >
               {EMAIL}
             </a>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
               {SOCIAL_LINKS.map((l) => (
                 <a
                   key={l.label}
                   href={l.link}
                   {...external(l.link)}
-                  className="pill hover:border-ink hover:text-ink"
+                  className="rule-link"
                 >
-                  {l.label} ↗
+                  {l.label}
                 </a>
               ))}
             </div>

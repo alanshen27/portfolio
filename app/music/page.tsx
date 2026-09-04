@@ -45,9 +45,7 @@ export default function MusicPage() {
           </Reveal>
 
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.08}>
-            <p className="text-accent font-mono text-[11px] tracking-[0.2em] uppercase">
-              Background
-            </p>
+            <p className="eyebrow">Background</p>
             <h2 className="display-quiet text-ink mt-3 text-[clamp(1.8rem,4vw,2.5rem)]">
               ABRSM Grade 8, twice over.
             </h2>
@@ -106,8 +104,7 @@ export default function MusicPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <div className="section-head">
-              <span className="idx">→</span>
-              <h2 className="eyebrow">On stage</h2>
+              <h2 className="title">On stage</h2>
               <span className="count">
                 {STAGE_PHOTOS.length} photos · orchestra, section, solo
               </span>

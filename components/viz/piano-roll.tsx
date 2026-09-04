@@ -36,7 +36,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
   const rh = h / ROWS
 
   return (
-    <div className={`bg-ink relative overflow-hidden ${className}`} aria-hidden>
+    <div className={`bg-panel-wash relative overflow-hidden ${className}`} aria-hidden>
       <svg viewBox={`0 0 ${w} ${h}`} className="h-full w-full">
         {Array.from({ length: ROWS }).map((_, r) => (
           <rect
@@ -45,7 +45,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             y={r * rh}
             width={w}
             height={rh}
-            fill={r % 2 === 0 ? 'rgba(255,255,255,0.025)' : 'transparent'}
+            fill={r % 2 === 0 ? 'rgba(23,25,28,0.03)' : 'transparent'}
           />
         ))}
         {Array.from({ length: COLS + 1 }).map((_, c) => (
@@ -56,7 +56,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             y1={0}
             y2={h}
             stroke={
-              c % 4 === 0 ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.05)'
+              c % 4 === 0 ? 'rgba(23,25,28,0.16)' : 'rgba(23,25,28,0.06)'
             }
             strokeWidth={1}
           />
@@ -69,7 +69,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             width={n.d * cw - 3}
             height={rh - 3}
             fill={
-              n.ai ? 'var(--color-accent-bright)' : 'rgba(255,255,255,0.82)'
+              n.ai ? 'var(--color-accent)' : 'rgba(23,25,28,0.78)'
             }
             initial={reduce ? false : { opacity: 0, scaleX: 0.4 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -87,7 +87,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
           x2={8 * cw}
           y1={0}
           y2={h}
-          stroke="var(--color-lake)"
+          stroke="var(--color-ink-faint)"
           strokeWidth={1.2}
           strokeDasharray="3 3"
           initial={reduce ? false : { opacity: 0 }}
@@ -96,9 +96,9 @@ export function PianoRoll({ className = '' }: { className?: string }) {
           transition={{ delay: 0.5, duration: 0.4 }}
         />
       </svg>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 font-mono text-[9.5px] tracking-[0.14em] text-white/45 uppercase">
+      <div className="text-ink-faint pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 text-[10px] tracking-[0.12em] uppercase">
         <span>sketch</span>
-        <span className="text-accent-bright">continue with ai →</span>
+        <span className="text-accent">continued by the model →</span>
       </div>
     </div>
   )

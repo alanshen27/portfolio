@@ -29,7 +29,7 @@ export function Header() {
         <div className="section-max section-pad flex h-16 items-center justify-between md:h-[4.25rem]">
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight md:text-[1.35rem]"
+            className="display-quiet text-[1.35rem] md:text-[1.5rem]"
             aria-label="Alan Shen — Home"
           >
             Alan Shen
@@ -65,7 +65,7 @@ export function Header() {
             })}
             <a
               href={`mailto:${EMAIL}`}
-              className="border-ink/20 hover:bg-ink border px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:text-white"
+              className="border-line-strong hover:border-ink ml-2 border-b pb-px text-[13px] transition-colors"
             >
               Email
             </a>
@@ -120,42 +120,39 @@ export function Header() {
                       onClick={() => setOpen(false)}
                       className="border-line flex items-baseline gap-4 border-b py-3"
                     >
-                      <span className="text-accent font-mono text-[11px]">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
                       <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
                         {item.label}
                       </span>
-                      <span className="text-ink-faint ml-auto font-mono text-[10px] tracking-[0.12em] uppercase">
+                      <span className="eyebrow-faint ml-auto">
                         {item.href.includes('#') ? 'Home' : 'Page'}
                       </span>
                     </Link>
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="pill pill-accent"
+                  className="rule-link text-sm"
                   onClick={() => setOpen(false)}
                 >
-                  Email ↗
+                  Email
                 </a>
                 <a
                   href="https://github.com/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pill"
+                  className="rule-link text-sm"
                 >
-                  GitHub ↗
+                  GitHub
                 </a>
                 <a
                   href="https://www.linkedin.com/in/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pill"
+                  className="rule-link text-sm"
                 >
-                  LinkedIn ↗
+                  LinkedIn
                 </a>
               </div>
             </div>

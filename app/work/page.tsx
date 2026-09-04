@@ -27,24 +27,25 @@ const STAGES = ['Ideate', 'Engineer', 'Verify', 'Launch']
 function StageStrip() {
   return (
     <div
-      className="bg-ink flex h-full w-full flex-col justify-center gap-3 p-5"
+      className="bg-panel-wash flex h-full w-full flex-col justify-center gap-4 p-6"
       aria-hidden
     >
-      <p className="font-mono text-[10px] tracking-[0.16em] text-white/45 uppercase">
-        Brief → storefront
-      </p>
-      <ol className="grid grid-cols-4 gap-1.5">
+      <p className="eyebrow-faint">From brief to storefront</p>
+      <ol className="border-line-strong flex items-center border-y py-4">
         {STAGES.map((s, i) => (
-          <li
-            key={s}
-            className="border border-white/15 bg-white/[0.04] px-2 py-3 text-center"
-          >
-            <p className="font-mono text-[9px] text-white/40">0{i + 1}</p>
-            <p className="mt-1 text-[11px] font-medium text-white/85">{s}</p>
+          <li key={s} className="flex flex-1 items-center">
+            <span className="display-quiet text-ink text-[clamp(0.95rem,1.4vw,1.2rem)]">
+              {s}
+            </span>
+            {i < STAGES.length - 1 && (
+              <span className="text-ink-faint mx-2 flex-1 text-center text-sm">
+                →
+              </span>
+            )}
           </li>
         ))}
       </ol>
-      <p className="font-mono text-[10px] leading-relaxed text-white/45">
+      <p className="text-ink-faint text-[12px] leading-relaxed">
         CAD · PCB · code · verification gates · Shopify checkout
       </p>
     </div>
@@ -86,8 +87,7 @@ export default function WorkPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <div className="section-head">
-              <span className="idx">00</span>
-              <h2 className="eyebrow">Index</h2>
+              <h2 className="title">Index</h2>
               <span className="count">{PROJECTS.length} entries</span>
             </div>
             <ul className="ledger border-line border-b">
@@ -98,10 +98,10 @@ export default function WorkPage() {
                     className="group grid gap-x-5 gap-y-1 py-2.5 text-sm md:grid-cols-12 md:items-baseline"
                   >
                     <span className="flex items-baseline gap-2.5 md:col-span-3">
-                      <span className="text-ink-faint font-mono text-[11px]">
-                        {String(i + 1).padStart(2, '0')}
+                      <span className="text-ink-faint w-4 text-[12px]">
+                        {i + 1}
                       </span>
-                      <span className="text-ink group-hover:text-accent font-semibold">
+                      <span className="display-quiet text-ink group-hover:text-accent text-lg">
                         {p.name}
                       </span>
                       <span className="pill">
@@ -129,7 +129,7 @@ export default function WorkPage() {
       <section className="bg-bg py-10 md:py-14">
         <div className="section-max section-pad">
           <ul className="ledger">
-            {PROJECTS.map((project, i) => (
+            {PROJECTS.map((project) => (
               <li key={project.id} className="py-8 first:pt-0 md:py-10">
                 <Reveal y={18}>
                   <article
@@ -144,11 +144,6 @@ export default function WorkPage() {
                         className="card bg-mist relative block aspect-[16/10] overflow-hidden"
                       >
                         <Visual p={project} />
-                        <span className="pill pill-ink absolute top-3 left-3">
-                          {project.kind
-                            ? PROJECT_KIND_LABEL[project.kind]
-                            : 'Build'}
-                        </span>
                       </a>
                       {project.photo && (
                         <figure className="mt-2 flex items-center gap-3">
@@ -171,23 +166,24 @@ export default function WorkPage() {
                     </div>
 
                     <div className="lg:col-span-7">
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <span className="text-ink-faint font-mono text-[11px]">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <h2 className="display-quiet text-ink text-[clamp(1.5rem,3vw,2.1rem)]">
-                          {project.name}
-                        </h2>
-                        <span className="eyebrow-faint ml-auto">
-                          {project.role}
+                      <p className="eyebrow">
+                        {project.kind
+                          ? PROJECT_KIND_LABEL[project.kind]
+                          : 'Build'}
+                        <span className="text-ink-faint">
+                          {' '}
+                          · {project.role}
                           {project.timeframe ? ` · ${project.timeframe}` : ''}
                         </span>
-                      </div>
+                      </p>
+                      <h2 className="display-quiet text-ink mt-1.5 text-[clamp(1.6rem,3vw,2.2rem)]">
+                        {project.name}
+                      </h2>
                       <p className="text-ink mt-2.5 text-base leading-snug">
                         {project.description}
                       </p>
                       {project.outcome && (
-                        <p className="border-accent text-accent-deep mt-3 inline-block border-l-2 pl-2.5 text-sm font-medium">
+                        <p className="text-accent-deep mt-3 font-serif text-base italic">
                           {project.outcome}
                         </p>
                       )}
@@ -198,12 +194,10 @@ export default function WorkPage() {
                           ))}
                         </ul>
                       )}
-                      <div className="mt-5 flex flex-wrap items-center gap-1.5">
-                        {project.tags?.map((t) => (
-                          <span key={t} className="pill">
-                            {t}
-                          </span>
-                        ))}
+                      <div className="border-line mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t pt-3">
+                        <p className="text-ink-faint text-[12px]">
+                          {project.tags?.join(' · ')}
+                        </p>
                         <a
                           href={project.link}
                           target="_blank"
@@ -237,8 +231,7 @@ export default function WorkPage() {
         <div className="section-max section-pad">
           <Reveal y={10}>
             <div className="section-head">
-              <span className="idx">→</span>
-              <h2 className="eyebrow">Roles behind the builds</h2>
+              <h2 className="title">Roles behind the builds</h2>
               <span className="count">{roles.length} positions</span>
             </div>
           </Reveal>
@@ -252,7 +245,7 @@ export default function WorkPage() {
                   {dateRange(job.start, job.end)}
                 </p>
                 <p className="md:col-span-3">
-                  <span className="text-ink font-semibold">{job.company}</span>
+                  <span className="text-ink font-medium">{job.company}</span>
                 </p>
                 <p className="text-ink-soft text-sm md:col-span-5">
                   {job.title}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { JetBrains_Mono, Outfit } from 'next/font/google'
+import { Fraunces, JetBrains_Mono, Outfit } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
@@ -7,7 +7,7 @@ import { Footer } from './footer'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#e9eef3',
+  themeColor: '#f1eee8',
 }
 
 export const metadata: Metadata = {
@@ -54,6 +54,14 @@ const jetbrains = JetBrains_Mono({
   weight: ['400', '500'],
 })
 
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
+  subsets: ['latin'],
+  weight: 'variable',
+  style: ['normal', 'italic'],
+  axes: ['opsz', 'SOFT'],
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,7 +69,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${jetbrains.variable} antialiased`}>
+      <body
+        className={`${outfit.variable} ${jetbrains.variable} ${fraunces.variable} antialiased`}
+      >
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

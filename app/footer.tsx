@@ -14,7 +14,7 @@ export function Footer() {
           <p className="display-quiet text-ink text-[clamp(1.5rem,3.5vw,2.1rem)]">
             {NAME}
           </p>
-          <p className="text-ink-faint mt-2 font-mono text-[11px] tracking-[0.12em] uppercase">
+          <p className="eyebrow-faint mt-2">
             Institut Le Rosey · Class of 2027
           </p>
           <a
@@ -48,7 +48,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-line border-t">
-        <div className="section-max section-pad text-ink-faint flex justify-between py-4 font-mono text-[11px] tracking-[0.08em] uppercase">
+        <div className="section-max section-pad text-ink-faint flex justify-between py-4 text-[12px]">
           <span>
             © {year} {NAME}
           </span>
