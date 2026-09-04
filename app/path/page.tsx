@@ -3,8 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Reveal } from '@/components/portfolio-motion'
-import { PageHero } from '@/components/page-hero'
-import { Projection } from '@/components/projection'
+import {
+  Movement,
+  PageTitle,
+  ProgrammeRow,
+  roman,
+} from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { MedalBars } from '@/components/viz/medal-bars'
 import { ScoreRing } from '@/components/viz/score-ring'
@@ -19,32 +23,13 @@ import {
   WORK_EXPERIENCE,
 } from '../data'
 
-function Head({
-  title,
-  count,
-  dark = false,
-}: {
-  title: string
-  count?: string
-  dark?: boolean
-}) {
-  return (
-    <div className={`section-head ${dark ? 'border-white/25' : ''}`}>
-      <h2 className={`title ${dark ? 'text-white' : ''}`}>{title}</h2>
-      {count && (
-        <span className={`count ${dark ? 'text-white/45' : ''}`}>{count}</span>
-      )}
-    </div>
-  )
-}
-
-const CHAPTERS = [
-  { id: 'measured', label: 'Measured' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'awards', label: 'Awards' },
-  { id: 'research', label: 'Research' },
-  { id: 'athletics', label: 'Athletics' },
-  { id: 'service', label: 'Service' },
+const CONTENTS = [
+  { label: 'Scores', href: '#scores' },
+  { label: 'Honours', href: '#honours' },
+  { label: 'Publications', href: '#research' },
+  { label: 'Appointments', href: '#appointments' },
+  { label: 'Swimming', href: '#athletics' },
+  { label: 'Service', href: '#service' },
 ]
 
 export default function PathPage() {
@@ -56,102 +41,171 @@ export default function PathPage() {
   return (
     <>
       <ScrollProgress />
-      <PageHero
-        kicker="Path · competition, research, athletics, service"
-        title="The record, measured."
-        description="Contest scores, awards, publications, meets, and service — with dates, so every claim can be checked."
-        image="/media/vex/worlds-arena.jpeg"
-        imagePosition="center 55%"
-        video="/media/vex/driver.mp4"
+      <PageTitle
+        kicker="III · Record"
+        title="The record"
+        standfirst="Contest scores, honours, publications, meets and service — every entry dated so it can be checked."
+        contents={CONTENTS}
       />
 
-      {/* Chapter strip */}
-      <nav
-        aria-label="Sections"
-        className="border-line bg-bg-elevated/90 border-b backdrop-blur"
-      >
-        <div className="section-max section-pad flex flex-wrap gap-x-6 gap-y-2 py-3">
-          {CHAPTERS.map((c) => (
-            <a
-              key={c.id}
-              href={`#${c.id}`}
-              className="text-ink-soft hover:text-ink flex items-baseline gap-2 text-[13px] transition-colors"
-            >
-              {c.label}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      {/* 01 Measured */}
-      <section
-        id="measured"
-        className="border-line bg-bg relative scroll-mt-24 overflow-hidden border-b py-10 md:py-14"
-      >
-        <div className="section-max section-pad relative">
-          <Reveal y={10}>
-            <Head title="Measured" count="USACO · TOEFL · medals" />
-          </Reveal>
-
-          <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
-            <Reveal className="lg:col-span-6" delay={0.04} y={14}>
-              <UsacoBoard />
+      {/* I. Scores */}
+      <section id="scores" className="scroll-mt-24 py-14 md:py-20">
+        <div className="section-max section-pad">
+          <Movement
+            n={1}
+            title="Scores"
+            standfirst="Three numbers that need no interpretation."
+          />
+          <div className="mt-8 grid gap-6 md:grid-cols-12">
+            <Reveal className="md:col-span-6" y={14}>
+              <UsacoBoard className="h-full" />
             </Reveal>
-            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-6">
-              <Reveal className="card p-5" delay={0.08} y={14}>
-                <ScoreRing
-                  value={117}
-                  max={120}
-                  label="TOEFL iBT"
-                  sublabel="Reading · Listening · Speaking · Writing"
-                />
-              </Reveal>
-              <Reveal className="card p-5" delay={0.12} y={14}>
-                <MedalBars />
-              </Reveal>
-            </div>
+            <Reveal className="card p-6 md:col-span-3" y={14} delay={0.05}>
+              <ScoreRing
+                value={117}
+                max={120}
+                label="TOEFL iBT"
+                sublabel="Reading · Listening · Speaking · Writing"
+              />
+            </Reveal>
+            <Reveal className="card p-6 md:col-span-3" y={14} delay={0.1}>
+              <MedalBars />
+            </Reveal>
           </div>
-
-          <Reveal className="mt-6" y={10}>
-            <ul className="ledger border-line border-y">
+          <Reveal className="mx-auto mt-8 max-w-4xl" y={10}>
+            <p className="eyebrow">Certificates</p>
+            <ol className="ledger border-line mt-2 border-y">
               {CERTIFICATIONS.map((c) => (
-                <li
-                  key={c.id}
-                  className="grid gap-x-5 gap-y-0.5 py-2.5 text-sm md:grid-cols-12"
-                >
-                  <span className="text-ink font-medium md:col-span-6">
-                    {c.name}
-                  </span>
-                  <span className="text-ink-soft md:col-span-6">
-                    {c.issuer}
-                  </span>
+                <li key={c.id}>
+                  <ProgrammeRow title={c.name} right={c.issuer ?? ''} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </Reveal>
         </div>
       </section>
 
-      {/* 02 Experience + education */}
+      {/* II. Honours */}
       <section
-        id="experience"
-        className="border-line bg-bg-elevated scroll-mt-24 border-b py-10 md:py-14"
+        id="honours"
+        className="bg-bg-elevated border-line scroll-mt-24 border-t py-14 md:py-20"
       >
-        <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-8">
-            <Reveal y={10}>
-              <Head title="Experience" count={`${techWork.length} positions`} />
-            </Reveal>
-            <ul className="ledger border-line border-b">
-              {techWork.map((job, i) => (
-                <Reveal key={job.id} delay={i * 0.03} y={12}>
+        <div className="section-max section-pad">
+          <Movement
+            n={2}
+            title="Honours"
+            standfirst={`${AWARDS.length} awards, 2023 – 2026, most recent first.`}
+          />
+          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+            <ol className="ledger border-line border-y">
+              {AWARDS.map((a, i) => (
+                <li
+                  key={a.id}
+                  className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-[2rem_5.5rem_1fr_auto]"
+                >
+                  <span className="numeral text-ink-faint hidden text-[13px] md:block">
+                    {roman(i + 1)}.
+                  </span>
+                  <span className="text-ink-faint pt-0.5 text-[12px]">
+                    {a.date ?? '—'}
+                  </span>
+                  <div>
+                    <p className="display-quiet text-ink text-[1.1rem] leading-snug">
+                      {a.title}
+                    </p>
+                    {a.description && (
+                      <p className="text-ink-soft mt-1 text-[13px] leading-snug">
+                        {a.description}
+                      </p>
+                    )}
+                  </div>
+                  {a.photo && (
+                    <div className="bg-mist relative h-16 w-24 overflow-hidden md:h-14 md:w-[5.5rem]">
+                      <Image
+                        src={a.photo}
+                        alt={`${a.title} — photograph`}
+                        fill
+                        className="object-cover"
+                        sizes="88px"
+                      />
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* III. Publications */}
+      <section
+        id="research"
+        className="bg-ink scroll-mt-24 py-14 text-white md:py-20"
+      >
+        <div className="section-max section-pad">
+          <Movement
+            n={3}
+            title="Publications"
+            dark
+            standfirst="AI-based pragmatics assessment and AI-enhanced pedagogy; contributing author on all three."
+          />
+          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+            <ol className="ledger-dark border-y border-white/15">
+              {PUBLICATIONS.map((pub, i) => (
+                <li
+                  key={pub.id}
+                  className="grid gap-x-5 gap-y-1.5 py-5 md:grid-cols-[2rem_1fr_auto]"
+                >
+                  <span className="numeral hidden text-[13px] text-white/45 md:block">
+                    {roman(i + 1)}.
+                  </span>
+                  <div>
+                    <p className="display-quiet text-[1.2rem] leading-snug md:text-[1.35rem]">
+                      {pub.title}
+                    </p>
+                    <p className="mt-1.5 text-[13px] text-white/65">
+                      {pub.authors}
+                    </p>
+                    <p className="mt-0.5 font-serif text-[13.5px] text-white/50 italic">
+                      {pub.venue}
+                    </p>
+                    {pub.presentation && (
+                      <p className="mt-2 text-[13px] text-white/75">
+                        Presented: {pub.presentation}
+                      </p>
+                    )}
+                  </div>
+                  <div className="text-right text-[12px] text-white/55 md:pt-1">
+                    <p className="text-accent-bright tracking-[0.08em] uppercase">
+                      {pub.status}
+                    </p>
+                    <p className="mt-0.5">{pub.date}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* IV. Appointments & education */}
+      <section
+        id="appointments"
+        className="border-line scroll-mt-24 border-t py-14 md:py-20"
+      >
+        <div className="section-max section-pad grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-8">
+            <Movement n={4} title="Appointments" align="left" />
+            <ol className="ledger border-line mt-2 border-b">
+              {techWork.map((job) => (
+                <Reveal key={job.id} y={10}>
                   <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
-                    <p className="eyebrow-faint pt-[3px] md:col-span-3">
+                    <p className="text-ink-faint pt-1 text-[12px] md:col-span-3">
                       {dateRange(job.start, job.end)}
                     </p>
                     <div className="md:col-span-9">
                       <div className="flex flex-wrap items-baseline gap-x-2.5">
-                        <h3 className="text-ink text-base font-medium">
+                        <h3 className="display-quiet text-ink text-[1.1rem]">
                           {job.company}
                         </h3>
                         <span className="text-ink-soft text-[13px]">
@@ -164,15 +218,13 @@ export default function PathPage() {
                             rel="noopener noreferrer"
                             className="row-link ml-auto text-[12px]"
                           >
-                            Visit ↗
+                            Visit →
                           </a>
                         )}
                       </div>
                       <div className="mt-2 flex gap-4">
                         <ul className="tick-list text-ink-soft min-w-0 flex-1 space-y-1 text-[13px] leading-snug">
-                          {job.bullets?.map((bullet) => (
-                            <li key={bullet}>{bullet}</li>
-                          ))}
+                          {job.bullets?.map((b) => <li key={b}>{b}</li>)}
                         </ul>
                         {job.photo && (
                           <div className="bg-mist relative hidden h-28 w-24 shrink-0 overflow-hidden sm:block">
@@ -190,20 +242,23 @@ export default function PathPage() {
                   </li>
                 </Reveal>
               ))}
-            </ul>
+            </ol>
           </div>
-          <div className="lg:col-span-4">
-            <Reveal y={10}>
-              <Head title="Education" />
-            </Reveal>
-            <ul className="ledger border-line border-b">
+          <div className="md:col-span-4">
+            <div className="pt-[1.35rem]">
+              <h2 className="display-quiet text-ink mt-1 text-[clamp(1.9rem,3.6vw,2.6rem)]">
+                Education
+              </h2>
+              <div className="rule-double mt-5 w-full" aria-hidden />
+            </div>
+            <ol className="ledger border-line mt-2 border-b">
               {EDUCATION.map((e) => (
-                <li key={e.id} className="py-3.5">
+                <li key={e.id} className="py-3">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-ink text-[15px] font-medium">
+                    <h3 className="display-quiet text-ink text-[1.05rem] leading-snug">
                       {e.institution}
                     </h3>
-                    <span className="eyebrow-faint whitespace-nowrap">
+                    <span className="text-ink-faint text-[12px] whitespace-nowrap">
                       {dateRange(e.start, e.end)}
                     </span>
                   </div>
@@ -213,137 +268,24 @@ export default function PathPage() {
                   </p>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* 03 Awards */}
+      {/* VI. Swimming */}
       <section
-        id="awards"
-        className="border-line bg-bg scroll-mt-24 border-b py-10 md:py-14"
-      >
-        <div className="section-max section-pad">
-          <Reveal y={10}>
-            <Head
-              title="Awards & honors"
-              count={`${AWARDS.length} entries · 2023–2026`}
-            />
-          </Reveal>
-          <Reveal y={12}>
-            <ul className="ledger border-line border-b">
-              {AWARDS.map((award) => (
-                <li
-                  key={award.id}
-                  className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr_auto]"
-                >
-                  <p className="eyebrow-faint pt-1">{award.date ?? '—'}</p>
-                  {award.image ? (
-                    <div className="bg-panel-wash relative hidden h-9 w-9 overflow-hidden md:block">
-                      <Image
-                        src={award.image}
-                        alt=""
-                        fill
-                        className="object-contain p-1"
-                        sizes="36px"
-                      />
-                    </div>
-                  ) : (
-                    <span className="hidden md:block" />
-                  )}
-                  <div className="min-w-0">
-                    <h3 className="text-ink text-[15px] leading-snug font-medium">
-                      {award.title}
-                    </h3>
-                    {award.description && (
-                      <p className="text-ink-soft mt-1 text-[13px] leading-snug">
-                        {award.description}
-                      </p>
-                    )}
-                  </div>
-                  {award.photo && (
-                    <div className="bg-mist relative mt-1 h-16 w-24 overflow-hidden md:mt-0 md:h-14 md:w-[5.25rem]">
-                      <Image
-                        src={award.photo}
-                        alt={`${award.title} — photo`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 84px"
-                      />
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 04 Research */}
-      <section
-        id="research"
-        className="bg-ink scroll-mt-24 border-b border-white/10 py-10 text-white md:py-14"
-      >
-        <div className="section-max section-pad">
-          <Reveal y={10}>
-            <Head
-              title="Research"
-              count={`${PUBLICATIONS.length} papers · co-author`}
-              dark
-            />
-          </Reveal>
-
-          <ul className="ledger-dark border-b border-white/12">
-            {PUBLICATIONS.map((pub, i) => (
-              <Reveal key={pub.id} delay={i * 0.04} y={12}>
-                <li className="grid gap-x-6 gap-y-1.5 py-4 md:grid-cols-12">
-                  <div className="flex flex-wrap items-center gap-2 md:col-span-3 md:flex-col md:items-start">
-                    <span className="pill pill-dark">{pub.status}</span>
-                    <span className="text-[12px] text-white/45">
-                      {pub.date}
-                    </span>
-                  </div>
-                  <div className="md:col-span-9">
-                    <h3 className="text-base leading-snug font-medium md:text-lg">
-                      {pub.title}
-                    </h3>
-                    <p className="mt-1 text-[13px] text-white/65">
-                      {pub.authors}
-                    </p>
-                    <p className="mt-0.5 text-[13px] text-white/45 italic">
-                      {pub.venue}
-                    </p>
-                    {pub.presentation && (
-                      <p className="mt-2 text-[13px] text-white/75">
-                        <span className="pill pill-dark mr-2">Talk</span>
-                        {pub.presentation}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 05 Athletics */}
-      <Projection
         id="athletics"
-        src="/media/swim/reel.mp4"
-        className="border-line scroll-mt-24 border-b py-12 md:py-16"
+        className="bg-bg-elevated border-line scroll-mt-24 border-t py-14 md:py-20"
       >
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <Head
-              title="Athletics"
-              count="14 medals · 2× MVP · school record"
-              dark
-            />
-          </Reveal>
-
-          <div className="mt-6 grid gap-8 lg:grid-cols-12">
-            <Reveal className="lg:col-span-5">
+          <Movement
+            n={5}
+            title="Swimming"
+            standfirst={`${swim?.title}, Le Rosey — 14 medals, two-year team MVP, one school record.`}
+          />
+          <div className="mt-8 grid gap-8 md:grid-cols-12">
+            <Reveal className="md:col-span-5" y={12}>
               <div className="grid grid-cols-5 gap-2">
                 <div className="relative col-span-3 aspect-[4/3] overflow-hidden">
                   <Image
@@ -351,117 +293,125 @@ export default function PathPage() {
                     alt="Le Rosey swim team"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 60vw, 24vw"
+                    sizes="(max-width: 768px) 60vw, 24vw"
                   />
                 </div>
                 <div className="relative col-span-2 overflow-hidden">
                   <Image
                     src="/media/swim/lake-medals.webp"
-                    alt="Team with medals after the lake swim relay"
+                    alt="Team with medals after the lake relay"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 40vw, 16vw"
+                    sizes="(max-width: 768px) 40vw, 16vw"
                   />
                 </div>
               </div>
-              <p className="eyebrow-faint mt-3 text-white/55">
-                {swim?.title} · {swim ? dateRange(swim.start, swim.end) : ''}
-              </p>
-              <MedalBars className="mt-5" tone="dark" />
+              <div className="relative mt-2 aspect-[16/7] overflow-hidden">
+                <Image
+                  src="/media/swim/medals-rooftop.png"
+                  alt="Swimming medals"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                />
+              </div>
+              <MedalBars className="mt-5" />
             </Reveal>
-            <Reveal className="lg:col-span-7" delay={0.08}>
-              <p className="eyebrow-faint text-white/50">Meet by meet</p>
-              <ul className="ledger-dark mt-2 border-y border-white/12">
-                {swim?.bullets?.map((bullet) => (
+            <Reveal className="md:col-span-7" y={12} delay={0.05}>
+              <p className="eyebrow">Meet by meet</p>
+              <ol className="ledger border-line mt-2 border-y">
+                {swim?.bullets?.map((b) => (
                   <li
-                    key={bullet}
-                    className="py-2.5 text-[13px] leading-snug text-white/80"
+                    key={b}
+                    className="text-ink py-2.5 text-[13.5px] leading-snug"
                   >
-                    {bullet}
+                    {b}
                   </li>
                 ))}
-              </ul>
+              </ol>
             </Reveal>
           </div>
         </div>
-      </Projection>
+      </section>
 
-      {/* 06 Service */}
-      <section id="service" className="bg-bg scroll-mt-24 py-10 md:py-14">
+      {/* VII. Service */}
+      <section
+        id="service"
+        className="border-line scroll-mt-24 border-t py-14 md:py-20"
+      >
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <Head title="Service" count={`${VOLUNTEERING.length} programmes`} />
-          </Reveal>
-
-          <ul className="ledger border-line border-b">
+          <Movement n={6} title="Service" />
+          <ol className="ledger border-line mt-8 border-b">
             {VOLUNTEERING.map((v, i) => (
               <Reveal key={v.id} delay={i * 0.04} y={14}>
-                <li className="grid gap-6 py-6 lg:grid-cols-12 lg:gap-8">
+                <li className="border-line grid gap-6 border-t py-8 md:grid-cols-12 md:gap-8">
                   {v.id === 'vol-casa' && v.image && (
-                    <div className="relative min-h-[160px] overflow-hidden lg:col-span-4">
+                    <div className="relative min-h-[160px] overflow-hidden md:col-span-4">
                       <Image
                         src={v.image}
                         alt="Volunteers at a housing construction site in Oradea, Romania"
                         fill
                         className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 33vw"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   )}
                   <div
                     className={
-                      v.id === 'vol-casa' ? 'lg:col-span-8' : 'lg:col-span-12'
+                      v.id === 'vol-casa' ? 'md:col-span-8' : 'md:col-span-12'
                     }
                   >
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <p className="eyebrow-faint">
-                        {dateRange(v.start, v.end)}
-                      </p>
-                      <span className="pill">{v.cause}</span>
-                      {v.link && (
-                        <a
-                          href={v.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="row-link ml-auto text-[12px]"
-                        >
-                          Visit ↗
-                        </a>
-                      )}
-                    </div>
-                    <h3 className="text-ink mt-2 text-lg font-medium">
+                    <p className="eyebrow">
+                      <span className="numeral mr-1.5">{roman(i + 1)}.</span>
+                      {v.cause}
+                      <span className="text-ink-faint">
+                        {' '}
+                        · {dateRange(v.start, v.end)}
+                      </span>
+                    </p>
+                    <h3 className="display-quiet text-ink mt-2 text-[1.4rem]">
                       {v.organization}
-                      <span className="text-ink-soft ml-2 text-sm font-normal">
+                      <span className="text-ink-soft ml-2 font-sans text-sm">
                         {v.role}
                       </span>
                     </h3>
                     {v.description && (
-                      <p className="text-ink-soft mt-2 max-w-3xl text-sm leading-snug">
+                      <p className="note-text mt-3 max-w-3xl">
                         {v.description}
                       </p>
                     )}
                     {v.bullets && (
-                      <ul className="tick-list text-ink-soft mt-2 grid gap-x-8 gap-y-1.5 text-[13px] leading-snug md:grid-cols-2">
+                      <ul className="tick-list text-ink-soft mt-3 grid gap-x-8 gap-y-1.5 text-[13px] leading-snug md:grid-cols-2">
                         {v.bullets.map((b) => (
                           <li key={b}>{b}</li>
                         ))}
                       </ul>
                     )}
+                    {v.link && (
+                      <a
+                        href={v.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="row-link mt-3 inline-block text-[13px]"
+                      >
+                        Visit →
+                      </a>
+                    )}
                   </div>
                 </li>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
       <section className="border-line bg-bg-elevated border-t py-10">
-        <div className="section-max section-pad flex flex-wrap items-end justify-between gap-6">
-          <p className="display-quiet text-ink text-[clamp(1.3rem,2.6vw,1.8rem)]">
-            Off the podium, onto the stage.
+        <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
+          <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
+            Interval: the music.
           </p>
           <Link href="/music" className="row-link text-sm">
-            Open music →
+            IV · Music →
           </Link>
         </div>
       </section>

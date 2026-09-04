@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Alan Shen | High School Founder & Developer',
+    default: 'Alan Shen — A programme of work',
     template: '%s | Alan Shen',
   },
   description:
@@ -68,10 +68,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${outfit.variable} ${jetbrains.variable} ${fraunces.variable} antialiased`}
-      >
+    <html
+      lang="en"
+      className={`${outfit.variable} ${jetbrains.variable} ${fraunces.variable}`}
+    >
+      <body className="antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

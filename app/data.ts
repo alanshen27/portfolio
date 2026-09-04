@@ -688,11 +688,9 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const SITE_NAV = [
-  { label: 'Builds', href: '/#builds' },
-  { label: 'Honors', href: '/#honors' },
-  { label: 'Research', href: '/#research' },
-  { label: 'Work', href: '/work' },
-  { label: 'Path', href: '/path' },
+  { label: 'Programme', href: '/' },
+  { label: 'Works', href: '/work' },
+  { label: 'Record', href: '/path' },
   { label: 'Music', href: '/music' },
 ] as const
 
@@ -764,6 +762,97 @@ export const HIGHLIGHTS: Highlight[] = [
     href: '/music',
   },
 ]
+
+/**
+ * The Programme — the ordered listing on the cover. Each row is a work or a
+ * result a reader can verify; the right-hand entry is the outcome or role.
+ */
+export type ProgrammeEntry = {
+  title: string
+  subtitle: string
+  right: string
+  href: string
+}
+
+export const PROGRAMME: ProgrammeEntry[] = [
+  {
+    title: 'Studious',
+    subtitle: 'A learning-management system for schools, live since 2023',
+    right: 'Founder · 2023 – present',
+    href: '#note-studious',
+  },
+  {
+    title: 'Scribe',
+    subtitle: 'AI study assistant — 1st Place Overall, HackHarvard China 2025',
+    right: 'Co-founder & engineer · 2025',
+    href: '#note-scribe',
+  },
+  {
+    title: 'notate',
+    subtitle: 'AI music co-writer: a Transformer continues a sketched phrase',
+    right: 'Solo build · 2026',
+    href: '#note-notate',
+  },
+  {
+    title: 'USACO Gold Division',
+    subtitle: '1000 / 1000 in the Silver contest, promoted directly to Gold',
+    right: 'February 2026',
+    href: '#note-competition',
+  },
+  {
+    title: 'VEX Robotics, Team 15520X',
+    subtitle:
+      'Excellence Award at Alpine Robo Games → World Championship qualifier',
+    right: 'Engineer & programmer · 2025 – 26',
+    href: '#note-competition',
+  },
+  {
+    title: 'Training AI for Pragmatics Assessment',
+    subtitle: 'Co-author, with a CALICO 2026 conference talk',
+    right: 'Cambridge University Press · forthcoming',
+    href: '#note-research',
+  },
+  {
+    title: 'Nomad',
+    subtitle: 'Campus planner and student network, built in 36 hours',
+    right: '3rd Place · HackMIT China 2026',
+    href: '/work#project-nomad',
+  },
+  {
+    title: 'Foundry',
+    subtitle: 'AI-native workspace from product brief to storefront',
+    right: 'Penn ESAP · 2026',
+    href: '/work#project-foundry',
+  },
+  {
+    title: 'Two singles',
+    subtitle: '‘I’d Stay’ and ‘Dreams of the Blue’, released as Alan Shen',
+    right: 'ABRSM Grade 8 violin & piano',
+    href: '#interval',
+  },
+]
+
+/** Programme notes — running text for the major works. Facts only. */
+export const NOTES: Record<string, string[]> = {
+  studious: [
+    'Studious is a learning-management system built for digital-first classrooms, and the longest-running thing on this programme. Alan founded it in September 2023 and still leads it: the frontend in Next.js, the backend on tRPC, and the infrastructure that keeps it responsive across regions — Pusher sockets for realtime, Supabase read replicas, load balancing on Render, and Vercel at the edge.',
+    'The Studious School Development Program grew out of it, bringing the platform to under-resourced classrooms, including two schools in rural Romania during a service trip in 2025.',
+  ],
+  scribe: [
+    'Scribe is an AI study assistant that teaches method rather than handing over answers. Alan co-founded it and worked across the stack — he led the frontend redesign, built backend infrastructure, and supported the inference design behind its study workflows.',
+    'It took 1st Place Overall, the “Best Overall Hack”, at HackHarvard China 2025.',
+  ],
+  notate: [
+    'Sketch a chord progression or melody on notate’s piano roll and a decoder-only Transformer — six layers, 512-wide, eight heads, about 21 million parameters, trained on REMI-tokenised MIDI from POP909 and larger piano corpora — continues the phrase. Everything plays through a polyphonic subtractive synth Alan wrote from scratch as a Web Audio AudioWorklet; the same DSP renders the WAV export.',
+    'It sits where the two halves of this programme meet: a violinist’s ear for phrase, and an engineer’s interest in what a model can learn about it.',
+  ],
+  competition: [
+    'In the February 2026 USACO contest Alan scored a perfect 1000 in the Silver division and was promoted directly to Gold. With VEX team 15520X he engineers the robot and programmes both the autonomous routines and the driver-control interface; the team took the Excellence Award at Alpine Robo Games 2026 — the Swiss qualifier — and with it a place at the World Championship in Dallas, after placing 3rd in skills and 3rd in qualifiers there and 4th in skills, 7th overall at the Swiss Regional.',
+  ],
+  research: [
+    'Alan is a contributing author on three papers on AI-based pragmatics assessment and AI-enhanced pedagogy. Training AI for Pragmatics Assessment is forthcoming from Cambridge University Press, with the work presented at CALICO in June 2026; a paper on API endpoints in Chinese international education is accepted at the Journal of Research on International Chinese Teaching and Learning Resources; and Luduan.ai: A System Solution to AI-Enhanced Pedagogy goes to the 4th Conference on Artificial Intelligence Research in Applied Linguistics at Columbia University in September 2026.',
+  ],
+}
 
 /** Dossier facts — the ID-card column in the hero. */
 export const FACTS: { label: string; value: string; href?: string }[] = [

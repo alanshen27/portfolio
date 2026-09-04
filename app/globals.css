@@ -253,24 +253,71 @@
     text-underline-offset: 3px;
   }
 
-  /* Retired but harmless: kept so nothing breaks if referenced */
-  .paper-grid,
-  .corner-ticks {
-    background-image: none;
+  /* ---- Programme devices ------------------------------------------------- */
+
+  /* Roman numerals: serif, slightly spaced */
+  .numeral {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    font-variant-numeric: lining-nums;
   }
 
-  .corner-ticks::before,
-  .corner-ticks::after {
-    content: none;
+  /* Dotted leader between a title and its right-hand entry */
+  .leaders {
+    align-self: flex-end;
+    margin: 0 0.5rem 0.35em;
+    border-bottom: 1px dotted var(--color-line-strong);
+    min-width: 2rem;
+  }
+
+  .leaders-dark {
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Double hairline — programme heading rule */
+  .rule-double {
+    height: 4px;
+    border-top: 1px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-ink);
+  }
+
+  .rule-double-dark {
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Drop cap for the first paragraph of a note */
+  .drop-cap::first-letter {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 500;
+    float: left;
+    font-size: 3.1em;
+    line-height: 0.82;
+    padding-right: 0.08em;
+    margin-top: 0.06em;
+    color: var(--color-accent);
+  }
+
+  /* Running text in notes: serif, comfortable measure */
+  .note-text {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--color-ink);
+    font-variation-settings: 'SOFT' 60;
+  }
+
+  .note-text + .note-text {
+    margin-top: 0.7em;
+  }
+
+  /* Cover: soft vignette on paper */
+  .bg-cover-paper {
+    background: radial-gradient(60% 50% at 50% 0%, #ebe6dc 0%, transparent 70%),
+      linear-gradient(180deg, #f5f2ec 0%, var(--color-bg) 100%);
   }
 
   .bg-atmosphere {
-    background: radial-gradient(
-        70% 50% at 100% 0%,
-        #e9e3d7 0%,
-        transparent 55%
-      ),
-      radial-gradient(50% 40% at 0% 80%, #e2e4dd 0%, transparent 50%),
-      linear-gradient(180deg, #f4f1eb 0%, var(--color-bg) 40%, #f6f3ee 100%);
+    background: var(--color-bg);
   }
 }
