@@ -825,12 +825,32 @@ export const PROGRAMME: ProgrammeEntry[] = [
     href: '/work#project-foundry',
   },
   {
+    title: 'Luduan.ai',
+    subtitle:
+      'frontend and UI/UX contributor on a platform serving 30+ U.S. institutions',
+    right: 'contributor · 2026 – present',
+    href: '/path#appointments',
+  },
+  {
     title: 'two singles',
     subtitle: '‘I’d Stay’ and ‘Dreams of the Blue’, released as Alan Shen',
     right: 'ABRSM grade 8 violin & piano',
     href: '#interval',
   },
+  {
+    title: 'swimming, Le Rosey',
+    subtitle: 'fourteen medals across IM, freestyle, relays and open water',
+    right: 'two-year team mvp · school record',
+    href: '#honours',
+  },
 ]
+
+/** Lines in Alan's own words, from earlier versions of this site's copy. */
+export const LINES = {
+  code: 'I care about writing code that solves real problems — and shipping systems that students actually use.',
+  systems:
+    'Building education systems at the intersection of AI, product, and competition.',
+}
 
 /** Programme notes — running text for the major works. Facts only. */
 export const NOTES: Record<string, string[]> = {

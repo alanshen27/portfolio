@@ -6,6 +6,7 @@ import { Reveal } from '@/components/portfolio-motion'
 import { MusicVisualizer } from '@/components/music-visualizer'
 import { Movement, PageTitle, ProgrammeRow } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { PlateInterlude } from '@/components/interlude'
 import { MUSIC_RELEASES, STAGE_PHOTOS } from '../data'
 
 export default function MusicPage() {
@@ -36,10 +37,19 @@ export default function MusicPage() {
         </div>
       </section>
 
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/music/violin-performance.png"
+        alt="Alan Shen performing on violin"
+        caption="solo, on stage."
+        credit="ii · releases, below"
+        position="center 30%"
+      />
+
       {/* II. Releases */}
       <section
         id="releases"
-        className="bg-bg-elevated border-line scroll-mt-24 border-t py-14 md:py-20"
+        className="bg-bg-elevated scroll-mt-24 py-12 md:py-16"
       >
         <div className="section-max section-pad grid gap-10 md:grid-cols-12 md:items-start">
           <Reveal className="md:col-span-5" y={12}>

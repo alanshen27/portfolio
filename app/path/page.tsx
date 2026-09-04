@@ -10,6 +10,7 @@ import {
   roman,
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { NumbersInterlude, PlateInterlude } from '@/components/interlude'
 import { MedalBars } from '@/components/viz/medal-bars'
 import { ScoreRing } from '@/components/viz/score-ring'
 import { UsacoBoard } from '@/components/viz/usaco-board'
@@ -85,10 +86,19 @@ export default function PathPage() {
         </div>
       </section>
 
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/vex/worlds-arena.jpeg"
+        alt="The VEX Robotics World Championship arena"
+        caption="the World Championship arena — reached through the Excellence Award at Alpine Robo Games 2026."
+        credit="ii · honours, below"
+        position="center 55%"
+      />
+
       {/* II. Honours */}
       <section
         id="honours"
-        className="bg-bg-elevated border-line scroll-mt-24 border-t py-14 md:py-20"
+        className="bg-bg-elevated scroll-mt-24 py-12 md:py-16"
       >
         <div className="section-max section-pad">
           <Movement
@@ -137,10 +147,20 @@ export default function PathPage() {
         </div>
       </section>
 
+      {/* beat — by the numbers */}
+      <NumbersInterlude
+        items={[
+          { value: String(AWARDS.length), label: 'awards, 2023 – 2026' },
+          { value: String(PUBLICATIONS.length), label: 'papers as co-author' },
+          { value: String(techWork.length), label: 'appointments' },
+          { value: '14', label: 'swimming medals' },
+        ]}
+      />
+
       {/* III. Publications */}
       <section
         id="research"
-        className="bg-ink scroll-mt-24 py-14 text-white md:py-20"
+        className="bg-ink scroll-mt-24 py-12 text-white md:py-16"
       >
         <div className="section-max section-pad">
           <Movement

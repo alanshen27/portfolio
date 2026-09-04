@@ -10,9 +10,11 @@ import {
   ProgrammeRow,
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { NumbersInterlude, QuoteInterlude } from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { dateRange } from '@/lib/utils'
 import {
+  LINES,
   NOTES,
   PROJECT_KIND_LABEL,
   PROJECTS,
@@ -115,8 +117,18 @@ export default function WorkPage() {
         </div>
       </section>
 
+      {/* beat — by the numbers */}
+      <NumbersInterlude
+        items={[
+          { value: String(PROJECTS.length), label: 'works' },
+          { value: '2', label: 'companies founded or co-founded' },
+          { value: '3', label: 'hackathon podiums' },
+          { value: '2', label: 'research-grade side builds' },
+        ]}
+      />
+
       {/* Notes */}
-      <section className="bg-bg-elevated border-line border-t py-14 md:py-20">
+      <section className="bg-bg-elevated py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement n={2} title="notes on the works" />
           <div className="mt-6">
@@ -231,8 +243,13 @@ export default function WorkPage() {
         </div>
       </section>
 
+      {/* beat — a line */}
+      <QuoteInterlude source="Alan, on the work">
+        “{LINES.systems}”
+      </QuoteInterlude>
+
       {/* Appointments */}
-      <section className="border-line border-t py-14 md:py-20">
+      <section className="py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement
             n={3}

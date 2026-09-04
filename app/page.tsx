@@ -6,12 +6,20 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Reveal, easeOut } from '@/components/portfolio-motion'
 import { Movement, Numeral, ProgrammeRow, roman } from '@/components/programme'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import {
+  Figures,
+  Loop,
+  NumbersInterlude,
+  PlateInterlude,
+  QuoteInterlude,
+} from '@/components/interlude'
 import { dateRange } from '@/lib/utils'
 import {
   AWARDS,
   EDUCATION,
   EMAIL,
   HOME_BIO,
+  LINES,
   MUSIC_RELEASES,
   NAME,
   NOTES,
@@ -252,14 +260,25 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* beat — by the numbers */}
+      <NumbersInterlude
+        items={[
+          { value: '1000/1000', label: 'USACO Silver contest, feb 2026' },
+          { value: '1st', label: 'HackHarvard China 2025, overall' },
+          { value: '3', label: 'papers · one forthcoming, Cambridge UP' },
+          { value: '14', label: 'swimming medals · two-year team mvp' },
+        ]}
+        note="counted, not rounded — each figure appears again below with its date."
+      />
+
       {/* I. Programme */}
-      <section className="py-14 md:py-20">
+      <section className="py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement
             n={1}
             id="programme"
             title="programme"
-            standfirst="nine works and results, in the order a reader should meet them. each line links to its note."
+            standfirst={`${PROGRAMME.length} works and results, in the order a reader should meet them. each line links to its note.`}
           />
           <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
             <ol className="ledger border-line border-y">
@@ -288,8 +307,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* beat — a line */}
+      <QuoteInterlude source="Alan, on why he builds">
+        “{LINES.code}”
+      </QuoteInterlude>
+
       {/* II. Programme notes */}
-      <section className="bg-bg-elevated border-line border-t py-14 md:py-20">
+      <section className="bg-bg-elevated py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement
             n={2}
@@ -307,12 +331,22 @@ export default function Home() {
               paragraphs={NOTES.studious}
               link={{ href: STUDIOUS.link, label: 'studious.sh' }}
               aside={
-                <Plate
-                  src={STUDIOUS.image!}
-                  alt="Studious"
-                  caption="Studious — the classroom view."
-                  ratio="aspect-[16/10]"
-                />
+                <div className="grid gap-3">
+                  <Plate
+                    src={STUDIOUS.image!}
+                    alt="Studious"
+                    caption="Studious — the classroom view."
+                    ratio="aspect-[16/10]"
+                  />
+                  <Figures
+                    className="border-line border-t pt-1"
+                    items={[
+                      { value: '2023', label: 'founded' },
+                      { value: 'live', label: 'in classrooms' },
+                      { value: '2', label: 'schools in Romania' },
+                    ]}
+                  />
+                </div>
               }
             />
             <Note
@@ -348,13 +382,23 @@ export default function Home() {
               paragraphs={NOTES.notate}
               link={{ href: NOTATE.link, label: 'source on GitHub' }}
               aside={
-                <figure>
-                  <PianoRoll className="aspect-[16/10] w-full" />
-                  <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
-                    A sketched phrase (ink) and the model’s continuation
-                    (green).
-                  </figcaption>
-                </figure>
+                <div className="grid gap-3">
+                  <figure>
+                    <PianoRoll className="aspect-[16/10] w-full" />
+                    <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
+                      a sketched phrase (ink) and the model’s continuation
+                      (green).
+                    </figcaption>
+                  </figure>
+                  <Figures
+                    className="border-line border-t pt-1"
+                    items={[
+                      { value: '21M', label: 'parameters' },
+                      { value: '6×512', label: 'layers × width' },
+                      { value: '8', label: 'attention heads' },
+                    ]}
+                  />
+                </div>
               }
             />
             <Note
@@ -367,12 +411,12 @@ export default function Home() {
               link={{ href: '/path', label: 'scores and standings' }}
               aside={
                 <div className="grid gap-3">
-                  <Plate
-                    src="/media/vex/worlds-team.jpeg"
-                    alt="VEX team 15520X"
-                    caption="Team 15520X, MECH_IT_HAPPEN."
+                  <Loop
+                    src="/media/vex/driver.mp4"
+                    poster="/media/vex/worlds-arena.jpeg"
+                    alt="VEX robot under driver control"
+                    caption="driver control — the interface Alan programmed, on the loop."
                     ratio="aspect-[16/9]"
-                    position="object-[center_60%]"
                   />
                   <div className="border-line grid grid-cols-2 border-t pt-3 text-center">
                     <div className="border-line border-r">
@@ -420,10 +464,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/hackathons/hackmit-workspace.jpg"
+        alt="The HackMIT China 2026 workspace"
+        caption="HackMIT China 2026 — the workspace. Nomad came out of it in 36 hours: 3rd place, education track, outstanding impact award."
+        credit="ii · notes, continued on the works page"
+        position="center 45%"
+      />
+
       {/* III. Interval */}
       <section
         id="interval"
-        className="bg-ink scroll-mt-24 py-14 text-white md:py-20"
+        className="bg-ink scroll-mt-24 py-12 text-white md:py-16"
       >
         <div className="section-max section-pad">
           <Movement
@@ -522,8 +575,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/music/orchestra-hall.jpg"
+        alt="Orchestra in a concert hall"
+        caption="with the orchestra."
+        credit="iii · interval"
+        position="center 40%"
+      />
+
       {/* IV. Biography */}
-      <section className="border-line border-t py-14 md:py-20">
+      <section className="py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement n={4} id="biography" title="biography" />
           <div className="mt-8 grid gap-8 md:grid-cols-12 md:gap-10">
@@ -617,8 +679,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* beat — loop */}
+      <PlateInterlude
+        src="/media/swim/team.jpg"
+        video="/media/swim/reel.mp4"
+        alt="Swimming meet footage"
+        caption="off stage — the pool. fourteen medals, two-year team mvp, one school record."
+        credit="v · honours, below"
+      />
+
       {/* V. Honours */}
-      <section className="bg-bg-elevated border-line border-t py-14 md:py-20">
+      <section className="bg-bg-elevated py-12 md:py-16">
         <div className="section-max section-pad">
           <Movement
             n={5}
@@ -720,7 +791,7 @@ export default function Home() {
       {/* VI. Contact / colophon */}
       <section
         id="contact"
-        className="border-line scroll-mt-24 border-t py-14 md:py-20"
+        className="border-line scroll-mt-24 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad text-center">
           <Movement n={6} title="contact" />
