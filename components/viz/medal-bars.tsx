@@ -5,9 +5,9 @@ import { CountUp } from './count-up'
 import { easeSnap } from '@/components/portfolio-motion'
 
 const MEDALS = [
-  { label: 'Gold', count: 8, color: '#c9a227' },
-  { label: 'Silver', count: 4, color: '#9aa5ae' },
-  { label: 'Bronze', count: 2, color: '#b08d57' },
+  { label: 'gold', count: 8, color: '#c9a227' },
+  { label: 'silver', count: 4, color: '#9aa5ae' },
+  { label: 'bronze', count: 2, color: '#b08d57' },
 ]
 
 /** One dot per medal — a tally, not a progress bar. */
@@ -28,11 +28,11 @@ export function MedalBars({
           <CountUp to={14} />
         </p>
         <p
-          className={`text-[11px] font-medium tracking-[0.12em] uppercase ${
+          className={`text-[12px] font-medium ${
             dark ? 'text-white/55' : 'text-ink-faint'
           }`}
         >
-          medals · 2× team MVP
+          medals · 2× team mvp
         </p>
       </div>
       <ul className="mt-6 space-y-3.5">
@@ -42,7 +42,7 @@ export function MedalBars({
             className="grid grid-cols-[3.5rem_1fr_1.5rem] items-center gap-3"
           >
             <span
-              className={`text-[11px] font-medium tracking-[0.1em] uppercase ${
+              className={`text-[12px] font-medium ${
                 dark ? 'text-white/70' : 'text-ink-soft'
               }`}
             >
@@ -68,7 +68,7 @@ export function MedalBars({
               ))}
             </span>
             <span
-              className={`text-right font-serif text-base tabular-nums ${
+              className={`text-right text-base tabular-nums ${
                 dark ? 'text-white' : 'text-ink'
               }`}
             >

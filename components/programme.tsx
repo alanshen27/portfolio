@@ -62,7 +62,7 @@ export function Movement({
         </h2>
         {standfirst && (
           <p
-            className={`mt-3 font-serif text-[15px] leading-relaxed italic md:text-base ${
+            className={`mt-3 text-[15px] leading-relaxed md:text-base ${
               dark ? 'text-white/65' : 'text-ink-soft'
             } ${centered ? 'mx-auto max-w-xl' : 'max-w-2xl'}`}
           >
@@ -183,7 +183,7 @@ export function PageTitle({
           {title}
         </h1>
         {standfirst && (
-          <p className="text-ink-soft mx-auto mt-4 max-w-2xl font-serif text-base leading-relaxed italic md:text-lg">
+          <p className="text-ink-soft mx-auto mt-4 max-w-2xl text-base leading-relaxed md:text-lg">
             {standfirst}
           </p>
         )}

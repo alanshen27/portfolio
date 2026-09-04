@@ -21,21 +21,21 @@ export function dateRange(start: string, end: string) {
 
 const ROMAN = [
   '',
-  'I',
-  'II',
-  'III',
-  'IV',
-  'V',
-  'VI',
-  'VII',
-  'VIII',
-  'IX',
-  'X',
-  'XI',
-  'XII',
+  'i',
+  'ii',
+  'iii',
+  'iv',
+  'v',
+  'vi',
+  'vii',
+  'viii',
+  'ix',
+  'x',
+  'xi',
+  'xii',
 ]
 
-/** 1 → "I", 4 → "IV" — programme numbering. */
+/** 1 → "i", 4 → "iv" — programme numbering, lowercase. */
 export function roman(n: number) {
   return ROMAN[n] ?? String(n)
 }

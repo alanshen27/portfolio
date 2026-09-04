@@ -130,11 +130,11 @@ export const PROJECTS: Project[] = [
     link: 'https://www.studious.sh',
     image: '/media/projects/studious.png',
     id: 'project1',
-    role: 'Founder',
-    timeframe: 'Sep 2023 – Present',
+    role: 'founder',
+    timeframe: 'Sep 2023 – present',
     device: 'laptop',
     kind: 'company',
-    outcome: 'Live product · School Development Program',
+    outcome: 'live product · School Development Program',
     tags: ['Next.js', 'tRPC', 'Supabase', 'Pusher'],
     points: [
       'Led frontend in Next.js and backend with tRPC.',
@@ -149,13 +149,13 @@ export const PROJECTS: Project[] = [
     link: 'https://www.scribe.study',
     image: '/media/projects/scribe.png',
     id: 'project2',
-    role: 'SWE & Co-Founder',
+    role: 'SWE & co-founder',
     timeframe: 'Aug 2025 – Jan 2026',
     device: 'tvModern',
     photo: '/media/hackathons/hackharvard-china.jpg',
-    photoCaption: 'On stage · HackHarvard China 2025, 1st Place Overall',
+    photoCaption: 'on stage · HackHarvard China 2025, 1st place overall',
     kind: 'company',
-    outcome: '1st Place Overall · HackHarvard China 2025',
+    outcome: '1st place overall · HackHarvard China 2025',
     tags: ['AI workflows', 'Inference', 'Full-stack'],
     points: [
       '1st Place Overall at HackHarvard China 2025.',
@@ -170,8 +170,8 @@ export const PROJECTS: Project[] = [
     link: 'https://github.com/alanshen27/notate',
     repo: 'https://github.com/alanshen27/notate',
     id: 'project-notate',
-    role: 'Solo build',
-    timeframe: 'May 2026 – Present',
+    role: 'solo build',
+    timeframe: 'May 2026 – present',
     kind: 'research',
     outcome: '~21M-param Transformer · Prelude / Canon / Sinfonia models',
     tags: ['PyTorch', 'Transformer', 'FastAPI', 'Web Audio'],
@@ -191,7 +191,7 @@ export const PROJECTS: Project[] = [
     role: 'Penn ESAP 2026',
     timeframe: 'Jul – Aug 2026',
     kind: 'build',
-    outcome: 'Ideate → Engineer → Verify → Launch pipeline',
+    outcome: 'ideate → engineer → verify → launch pipeline',
     tags: ['TypeScript', 'KCL CAD', 'Yjs', 'Shopify'],
     points: [
       'Project-aware AI copilot with streaming tool execution and background jobs.',
@@ -229,9 +229,9 @@ export const PROJECTS: Project[] = [
     timeframe: 'Oct 2025',
     device: 'monitor',
     photo: '/media/hackathons/hackharvard-2025.jpg',
-    photoCaption: 'Team at HackHarvard 2025, Cambridge MA',
+    photoCaption: 'team at HackHarvard 2025, Cambridge MA',
     kind: 'hackathon',
-    outcome: 'Invitational · one of two high-school teams',
+    outcome: 'invitational · one of two high-school teams',
     tags: ['Visualization', 'ML'],
     points: [
       'Interactive viz for inspecting network structure and behavior.',
@@ -259,18 +259,18 @@ export const PROJECTS: Project[] = [
 ]
 
 export const PROJECT_KIND_LABEL: Record<ProjectKind, string> = {
-  company: 'Company',
-  hackathon: 'Hackathon',
-  research: 'Research build',
-  build: 'Build',
+  company: 'company',
+  hackathon: 'hackathon',
+  research: 'research build',
+  build: 'build',
 }
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Studious',
-    title: 'Founder',
+    title: 'founder',
     start: 'September 2023',
-    end: 'Present',
+    end: 'present',
     link: 'https://www.studious.sh',
     image: 'https://www.studious.sh/logo.png',
     bullets: [
@@ -283,9 +283,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'Scribe',
-    title: 'SWE and Co-Founder',
+    title: 'SWE and co-founder',
     start: 'August 2025',
-    end: 'Present',
+    end: 'present',
     link: 'https://www.scribe.study',
     image: '/media/logos/scribe.png',
     bullets: [
@@ -298,9 +298,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'Luduan.ai',
-    title: 'Frontend and UI/UX Design Contributor',
+    title: 'frontend and UI/UX design contributor',
     start: 'February 2026',
-    end: 'Present',
+    end: 'present',
     link: 'https://www.luduan.ai',
     image: '/media/logos/luduan.png',
     bullets: [
@@ -311,9 +311,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'VEX Robotics',
-    title: 'Engineer and Programmer — 15520X (MECH_IT_HAPPEN)',
+    title: 'engineer and programmer — 15520X (MECH_IT_HAPPEN)',
     start: 'September 2025',
-    end: 'Present',
+    end: 'present',
     image: '/media/logos/vex.jpg',
     photo: '/media/vex/team.png',
     bullets: [
@@ -327,9 +327,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'Institut Le Rosey',
-    title: 'Competitive Swimmer',
+    title: 'competitive swimmer',
     start: 'September 2023',
-    end: 'Present',
+    end: 'present',
     image: '/media/logos/lerosey.png',
     location: 'Switzerland',
     bullets: [
@@ -349,7 +349,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 export const EDUCATION: Education[] = [
   {
     institution: 'Institut Le Rosey',
-    degree: 'IB Diploma',
+    degree: 'IB diploma',
     start: '2022',
     end: '2027',
     location: 'Rolle, Switzerland',
@@ -392,23 +392,23 @@ export const SKILLS: Skill[] = [
 /** Grouped skills for the home skills matrix */
 export const SKILL_GROUPS: { label: string; items: string }[] = [
   {
-    label: 'Languages',
+    label: 'languages',
     items: 'TypeScript, C++, Python, JavaScript, SQL',
   },
   {
-    label: 'Frameworks',
+    label: 'frameworks',
     items: 'Next.js, React, tRPC, Motion',
   },
   {
-    label: 'Systems & Tools',
+    label: 'systems & tools',
     items: 'Supabase, Pusher, Vercel, Render, Git',
   },
   {
-    label: 'Focus',
-    items: 'Competitive programming, AI / ML systems, product design',
+    label: 'focus',
+    items: 'competitive programming, AI / ML systems, product design',
   },
   {
-    label: 'Music',
+    label: 'music',
     items: 'ABRSM Grade 8 Violin & Piano, recording, orchestration',
   },
 ]
@@ -416,24 +416,24 @@ export const SKILL_GROUPS: { label: string; items: string }[] = [
 export const CERTIFICATIONS: Certification[] = [
   {
     name: 'ABRSM Grade 8 Piano',
-    issuer: 'Performance',
+    issuer: 'performance',
     image: 'https://upload.wikimedia.org/wikipedia/en/f/f6/ABRSM_logo.svg',
     id: 'cert1',
   },
   {
     name: 'ABRSM Grade 8 Violin',
-    issuer: 'Performance',
+    issuer: 'performance',
     image: 'https://upload.wikimedia.org/wikipedia/en/f/f6/ABRSM_logo.svg',
     id: 'cert2',
   },
   {
     name: 'Building Biosensor Software for Public Health Research',
-    issuer: 'Pre-college Course',
+    issuer: 'pre-college course',
     id: 'cert3',
   },
   {
     name: 'TOEFL iBT',
-    issuer: 'Score: 117 / 120',
+    issuer: 'score: 117 / 120',
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNmS9EYfLaBhhQnpC3-ShH-eOu6PjkzPAyYQ&s',
     id: 'cert4',
@@ -459,7 +459,7 @@ export const AWARDS: Award[] = [
     id: 'award-hackmit',
   },
   {
-    title: 'USACO Gold Division',
+    title: 'USACO Gold division',
     description:
       'Achieved 1000 / 1000 in the USACO Silver contest to be directly promoted to USACO Gold.',
     date: 'Feb 2026',
@@ -505,7 +505,7 @@ export const PUBLICATIONS: Publication[] = [
     title: 'Training AI for Pragmatics Assessment',
     authors: 'Xiao, F., Taguchi, N., Li, S. & Shen, A.',
     venue: 'Cambridge University Press',
-    status: 'Forthcoming',
+    status: 'forthcoming',
     date: '2026',
     presentation:
       'CALICO — Computer Assisted Language Instruction Consortium · Jun 15, 2026',
@@ -516,7 +516,7 @@ export const PUBLICATIONS: Publication[] = [
     authors: 'Xiao, F. & Shen, X.',
     venue:
       'Journal of Research on International Chinese Teaching and Learning Resources, Vol. 3, pp. 111–118',
-    status: 'Accepted · forthcoming',
+    status: 'accepted · forthcoming',
     date: '2026',
     id: 'pub-api',
   },
@@ -525,7 +525,7 @@ export const PUBLICATIONS: Publication[] = [
     authors: 'Xiao, F., Wojnicki, H. & Shen, X.',
     venue:
       'The 4th Conference on Artificial Intelligence Research in Applied Linguistics · Columbia University',
-    status: 'Conference',
+    status: 'conference paper',
     date: 'Sep 2026',
     id: 'pub-luduan',
   },
@@ -533,11 +533,11 @@ export const PUBLICATIONS: Publication[] = [
 
 export const VOLUNTEERING: Volunteering[] = [
   {
-    role: 'Student Volunteer',
+    role: 'student volunteer',
     organization: 'Casa Draga Casa Concept Association Beius',
     start: 'Mar 2025',
     end: 'Jun 2025',
-    cause: 'Disaster & Humanitarian Relief',
+    cause: 'disaster & humanitarian relief',
     bullets: [
       'Built and worked on multiple housing units with 10 classmates in rural Romania (Oradea).',
       'Visited orphanages and the local liceul for cultural exchange.',
@@ -549,11 +549,11 @@ export const VOLUNTEERING: Volunteering[] = [
     id: 'vol-casa',
   },
   {
-    role: 'Educator & Developer',
+    role: 'educator & developer',
     organization: 'The Lost Food Project',
     start: 'Oct 2025',
     end: 'May 2026',
-    cause: 'Environment',
+    cause: 'environment',
     description:
       'Led a team of 4 students building a web-based game for Earth Day to spread awareness about food waste — 3+ hours of playtime across 30+ players, with largely positive feedback.',
     image: '/media/logos/lostfood.png',
@@ -561,11 +561,11 @@ export const VOLUNTEERING: Volunteering[] = [
     id: 'vol-lostfood',
   },
   {
-    role: 'Student Volunteer',
+    role: 'student volunteer',
     organization: "Association Sur Le Chemin de l'école",
     start: 'Apr 2023',
     end: 'Jul 2023',
-    cause: 'Poverty Alleviation',
+    cause: 'poverty alleviation',
     bullets: [
       'Researched the needs and situation of children in Dharia, India, raising 2,500 CHF.',
       'Organised a school-wide fundraising event with 3 classmates.',
@@ -592,7 +592,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
   {
     title: "I'd Stay",
     artist: 'Alan Shen',
-    type: 'Single',
+    type: 'single',
     cover: '/media/audio/id-stay-cover.png',
     audio: '/media/audio/id-stay.mp3',
     hyperfollow: 'https://distrokid.com/hyperfollow/alanshen/id-stay',
@@ -619,7 +619,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
   {
     title: 'Dreams of the Blue',
     artist: 'Alan Shen',
-    type: 'Single',
+    type: 'single',
     cover: '/media/audio/dreams-of-the-blue-cover.png',
     audio: '/media/audio/dreams-of-the-blue.mp3',
     hyperfollow:
@@ -636,27 +636,27 @@ export const STAGE_PHOTOS: { src: string; alt: string; caption: string }[] = [
   {
     src: '/media/music/violin-portrait.jpg',
     alt: 'Alan Shen playing violin on stage, close-up',
-    caption: 'Solo · close',
+    caption: 'solo · close',
   },
   {
     src: '/media/site/banner.jpg',
     alt: 'Wide shot of Alan Shen performing violin on a lit stage',
-    caption: 'Solo · stage',
+    caption: 'solo · stage',
   },
   {
     src: '/media/music/orchestra.png',
     alt: 'Alan Shen playing in an orchestra violin section',
-    caption: 'Orchestra',
+    caption: 'orchestra',
   },
   {
     src: '/media/music/violin-group.png',
     alt: 'Violin section in performance',
-    caption: 'Violin section',
+    caption: 'violin section',
   },
   {
     src: '/media/music/violin-stage.png',
     alt: 'Alan Shen performing violin in a dark hall',
-    caption: 'Recital',
+    caption: 'recital',
   },
 ]
 
@@ -678,20 +678,20 @@ export const SOCIAL_LINKS: SocialLink[] = [
     link: 'https://scribe.study',
   },
   {
-    label: 'Music',
+    label: 'music',
     link: 'https://distrokid.com/hyperfollow/alanshen/id-stay',
   },
   {
-    label: 'Email',
+    label: 'email',
     link: 'mailto:alan.shen27@gmail.com',
   },
 ]
 
 export const SITE_NAV = [
-  { label: 'Programme', href: '/' },
-  { label: 'Works', href: '/work' },
-  { label: 'Record', href: '/path' },
-  { label: 'Music', href: '/music' },
+  { label: 'programme', href: '/' },
+  { label: 'works', href: '/work' },
+  { label: 'record', href: '/path' },
+  { label: 'music', href: '/music' },
 ] as const
 
 export const EMAIL = 'alan.shen27@gmail.com'
@@ -777,44 +777,44 @@ export type ProgrammeEntry = {
 export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Studious',
-    subtitle: 'A learning-management system for schools, live since 2023',
-    right: 'Founder · 2023 – present',
+    subtitle: 'a learning-management system for schools, live since 2023',
+    right: 'founder · 2023 – present',
     href: '#note-studious',
   },
   {
     title: 'Scribe',
-    subtitle: 'AI study assistant — 1st Place Overall, HackHarvard China 2025',
-    right: 'Co-founder & engineer · 2025',
+    subtitle: 'AI study assistant — 1st place overall, HackHarvard China 2025',
+    right: 'co-founder & engineer · 2025',
     href: '#note-scribe',
   },
   {
     title: 'notate',
     subtitle: 'AI music co-writer: a Transformer continues a sketched phrase',
-    right: 'Solo build · 2026',
+    right: 'solo build · 2026',
     href: '#note-notate',
   },
   {
-    title: 'USACO Gold Division',
+    title: 'USACO Gold division',
     subtitle: '1000 / 1000 in the Silver contest, promoted directly to Gold',
-    right: 'February 2026',
+    right: 'february 2026',
     href: '#note-competition',
   },
   {
     title: 'VEX Robotics, Team 15520X',
     subtitle:
       'Excellence Award at Alpine Robo Games → World Championship qualifier',
-    right: 'Engineer & programmer · 2025 – 26',
+    right: 'engineer & programmer · 2025 – 26',
     href: '#note-competition',
   },
   {
     title: 'Training AI for Pragmatics Assessment',
-    subtitle: 'Co-author, with a CALICO 2026 conference talk',
+    subtitle: 'co-author, with a CALICO 2026 conference talk',
     right: 'Cambridge University Press · forthcoming',
     href: '#note-research',
   },
   {
     title: 'Nomad',
-    subtitle: 'Campus planner and student network, built in 36 hours',
+    subtitle: 'campus planner and student network, built in 36 hours',
     right: '3rd Place · HackMIT China 2026',
     href: '/work#project-nomad',
   },
@@ -825,9 +825,9 @@ export const PROGRAMME: ProgrammeEntry[] = [
     href: '/work#project-foundry',
   },
   {
-    title: 'Two singles',
+    title: 'two singles',
     subtitle: '‘I’d Stay’ and ‘Dreams of the Blue’, released as Alan Shen',
-    right: 'ABRSM Grade 8 violin & piano',
+    right: 'ABRSM grade 8 violin & piano',
     href: '#interval',
   },
 ]

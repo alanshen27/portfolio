@@ -13,7 +13,7 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
 
   return (
     <div
-      className={`relative overflow-hidden bg-ink text-white ${className}`}
+      className={`bg-ink relative overflow-hidden text-white ${className}`}
       aria-label="USACO Silver contest: 1000 out of 1000, promoted to Gold"
     >
       <div
@@ -27,14 +27,14 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
 
       <div className="relative z-10 p-5 md:p-6">
         <div className="flex items-baseline justify-between gap-3">
-          <p className="eyebrow text-accent-bright">USACO · February 2026</p>
+          <p className="eyebrow text-accent-bright">USACO · february 2026</p>
           <motion.span
-            className="text-accent-bright border-accent-bright/40 border px-2.5 py-0.5 text-[11px] font-medium tracking-[0.12em] uppercase"
+            className="text-accent-bright border-accent-bright/40 border px-2.5 py-0.5 text-[12px] font-medium"
             initial={reduce ? false : { opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.4, duration: 0.4, ease: easeSnap }}
           >
-            Gold division
+            gold division
           </motion.span>
         </div>
 
@@ -42,11 +42,11 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
           <p className="figure text-[clamp(3.5rem,9vw,5rem)]">
             <CountUp to={1000} duration={1800} />
           </p>
-          <p className="font-serif text-lg text-white/45 italic">of 1000</p>
+          <p className="text-lg text-white/45">of 1000</p>
         </div>
 
-        <p className="mt-2 max-w-sm font-serif text-[15px] leading-snug text-white/70 italic">
-          A perfect score in the Silver contest, promoting straight to Gold.
+        <p className="mt-2 max-w-sm text-[15px] leading-snug text-white/70">
+          a perfect score in the Silver contest, promoting straight to Gold.
         </p>
 
         <div className="mt-6 h-px overflow-hidden bg-white/10">
@@ -60,22 +60,16 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
 
         <dl className="mt-5 grid grid-cols-3 gap-3 text-[13px]">
           <div>
-            <dt className="text-[11px] tracking-[0.1em] text-white/40 uppercase">
-              Division
-            </dt>
+            <dt className="text-[12px] text-white/40">division</dt>
             <dd className="mt-1 text-white/85">Silver → Gold</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.1em] text-white/40 uppercase">
-              Score
-            </dt>
+            <dt className="text-[12px] text-white/40">score</dt>
             <dd className="mt-1 text-white/85">1000 / 1000</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.1em] text-white/40 uppercase">
-              Promotion
-            </dt>
-            <dd className="mt-1 text-white/85">Direct</dd>
+            <dt className="text-[12px] text-white/40">promotion</dt>
+            <dd className="mt-1 text-white/85">direct</dd>
           </div>
         </dl>
       </div>

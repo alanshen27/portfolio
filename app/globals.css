@@ -18,7 +18,7 @@
   body {
     background: var(--color-bg);
     color: var(--color-ink);
-    font-family: var(--font-outfit), system-ui, sans-serif;
+    font-family: var(--font-instrument), system-ui, sans-serif;
     font-feature-settings: 'tnum' 1;
   }
 
@@ -45,9 +45,9 @@
   --color-lake: #7b8d99;
   --color-panel-wash: #ebe6dd;
 
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-serif: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   /* Mono is reserved; nothing in the dossier system uses it by default */
   --font-mono: var(--font-jetbrains), ui-monospace, 'SF Mono', SFMono-Regular,
     monospace;
@@ -77,32 +77,29 @@
 @layer components {
   /* Display type: serif, medium weight, gentle tracking */
   .display-quiet {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.05;
-    font-variation-settings: 'SOFT' 40;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
   }
 
   /* ---- Dossier system (editorial) ---------------------------------------- */
 
   /* Small label: sans, tracked, accent. Never mono. */
   .eyebrow {
-    font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-    font-size: 11px;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-size: 12.5px;
     font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
     color: var(--color-accent);
   }
 
   /* Meta: dates, roles, small qualifiers */
   .eyebrow-faint {
-    font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-    font-size: 11px;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-size: 12.5px;
     font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
     color: var(--color-ink-faint);
   }
 
@@ -116,10 +113,10 @@
   }
 
   .section-head .title {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 500;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
     font-size: 1.5rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     line-height: 1.1;
     color: var(--color-ink);
   }
@@ -145,11 +142,10 @@
     gap: 0.3rem;
     padding: 0.1rem 0;
     border: 0;
-    font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-    font-size: 11px;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-size: 12.5px;
     font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
     color: var(--color-ink-faint);
     white-space: nowrap;
     line-height: 1.4;
@@ -219,12 +215,11 @@
 
   /* Big proof figure — serif */
   .figure {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.035em;
     line-height: 0.95;
     font-variant-numeric: tabular-nums;
-    font-variation-settings: 'SOFT' 60;
   }
 
   /* Soft rule under running text */
@@ -257,9 +252,9 @@
 
   /* Roman numerals: serif, slightly spaced */
   .numeral {
-    font-family: var(--font-fraunces), Georgia, serif;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
     font-variant-numeric: lining-nums;
   }
 
@@ -288,23 +283,22 @@
 
   /* Drop cap for the first paragraph of a note */
   .drop-cap::first-letter {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 500;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
     float: left;
-    font-size: 3.1em;
-    line-height: 0.82;
-    padding-right: 0.08em;
-    margin-top: 0.06em;
+    font-size: 3em;
+    line-height: 0.85;
+    padding-right: 0.1em;
+    margin-top: 0.04em;
     color: var(--color-accent);
   }
 
   /* Running text in notes: serif, comfortable measure */
   .note-text {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-size: 15.5px;
-    line-height: 1.55;
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--color-ink);
-    font-variation-settings: 'SOFT' 60;
   }
 
   .note-text + .note-text {

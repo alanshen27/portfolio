@@ -21,10 +21,10 @@ import {
 } from '../data'
 
 function linkLabel(href: string) {
-  if (href.includes('youtu')) return 'Watch the demo'
-  if (href.includes('github')) return 'Source on GitHub'
-  if (href.includes('linkedin')) return 'Context'
-  return 'Open the live site'
+  if (href.includes('youtu')) return 'watch the demo'
+  if (href.includes('github')) return 'source on GitHub'
+  if (href.includes('linkedin')) return 'context'
+  return 'open the live site'
 }
 
 const NOTE_KEY: Record<string, keyof typeof NOTES> = {
@@ -33,7 +33,7 @@ const NOTE_KEY: Record<string, keyof typeof NOTES> = {
   'project-notate': 'notate',
 }
 
-const STAGES = ['Ideate', 'Engineer', 'Verify', 'Launch']
+const STAGES = ['ideate', 'engineer', 'verify', 'launch']
 
 function Pipeline() {
   return (
@@ -41,7 +41,7 @@ function Pipeline() {
       className="bg-panel-wash flex aspect-[16/10] w-full flex-col justify-center gap-4 p-6"
       aria-hidden
     >
-      <p className="eyebrow-faint">From brief to storefront</p>
+      <p className="eyebrow-faint">from brief to storefront</p>
       <ol className="border-line-strong flex items-center border-y py-4">
         {STAGES.map((s, i) => (
           <li key={s} className="flex flex-1 items-center">
@@ -88,8 +88,8 @@ export default function WorkPage() {
     <>
       <ScrollProgress />
       <PageTitle
-        kicker="II · Works"
-        title="Complete programme notes"
+        kicker="ii · works"
+        title="complete programme notes"
         standfirst={`${PROJECTS.length} works — two companies, three hackathon podiums, and two research-grade side builds — each with what it is, what Alan did, and what came of it.`}
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
@@ -118,7 +118,7 @@ export default function WorkPage() {
       {/* Notes */}
       <section className="bg-bg-elevated border-line border-t py-14 md:py-20">
         <div className="section-max section-pad">
-          <Movement n={2} title="Notes on the works" />
+          <Movement n={2} title="notes on the works" />
           <div className="mt-6">
             {PROJECTS.map((project, i) => {
               const key = NOTE_KEY[project.id]
@@ -176,7 +176,7 @@ export default function WorkPage() {
                         {project.name}
                       </h3>
                       {project.outcome && (
-                        <p className="text-accent-deep mt-2 font-serif text-base italic">
+                        <p className="text-accent-deep mt-2 text-base font-medium">
                           {project.outcome}
                         </p>
                       )}
@@ -217,7 +217,7 @@ export default function WorkPage() {
                               rel="noopener noreferrer"
                               className="row-link"
                             >
-                              Source →
+                              source →
                             </a>
                           )}
                         </span>
@@ -236,8 +236,8 @@ export default function WorkPage() {
         <div className="section-max section-pad">
           <Movement
             n={3}
-            title="Appointments"
-            standfirst="Where the works were made."
+            title="appointments"
+            standfirst="where the works were made."
           />
           <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
             <ol className="ledger border-line border-y">
@@ -260,10 +260,10 @@ export default function WorkPage() {
       <section className="border-line bg-bg-elevated border-t py-10">
         <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
           <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
-            Next: the record — scores, honours, publications.
+            next: the record — scores, honours, publications.
           </p>
           <Link href="/path" className="row-link text-sm">
-            III · Record →
+            iii · record →
           </Link>
         </div>
       </section>

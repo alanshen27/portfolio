@@ -45,7 +45,7 @@ export function Header() {
           </Link>
 
           <p className="eyebrow-faint hidden text-center md:block">
-            Programme of work · {current.label}
+            programme of work · {current.label}
           </p>
 
           <nav
@@ -79,7 +79,7 @@ export function Header() {
               href={`mailto:${EMAIL}`}
               className="text-ink-soft hover:text-ink ml-1 text-[13px] transition-colors"
             >
-              Email
+              email
             </a>
           </nav>
 
@@ -115,7 +115,7 @@ export function Header() {
             exit={{ opacity: 0 }}
           >
             <div className="flex h-full flex-col justify-end px-6 pt-28 pb-16">
-              <p className="eyebrow-faint mb-4">Contents</p>
+              <p className="eyebrow-faint mb-4">contents</p>
               <ul>
                 {SITE_NAV.map((item, i) => (
                   <motion.li
@@ -149,7 +149,7 @@ export function Header() {
                   className="rule-link"
                   onClick={() => setOpen(false)}
                 >
-                  Email
+                  email
                 </a>
                 <a
                   href="https://github.com/alanshen27"

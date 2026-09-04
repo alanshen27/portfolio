@@ -60,9 +60,9 @@ export function Stream({
   const skip = () => setSkipped(true)
 
   const items = useMemo(() => {
-    return Children.toArray(children).filter(isValidElement) as ReactElement<
-      StreamChildProps
-    >[]
+    return Children.toArray(children).filter(
+      isValidElement,
+    ) as ReactElement<StreamChildProps>[]
   }, [children])
 
   const total = items.length
@@ -80,7 +80,7 @@ export function Stream({
           <button
             type="button"
             onClick={skip}
-            className="fixed bottom-4 right-4 z-50 rounded-full border border-zinc-200 bg-white/80 px-3 py-1.5 text-xs text-zinc-600 shadow-sm backdrop-blur transition hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            className="fixed right-4 bottom-4 z-50 rounded-full border border-zinc-200 bg-white/80 px-3 py-1.5 text-xs text-zinc-600 shadow-sm backdrop-blur transition hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300 dark:hover:bg-zinc-900"
           >
             skip ▸
           </button>
@@ -253,7 +253,7 @@ export function Head({
 
   return (
     <Tag className={cn(sizeClass, 'flex items-center gap-2')}>
-      <span className="select-none text-zinc-400 dark:text-zinc-600">
+      <span className="text-zinc-400 select-none dark:text-zinc-600">
         {hash.trim()}
       </span>
       {image && (
@@ -314,10 +314,7 @@ export function Paragraph({
 }
 
 /** Blockquote (`> ...`). */
-export function Quote({
-  children,
-  __streamIndex = 0,
-}: BaseProps) {
+export function Quote({ children, __streamIndex = 0 }: BaseProps) {
   const text = typeof children === 'string' ? children : String(children ?? '')
   const { displayed, active, visible } = useTypewriter({
     text,
@@ -325,8 +322,8 @@ export function Quote({
   })
   if (!visible) return null
   return (
-    <blockquote className="my-3 border-l-2 border-zinc-300 pl-3 italic text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
-      <span className="mr-1 select-none not-italic text-zinc-400 dark:text-zinc-600">
+    <blockquote className="my-3 border-l-2 border-zinc-300 pl-3 text-zinc-600 italic dark:border-zinc-700 dark:text-zinc-400">
+      <span className="mr-1 text-zinc-400 not-italic select-none dark:text-zinc-600">
         &gt;
       </span>
       {renderInline(displayed)}
@@ -392,7 +389,7 @@ export function Bullet({
 
   return (
     <div className="my-1 flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
-      <span className="mt-[0.35em] select-none text-zinc-400 dark:text-zinc-600">
+      <span className="mt-[0.35em] text-zinc-400 select-none dark:text-zinc-600">
         -
       </span>
       {image && (
@@ -438,7 +435,7 @@ export function Bullet({
             pointerEvents: 'none',
             zIndex: 60,
           }}
-          className="overflow-hidden rounded-lg bg-white/90 p-1 shadow-xl ring-1 ring-zinc-200 backdrop-blur dark:bg-zinc-900/90 dark:ring-zinc-700"
+          className="overflow-hidden rounded-lg bg-white/90 p-1 ring-1 shadow-xl ring-zinc-200 backdrop-blur dark:bg-zinc-900/90 dark:ring-zinc-700"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -531,7 +528,12 @@ export function Figure({
       className="my-3"
     >
       {href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
           {img}
         </a>
       ) : (

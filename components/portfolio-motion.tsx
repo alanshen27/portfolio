@@ -178,11 +178,12 @@ export function GhostIndex({
   value: string | number
   className?: string
 }) {
-  const label = typeof value === 'number' ? String(value).padStart(2, '0') : value
+  const label =
+    typeof value === 'number' ? String(value).padStart(2, '0') : value
 
   return (
     <span
-      className={`ghost-index pointer-events-none absolute top-1/2 right-0 z-0 -translate-y-1/2 select-none font-[family-name:var(--font-display)] text-[clamp(4.5rem,12vw,7.5rem)] leading-none font-extrabold tracking-[-0.06em] ${className}`}
+      className={`ghost-index pointer-events-none absolute top-1/2 right-0 z-0 -translate-y-1/2 font-[family-name:var(--font-display)] text-[clamp(4.5rem,12vw,7.5rem)] leading-none font-extrabold tracking-[-0.06em] select-none ${className}`}
       aria-hidden
     >
       {label}
@@ -255,8 +256,7 @@ export function AnimatedCorners({
   clearSpine?: boolean
 }) {
   const reduce = useReducedMotion()
-  const border =
-    tone === 'white' ? 'border-white/70' : 'border-accent'
+  const border = tone === 'white' ? 'border-white/70' : 'border-accent'
 
   const leftClass = clearSpine
     ? 'left-[var(--corner-inset)] md:left-[calc(4rem+var(--corner-inset))] lg:left-[calc(4.5rem+var(--corner-inset))]'
@@ -331,7 +331,7 @@ export function ScrollCue({ className = '' }: { className?: string }) {
         <span className="text-[10px] tracking-[0.28em] text-white/50 uppercase">
           Scroll
         </span>
-        <span className="h-8 w-px bg-gradient-to-b from-accent to-transparent" />
+        <span className="from-accent h-8 w-px bg-gradient-to-b to-transparent" />
       </motion.div>
     </motion.div>
   )
@@ -356,7 +356,7 @@ export function SplitWords({
   return (
     <span className={`inline-flex flex-wrap gap-x-[0.28em] ${className}`}>
       {words.map((word, i) => (
-        <span key={`${word}-${i}`} className="overflow-hidden inline-block">
+        <span key={`${word}-${i}`} className="inline-block overflow-hidden">
           <motion.span
             className="inline-block"
             initial={{ y: '110%', rotate: 4 }}
@@ -429,7 +429,7 @@ export function DrawLine({ className = '' }: { className?: string }) {
 
   return (
     <motion.div
-      className={`origin-top bg-accent ${className}`}
+      className={`bg-accent origin-top ${className}`}
       initial={reduce ? false : { scaleY: 0 }}
       whileInView={{ scaleY: 1 }}
       viewport={{ once: true, margin: '-10% 0px' }}
@@ -457,10 +457,10 @@ export function Marquee({
 
   return (
     <div
-      className={`relative overflow-hidden border-y border-line ${className}`}
+      className={`border-line relative overflow-hidden border-y ${className}`}
     >
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-bg-elevated to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-bg-elevated to-transparent" />
+      <div className="from-bg-elevated pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r to-transparent" />
+      <div className="from-bg-elevated pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l to-transparent" />
       <motion.div
         className="flex w-max gap-10 py-4 whitespace-nowrap"
         animate={reduce ? undefined : { x: ['0%', '-50%'] }}
@@ -473,10 +473,10 @@ export function Marquee({
         {row.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="font-[family-name:var(--font-display)] text-sm font-medium tracking-wide text-ink-soft"
+            className="text-ink-soft font-[family-name:var(--font-display)] text-sm font-medium tracking-wide"
           >
             {item}
-            <span className="ml-10 text-accent" aria-hidden>
+            <span className="text-accent ml-10" aria-hidden>
               ◆
             </span>
           </span>

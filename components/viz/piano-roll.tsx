@@ -36,7 +36,10 @@ export function PianoRoll({ className = '' }: { className?: string }) {
   const rh = h / ROWS
 
   return (
-    <div className={`bg-panel-wash relative overflow-hidden ${className}`} aria-hidden>
+    <div
+      className={`bg-panel-wash relative overflow-hidden ${className}`}
+      aria-hidden
+    >
       <svg viewBox={`0 0 ${w} ${h}`} className="h-full w-full">
         {Array.from({ length: ROWS }).map((_, r) => (
           <rect
@@ -55,9 +58,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             x2={c * cw}
             y1={0}
             y2={h}
-            stroke={
-              c % 4 === 0 ? 'rgba(23,25,28,0.16)' : 'rgba(23,25,28,0.06)'
-            }
+            stroke={c % 4 === 0 ? 'rgba(23,25,28,0.16)' : 'rgba(23,25,28,0.06)'}
             strokeWidth={1}
           />
         ))}
@@ -68,9 +69,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
             y={(ROWS - 1 - n.p) * rh + 1.5}
             width={n.d * cw - 3}
             height={rh - 3}
-            fill={
-              n.ai ? 'var(--color-accent)' : 'rgba(23,25,28,0.78)'
-            }
+            fill={n.ai ? 'var(--color-accent)' : 'rgba(23,25,28,0.78)'}
             initial={reduce ? false : { opacity: 0, scaleX: 0.4 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, margin: '-10% 0px' }}
@@ -96,7 +95,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
           transition={{ delay: 0.5, duration: 0.4 }}
         />
       </svg>
-      <div className="text-ink-faint pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 text-[10px] tracking-[0.12em] uppercase">
+      <div className="text-ink-faint pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 text-[11px]">
         <span>sketch</span>
         <span className="text-accent">continued by the model →</span>
       </div>

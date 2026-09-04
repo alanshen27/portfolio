@@ -66,7 +66,7 @@ export function ScoreRing({
           <p className={`figure text-4xl ${ink}`}>
             <CountUp to={value} duration={1600} />
           </p>
-          <p className={`mt-0.5 font-serif text-sm italic ${faint}`}>/ {max}</p>
+          <p className={`mt-0.5 text-sm ${faint}`}>/ {max}</p>
         </div>
       </div>
       <p className={`mt-4 text-sm font-medium ${ink}`}>{label}</p>

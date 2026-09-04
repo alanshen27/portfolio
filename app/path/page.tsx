@@ -24,12 +24,12 @@ import {
 } from '../data'
 
 const CONTENTS = [
-  { label: 'Scores', href: '#scores' },
-  { label: 'Honours', href: '#honours' },
-  { label: 'Publications', href: '#research' },
-  { label: 'Appointments', href: '#appointments' },
-  { label: 'Swimming', href: '#athletics' },
-  { label: 'Service', href: '#service' },
+  { label: 'scores', href: '#scores' },
+  { label: 'honours', href: '#honours' },
+  { label: 'publications', href: '#research' },
+  { label: 'appointments', href: '#appointments' },
+  { label: 'swimming', href: '#athletics' },
+  { label: 'service', href: '#service' },
 ]
 
 export default function PathPage() {
@@ -42,9 +42,9 @@ export default function PathPage() {
     <>
       <ScrollProgress />
       <PageTitle
-        kicker="III · Record"
-        title="The record"
-        standfirst="Contest scores, honours, publications, meets and service — every entry dated so it can be checked."
+        kicker="iii · record"
+        title="the record"
+        standfirst="contest scores, honours, publications, meets and service — every entry dated so it can be checked."
         contents={CONTENTS}
       />
 
@@ -53,8 +53,8 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Movement
             n={1}
-            title="Scores"
-            standfirst="Three numbers that need no interpretation."
+            title="scores"
+            standfirst="three numbers that need no interpretation."
           />
           <div className="mt-8 grid gap-6 md:grid-cols-12">
             <Reveal className="md:col-span-6" y={14}>
@@ -65,7 +65,7 @@ export default function PathPage() {
                 value={117}
                 max={120}
                 label="TOEFL iBT"
-                sublabel="Reading · Listening · Speaking · Writing"
+                sublabel="reading · listening · speaking · writing"
               />
             </Reveal>
             <Reveal className="card p-6 md:col-span-3" y={14} delay={0.1}>
@@ -73,7 +73,7 @@ export default function PathPage() {
             </Reveal>
           </div>
           <Reveal className="mx-auto mt-8 max-w-4xl" y={10}>
-            <p className="eyebrow">Certificates</p>
+            <p className="eyebrow">certificates</p>
             <ol className="ledger border-line mt-2 border-y">
               {CERTIFICATIONS.map((c) => (
                 <li key={c.id}>
@@ -93,7 +93,7 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Movement
             n={2}
-            title="Honours"
+            title="honours"
             standfirst={`${AWARDS.length} awards, 2023 – 2026, most recent first.`}
           />
           <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
@@ -145,7 +145,7 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Movement
             n={3}
-            title="Publications"
+            title="publications"
             dark
             standfirst="AI-based pragmatics assessment and AI-enhanced pedagogy; contributing author on all three."
           />
@@ -166,19 +166,17 @@ export default function PathPage() {
                     <p className="mt-1.5 text-[13px] text-white/65">
                       {pub.authors}
                     </p>
-                    <p className="mt-0.5 font-serif text-[13.5px] text-white/50 italic">
+                    <p className="mt-0.5 text-[13.5px] text-white/50">
                       {pub.venue}
                     </p>
                     {pub.presentation && (
                       <p className="mt-2 text-[13px] text-white/75">
-                        Presented: {pub.presentation}
+                        presented: {pub.presentation}
                       </p>
                     )}
                   </div>
                   <div className="text-right text-[12px] text-white/55 md:pt-1">
-                    <p className="text-accent-bright tracking-[0.08em] uppercase">
-                      {pub.status}
-                    </p>
+                    <p className="text-accent-bright">{pub.status}</p>
                     <p className="mt-0.5">{pub.date}</p>
                   </div>
                 </li>
@@ -195,7 +193,7 @@ export default function PathPage() {
       >
         <div className="section-max section-pad grid gap-10 md:grid-cols-12">
           <div className="md:col-span-8">
-            <Movement n={4} title="Appointments" align="left" />
+            <Movement n={4} title="appointments" align="left" />
             <ol className="ledger border-line mt-2 border-b">
               {techWork.map((job) => (
                 <Reveal key={job.id} y={10}>
@@ -218,7 +216,7 @@ export default function PathPage() {
                             rel="noopener noreferrer"
                             className="row-link ml-auto text-[12px]"
                           >
-                            Visit →
+                            visit →
                           </a>
                         )}
                       </div>
@@ -247,7 +245,7 @@ export default function PathPage() {
           <div className="md:col-span-4">
             <div className="pt-[1.35rem]">
               <h2 className="display-quiet text-ink mt-1 text-[clamp(1.9rem,3.6vw,2.6rem)]">
-                Education
+                education
               </h2>
               <div className="rule-double mt-5 w-full" aria-hidden />
             </div>
@@ -281,8 +279,8 @@ export default function PathPage() {
         <div className="section-max section-pad">
           <Movement
             n={5}
-            title="Swimming"
-            standfirst={`${swim?.title}, Le Rosey — 14 medals, two-year team MVP, one school record.`}
+            title="swimming"
+            standfirst={`${swim?.title}, Le Rosey — 14 medals, two-year team mvp, one school record.`}
           />
           <div className="mt-8 grid gap-8 md:grid-cols-12">
             <Reveal className="md:col-span-5" y={12}>
@@ -318,7 +316,7 @@ export default function PathPage() {
               <MedalBars className="mt-5" />
             </Reveal>
             <Reveal className="md:col-span-7" y={12} delay={0.05}>
-              <p className="eyebrow">Meet by meet</p>
+              <p className="eyebrow">meet by meet</p>
               <ol className="ledger border-line mt-2 border-y">
                 {swim?.bullets?.map((b) => (
                   <li
@@ -340,7 +338,7 @@ export default function PathPage() {
         className="border-line scroll-mt-24 border-t py-14 md:py-20"
       >
         <div className="section-max section-pad">
-          <Movement n={6} title="Service" />
+          <Movement n={6} title="service" />
           <ol className="ledger border-line mt-8 border-b">
             {VOLUNTEERING.map((v, i) => (
               <Reveal key={v.id} delay={i * 0.04} y={14}>
@@ -394,7 +392,7 @@ export default function PathPage() {
                         rel="noopener noreferrer"
                         className="row-link mt-3 inline-block text-[13px]"
                       >
-                        Visit →
+                        visit →
                       </a>
                     )}
                   </div>
@@ -408,10 +406,10 @@ export default function PathPage() {
       <section className="border-line bg-bg-elevated border-t py-10">
         <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
           <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
-            Interval: the music.
+            interval: the music.
           </p>
           <Link href="/music" className="row-link text-sm">
-            IV · Music →
+            iv · music →
           </Link>
         </div>
       </section>

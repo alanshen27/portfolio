@@ -17,13 +17,13 @@ export default function MusicPage() {
     <>
       <ScrollProgress />
       <PageTitle
-        kicker="IV · Music"
-        title="Interval"
-        standfirst="ABRSM Grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
+        kicker="iv · music"
+        title="interval"
+        standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
         contents={[
-          { label: 'Listen', href: '#listen' },
-          { label: 'Releases', href: '#releases' },
-          { label: 'On stage', href: '#stage' },
+          { label: 'listen', href: '#listen' },
+          { label: 'releases', href: '#releases' },
+          { label: 'on stage', href: '#stage' },
         ]}
       />
 
@@ -53,14 +53,14 @@ export default function MusicPage() {
               />
             </div>
             <p className="note-text drop-cap mt-5">
-              Grade 8 in both violin and piano, with orchestra and solo stage
+              grade 8 in both violin and piano, with orchestra and solo stage
               performance — from concert halls to orphanages in Romania, where
               he prepared and performed for the Liceul de Arte Oradea and wrote
               a song for more than sixty students.
             </p>
           </Reveal>
           <div className="md:col-span-7">
-            <Movement n={2} title="Releases" align="left" />
+            <Movement n={2} title="releases" align="left" />
             <Reveal y={12}>
               <ol className="ledger border-line mt-2 border-b">
                 {MUSIC_RELEASES.map((r, i) => (
@@ -79,7 +79,7 @@ export default function MusicPage() {
                         n={i + 1}
                         title={r.title}
                         subtitle={`${r.type} · ${r.artist}`}
-                        right={r.hyperfollow ? 'Every store' : ''}
+                        right={r.hyperfollow ? 'every store' : ''}
                         href={r.hyperfollow}
                       />
                     </div>
@@ -88,7 +88,7 @@ export default function MusicPage() {
               </ol>
             </Reveal>
             <Reveal className="mt-6" y={12} delay={0.04}>
-              <p className="eyebrow">Stores</p>
+              <p className="eyebrow">stores</p>
               <ol className="ledger border-line mt-2 border-y">
                 {streamLinks.map((l) => (
                   <li key={`${l.release}-${l.label}`}>
@@ -113,8 +113,8 @@ export default function MusicPage() {
         <div className="section-max section-pad">
           <Movement
             n={3}
-            title="On stage"
-            standfirst="Orchestra, section and solo — five photographs."
+            title="on stage"
+            standfirst="orchestra, section and solo — five photographs."
           />
           <ul className="mt-8 grid grid-cols-2 gap-2 md:grid-cols-6">
             {STAGE_PHOTOS.map((p, i) => (
@@ -144,7 +144,7 @@ export default function MusicPage() {
                         : '(max-width: 768px) 50vw, 17vw'
                     }
                   />
-                  <figcaption className="text-ink absolute bottom-2 left-2 bg-[color-mix(in_oklab,var(--color-bg-elevated)_92%,transparent)] px-2 py-0.5 font-serif text-[12px] italic">
+                  <figcaption className="text-ink absolute bottom-2 left-2 bg-[color-mix(in_oklab,var(--color-bg-elevated)_92%,transparent)] px-2 py-0.5 text-[12px]">
                     {p.caption}
                   </figcaption>
                 </figure>
@@ -157,10 +157,10 @@ export default function MusicPage() {
       <section className="border-line bg-bg-elevated border-t py-10">
         <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
           <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
-            Back to the programme.
+            back to the programme.
           </p>
           <Link href="/" className="row-link text-sm">
-            I · Programme →
+            i · programme →
           </Link>
         </div>
       </section>

@@ -25,12 +25,12 @@ import {
 } from './data'
 
 const CONTENTS = [
-  { label: 'Programme', href: '#programme' },
-  { label: 'Notes', href: '#notes' },
-  { label: 'Interval', href: '#interval' },
-  { label: 'Biography', href: '#biography' },
-  { label: 'Honours', href: '#honours' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'programme', href: '#programme' },
+  { label: 'notes', href: '#notes' },
+  { label: 'interval', href: '#interval' },
+  { label: 'biography', href: '#biography' },
+  { label: 'honours', href: '#honours' },
+  { label: 'contact', href: '#contact' },
 ]
 
 const STUDIOUS = PROJECTS.find((p) => p.id === 'project1')!
@@ -39,7 +39,7 @@ const NOTATE = PROJECTS.find((p) => p.id === 'project-notate')!
 const ROLES = WORK_EXPERIENCE.filter((w) => w.company !== 'Institut Le Rosey')
 const SWIM = WORK_EXPERIENCE.find((w) => w.company === 'Institut Le Rosey')
 const CONTACT = SOCIAL_LINKS.filter((l) =>
-  ['GitHub', 'LinkedIn', 'Email'].includes(l.label),
+  ['GitHub', 'LinkedIn', 'email'].includes(l.label),
 )
 
 function ext(href: string) {
@@ -170,7 +170,7 @@ export default function Home() {
       <section className="bg-cover-paper border-line relative border-b pt-28 pb-10 md:pt-36 md:pb-14">
         <div className="section-max section-pad text-center">
           <motion.p className="eyebrow" {...fade(0)}>
-            Institut Le Rosey · IB Diploma · Class of 2027
+            Institut Le Rosey · IB diploma · class of 2027
           </motion.p>
           <motion.h1
             className="display-quiet text-ink mt-5 text-[clamp(3.6rem,11vw,8.5rem)] leading-[0.95]"
@@ -179,18 +179,18 @@ export default function Home() {
             {NAME}
           </motion.h1>
           <motion.p
-            className="text-ink mx-auto mt-6 max-w-2xl font-serif text-[clamp(1.2rem,2.4vw,1.7rem)] leading-[1.3] font-light italic"
+            className="text-ink mx-auto mt-6 max-w-2xl text-[clamp(1.2rem,2.4vw,1.7rem)] leading-[1.3] font-normal tracking-[-0.01em]"
             {...fade(0.2)}
           >
-            A programme of work, 2023 – 2026: education software, competitive
+            a programme of work, 2023 – 2026: education software, competitive
             programming, robotics, research — and the violin.
           </motion.p>
           <motion.p
             className="text-ink-soft mx-auto mt-5 max-w-2xl text-[13px] leading-relaxed tracking-[0.02em] md:text-sm"
             {...fade(0.3)}
           >
-            Founder of Studious and Scribe · USACO Gold · VEX World Championship
-            qualifier · Cambridge University Press, forthcoming · ABRSM Grade 8,
+            founder of Studious and Scribe · USACO Gold · VEX World Championship
+            qualifier · Cambridge University Press, forthcoming · ABRSM grade 8,
             violin and piano
           </motion.p>
 
@@ -246,7 +246,7 @@ export default function Home() {
             />
           </div>
           <p className="text-ink-faint mt-2 flex justify-between text-[12px]">
-            <span>Cover photograph: on stage, violin.</span>
+            <span>cover photograph: on stage, violin.</span>
             <span>alanshen.me</span>
           </p>
         </motion.div>
@@ -258,8 +258,8 @@ export default function Home() {
           <Movement
             n={1}
             id="programme"
-            title="Programme"
-            standfirst="Nine works and results, in the order a reader should meet them. Each line links to its note."
+            title="programme"
+            standfirst="nine works and results, in the order a reader should meet them. each line links to its note."
           />
           <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
             <ol className="ledger border-line border-y">
@@ -277,11 +277,11 @@ export default function Home() {
             </ol>
             <p className="text-ink-faint mt-3 flex flex-wrap justify-between gap-2 text-[12px]">
               <span>
-                Roles, dates and placements as listed; full detail under Notes
-                and Honours.
+                roles, dates and placements as listed; full detail under notes
+                and honours.
               </span>
               <Link href="/work" className="row-link">
-                Complete programme notes →
+                complete programme notes →
               </Link>
             </p>
           </Reveal>
@@ -294,8 +294,8 @@ export default function Home() {
           <Movement
             n={2}
             id="notes"
-            title="Programme notes"
-            standfirst="What each of the major works is, what Alan did, and what came of it."
+            title="programme notes"
+            standfirst="what each of the major works is, what Alan did, and what came of it."
           />
 
           <div className="mt-8">
@@ -319,7 +319,7 @@ export default function Home() {
               id="note-scribe"
               n={2}
               title="Scribe"
-              meta={`${SCRIBE.role} · ${SCRIBE.timeframe}`}
+              meta={`SWE & co-founder · ${SCRIBE.timeframe}`}
               paragraphs={NOTES.scribe}
               link={{ href: SCRIBE.link, label: 'scribe.study' }}
               flip
@@ -346,7 +346,7 @@ export default function Home() {
               title="notate"
               meta={`${NOTATE.role} · ${NOTATE.timeframe}`}
               paragraphs={NOTES.notate}
-              link={{ href: NOTATE.link, label: 'Source on GitHub' }}
+              link={{ href: NOTATE.link, label: 'source on GitHub' }}
               aside={
                 <figure>
                   <PianoRoll className="aspect-[16/10] w-full" />
@@ -360,11 +360,11 @@ export default function Home() {
             <Note
               id="note-competition"
               n={4}
-              title="Competition"
+              title="competition"
               meta="USACO · VEX Robotics 15520X · 2025 – 26"
               paragraphs={NOTES.competition}
               flip
-              link={{ href: '/path', label: 'Scores and standings' }}
+              link={{ href: '/path', label: 'scores and standings' }}
               aside={
                 <div className="grid gap-3">
                   <Plate
@@ -394,10 +394,10 @@ export default function Home() {
             <Note
               id="note-research"
               n={5}
-              title="Research"
-              meta="Co-author · three papers · 2026"
+              title="research"
+              meta="co-author · three papers · 2026"
               paragraphs={NOTES.research}
-              link={{ href: '/path#research', label: 'Published works' }}
+              link={{ href: '/path#research', label: 'published works' }}
               aside={
                 <ol className="ledger border-line border-y">
                   {PUBLICATIONS.map((pub) => (
@@ -408,7 +408,7 @@ export default function Home() {
                       <p className="text-ink-soft mt-1 text-[12.5px]">
                         {pub.authors}
                       </p>
-                      <p className="text-ink-faint mt-0.5 text-[12.5px] italic">
+                      <p className="text-ink-faint mt-0.5 text-[12.5px]">
                         {pub.venue} · {pub.status}
                       </p>
                     </li>
@@ -428,9 +428,9 @@ export default function Home() {
         <div className="section-max section-pad">
           <Movement
             n={3}
-            title="Interval"
+            title="interval"
             dark
-            standfirst="ABRSM Grade 8 on both violin and piano; orchestra and solo stage; two singles released under his own name."
+            standfirst="ABRSM grade 8 on both violin and piano; orchestra and solo stage; two singles released under his own name."
           />
           <div className="mt-10 grid gap-8 md:grid-cols-12 md:items-start">
             <Reveal className="md:col-span-5" y={12}>
@@ -477,7 +477,7 @@ export default function Home() {
                           rel="noopener noreferrer"
                           className="text-accent-bright text-[13px] hover:underline"
                         >
-                          Stream →
+                          stream →
                         </a>
                       )}
                     </li>
@@ -505,8 +505,8 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-4 font-serif text-[15px] leading-relaxed text-white/70 italic">
-                  From concert halls to orphanages in Oradea, Romania, where he
+                <p className="mt-4 text-[15px] leading-relaxed text-white/70">
+                  from concert halls to orphanages in Oradea, Romania, where he
                   prepared and performed for the Liceul de Arte and wrote a song
                   for more than sixty students.
                 </p>
@@ -514,7 +514,7 @@ export default function Home() {
                   href="/music"
                   className="text-accent-bright mt-4 inline-block text-sm hover:underline"
                 >
-                  Players, stores and stage photographs →
+                  players, stores and stage photographs →
                 </Link>
               </Reveal>
             </div>
@@ -525,7 +525,7 @@ export default function Home() {
       {/* IV. Biography */}
       <section className="border-line border-t py-14 md:py-20">
         <div className="section-max section-pad">
-          <Movement n={4} id="biography" title="Biography" />
+          <Movement n={4} id="biography" title="biography" />
           <div className="mt-8 grid gap-8 md:grid-cols-12 md:gap-10">
             <Reveal className="md:col-span-3" y={12}>
               <div className="bg-mist relative aspect-[3/4] overflow-hidden">
@@ -539,10 +539,10 @@ export default function Home() {
               </div>
               <dl className="mt-4 text-[13px]">
                 {[
-                  ['School', 'Institut Le Rosey, Rolle, Switzerland'],
-                  ['Programme', 'IB Diploma · Class of 2027'],
-                  ['Summer 2026', 'Penn ESAP — AI and its mathematics'],
-                  ['Languages', 'TypeScript · C++ · Python'],
+                  ['school', 'Institut Le Rosey, Rolle, Switzerland'],
+                  ['programme', 'IB diploma · class of 2027'],
+                  ['summer 2026', 'Penn ESAP — AI and its mathematics'],
+                  ['languages', 'TypeScript · C++ · Python'],
                 ].map(([k, v]) => (
                   <div
                     key={k}
@@ -558,15 +558,15 @@ export default function Home() {
             <Reveal className="md:col-span-5" y={12} delay={0.04}>
               <p className="note-text drop-cap">{HOME_BIO}</p>
               <p className="note-text">
-                Outside the programme he swims for Le Rosey — two-year team MVP,
+                outside the programme he swims for Le Rosey — two-year team MVP,
                 fourteen medals across IM, freestyle, relays and open water —
                 and has volunteered in Romania and for The Lost Food Project,
                 where he led four students building an Earth Day game.
               </p>
               <div className="mt-6">
-                <p className="eyebrow">Stack</p>
+                <p className="eyebrow">stack</p>
                 <dl className="mt-2 text-[13px]">
-                  {SKILL_GROUPS.filter((g) => g.label !== 'Music').map((g) => (
+                  {SKILL_GROUPS.filter((g) => g.label !== 'music').map((g) => (
                     <div
                       key={g.label}
                       className="border-line grid grid-cols-[6.5rem_1fr] gap-3 border-b py-1.5"
@@ -580,7 +580,7 @@ export default function Home() {
             </Reveal>
 
             <Reveal className="md:col-span-4" y={12} delay={0.08}>
-              <p className="eyebrow">Appointments</p>
+              <p className="eyebrow">appointments</p>
               <ol className="ledger border-line mt-2 border-b">
                 {ROLES.map((job) => (
                   <li key={job.id} className="py-2.5">
@@ -596,7 +596,7 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
-              <p className="eyebrow mt-6">Education</p>
+              <p className="eyebrow mt-6">education</p>
               <ol className="ledger border-line mt-2 border-b">
                 {EDUCATION.map((e) => (
                   <li key={e.id} className="py-2.5">
@@ -623,12 +623,12 @@ export default function Home() {
           <Movement
             n={5}
             id="honours"
-            title="Honours & off stage"
-            standfirst="The back matter: every award with its date, and the swimming and service record."
+            title="honours & off stage"
+            standfirst="the back matter: every award with its date, and the swimming and service record."
           />
           <div className="mt-8 grid gap-10 md:grid-cols-12">
             <Reveal className="md:col-span-7" y={12}>
-              <p className="eyebrow">Honours</p>
+              <p className="eyebrow">honours</p>
               <ol className="ledger border-line mt-2 border-y">
                 {AWARDS.map((a) => (
                   <li
@@ -663,27 +663,25 @@ export default function Home() {
                 ))}
               </ol>
               <p className="text-ink-faint mt-2 text-[12px]">
-                Also: ABRSM Grade 8 Piano and Violin · TOEFL iBT 117 / 120.{' '}
+                also: ABRSM grade 8 piano and violin · TOEFL iBT 117 / 120.{' '}
                 <Link href="/path" className="row-link">
-                  Full record →
+                  full record →
                 </Link>
               </p>
             </Reveal>
 
             <div className="md:col-span-5">
               <Reveal y={12} delay={0.04}>
-                <p className="eyebrow">Off stage — swimming</p>
+                <p className="eyebrow">off stage — swimming</p>
                 <div className="border-line mt-2 grid grid-cols-3 border-y py-3 text-center">
                   {[
                     ['14', 'medals'],
-                    ['2×', 'team MVP'],
+                    ['2×', 'team mvp'],
                     ['1', 'school record'],
                   ].map(([v, l]) => (
                     <div key={l}>
                       <p className="figure text-ink text-3xl">{v}</p>
-                      <p className="text-ink-faint mt-1 text-[11px] tracking-[0.08em] uppercase">
-                        {l}
-                      </p>
+                      <p className="text-ink-faint mt-1 text-[12px]">{l}</p>
                     </div>
                   ))}
                 </div>
@@ -693,7 +691,7 @@ export default function Home() {
                 </p>
               </Reveal>
               <Reveal className="mt-8" y={12} delay={0.08}>
-                <p className="eyebrow">Off stage — service</p>
+                <p className="eyebrow">off stage — service</p>
                 <ol className="ledger border-line mt-2 border-y">
                   {VOLUNTEERING.map((v) => (
                     <li key={v.id} className="py-2.5">
@@ -725,7 +723,7 @@ export default function Home() {
         className="border-line scroll-mt-24 border-t py-14 md:py-20"
       >
         <div className="section-max section-pad text-center">
-          <Movement n={6} title="Contact" />
+          <Movement n={6} title="contact" />
           <Reveal className="mt-6" y={10}>
             <a
               href={`mailto:${EMAIL}`}
@@ -746,7 +744,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-ink-faint mx-auto mt-10 max-w-md text-[12px] leading-relaxed">
-              Set in Fraunces and Outfit. Built with Next.js and Motion. Every
+              set in Instrument Sans. built with Next.js and Motion. every
               placement, score and date on this page appears as recorded;
               nothing is rounded up.
             </p>

@@ -17,7 +17,7 @@ export function Footer() {
           {NAME}
         </p>
         <p className="eyebrow-faint mt-2">
-          Institut Le Rosey · Class of 2027 · Programme of work
+          Institut Le Rosey · class of 2027 · programme of work
         </p>
         <nav
           aria-label="Footer"
@@ -59,7 +59,7 @@ export function Footer() {
           <span>
             © {year} {NAME}
           </span>
-          <span>Always building.</span>
+          <span>always building.</span>
         </div>
       </div>
     </footer>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, JetBrains_Mono, Outfit } from 'next/font/google'
+import { Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Alan Shen — A programme of work',
+    default: 'Alan Shen — a programme of work',
     template: '%s | Alan Shen',
   },
   description:
@@ -42,24 +42,18 @@ export const metadata: Metadata = {
   },
 }
 
-const outfit = Outfit({
-  variable: '--font-outfit',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-})
-
 const jetbrains = JetBrains_Mono({
   variable: '--font-jetbrains',
   subsets: ['latin'],
   weight: ['400', '500'],
 })
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
+const instrument = Instrument_Sans({
+  variable: '--font-instrument',
   subsets: ['latin'],
   weight: 'variable',
   style: ['normal', 'italic'],
-  axes: ['opsz', 'SOFT'],
+  axes: ['wdth'],
 })
 
 export default function RootLayout({
@@ -68,10 +62,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${outfit.variable} ${jetbrains.variable} ${fraunces.variable}`}
-    >
+    <html lang="en" className={`${instrument.variable} ${jetbrains.variable}`}>
       <body className="antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
