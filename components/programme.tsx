@@ -23,14 +23,15 @@ export function Numeral({
 }
 
 /**
- * Section opener: numeral, serif title, optional standfirst, double rule.
- * Centered like a programme heading; left-aligned variant for dense back matter.
+ * Movement opener. A full-width double rule, then numeral + title in the
+ * left third and the standfirst in the right two-thirds. `align="center"`
+ * is kept only for the cover-voice moments (contact).
  */
 export function Movement({
   n,
   title,
   standfirst,
-  align = 'center',
+  align = 'left',
   dark = false,
   id,
   className = '',
@@ -44,35 +45,58 @@ export function Movement({
   className?: string
 }) {
   const centered = align === 'center'
-  return (
-    <Reveal y={10} className={className}>
-      <header
-        id={id}
-        className={`scroll-mt-24 ${centered ? 'mx-auto max-w-3xl text-center' : ''}`}
-      >
-        <p
-          className={`numeral text-[13px] ${dark ? 'text-accent-bright' : 'text-accent'}`}
-        >
-          {roman(n)}
-        </p>
-        <h2
-          className={`display-quiet mt-1 text-[clamp(1.9rem,3.6vw,2.6rem)] ${dark ? 'text-white' : 'text-ink'}`}
-        >
-          {title}
-        </h2>
-        {standfirst && (
+  const rule = `rule-double ${dark ? 'rule-double-dark' : ''}`
+  if (centered) {
+    return (
+      <Reveal y={8} className={className}>
+        <header id={id} className="mx-auto max-w-2xl scroll-mt-24 text-center">
+          <div className={`${rule} mx-auto w-16`} aria-hidden />
           <p
-            className={`mt-3 text-[15px] leading-relaxed md:text-base ${
-              dark ? 'text-white/65' : 'text-ink-soft'
-            } ${centered ? 'mx-auto max-w-xl' : 'max-w-2xl'}`}
+            className={`numeral mt-4 text-[13px] ${dark ? 'text-accent-bright' : 'text-accent'}`}
           >
-            {standfirst}
+            {roman(n)}
           </p>
-        )}
-        <div
-          className={`rule-double mt-5 ${dark ? 'rule-double-dark' : ''} ${centered ? 'mx-auto w-24' : 'w-full'}`}
-          aria-hidden
-        />
+          <h2
+            className={`display-quiet mt-1 text-[clamp(1.9rem,3.6vw,2.6rem)] ${dark ? 'text-white' : 'text-ink'}`}
+          >
+            {title}
+          </h2>
+          {standfirst && (
+            <p
+              className={`mx-auto mt-3 max-w-xl text-[15px] leading-relaxed ${dark ? 'text-white/65' : 'text-ink-soft'}`}
+            >
+              {standfirst}
+            </p>
+          )}
+        </header>
+      </Reveal>
+    )
+  }
+  return (
+    <Reveal y={8} className={className}>
+      <header id={id} className="scroll-mt-24">
+        <div className={rule} aria-hidden />
+        <div className="grid gap-3 pt-4 md:grid-cols-12 md:gap-6">
+          <div className="flex items-baseline gap-3 md:col-span-4">
+            <span
+              className={`numeral text-[13px] ${dark ? 'text-accent-bright' : 'text-accent'}`}
+            >
+              {roman(n)}
+            </span>
+            <h2
+              className={`display-quiet text-[clamp(1.9rem,3.6vw,2.6rem)] ${dark ? 'text-white' : 'text-ink'}`}
+            >
+              {title}
+            </h2>
+          </div>
+          {standfirst && (
+            <p
+              className={`max-w-2xl text-[15px] leading-relaxed md:col-span-8 md:pt-2 ${dark ? 'text-white/65' : 'text-ink-soft'}`}
+            >
+              {standfirst}
+            </p>
+          )}
+        </div>
       </header>
     </Reveal>
   )
@@ -163,7 +187,7 @@ export function ProgrammeRow({
   return <div className={cls}>{inner}</div>
 }
 
-/** Page opener for sub-pages: same voice as the cover, no photographic hero. */
+/** Page opener for sub-pages: same voice as the cover, on the grid. */
 export function PageTitle({
   kicker,
   title,
@@ -176,37 +200,40 @@ export function PageTitle({
   contents?: { label: string; href: string }[]
 }) {
   return (
-    <section className="border-line border-b pt-28 pb-10 md:pt-32 md:pb-12">
-      <div className="section-max section-pad text-center">
+    <section className="border-line border-b pt-24 pb-8 md:pt-28 md:pb-10">
+      <div className="section-max section-pad">
         <p className="eyebrow">{kicker}</p>
-        <h1 className="display-quiet text-ink mt-3 text-[clamp(2.4rem,6vw,4.2rem)]">
-          {title}
-        </h1>
-        {standfirst && (
-          <p className="text-ink-soft mx-auto mt-4 max-w-2xl text-base leading-relaxed md:text-lg">
-            {standfirst}
-          </p>
-        )}
-        <div className="rule-double mx-auto mt-6 w-24" aria-hidden />
-        {contents && (
-          <nav
-            aria-label="Contents"
-            className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[13px]"
-          >
-            {contents.map((c, i) => (
-              <a
-                key={c.href}
-                href={c.href}
-                className="text-ink-soft hover:text-ink flex items-baseline gap-1.5 transition-colors"
+        <div className="mt-3 grid gap-5 md:grid-cols-12 md:gap-8">
+          <h1 className="display-quiet text-ink text-[clamp(2.6rem,6.5vw,4.8rem)] leading-[0.95] md:col-span-7">
+            {title}
+          </h1>
+          <div className="md:col-span-5 md:pt-2">
+            {standfirst && (
+              <p className="text-ink-soft max-w-md text-[15px] leading-relaxed">
+                {standfirst}
+              </p>
+            )}
+            {contents && (
+              <nav
+                aria-label="Contents"
+                className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 text-[13px]"
               >
-                <span className="numeral text-ink-faint text-[11px]">
-                  {roman(i + 1)}
-                </span>
-                {c.label}
-              </a>
-            ))}
-          </nav>
-        )}
+                {contents.map((c, i) => (
+                  <a
+                    key={c.href}
+                    href={c.href}
+                    className="text-ink-soft hover:text-ink flex items-baseline gap-1.5 transition-colors"
+                  >
+                    <span className="numeral text-ink-faint text-[11px]">
+                      {roman(i + 1)}
+                    </span>
+                    {c.label}
+                  </a>
+                ))}
+              </nav>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   )

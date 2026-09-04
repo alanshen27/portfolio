@@ -31,10 +31,10 @@ export function Reveal({
   return (
     <motion.div
       className={`min-w-0 ${className}`}
-      initial={{ opacity: 0, y, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-12% 0px', amount: 0.2 }}
-      transition={{ duration: 0.85, ease: easeSnap, delay }}
+      initial={{ opacity: 0, y: Math.min(y, 12) }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-8% 0px', amount: 0.15 }}
+      transition={{ duration: 0.45, ease: easeOut, delay }}
     >
       {children}
     </motion.div>

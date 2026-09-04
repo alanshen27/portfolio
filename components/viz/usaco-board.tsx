@@ -16,15 +16,6 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
       className={`bg-ink relative overflow-hidden text-white ${className}`}
       aria-label="USACO Silver contest: 1000 out of 1000, promoted to Gold"
     >
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden
-        style={{
-          background:
-            'radial-gradient(90% 70% at 85% 15%, rgba(210,191,147,0.16), transparent 60%)',
-        }}
-      />
-
       <div className="relative z-10 p-5 md:p-6">
         <div className="flex items-baseline justify-between gap-3">
           <p className="eyebrow text-accent-bright">USACO · february 2026</p>

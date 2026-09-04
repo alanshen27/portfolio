@@ -154,7 +154,7 @@ export default function MusicPage() {
                         : '(max-width: 768px) 50vw, 17vw'
                     }
                   />
-                  <figcaption className="text-ink absolute bottom-2 left-2 bg-[color-mix(in_oklab,var(--color-bg-elevated)_92%,transparent)] px-2 py-0.5 text-[12px]">
+                  <figcaption className="text-ink absolute bottom-2 left-2 bg-[color-mix(in_oklab,var(--color-bg-elevated)_92%,transparent)] px-2 py-0.5 text-[13px]">
                     {p.caption}
                   </figcaption>
                 </figure>

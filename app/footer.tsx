@@ -55,7 +55,7 @@ export function Footer() {
         </nav>
       </div>
       <div className="border-line border-t">
-        <div className="section-max section-pad text-ink-faint flex justify-between py-4 text-[12px]">
+        <div className="section-max section-pad text-ink-faint flex justify-between py-4 text-[13px]">
           <span>
             © {year} {NAME}
           </span>

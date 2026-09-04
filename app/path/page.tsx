@@ -61,7 +61,11 @@ export default function PathPage() {
             <Reveal className="md:col-span-6" y={14}>
               <UsacoBoard className="h-full" />
             </Reveal>
-            <Reveal className="card p-6 md:col-span-3" y={14} delay={0.05}>
+            <Reveal
+              className="border-line border-t pt-4 md:col-span-3"
+              y={14}
+              delay={0.05}
+            >
               <ScoreRing
                 value={117}
                 max={120}
@@ -69,11 +73,15 @@ export default function PathPage() {
                 sublabel="reading · listening · speaking · writing"
               />
             </Reveal>
-            <Reveal className="card p-6 md:col-span-3" y={14} delay={0.1}>
+            <Reveal
+              className="border-line border-t pt-4 md:col-span-3"
+              y={14}
+              delay={0.1}
+            >
               <MedalBars />
             </Reveal>
           </div>
-          <Reveal className="mx-auto mt-8 max-w-4xl" y={10}>
+          <Reveal className="mt-8 md:ml-[33.333%]" y={10}>
             <p className="eyebrow">certificates</p>
             <ol className="ledger border-line mt-2 border-y">
               {CERTIFICATIONS.map((c) => (
@@ -106,7 +114,7 @@ export default function PathPage() {
             title="honours"
             standfirst={`${AWARDS.length} awards, 2023 – 2026, most recent first.`}
           />
-          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
             <ol className="ledger border-line border-y">
               {AWARDS.map((a, i) => (
                 <li
@@ -116,7 +124,7 @@ export default function PathPage() {
                   <span className="numeral text-ink-faint hidden text-[13px] md:block">
                     {roman(i + 1)}.
                   </span>
-                  <span className="text-ink-faint pt-0.5 text-[12px]">
+                  <span className="text-ink-faint pt-0.5 text-[13px]">
                     {a.date ?? '—'}
                   </span>
                   <div>
@@ -169,7 +177,7 @@ export default function PathPage() {
             dark
             standfirst="AI-based pragmatics assessment and AI-enhanced pedagogy; contributing author on all three."
           />
-          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
             <ol className="ledger-dark border-y border-white/15">
               {PUBLICATIONS.map((pub, i) => (
                 <li
@@ -186,7 +194,7 @@ export default function PathPage() {
                     <p className="mt-1.5 text-[13px] text-white/65">
                       {pub.authors}
                     </p>
-                    <p className="mt-0.5 text-[13.5px] text-white/50">
+                    <p className="mt-0.5 text-[13px] text-white/50">
                       {pub.venue}
                     </p>
                     {pub.presentation && (
@@ -195,7 +203,7 @@ export default function PathPage() {
                       </p>
                     )}
                   </div>
-                  <div className="text-right text-[12px] text-white/55 md:pt-1">
+                  <div className="text-right text-[13px] text-white/55 md:pt-1">
                     <p className="text-accent-bright">{pub.status}</p>
                     <p className="mt-0.5">{pub.date}</p>
                   </div>
@@ -218,7 +226,7 @@ export default function PathPage() {
               {techWork.map((job) => (
                 <Reveal key={job.id} y={10}>
                   <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
-                    <p className="text-ink-faint pt-1 text-[12px] md:col-span-3">
+                    <p className="text-ink-faint pt-1 text-[13px] md:col-span-3">
                       {dateRange(job.start, job.end)}
                     </p>
                     <div className="md:col-span-9">
@@ -234,7 +242,7 @@ export default function PathPage() {
                             href={job.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="row-link ml-auto text-[12px]"
+                            className="row-link ml-auto text-[13px]"
                           >
                             visit →
                           </a>
@@ -276,7 +284,7 @@ export default function PathPage() {
                     <h3 className="display-quiet text-ink text-[1.05rem] leading-snug">
                       {e.institution}
                     </h3>
-                    <span className="text-ink-faint text-[12px] whitespace-nowrap">
+                    <span className="text-ink-faint text-[13px] whitespace-nowrap">
                       {dateRange(e.start, e.end)}
                     </span>
                   </div>
@@ -341,7 +349,7 @@ export default function PathPage() {
                 {swim?.bullets?.map((b) => (
                   <li
                     key={b}
-                    className="text-ink py-2.5 text-[13.5px] leading-snug"
+                    className="text-ink py-2.5 text-[13px] leading-snug"
                   >
                     {b}
                   </li>

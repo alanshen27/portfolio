@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Reveal, easeOut } from '@/components/portfolio-motion'
 import { Movement, Numeral, ProgrammeRow, roman } from '@/components/programme'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import { Parallax, ParallaxPlane } from '@/components/parallax'
 import {
   Figures,
   Loop,
@@ -21,7 +22,6 @@ import {
   HOME_BIO,
   LINES,
   MUSIC_RELEASES,
-  NAME,
   NOTES,
   PROGRAMME,
   PROJECTS,
@@ -85,11 +85,12 @@ function Note({
         id={id}
         className="border-line grid scroll-mt-24 gap-6 border-t py-10 md:grid-cols-12 md:gap-10 md:py-12"
       >
-        <div
+        <Parallax
+          depth={-28}
           className={`md:col-span-5 ${flip ? 'md:order-2 md:col-start-8' : ''}`}
         >
           {aside}
-        </div>
+        </Parallax>
         <div
           className={`md:col-span-7 ${flip ? 'md:order-1 md:col-start-1' : ''}`}
         >
@@ -154,7 +155,7 @@ function Plate({
         />
       </div>
       {caption && (
-        <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
+        <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
           {caption}
         </figcaption>
       )}
@@ -174,89 +175,94 @@ export default function Home() {
 
   return (
     <div className="bg-atmosphere">
-      {/* Cover */}
-      <section className="bg-cover-paper border-line relative border-b pt-28 pb-10 md:pt-36 md:pb-14">
-        <div className="section-max section-pad text-center">
-          <motion.p className="eyebrow" {...fade(0)}>
-            Institut Le Rosey · IB diploma · class of 2027
-          </motion.p>
-          <motion.h1
-            className="display-quiet text-ink mt-5 text-[clamp(3.6rem,11vw,8.5rem)] leading-[0.95]"
-            {...fade(0.08)}
-          >
-            {NAME}
-          </motion.h1>
-          <motion.p
-            className="text-ink mx-auto mt-6 max-w-2xl text-[clamp(1.2rem,2.4vw,1.7rem)] leading-[1.3] font-normal tracking-[-0.01em]"
-            {...fade(0.2)}
-          >
-            a programme of work, 2023 – 2026: education software, competitive
-            programming, robotics, research — and the violin.
-          </motion.p>
-          <motion.p
-            className="text-ink-soft mx-auto mt-5 max-w-2xl text-[13px] leading-relaxed tracking-[0.02em] md:text-sm"
-            {...fade(0.3)}
-          >
-            founder of Studious and Scribe · USACO Gold · VEX World Championship
-            qualifier · Cambridge University Press, forthcoming · ABRSM grade 8,
-            violin and piano
-          </motion.p>
-
-          <motion.div
-            className="rule-double mx-auto mt-8 w-32"
-            aria-hidden
-            {...fade(0.38)}
-          />
-
-          <motion.nav
-            aria-label="Contents"
-            className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[13px]"
-            {...fade(0.44)}
-          >
-            {CONTENTS.map((c, i) => (
-              <a
-                key={c.href}
-                href={c.href}
-                className="text-ink-soft hover:text-ink flex items-baseline gap-1.5 transition-colors"
-              >
-                <span className="numeral text-ink-faint text-[11px]">
-                  {roman(i + 1)}
-                </span>
-                {c.label}
-              </a>
-            ))}
-            <span className="text-line-strong hidden sm:inline">|</span>
-            {CONTACT.map((l) => (
-              <a
-                key={l.label}
-                href={l.link}
-                {...ext(l.link)}
-                className="rule-link"
-              >
-                {l.label}
-              </a>
-            ))}
-          </motion.nav>
+      {/* Cover — asymmetric: name at the foot of the left column, the
+          particulars in the right column, photograph full-bleed below */}
+      <section className="border-line border-b pt-24 md:pt-28">
+        <div className="section-max section-pad grid gap-8 md:grid-cols-12 md:gap-6">
+          <div className="flex flex-col justify-between md:col-span-7">
+            <motion.p className="eyebrow" {...fade(0)}>
+              Institut Le Rosey · IB diploma · class of 2027
+            </motion.p>
+            <motion.h1
+              className="display-quiet text-ink mt-10 text-[clamp(3.6rem,12vw,9.5rem)] leading-[0.9] tracking-[-0.04em] md:mt-24"
+              {...fade(0.08)}
+            >
+              Alan
+              <br />
+              Shen
+            </motion.h1>
+          </div>
+          <div className="flex flex-col justify-end md:col-span-5 md:pb-2">
+            <motion.p
+              className="text-ink text-[clamp(1.15rem,1.9vw,1.45rem)] leading-[1.3] tracking-[-0.01em]"
+              {...fade(0.16)}
+            >
+              a programme of work, 2023 – 2026: education software, competitive
+              programming, robotics, research — and the violin.
+            </motion.p>
+            <motion.p
+              className="text-ink-soft mt-4 max-w-md text-[13px] leading-relaxed"
+              {...fade(0.24)}
+            >
+              founder of Studious and Scribe · USACO Gold · VEX World
+              Championship qualifier · Cambridge University Press, forthcoming ·
+              ABRSM grade 8, violin and piano
+            </motion.p>
+            <motion.nav
+              aria-label="Contents"
+              className="border-line mt-6 grid grid-cols-2 gap-x-6 gap-y-1.5 border-t pt-4 text-[13px] sm:grid-cols-3"
+              {...fade(0.32)}
+            >
+              {CONTENTS.map((c, i) => (
+                <a
+                  key={c.href}
+                  href={c.href}
+                  className="text-ink-soft hover:text-ink flex items-baseline gap-1.5 transition-colors"
+                >
+                  <span className="numeral text-ink-faint w-5 text-[11px]">
+                    {roman(i + 1)}
+                  </span>
+                  {c.label}
+                </a>
+              ))}
+            </motion.nav>
+            <motion.p
+              className="mt-3 flex flex-wrap gap-x-5 text-[13px]"
+              {...fade(0.36)}
+            >
+              {CONTACT.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.link}
+                  {...ext(l.link)}
+                  className="rule-link"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </motion.p>
+          </div>
         </div>
 
-        <motion.div
-          className="section-max section-pad mt-10 md:mt-14"
-          {...fade(0.5)}
-        >
-          <div className="bg-mist relative aspect-[21/7] overflow-hidden md:aspect-[21/6]">
-            <Image
-              src="/media/site/banner.jpg"
-              alt="Alan Shen performing violin on stage"
-              fill
-              priority
-              className="object-cover object-[center_45%]"
-              sizes="100vw"
-            />
+        <motion.div className="mt-10 md:mt-14" {...fade(0.4)}>
+          <div className="bg-mist relative h-[56vw] max-h-[620px] min-h-[280px] w-full overflow-hidden">
+            <ParallaxPlane travel={0.16}>
+              <Image
+                src="/media/site/banner.jpg"
+                alt="Alan Shen performing violin on stage"
+                fill
+                priority
+                className="object-cover object-[center_45%]"
+                sizes="100vw"
+              />
+            </ParallaxPlane>
           </div>
-          <p className="text-ink-faint mt-2 flex justify-between text-[12px]">
-            <span>cover photograph: on stage, violin.</span>
-            <span>alanshen.me</span>
-          </p>
+          <div className="section-max section-pad">
+            <p className="text-ink-faint flex justify-between py-2 text-[13px]">
+              <span>cover photograph: on stage, violin.</span>
+              <span>alanshen.me</span>
+            </p>
+          </div>
         </motion.div>
       </section>
 
@@ -280,7 +286,7 @@ export default function Home() {
             title="programme"
             standfirst={`${PROGRAMME.length} works and results, in the order a reader should meet them. each line links to its note.`}
           />
-          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
             <ol className="ledger border-line border-y">
               {PROGRAMME.map((e, i) => (
                 <li key={e.title}>
@@ -294,7 +300,7 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <p className="text-ink-faint mt-3 flex flex-wrap justify-between gap-2 text-[12px]">
+            <p className="text-ink-faint mt-3 flex flex-wrap justify-between gap-2 text-[13px]">
               <span>
                 roles, dates and placements as listed; full detail under notes
                 and honours.
@@ -385,7 +391,7 @@ export default function Home() {
                 <div className="grid gap-3">
                   <figure>
                     <PianoRoll className="aspect-[16/10] w-full" />
-                    <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
+                    <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
                       a sketched phrase (ink) and the model’s continuation
                       (green).
                     </figcaption>
@@ -449,10 +455,10 @@ export default function Home() {
                       <p className="display-quiet text-ink text-[1.05rem] leading-snug">
                         {pub.title}
                       </p>
-                      <p className="text-ink-soft mt-1 text-[12.5px]">
+                      <p className="text-ink-soft mt-1 text-[13px]">
                         {pub.authors}
                       </p>
-                      <p className="text-ink-faint mt-0.5 text-[12.5px]">
+                      <p className="text-ink-faint mt-0.5 text-[13px]">
                         {pub.venue} · {pub.status}
                       </p>
                     </li>
@@ -518,7 +524,7 @@ export default function Home() {
                         <span className="display-quiet block text-lg">
                           {r.title}
                         </span>
-                        <span className="text-[12.5px] text-white/55">
+                        <span className="text-[13px] text-white/55">
                           {r.type} · {r.artist}
                         </span>
                       </span>
@@ -650,11 +656,11 @@ export default function Home() {
                       <span className="display-quiet text-ink text-base">
                         {job.company}
                       </span>
-                      <span className="text-ink-faint text-[12px] whitespace-nowrap">
+                      <span className="text-ink-faint text-[13px] whitespace-nowrap">
                         {dateRange(job.start, job.end)}
                       </span>
                     </div>
-                    <p className="text-ink-soft text-[12.5px]">{job.title}</p>
+                    <p className="text-ink-soft text-[13px]">{job.title}</p>
                   </li>
                 ))}
               </ol>
@@ -666,11 +672,11 @@ export default function Home() {
                       <span className="display-quiet text-ink text-base leading-snug">
                         {e.institution}
                       </span>
-                      <span className="text-ink-faint text-[12px] whitespace-nowrap">
+                      <span className="text-ink-faint text-[13px] whitespace-nowrap">
                         {dateRange(e.start, e.end)}
                       </span>
                     </div>
-                    <p className="text-ink-soft text-[12.5px]">{e.degree}</p>
+                    <p className="text-ink-soft text-[13px]">{e.degree}</p>
                   </li>
                 ))}
               </ol>
@@ -706,15 +712,15 @@ export default function Home() {
                     key={a.id}
                     className="grid gap-x-4 gap-y-1 py-3 md:grid-cols-[5.5rem_1fr_auto]"
                   >
-                    <span className="text-ink-faint pt-0.5 text-[12px]">
+                    <span className="text-ink-faint pt-0.5 text-[13px]">
                       {a.date ?? '—'}
                     </span>
                     <div>
-                      <p className="text-ink text-[14.5px] leading-snug font-medium">
+                      <p className="text-ink text-[15px] leading-snug font-medium">
                         {a.title}
                       </p>
                       {a.description && (
-                        <p className="text-ink-soft mt-0.5 text-[12.5px] leading-snug">
+                        <p className="text-ink-soft mt-0.5 text-[13px] leading-snug">
                           {a.description}
                         </p>
                       )}
@@ -733,7 +739,7 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
-              <p className="text-ink-faint mt-2 text-[12px]">
+              <p className="text-ink-faint mt-2 text-[13px]">
                 also: ABRSM grade 8 piano and violin · TOEFL iBT 117 / 120.{' '}
                 <Link href="/path" className="row-link">
                   full record →
@@ -752,11 +758,11 @@ export default function Home() {
                   ].map(([v, l]) => (
                     <div key={l}>
                       <p className="figure text-ink text-3xl">{v}</p>
-                      <p className="text-ink-faint mt-1 text-[12px]">{l}</p>
+                      <p className="text-ink-faint mt-1 text-[13px]">{l}</p>
                     </div>
                   ))}
                 </div>
-                <p className="text-ink-soft mt-2 text-[12.5px] leading-snug">
+                <p className="text-ink-soft mt-2 text-[13px] leading-snug">
                   {SWIM?.title}, Le Rosey, since 2023 — individual medley,
                   freestyle, relays and open water.
                 </p>
@@ -770,11 +776,11 @@ export default function Home() {
                         <span className="text-ink text-[14px] font-medium">
                           {v.organization}
                         </span>
-                        <span className="text-ink-faint text-[12px] whitespace-nowrap">
+                        <span className="text-ink-faint text-[13px] whitespace-nowrap">
                           {dateRange(v.start, v.end)}
                         </span>
                       </div>
-                      <p className="text-ink-soft text-[12.5px] leading-snug">
+                      <p className="text-ink-soft text-[13px] leading-snug">
                         {v.role} · {v.cause}
                         {v.description ? ` — ${v.description}` : ''}
                         {v.bullets ? ` — ${v.bullets[0]}` : ''}
@@ -794,7 +800,7 @@ export default function Home() {
         className="border-line scroll-mt-24 border-t py-12 md:py-16"
       >
         <div className="section-max section-pad text-center">
-          <Movement n={6} title="contact" />
+          <Movement n={6} title="contact" align="center" />
           <Reveal className="mt-6" y={10}>
             <a
               href={`mailto:${EMAIL}`}
@@ -814,7 +820,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <p className="text-ink-faint mx-auto mt-10 max-w-md text-[12px] leading-relaxed">
+            <p className="text-ink-faint mx-auto mt-10 max-w-md text-[13px] leading-relaxed">
               set in Instrument Sans. built with Next.js and Motion. every
               placement, score and date on this page appears as recorded;
               nothing is rounded up.

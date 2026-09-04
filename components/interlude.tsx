@@ -3,11 +3,11 @@
 import Image from 'next/image'
 import { useReducedMotion } from 'motion/react'
 import type { ReactNode } from 'react'
-import { Reveal } from '@/components/portfolio-motion'
+import { Parallax, ParallaxPlane } from '@/components/parallax'
 
 /**
- * Interludes — short beats between movements. Each is one screen-fraction
- * tall, dense, and a different kind of moment: numbers, a line, a plate.
+ * Interludes — beats between movements. Flat paper, rules, and two planes
+ * moving at different rates. Nothing decorative that isn't content.
  */
 
 export function Figures({
@@ -21,29 +21,23 @@ export function Figures({
 }) {
   return (
     <dl
-      className={`grid grid-cols-2 sm:grid-cols-4 ${className}`}
+      className={`grid gap-x-6 ${className}`}
       style={{
         gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, minmax(0, 1fr))`,
       }}
     >
-      {items.map((f, i) => (
+      {items.map((f) => (
         <div
           key={f.label}
-          className={`px-3 py-3 text-center ${
-            i > 0
-              ? dark
-                ? 'border-l border-white/15'
-                : 'border-line border-l'
-              : ''
-          }`}
+          className={`border-t pt-2 ${dark ? 'border-white/25' : 'border-ink'}`}
         >
           <dd
-            className={`figure text-[clamp(1.6rem,3vw,2.4rem)] ${dark ? 'text-white' : 'text-ink'}`}
+            className={`figure text-[clamp(1.5rem,2.6vw,2.1rem)] ${dark ? 'text-white' : 'text-ink'}`}
           >
             {f.value}
           </dd>
           <dt
-            className={`mt-1 text-[12px] leading-snug ${dark ? 'text-white/55' : 'text-ink-faint'}`}
+            className={`mt-1 text-[13px] leading-snug ${dark ? 'text-white/55' : 'text-ink-soft'}`}
           >
             {f.label}
           </dt>
@@ -53,31 +47,36 @@ export function Figures({
   )
 }
 
-/** A row of numbers on a wash — "by the numbers" beat. */
+/** Four figures on the grid, header at left — "by the numbers" beat. */
 export function NumbersInterlude({
   items,
+  label = 'by the numbers',
   note,
 }: {
   items: { value: string; label: string }[]
+  label?: string
   note?: string
 }) {
   return (
-    <section className="bg-panel-wash border-line border-y py-6 md:py-8">
-      <div className="section-max section-pad">
-        <Reveal y={10}>
-          <Figures items={items} />
+    <section className="border-line border-t py-8 md:py-10">
+      <div className="section-max section-pad grid gap-6 md:grid-cols-12">
+        <div className="md:col-span-3">
+          <p className="eyebrow">{label}</p>
           {note && (
-            <p className="text-ink-faint mt-3 text-center text-[12px]">
+            <p className="text-ink-faint mt-1 max-w-[16rem] text-[13px] leading-snug">
               {note}
             </p>
           )}
-        </Reveal>
+        </div>
+        <Parallax depth={-16} className="md:col-span-9">
+          <Figures items={items} />
+        </Parallax>
       </div>
     </section>
   )
 }
 
-/** A single line in Alan's voice, set large, with an attribution. */
+/** One sentence in Alan's words, set on the grid with a hanging attribution. */
 export function QuoteInterlude({
   children,
   source,
@@ -89,31 +88,32 @@ export function QuoteInterlude({
 }) {
   return (
     <section
-      className={`border-line border-y py-10 md:py-14 ${dark ? 'bg-ink text-white' : 'bg-bg-elevated'}`}
+      className={`border-t py-10 md:py-14 ${dark ? 'bg-ink border-white/15 text-white' : 'border-line'}`}
     >
-      <div className="section-max section-pad">
-        <Reveal y={10}>
-          <blockquote className="mx-auto max-w-3xl text-center">
+      <div className="section-max section-pad grid gap-4 md:grid-cols-12">
+        <p
+          className={`text-[13px] md:col-span-3 ${dark ? 'text-white/50' : 'text-ink-faint'}`}
+        >
+          {source}
+        </p>
+        <Parallax depth={-24} className="md:col-span-8">
+          <blockquote>
             <p
-              className={`display-quiet text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.2] font-medium ${dark ? 'text-white' : 'text-ink'}`}
+              className={`display-quiet text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.15] ${dark ? 'text-white' : 'text-ink'}`}
             >
               {children}
             </p>
-            {source && (
-              <footer
-                className={`mt-4 text-[12.5px] ${dark ? 'text-white/50' : 'text-ink-faint'}`}
-              >
-                {source}
-              </footer>
-            )}
           </blockquote>
-        </Reveal>
+        </Parallax>
       </div>
     </section>
   )
 }
 
-/** A wide photograph or muted loop with a caption line — a plate beat. */
+/**
+ * Full-bleed plate. The image plane drifts one way; the caption block,
+ * set on paper and overlapping the plate's lower-left, drifts the other.
+ */
 export function PlateInterlude({
   src,
   video,
@@ -121,7 +121,7 @@ export function PlateInterlude({
   caption,
   credit,
   position = 'center',
-  ratio = 'aspect-[21/7] md:aspect-[21/6]',
+  height = 'h-[52vw] max-h-[560px] min-h-[260px]',
 }: {
   src: string
   video?: string
@@ -129,51 +129,55 @@ export function PlateInterlude({
   caption: string
   credit?: string
   position?: string
-  ratio?: string
+  height?: string
 }) {
   const reduce = useReducedMotion()
   const showVideo = video && !reduce
   return (
-    <section className="border-line border-y py-6 md:py-8">
-      <div className="section-max section-pad">
-        <Reveal y={12}>
-          <figure>
-            <div className={`bg-mist relative overflow-hidden ${ratio}`}>
-              {showVideo ? (
-                <video
-                  src={video}
-                  poster={src}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  aria-label={alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: position }}
-                />
-              ) : (
-                <Image
-                  src={src}
-                  alt={alt}
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: position }}
-                  sizes="100vw"
-                />
-              )}
-            </div>
-            <figcaption className="text-ink-faint mt-2 flex flex-wrap justify-between gap-x-4 text-[12px]">
-              <span>{caption}</span>
-              {credit && <span>{credit}</span>}
-            </figcaption>
-          </figure>
-        </Reveal>
+    <section className="border-line relative border-t">
+      <div className={`bg-mist relative w-full overflow-hidden ${height}`}>
+        <ParallaxPlane travel={0.14}>
+          {showVideo ? (
+            <video
+              src={video}
+              poster={src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label={alt}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: position }}
+            />
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover"
+              style={{ objectPosition: position }}
+              sizes="100vw"
+            />
+          )}
+        </ParallaxPlane>
+      </div>
+      <div className="section-max section-pad relative">
+        <Parallax
+          depth={-36}
+          className="bg-bg relative -mt-10 max-w-md px-5 pt-4 pb-5 md:-mt-14 md:px-6"
+        >
+          <div className="rule-double" aria-hidden />
+          <p className="text-ink mt-3 text-[15px] leading-snug">{caption}</p>
+          {credit && (
+            <p className="text-ink-faint mt-2 text-[13px]">{credit}</p>
+          )}
+        </Parallax>
       </div>
     </section>
   )
 }
 
-/** Muted loop as an aside inside a note. */
+/** Muted loop as an aside inside a note, on its own plane. */
 export function Loop({
   src,
   poster,
@@ -193,31 +197,33 @@ export function Loop({
   return (
     <figure>
       <div className={`bg-mist relative overflow-hidden ${ratio}`}>
-        {reduce ? (
-          <Image
-            src={poster}
-            alt={alt}
-            fill
-            className="object-cover"
-            style={{ objectPosition: position }}
-            sizes="(max-width: 768px) 100vw, 40vw"
-          />
-        ) : (
-          <video
-            src={src}
-            poster={poster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-label={alt}
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: position }}
-          />
-        )}
+        <ParallaxPlane travel={0.1}>
+          {reduce ? (
+            <Image
+              src={poster}
+              alt={alt}
+              fill
+              className="object-cover"
+              style={{ objectPosition: position }}
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+          ) : (
+            <video
+              src={src}
+              poster={poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label={alt}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: position }}
+            />
+          )}
+        </ParallaxPlane>
       </div>
       {caption && (
-        <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
+        <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
           {caption}
         </figcaption>
       )}

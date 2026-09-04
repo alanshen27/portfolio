@@ -305,12 +305,8 @@
     margin-top: 0.7em;
   }
 
-  /* Cover: soft vignette on paper */
-  .bg-cover-paper {
-    background: radial-gradient(60% 50% at 50% 0%, #ebe6dc 0%, transparent 70%),
-      linear-gradient(180deg, #f5f2ec 0%, var(--color-bg) 100%);
-  }
-
+  /* Flat paper only — no washes, no vignettes */
+  .bg-cover-paper,
   .bg-atmosphere {
     background: var(--color-bg);
   }

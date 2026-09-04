@@ -58,7 +58,7 @@ function Pipeline() {
           </li>
         ))}
       </ol>
-      <p className="text-ink-faint text-[12px] leading-relaxed">
+      <p className="text-ink-faint text-[13px] leading-relaxed">
         CAD · PCB · code · verification gates · Shopify checkout
       </p>
     </div>
@@ -99,7 +99,7 @@ export default function WorkPage() {
       {/* Listing */}
       <section className="py-12 md:py-16">
         <div className="section-max section-pad">
-          <Reveal className="mx-auto max-w-4xl" y={12}>
+          <Reveal className="md:ml-[33.333%]" y={12}>
             <ol className="ledger border-line border-y">
               {PROJECTS.map((p, i) => (
                 <li key={p.id}>
@@ -164,7 +164,7 @@ export default function WorkPage() {
                               sizes="(max-width: 768px) 100vw, 40vw"
                             />
                           </div>
-                          <figcaption className="text-ink-faint mt-2 text-[12px] leading-snug">
+                          <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
                             {project.photoCaption}
                           </figcaption>
                         </figure>
@@ -210,7 +210,7 @@ export default function WorkPage() {
                         </ul>
                       )}
                       <div className="border-line mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5 border-t pt-3">
-                        <p className="text-ink-faint text-[12px]">
+                        <p className="text-ink-faint text-[13px]">
                           {project.tags?.join(' · ')}
                         </p>
                         <span className="flex gap-4 text-sm">
@@ -256,7 +256,7 @@ export default function WorkPage() {
             title="appointments"
             standfirst="where the works were made."
           />
-          <Reveal className="mx-auto mt-8 max-w-4xl" y={12}>
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
             <ol className="ledger border-line border-y">
               {roles.map((job, i) => (
                 <li key={job.id}>
