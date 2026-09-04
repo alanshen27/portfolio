@@ -74,16 +74,16 @@
   max-width: 72rem;
 }
 
-/* Display type: serif, medium weight, gentle tracking */
-.display-quiet {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.05;
-  font-variation-settings: 'SOFT' 40;
-}
-
 @layer components {
+  /* Display type: serif, medium weight, gentle tracking */
+  .display-quiet {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    font-variation-settings: 'SOFT' 40;
+  }
+
   /* ---- Dossier system (editorial) ---------------------------------------- */
 
   /* Small label: sans, tracked, accent. Never mono. */

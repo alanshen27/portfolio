@@ -218,7 +218,7 @@ export default function Home() {
             </h1>
 
             <motion.p
-              className="display-quiet text-ink mt-5 max-w-2xl text-[1.25rem] leading-[1.25] font-normal md:text-[1.65rem]"
+              className="display-quiet text-ink mt-5 max-w-2xl text-[1.25rem] leading-[1.3] font-light md:text-[1.6rem]"
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.25, ease: easeOut }}
