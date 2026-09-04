@@ -185,11 +185,24 @@ export default function PathPage() {
                           </a>
                         )}
                       </div>
-                      <ul className="tick-list text-ink-soft mt-2 space-y-1 text-[13px] leading-snug">
-                        {job.bullets?.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
-                        ))}
-                      </ul>
+                      <div className="mt-2 flex gap-4">
+                        <ul className="tick-list text-ink-soft min-w-0 flex-1 space-y-1 text-[13px] leading-snug">
+                          {job.bullets?.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+                        {job.photo && (
+                          <div className="bg-mist relative hidden h-28 w-24 shrink-0 overflow-hidden sm:block">
+                            <Image
+                              src={job.photo}
+                              alt={`${job.company} team`}
+                              fill
+                              className="object-cover object-top"
+                              sizes="96px"
+                            />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </li>
                 </Reveal>
@@ -240,7 +253,7 @@ export default function PathPage() {
               {AWARDS.map((award) => (
                 <li
                   key={award.id}
-                  className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr]"
+                  className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr_auto]"
                 >
                   <p className="eyebrow-faint pt-1">{award.date ?? '—'}</p>
                   {award.image ? (
@@ -266,6 +279,17 @@ export default function PathPage() {
                       </p>
                     )}
                   </div>
+                  {award.photo && (
+                    <div className="bg-mist relative mt-1 h-16 w-24 overflow-hidden md:mt-0 md:h-14 md:w-[5.25rem]">
+                      <Image
+                        src={award.photo}
+                        alt={`${award.title} — photo`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 84px"
+                      />
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
@@ -340,14 +364,25 @@ export default function PathPage() {
 
           <div className="mt-6 grid gap-8 lg:grid-cols-12">
             <Reveal className="lg:col-span-5">
-              <div className="relative aspect-[16/11] overflow-hidden">
-                <Image
-                  src="/media/swim/team.jpg"
-                  alt="Le Rosey swim team"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                />
+              <div className="grid grid-cols-5 gap-2">
+                <div className="relative col-span-3 aspect-[4/3] overflow-hidden">
+                  <Image
+                    src="/media/swim/team.jpg"
+                    alt="Le Rosey swim team"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 60vw, 24vw"
+                  />
+                </div>
+                <div className="relative col-span-2 overflow-hidden">
+                  <Image
+                    src="/media/swim/lake-medals.webp"
+                    alt="Team with medals after the lake swim relay"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 40vw, 16vw"
+                  />
+                </div>
               </div>
               <p className="mt-3 font-mono text-[11px] tracking-[0.1em] text-white/55 uppercase">
                 {swim?.title} · {swim ? dateRange(swim.start, swim.end) : ''}

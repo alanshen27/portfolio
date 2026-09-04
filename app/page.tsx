@@ -413,7 +413,7 @@ export default function Home() {
                 {AWARDS.map((a) => (
                   <li
                     key={a.id}
-                    className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr]"
+                    className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr_auto]"
                   >
                     <p className="eyebrow-faint pt-1">{a.date ?? '—'}</p>
                     {a.image ? (
@@ -439,6 +439,18 @@ export default function Home() {
                         </p>
                       )}
                     </div>
+                    {/* VEX photo already sits in the card to the right */}
+                    {a.photo && a.id !== 'award-vex' && (
+                      <div className="bg-mist relative mt-1 h-16 w-24 overflow-hidden md:mt-0 md:h-14 md:w-[5.25rem]">
+                        <Image
+                          src={a.photo}
+                          alt={`${a.title} — photo`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 84px"
+                        />
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -454,23 +466,37 @@ export default function Home() {
 
             <Reveal className="lg:col-span-5" y={14} delay={0.06}>
               <UsacoBoard />
-              <div className="card mt-4 p-4">
-                <div className="flex items-baseline justify-between">
-                  <p className="eyebrow">VEX Robotics · 15520X</p>
-                  <p className="eyebrow-faint">Sep 2025 – present</p>
+              <div className="card mt-4">
+                <div className="relative aspect-[16/7]">
+                  <Image
+                    src="/media/vex/worlds-team.jpeg"
+                    alt="VEX team 15520X at their competition booth"
+                    fill
+                    className="object-cover object-[center_60%]"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  <span className="pill pill-ink absolute bottom-2 left-2">
+                    Team 15520X
+                  </span>
                 </div>
-                <p className="text-ink mt-2 text-sm leading-snug">
-                  Engineer and programmer. Autonomous routines plus the
-                  driver-control interface.
-                </p>
-                <ul className="tick-list text-ink-soft mt-2.5 space-y-1 text-[13px]">
-                  <li>
-                    Excellence Award, Alpine Robo Games 2026 → VEX Worlds,
-                    Dallas.
-                  </li>
-                  <li>3rd skills · 3rd qualifiers at Alpine Robo Games.</li>
-                  <li>4th skills · 7th overall, Swiss Regional (ISBasel).</li>
-                </ul>
+                <div className="p-4">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="eyebrow">VEX Robotics · 15520X</p>
+                    <p className="eyebrow-faint">Sep 2025 – present</p>
+                  </div>
+                  <p className="text-ink mt-2 text-sm leading-snug">
+                    Engineer and programmer. Autonomous routines plus the
+                    driver-control interface.
+                  </p>
+                  <ul className="tick-list text-ink-soft mt-2.5 space-y-1 text-[13px]">
+                    <li>
+                      Excellence Award, Alpine Robo Games 2026 → VEX Worlds,
+                      Dallas.
+                    </li>
+                    <li>3rd skills · 3rd qualifiers at Alpine Robo Games.</li>
+                    <li>4th skills · 7th overall, Swiss Regional (ISBasel).</li>
+                  </ul>
+                </div>
               </div>
             </Reveal>
           </div>

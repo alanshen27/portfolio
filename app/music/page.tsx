@@ -6,7 +6,7 @@ import { Reveal } from '@/components/portfolio-motion'
 import { MusicVisualizer } from '@/components/music-visualizer'
 import { PageHero } from '@/components/page-hero'
 import { ScrollProgress } from '@/components/scroll-progress'
-import { MUSIC_RELEASES, NAME } from '../data'
+import { MUSIC_RELEASES, NAME, STAGE_PHOTOS } from '../data'
 
 export default function MusicPage() {
   const streamLinks = MUSIC_RELEASES.flatMap((r) =>
@@ -32,7 +32,7 @@ export default function MusicPage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-bg-elevated py-16 md:py-24">
+      <section className="border-line bg-bg-elevated border-t py-16 md:py-24">
         <div className="section-max section-pad grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="relative aspect-[4/3] overflow-hidden lg:col-span-6">
             <Image
@@ -45,25 +45,25 @@ export default function MusicPage() {
           </Reveal>
 
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.08}>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-accent uppercase">
+            <p className="text-accent font-mono text-[11px] tracking-[0.2em] uppercase">
               Background
             </p>
-            <h2 className="display-quiet mt-3 text-[clamp(1.8rem,4vw,2.5rem)] text-ink">
+            <h2 className="display-quiet text-ink mt-3 text-[clamp(1.8rem,4vw,2.5rem)]">
               ABRSM Grade 8, twice over.
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            <p className="text-ink-soft mt-4 text-sm leading-relaxed">
               Grade 8 in both violin and piano, with orchestra and solo stage
               performance — from concert halls to orphanages in Romania.
             </p>
 
-            <ul className="mt-8 divide-y divide-line border-y border-line">
+            <ul className="divide-line border-line mt-8 divide-y border-y">
               {MUSIC_RELEASES.filter((r) => r.hyperfollow).map((r) => (
                 <li key={r.id}>
                   <a
                     href={r.hyperfollow}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between py-3.5 text-sm text-ink-soft transition-colors hover:text-ink"
+                    className="group text-ink-soft hover:text-ink flex items-center justify-between py-3.5 text-sm transition-colors"
                   >
                     <span>{r.title} — every store</span>
                     <span
@@ -81,7 +81,7 @@ export default function MusicPage() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between py-3.5 text-sm text-ink-soft transition-colors hover:text-ink"
+                    className="group text-ink-soft hover:text-ink flex items-center justify-between py-3.5 text-sm transition-colors"
                   >
                     <span>
                       {link.label}
@@ -101,14 +101,64 @@ export default function MusicPage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-bg py-14">
+      {/* Stage strip */}
+      <section className="border-line bg-bg border-t py-10 md:py-14">
+        <div className="section-max section-pad">
+          <Reveal y={10}>
+            <div className="section-head">
+              <span className="idx">→</span>
+              <h2 className="eyebrow">On stage</h2>
+              <span className="count">
+                {STAGE_PHOTOS.length} photos · orchestra, section, solo
+              </span>
+            </div>
+          </Reveal>
+          <ul className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-6">
+            {STAGE_PHOTOS.map((p, i) => (
+              <Reveal
+                key={p.src}
+                delay={i * 0.04}
+                y={12}
+                className={
+                  i === 0
+                    ? 'col-span-2 row-span-2 md:col-span-3'
+                    : i === 1
+                      ? 'col-span-2 md:col-span-3'
+                      : i === 4
+                        ? 'col-span-2 md:col-span-1'
+                        : 'md:col-span-1'
+                }
+              >
+                <figure className="group bg-mist relative h-full min-h-[160px] overflow-hidden">
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes={
+                      i < 2
+                        ? '(max-width: 768px) 100vw, 50vw'
+                        : '(max-width: 768px) 50vw, 33vw'
+                    }
+                  />
+                  <figcaption className="pill pill-ink absolute bottom-2 left-2">
+                    {p.caption}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-line bg-bg-elevated border-t py-10">
         <div className="section-max section-pad flex flex-wrap items-end justify-between gap-6">
-          <p className="display-quiet text-[clamp(1.4rem,3vw,2rem)] text-ink">
+          <p className="display-quiet text-ink text-[clamp(1.4rem,3vw,2rem)]">
             Back home.
           </p>
           <Link
             href="/"
-            className="text-sm text-accent transition-opacity hover:opacity-70"
+            className="text-accent text-sm transition-opacity hover:opacity-70"
           >
             Home →
           </Link>

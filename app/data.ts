@@ -26,6 +26,9 @@ export type Project = {
   tags?: string[]
   /** Source repository when public */
   repo?: string
+  /** Photo from the event or team, shown under the screenshot on /work */
+  photo?: string
+  photoCaption?: string
 }
 
 export type WorkExperience = {
@@ -35,6 +38,8 @@ export type WorkExperience = {
   end: string
   link?: string
   image?: string
+  /** Photo from the role, shown beside the row on the record pages */
+  photo?: string
   description?: string
   bullets?: string[]
   location?: string
@@ -71,6 +76,8 @@ export type Award = {
   description?: string
   date?: string
   image?: string
+  /** Photo evidence — ceremony, team, venue */
+  photo?: string
   id: string
 }
 
@@ -145,6 +152,8 @@ export const PROJECTS: Project[] = [
     role: 'SWE & Co-Founder',
     timeframe: 'Aug 2025 – Jan 2026',
     device: 'tvModern',
+    photo: '/media/hackathons/hackharvard-china.jpg',
+    photoCaption: 'On stage · HackHarvard China 2025, 1st Place Overall',
     kind: 'company',
     outcome: '1st Place Overall · HackHarvard China 2025',
     tags: ['AI workflows', 'Inference', 'Full-stack'],
@@ -219,6 +228,8 @@ export const PROJECTS: Project[] = [
     role: 'HackHarvard 2025',
     timeframe: 'Oct 2025',
     device: 'monitor',
+    photo: '/media/hackathons/hackharvard-2025.jpg',
+    photoCaption: 'Team at HackHarvard 2025, Cambridge MA',
     kind: 'hackathon',
     outcome: 'Invitational · one of two high-school teams',
     tags: ['Visualization', 'ML'],
@@ -304,6 +315,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     start: 'September 2025',
     end: 'Present',
     image: '/media/logos/vex.jpg',
+    photo: '/media/vex/team.png',
     bullets: [
       '3rd place skills and 3rd place qualifiers at Alpine Robo Games 2026.',
       'Ranked 4th Skills, 7th Overall at Swiss Regional Competition (Santa Clash @ ISBasel).',
@@ -434,6 +446,7 @@ export const AWARDS: Award[] = [
     description: '1st Place Overall, "Best Overall Hack" Winner.',
     date: 'Nov 2025',
     image: '/media/logos/hackharvard.svg',
+    photo: '/media/hackathons/hackharvard-win.jpg',
     id: 'award1',
   },
   {
@@ -459,6 +472,7 @@ export const AWARDS: Award[] = [
       'Won Excellence Award for VEX Robotics Swiss qualifications and qualified for VEX Worlds in Dallas, Texas. Issued by VEX Robotics.',
     date: 'Feb 2026',
     image: '/media/logos/vex.jpg',
+    photo: '/media/vex/worlds-team.jpeg',
     id: 'award-vex',
   },
   {
@@ -467,6 +481,7 @@ export const AWARDS: Award[] = [
       'Invited as one of only two high school teams to attend HackHarvard 2025.',
     date: 'Oct 2025',
     image: '/media/logos/hackharvard.svg',
+    photo: '/media/hackathons/hackharvard-2025.jpg',
     id: 'award2',
   },
   {
@@ -615,6 +630,35 @@ export const MUSIC_RELEASES: MusicRelease[] = [
 ]
 
 export const DISTROKID_ARTIST = 'alanshen'
+
+/** Stage photos for the music page strip. Captions describe the shot, not the venue. */
+export const STAGE_PHOTOS: { src: string; alt: string; caption: string }[] = [
+  {
+    src: '/media/music/violin-portrait.jpg',
+    alt: 'Alan Shen playing violin on stage, close-up',
+    caption: 'Solo · close',
+  },
+  {
+    src: '/media/music/violin-wide.png',
+    alt: 'Wide shot of Alan Shen performing violin on a lit stage',
+    caption: 'Solo · stage',
+  },
+  {
+    src: '/media/music/orchestra.png',
+    alt: 'Alan Shen playing in an orchestra violin section',
+    caption: 'Orchestra',
+  },
+  {
+    src: '/media/music/violin-group.png',
+    alt: 'Violin section in performance',
+    caption: 'Violin section',
+  },
+  {
+    src: '/media/music/violin-stage.png',
+    alt: 'Alan Shen performing violin in a dark hall',
+    caption: 'Recital',
+  },
+]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
