@@ -8,6 +8,8 @@ import { Movement, Numeral, ProgrammeRow, roman } from '@/components/programme'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { Parallax } from '@/components/parallax'
 import { Roll } from '@/components/roll'
+import { AppPlate } from '@/components/app-plate'
+import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
 import {
   Figures,
   Loop,
@@ -339,12 +341,7 @@ export default function Home() {
               link={{ href: STUDIOUS.link, label: 'studious.sh' }}
               aside={
                 <div className="grid gap-3">
-                  <Plate
-                    src={STUDIOUS.image!}
-                    alt="Studious"
-                    caption="Studious — the classroom view."
-                    ratio="aspect-[16/10]"
-                  />
+                  <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} />
                   <Figures
                     className="border-line border-t pt-1"
                     items={[
@@ -366,10 +363,10 @@ export default function Home() {
               flip
               aside={
                 <div className="grid gap-3">
-                  <Plate
-                    src={SCRIBE.image!}
-                    alt="Scribe"
-                    ratio="aspect-[16/10]"
+                  <AppPlate
+                    domain="scribe.study"
+                    screens={SCRIBE_SCREENS}
+                    ratio="aspect-[4/3]"
                   />
                   <Plate
                     src="/media/hackathons/hackharvard-china.jpg"
@@ -394,7 +391,7 @@ export default function Home() {
                     <PianoRoll className="aspect-[16/10] w-full" />
                     <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
                       a sketched phrase (ink) and the model’s continuation
-                      (green).
+                      (amber).
                     </figcaption>
                   </figure>
                   <Figures

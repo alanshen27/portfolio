@@ -12,6 +12,8 @@ import {
 import { ScrollProgress } from '@/components/scroll-progress'
 import { NumbersInterlude, QuoteInterlude } from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import { AppPlate, InkShot } from '@/components/app-plate'
+import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
 import { Roll } from '@/components/roll'
 import { dateRange } from '@/lib/utils'
 import {
@@ -67,18 +69,22 @@ function Pipeline() {
 }
 
 function Visual({ p }: { p: Project }) {
-  if (p.image) {
+  if (p.id === 'project1')
+    return <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} />
+  if (p.id === 'project2')
     return (
-      <div className="bg-mist relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={p.image}
-          alt={`${p.name} screenshot`}
-          fill
-          className="object-cover object-top"
-          sizes="(max-width: 768px) 100vw, 40vw"
-        />
-      </div>
+      <AppPlate
+        domain="scribe.study"
+        screens={SCRIBE_SCREENS}
+        ratio="aspect-[4/3]"
+      />
     )
+  if (p.image) {
+    const own = p.link && !/linkedin|github|devpost/.test(p.link)
+    const head = own
+      ? p.link!.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+      : p.name.toLowerCase()
+    return <InkShot src={p.image} alt={`${p.name} screenshot`} head={head} />
   }
   if (p.id === 'project-notate') return <PianoRoll className="aspect-[16/10]" />
   return <Pipeline />
