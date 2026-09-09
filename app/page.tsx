@@ -6,7 +6,8 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Reveal, easeOut } from '@/components/portfolio-motion'
 import { Movement, Numeral, ProgrammeRow, roman } from '@/components/programme'
 import { PianoRoll } from '@/components/viz/piano-roll'
-import { Parallax, ParallaxPlane } from '@/components/parallax'
+import { Parallax } from '@/components/parallax'
+import { Roll } from '@/components/roll'
 import {
   Figures,
   Loop,
@@ -179,12 +180,12 @@ export default function Home() {
           particulars in the right column, photograph full-bleed below */}
       <section className="border-line border-b pt-24 md:pt-28">
         <div className="section-max section-pad grid gap-8 md:grid-cols-12 md:gap-6">
-          <div className="flex flex-col justify-between md:col-span-7">
+          <div className="flex flex-col justify-between md:col-span-6">
             <motion.p className="eyebrow" {...fade(0)}>
               Institut Le Rosey · IB diploma · class of 2027
             </motion.p>
             <motion.h1
-              className="display-quiet text-ink mt-10 text-[clamp(3.6rem,12vw,9.5rem)] leading-[0.9] tracking-[-0.04em] md:mt-24"
+              className="display-quiet text-ink mt-10 text-[clamp(3.4rem,9vw,7.5rem)] leading-[0.9] tracking-[-0.04em] md:mt-16"
               {...fade(0.08)}
             >
               Alan
@@ -192,7 +193,7 @@ export default function Home() {
               Shen
             </motion.h1>
           </div>
-          <div className="flex flex-col justify-end md:col-span-5 md:pb-2">
+          <div className="flex flex-col justify-end md:col-span-5 md:col-start-8 md:pb-2">
             <motion.p
               className="text-ink text-[clamp(1.15rem,1.9vw,1.45rem)] leading-[1.3] tracking-[-0.01em]"
               {...fade(0.16)}
@@ -244,25 +245,25 @@ export default function Home() {
           </div>
         </div>
 
-        <motion.div className="mt-10 md:mt-14" {...fade(0.4)}>
-          <div className="bg-mist relative h-[56vw] max-h-[620px] min-h-[280px] w-full overflow-hidden">
-            <ParallaxPlane travel={0.16}>
-              <Image
-                src="/media/site/banner.jpg"
-                alt="Alan Shen performing violin on stage"
-                fill
-                priority
-                className="object-cover object-[center_45%]"
-                sizes="100vw"
-              />
-            </ParallaxPlane>
-          </div>
-          <div className="section-max section-pad">
-            <p className="text-ink-faint flex justify-between py-2 text-[13px]">
-              <span>cover photograph: on stage, violin.</span>
-              <span>alanshen.me</span>
+        <motion.div
+          className="section-max section-pad mt-10 md:mt-12"
+          {...fade(0.4)}
+        >
+          <div className="border-line flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t pt-3 pb-4">
+            <p className="text-ink text-[15px]">
+              <span className="font-medium">the record, as a piano roll.</span>{' '}
+              <span className="text-ink-soft">
+                rows are what he does; time runs left to right; every note is an
+                event drawn to its real length. the amber hatch is the
+                continuation — the phrase isn’t finished.
+              </span>
+            </p>
+            <p className="text-ink-faint text-[13px]">
+              the roll is the interface he built for notate, turned on his own
+              record
             </p>
           </div>
+          <Roll />
         </motion.div>
       </section>
 
@@ -495,10 +496,10 @@ export default function Home() {
             <Reveal className="md:col-span-5" y={12}>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
-                  src="/media/music/violin-portrait.jpg"
-                  alt="Alan Shen playing violin on stage"
+                  src="/media/site/banner.jpg"
+                  alt="Alan Shen performing violin on stage"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[35%_center]"
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
               </div>
@@ -544,8 +545,9 @@ export default function Home() {
                 </ol>
               </Reveal>
               <Reveal className="mt-6" y={12} delay={0.05}>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-4 gap-2">
                   {[
+                    '/media/music/violin-portrait.jpg',
                     '/media/music/orchestra.png',
                     '/media/music/violin-group.png',
                     '/media/music/violin-stage.png',

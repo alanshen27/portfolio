@@ -37,10 +37,12 @@
   --color-ink-faint: #85878c;
   --color-line: #d9d4cb;
   --color-line-strong: #b9b3a8;
-  --color-accent: #2c5d55;
-  --color-accent-deep: #1f423d;
-  /* Accent for use on dark (ink) surfaces — brass, not neon */
-  --color-accent-bright: #d2bf93;
+  /* Amber: the colour notate draws its continuation in. Ink is what happened. */
+  --color-accent: #a8591a;
+  --color-accent-deep: #7f4210;
+  --color-amber: #d9922f;
+  /* Accent for use on dark (ink) surfaces */
+  --color-accent-bright: #e9ad4f;
   --color-mist: #e6e1d8;
   --color-lake: #7b8d99;
   --color-panel-wash: #ebe6dd;
@@ -303,6 +305,43 @@
 
   .note-text + .note-text {
     margin-top: 0.7em;
+  }
+
+  /* ---- The roll ---------------------------------------------------------- */
+
+  .roll-note {
+    background: var(--color-ink);
+  }
+
+  .roll-note-result {
+    background: var(--color-amber);
+  }
+
+  .roll-note-year {
+    background: transparent;
+    border: 1.5px dashed var(--color-ink);
+  }
+
+  .roll-note-result.roll-note-year {
+    border-color: var(--color-amber);
+  }
+
+  .roll-hit:hover .roll-tip,
+  .roll-hit:focus-visible .roll-tip {
+    display: block;
+  }
+
+  .roll-hit:hover .roll-note {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 1px;
+  }
+
+  .roll-future {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      color-mix(in oklab, var(--color-amber) 28%, transparent) 0 1px,
+      transparent 1px 7px
+    );
   }
 
   /* Flat paper only — no washes, no vignettes */

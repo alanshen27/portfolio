@@ -10,6 +10,7 @@ import {
   roman,
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { Roll } from '@/components/roll'
 import { NumbersInterlude, PlateInterlude } from '@/components/interlude'
 import { MedalBars } from '@/components/viz/medal-bars'
 import { ScoreRing } from '@/components/viz/score-ring'
@@ -48,6 +49,21 @@ export default function PathPage() {
         standfirst="contest scores, honours, publications, meets and service — every entry dated so it can be checked."
         contents={CONTENTS}
       />
+
+      {/* the roll — this page's rows */}
+      <section className="border-line border-b py-8 md:py-10">
+        <div className="section-max section-pad">
+          <p className="text-ink-faint mb-3 text-[13px]">
+            four rows of the roll — competition, research, athletics, service.
+            hollow bars: year known, month not recorded.
+          </p>
+          <Roll
+            rows={['competition', 'research', 'athletics', 'service']}
+            compact
+            playback={false}
+          />
+        </div>
+      </section>
 
       {/* I. Scores */}
       <section id="scores" className="scroll-mt-24 py-14 md:py-20">

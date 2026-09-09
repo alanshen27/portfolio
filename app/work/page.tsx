@@ -12,6 +12,7 @@ import {
 import { ScrollProgress } from '@/components/scroll-progress'
 import { NumbersInterlude, QuoteInterlude } from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import { Roll } from '@/components/roll'
 import { dateRange } from '@/lib/utils'
 import {
   LINES,
@@ -95,6 +96,17 @@ export default function WorkPage() {
         standfirst={`${PROJECTS.length} works — two companies, three hackathon podiums, and two research-grade side builds — each with what it is, what Alan did, and what came of it.`}
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
+
+      {/* the roll — this page's rows */}
+      <section className="border-line border-b py-8 md:py-10">
+        <div className="section-max section-pad">
+          <p className="text-ink-faint mb-3 text-[13px]">
+            the builds row of the roll — every work drawn to its length; amber
+            marks a placement.
+          </p>
+          <Roll rows={['builds']} compact playback={false} />
+        </div>
+      </section>
 
       {/* Listing */}
       <section className="py-12 md:py-16">

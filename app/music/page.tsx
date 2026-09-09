@@ -6,6 +6,7 @@ import { Reveal } from '@/components/portfolio-motion'
 import { MusicVisualizer } from '@/components/music-visualizer'
 import { Movement, PageTitle, ProgrammeRow } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { Roll } from '@/components/roll'
 import { PlateInterlude } from '@/components/interlude'
 import { MUSIC_RELEASES, STAGE_PHOTOS } from '../data'
 
@@ -27,6 +28,16 @@ export default function MusicPage() {
           { label: 'on stage', href: '#stage' },
         ]}
       />
+
+      {/* the roll — this page's rows */}
+      <section className="border-line border-b py-8 md:py-10">
+        <div className="section-max section-pad">
+          <p className="text-ink-faint mb-3 text-[13px]">
+            the music row of the roll.
+          </p>
+          <Roll rows={['music']} compact playback={false} />
+        </div>
+      </section>
 
       {/* I. Listen */}
       <section id="listen" className="scroll-mt-24 py-12 md:py-16">

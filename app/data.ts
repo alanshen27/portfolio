@@ -845,6 +845,317 @@ export const PROGRAMME: ProgrammeEntry[] = [
   },
 ]
 
+/**
+ * The roll — every event of the record as a note on a piano roll.
+ * Rows are who he is; columns are time. Dates are as recorded; where only a
+ * year is known the note is drawn hollow and centred in that year.
+ */
+export type RollRow =
+  | 'builds'
+  | 'competition'
+  | 'research'
+  | 'music'
+  | 'athletics'
+  | 'service'
+
+export const ROLL_ROWS: { id: RollRow; label: string }[] = [
+  { id: 'builds', label: 'builds' },
+  { id: 'competition', label: 'competition' },
+  { id: 'research', label: 'research' },
+  { id: 'music', label: 'music' },
+  { id: 'athletics', label: 'athletics' },
+  { id: 'service', label: 'service' },
+]
+
+export type RollNote = {
+  id: string
+  row: RollRow
+  label: string
+  /** YYYY-MM, or YYYY when precision is 'year' */
+  start: string
+  /** YYYY-MM, or 'now' for ongoing; omit for a single moment */
+  end?: string
+  precision?: 'month' | 'year'
+  /** A result — placement, award, release — rather than a span of work */
+  result?: boolean
+  detail: string
+  href?: string
+}
+
+export const ROLL_START = '2022-09'
+export const ROLL_END = '2027-06'
+export const ROLL_NOW = '2026-09'
+
+export const ROLL_NOTES: RollNote[] = [
+  // builds
+  {
+    id: 'r-studious',
+    row: 'builds',
+    label: 'Studious',
+    start: '2023-09',
+    end: 'now',
+    detail: 'founder — a learning-management system, live in classrooms',
+    href: '#note-studious',
+  },
+  {
+    id: 'r-scribe',
+    row: 'builds',
+    label: 'Scribe',
+    start: '2025-08',
+    end: '2026-01',
+    detail: 'co-founder & engineer — AI study assistant',
+    href: '#note-scribe',
+  },
+  {
+    id: 'r-synapse',
+    row: 'builds',
+    label: 'Synapse',
+    start: '2025-10',
+    detail:
+      'HackHarvard 2025 — neural-network visualisation; one of two high-school teams invited',
+    href: '/work#project3',
+  },
+  {
+    id: 'r-hive',
+    row: 'builds',
+    label: 'Hive',
+    start: '2025',
+    precision: 'year',
+    detail: 'Empower 3.0 Hacks — 3rd place, coding track',
+    href: '/work#project4',
+  },
+  {
+    id: 'r-luduan',
+    row: 'builds',
+    label: 'Luduan.ai',
+    start: '2026-02',
+    end: 'now',
+    detail:
+      'frontend and UI/UX contributor — platform serving 30+ U.S. institutions',
+    href: '/path#appointments',
+  },
+  {
+    id: 'r-nomad',
+    row: 'builds',
+    label: 'Nomad',
+    start: '2026-03',
+    result: true,
+    detail:
+      'HackMIT China 2026 — 3rd place, education track; outstanding impact award. 36 hours.',
+    href: '/work#project-nomad',
+  },
+  {
+    id: 'r-notate',
+    row: 'builds',
+    label: 'notate',
+    start: '2026-05',
+    end: 'now',
+    detail: 'AI music co-writer — a Transformer continues a sketched phrase',
+    href: '#note-notate',
+  },
+  {
+    id: 'r-foundry',
+    row: 'builds',
+    label: 'Foundry',
+    start: '2026-07',
+    end: '2026-08',
+    detail: 'Penn ESAP — AI-native workspace from product brief to storefront',
+    href: '/work#project-foundry',
+  },
+  // competition
+  {
+    id: 'r-vex',
+    row: 'competition',
+    label: 'VEX 15520X',
+    start: '2025-09',
+    end: 'now',
+    detail: 'engineer & programmer — autonomous routines and driver control',
+    href: '#note-competition',
+  },
+  {
+    id: 'r-sgis',
+    row: 'competition',
+    label: 'SGIS maths · 2nd',
+    start: '2025',
+    precision: 'year',
+    result: true,
+    detail:
+      'Swiss Group of International Schools mathematics competition — 2nd place',
+    href: '/path#honours',
+  },
+  {
+    id: 'r-hhc',
+    row: 'competition',
+    label: 'HackHarvard China · 1st',
+    start: '2025-11',
+    result: true,
+    detail: '1st place overall, “best overall hack” — with Scribe',
+    href: '#note-scribe',
+  },
+  {
+    id: 'r-usaco',
+    row: 'competition',
+    label: 'USACO 1000/1000 → Gold',
+    start: '2026-02',
+    result: true,
+    detail: 'perfect Silver contest, promoted directly to the Gold division',
+    href: '#note-competition',
+  },
+  {
+    id: 'r-alpine',
+    row: 'competition',
+    label: 'Excellence Award → Worlds',
+    start: '2026-02',
+    result: true,
+    detail:
+      'Alpine Robo Games 2026 — Excellence Award; World Championship qualifier',
+    href: '#note-competition',
+  },
+  // research
+  {
+    id: 'r-calico',
+    row: 'research',
+    label: 'CALICO talk · Cambridge UP',
+    start: '2026-06',
+    result: true,
+    detail:
+      '“Training AI for Pragmatics Assessment” — talk at CALICO; forthcoming, Cambridge University Press',
+    href: '#note-research',
+  },
+  {
+    id: 'r-api',
+    row: 'research',
+    label: 'API endpoint paper',
+    start: '2026',
+    precision: 'year',
+    detail:
+      'accepted — Journal of Research on International Chinese Teaching and Learning Resources',
+    href: '#note-research',
+  },
+  {
+    id: 'r-columbia',
+    row: 'research',
+    label: 'Luduan.ai paper · Columbia',
+    start: '2026-09',
+    result: true,
+    detail:
+      '4th Conference on AI Research in Applied Linguistics, Columbia University',
+    href: '#note-research',
+  },
+  // music
+  {
+    id: 'r-romania-music',
+    row: 'music',
+    label: 'Oradea performances',
+    start: '2025-03',
+    end: '2025-06',
+    detail:
+      'violin for the Liceul de Arte Oradea and orphanages; wrote and performed a song for 60+ students',
+    href: '#interval',
+  },
+  {
+    id: 'r-idstay',
+    row: 'music',
+    label: '‘I’d Stay’',
+    start: '2025-12',
+    result: true,
+    detail: 'single released as Alan Shen — 6 December 2025',
+    href: '#interval',
+  },
+  // athletics
+  {
+    id: 'r-swim',
+    row: 'athletics',
+    label: 'swimming, Le Rosey',
+    start: '2023-09',
+    end: 'now',
+    detail: 'competitive swimmer — two-year team mvp',
+    href: '#honours',
+  },
+  {
+    id: 'r-adisr23',
+    row: 'athletics',
+    label: 'ADISR · 1st, school record',
+    start: '2023',
+    precision: 'year',
+    result: true,
+    detail:
+      'ADISR 2023 EHL — 1st place (moyen); three gold medals and a new school record',
+    href: '/path#athletics',
+  },
+  {
+    id: 'r-mls24',
+    row: 'athletics',
+    label: 'MLS 2024',
+    start: '2024',
+    precision: 'year',
+    result: true,
+    detail: 'Beau Soleil — silver, 4×50 IM relay; lake swim relay, team 1st',
+    href: '/path#athletics',
+  },
+  {
+    id: 'r-adisr24',
+    row: 'athletics',
+    label: 'ADISR 2024',
+    start: '2024',
+    precision: 'year',
+    result: true,
+    detail: 'EHL — bronze 100 free; gold, IM relay and freestyle relay',
+    href: '/path#athletics',
+  },
+  {
+    id: 'r-mls25',
+    row: 'athletics',
+    label: 'MLS 2025',
+    start: '2025-06',
+    end: '2025-07',
+    result: true,
+    detail:
+      'silver, IM; gold — 100 free, 200 freestyle relay, 200 medley relay',
+    href: '/path#athletics',
+  },
+  {
+    id: 'r-adisr25',
+    row: 'athletics',
+    label: 'ADISR 2025',
+    start: '2025',
+    precision: 'year',
+    result: true,
+    detail: 'EHL — silver 50 free; gold 4×50 free',
+    href: '/path#athletics',
+  },
+  // service
+  {
+    id: 'r-chemin',
+    row: 'service',
+    label: 'Sur le Chemin de l’école',
+    start: '2023-04',
+    end: '2023-07',
+    detail:
+      'raised 2,500 CHF for children in Dharia, India; hosted a 120-student talent show',
+    href: '/path#service',
+  },
+  {
+    id: 'r-casa',
+    row: 'service',
+    label: 'Casa Draga Casa · Oradea',
+    start: '2025-03',
+    end: '2025-06',
+    detail:
+      'built housing units in rural Romania with ten classmates; brought Studious to two local schools',
+    href: '/path#service',
+  },
+  {
+    id: 'r-lostfood',
+    row: 'service',
+    label: 'The Lost Food Project',
+    start: '2025-10',
+    end: '2026-05',
+    detail: 'led four students building an Earth Day game — 30+ players',
+    href: '/path#service',
+  },
+]
+
 /** Lines in Alan's own words, from earlier versions of this site's copy. */
 export const LINES = {
   code: 'I care about writing code that solves real problems — and shipping systems that students actually use.',
