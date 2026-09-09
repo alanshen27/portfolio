@@ -76,7 +76,7 @@ export function PageHero({
 
       <div className="section-max section-pad relative z-10">
         <motion.p
-          className="text-lake font-mono text-[11px] tracking-[0.2em] uppercase"
+          className="eyebrow text-accent-bright"
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: easeOut }}
@@ -90,7 +90,7 @@ export function PageHero({
 
         {description && (
           <motion.p
-            className="mt-5 max-w-2xl text-base leading-relaxed text-white/65 md:text-lg"
+            className="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-white/70 italic md:text-xl"
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.4, ease: easeOut }}

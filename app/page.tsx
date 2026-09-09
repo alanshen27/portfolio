@@ -3,897 +3,840 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'motion/react'
-import { Reveal, SplitChars, easeOut } from '@/components/portfolio-motion'
-import { FieldBackdrop } from '@/components/field-backdrop'
-import { UsacoBoard } from '@/components/viz/usaco-board'
-import { MedalBars } from '@/components/viz/medal-bars'
+import { Reveal, easeOut } from '@/components/portfolio-motion'
+import { Movement, Numeral, ProgrammeRow, roman } from '@/components/programme'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import { Parallax } from '@/components/parallax'
+import { Roll } from '@/components/roll'
+import { AppPlate } from '@/components/app-plate'
+import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
+import {
+  Figures,
+  Loop,
+  NumbersInterlude,
+  PlateInterlude,
+  QuoteInterlude,
+} from '@/components/interlude'
 import { dateRange } from '@/lib/utils'
 import {
   AWARDS,
   EDUCATION,
   EMAIL,
-  FACTS,
-  HIGHLIGHTS,
   HOME_BIO,
-  HOME_INTRO,
+  LINES,
   MUSIC_RELEASES,
-  NAME,
-  PROJECT_KIND_LABEL,
+  NOTES,
+  PROGRAMME,
   PROJECTS,
   PUBLICATIONS,
   SKILL_GROUPS,
   SOCIAL_LINKS,
   VOLUNTEERING,
   WORK_EXPERIENCE,
-  type Project,
 } from './data'
 
-const FLAGSHIP_IDS = ['project1', 'project2', 'project-notate']
-const FLAGSHIP = FLAGSHIP_IDS.map(
-  (id) => PROJECTS.find((p) => p.id === id) as Project,
-)
-const MORE_BUILDS = PROJECTS.filter((p) => !FLAGSHIP_IDS.includes(p.id))
+const CONTENTS = [
+  { label: 'programme', href: '#programme' },
+  { label: 'notes', href: '#notes' },
+  { label: 'interval', href: '#interval' },
+  { label: 'biography', href: '#biography' },
+  { label: 'honours', href: '#honours' },
+  { label: 'contact', href: '#contact' },
+]
 
+const STUDIOUS = PROJECTS.find((p) => p.id === 'project1')!
+const SCRIBE = PROJECTS.find((p) => p.id === 'project2')!
+const NOTATE = PROJECTS.find((p) => p.id === 'project-notate')!
 const ROLES = WORK_EXPERIENCE.filter((w) => w.company !== 'Institut Le Rosey')
 const SWIM = WORK_EXPERIENCE.find((w) => w.company === 'Institut Le Rosey')
-
-const CONTACT_LINKS = SOCIAL_LINKS.filter((l) =>
-  ['GitHub', 'LinkedIn', 'Email'].includes(l.label),
+const CONTACT = SOCIAL_LINKS.filter((l) =>
+  ['GitHub', 'LinkedIn', 'email'].includes(l.label),
 )
 
-function external(href: string) {
+function ext(href: string) {
   return href.startsWith('http')
     ? { target: '_blank', rel: 'noopener noreferrer' }
     : {}
 }
 
-function linkLabel(href: string) {
-  if (href.includes('youtu')) return 'Demo'
-  if (href.includes('github')) return 'Source'
-  if (href.includes('linkedin')) return 'Context'
-  return 'Live'
-}
+/* ------------------------------------------------------------------------ */
 
-function SectionHead({
-  index,
+function Note({
+  id,
+  n,
   title,
-  count,
-  dark = false,
+  meta,
+  paragraphs,
+  bullets,
+  aside,
+  link,
+  spread,
+  flip = false,
 }: {
-  index: string
+  id: string
+  n: number
   title: string
-  count?: string
-  dark?: boolean
+  meta: string
+  paragraphs: string[]
+  bullets?: string[]
+  aside: React.ReactNode
+  link?: { href: string; label: string }
+  /** A full-width figure beneath the note — product screens, mostly */
+  spread?: React.ReactNode
+  flip?: boolean
 }) {
   return (
-    <div className={`section-head ${dark ? 'border-white/25' : ''}`}>
-      <span className={`idx ${dark ? 'text-white/40' : ''}`}>{index}</span>
-      <h2 className={`eyebrow ${dark ? 'text-accent-bright' : ''}`}>{title}</h2>
-      {count && (
-        <span className={`count ${dark ? 'text-white/40' : ''}`}>{count}</span>
-      )}
-    </div>
-  )
-}
-
-function DossierCard() {
-  return (
-    <div className="card corner-ticks paper-grid relative p-5 md:p-6">
-      <div className="flex items-start gap-4">
-        <div className="bg-mist relative h-16 w-16 shrink-0 overflow-hidden md:h-20 md:w-20">
-          <Image
-            src="/media/portrait/award-ceremony.png"
-            alt="Alan Shen"
-            fill
-            priority
-            className="origin-[50%_24%] scale-[1.9] object-cover object-[50%_24%]"
-            sizes="160px"
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-baseline justify-between gap-3">
-            <p className="eyebrow-faint">Dossier</p>
-            <p className="eyebrow-faint">alanshen.me</p>
-          </div>
-          <p className="display-quiet text-ink mt-1.5 text-xl">{NAME}</p>
-          <p className="text-ink-soft mt-0.5 text-sm">
-            Founder · Engineer · Violinist
-          </p>
-        </div>
-      </div>
-
-      <dl className="ledger mt-5 text-sm">
-        {FACTS.map((f) => (
-          <div
-            key={f.label}
-            className="grid grid-cols-[6rem_1fr] gap-3 py-2 first:pt-0"
-          >
-            <dt className="eyebrow-faint pt-[3px]">{f.label}</dt>
-            <dd className="text-ink">{f.value}</dd>
-          </div>
-        ))}
-      </dl>
-
-      <div className="border-line mt-5 flex flex-wrap gap-2 border-t pt-4">
-        {CONTACT_LINKS.map((l) => (
-          <a
-            key={l.label}
-            href={l.link}
-            {...external(l.link)}
-            className="pill pill-accent hover:bg-accent transition-colors hover:text-white"
-          >
-            {l.label}
-            <span aria-hidden>↗</span>
-          </a>
-        ))}
-        <Link href="/path" className="pill hover:border-ink hover:text-ink">
-          Full record →
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
-  return (
-    <Reveal delay={delay} y={16} className="h-full">
+    <Reveal y={16}>
       <article
-        id={p.id}
-        className="card card-hover flex h-full scroll-mt-28 flex-col"
+        id={id}
+        className="border-line grid scroll-mt-24 gap-6 border-t py-10 md:grid-cols-12 md:gap-10 md:py-12"
       >
-        <a
-          href={p.link}
-          {...external(p.link)}
-          className="group bg-mist relative block aspect-[16/9] overflow-hidden"
+        <Parallax
+          depth={-28}
+          className={`md:col-span-5 ${flip ? 'md:order-2 md:col-start-8' : ''}`}
         >
-          {p.image ? (
-            <Image
-              src={p.image}
-              alt={`${p.name} screenshot`}
-              fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          ) : (
-            <PianoRoll className="h-full w-full" />
-          )}
-          <span className="pill pill-ink absolute top-3 left-3">
-            {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
-          </span>
-        </a>
-
-        <div className="flex flex-1 flex-col p-4 md:p-5">
-          <div className="flex items-baseline justify-between gap-3">
-            <h3 className="display-quiet text-ink text-xl">{p.name}</h3>
-            <p className="eyebrow-faint whitespace-nowrap">{p.timeframe}</p>
-          </div>
-          <p className="text-ink-soft mt-0.5 text-[13px]">{p.role}</p>
-          <p className="text-ink mt-2.5 text-sm leading-snug">
-            {p.description}
+          {aside}
+        </Parallax>
+        <div
+          className={`md:col-span-7 ${flip ? 'md:order-1 md:col-start-1' : ''}`}
+        >
+          <p className="eyebrow">
+            <Numeral n={n} className="text-accent mr-1.5" />
+            {meta}
           </p>
-          {p.outcome && (
-            <p className="border-accent text-accent-deep mt-3 border-l-2 pl-2.5 text-[13px] font-medium">
-              {p.outcome}
-            </p>
-          )}
-          <ul className="tick-list text-ink-soft mt-3 space-y-1.5 text-[13px] leading-snug">
-            {p.points?.slice(0, 3).map((pt) => <li key={pt}>{pt}</li>)}
-          </ul>
-          <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-4">
-            {p.tags?.map((t) => (
-              <span key={t} className="pill">
-                {t}
-              </span>
+          <h3 className="display-quiet text-ink mt-2 text-[clamp(1.7rem,3.2vw,2.3rem)]">
+            {title}
+          </h3>
+          <div className="mt-4">
+            {paragraphs.map((para, i) => (
+              <p key={i} className={`note-text ${i === 0 ? 'drop-cap' : ''}`}>
+                {para}
+              </p>
             ))}
-            <a
-              href={p.link}
-              {...external(p.link)}
-              className="row-link ml-auto text-[13px]"
-            >
-              {linkLabel(p.link)} ↗
-            </a>
           </div>
+          {bullets && (
+            <ul className="tick-list text-ink-soft mt-4 grid gap-x-6 gap-y-1.5 text-[13px] leading-snug sm:grid-cols-2">
+              {bullets.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          )}
+          {link && (
+            <a
+              href={link.href}
+              {...ext(link.href)}
+              className="row-link mt-4 inline-block text-sm"
+            >
+              {link.label} →
+            </a>
+          )}
         </div>
+        {spread && <div className="md:order-3 md:col-span-12">{spread}</div>}
       </article>
     </Reveal>
   )
 }
 
+function Plate({
+  src,
+  alt,
+  caption,
+  ratio = 'aspect-[4/3]',
+  position = 'object-top',
+}: {
+  src: string
+  alt: string
+  caption?: string
+  ratio?: string
+  position?: string
+}) {
+  return (
+    <figure>
+      <div className={`bg-mist relative overflow-hidden ${ratio}`}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className={`object-cover ${position}`}
+          sizes="(max-width: 768px) 100vw, 40vw"
+        />
+      </div>
+      {caption && (
+        <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
+
+/* ------------------------------------------------------------------------ */
+
 export default function Home() {
   const reduce = useReducedMotion()
+  const fade = (delay: number) => ({
+    initial: reduce ? false : { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay, ease: easeOut },
+  })
 
   return (
     <div className="bg-atmosphere">
-      {/* 00 — Hero: who, one sentence, dossier card, proof strip */}
-      <section className="relative overflow-hidden pt-24 pb-10 md:pt-28 md:pb-14">
-        <FieldBackdrop />
-        <div className="section-max section-pad relative z-10 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <motion.p
-              className="eyebrow"
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: easeOut }}
-            >
-              Institut Le Rosey · IB Diploma · Class of 2027 · Switzerland
+      {/* Cover — asymmetric: name at the foot of the left column, the
+          particulars in the right column, photograph full-bleed below */}
+      <section className="border-line border-b pt-24 md:pt-28">
+        <div className="section-max section-pad grid gap-8 md:grid-cols-12 md:gap-6">
+          <div className="flex flex-col justify-between md:col-span-6">
+            <motion.p className="eyebrow" {...fade(0)}>
+              Institut Le Rosey · IB diploma · class of 2027
             </motion.p>
-
-            <h1 className="display-quiet text-ink mt-4 text-[clamp(3rem,8vw,5.75rem)]">
-              <SplitChars text={NAME} delay={0.06} />
-            </h1>
-
-            <motion.p
-              className="text-ink mt-5 max-w-2xl text-lg leading-snug md:text-[1.35rem]"
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.25, ease: easeOut }}
+            <motion.h1
+              className="display-quiet text-ink mt-10 text-[clamp(3.4rem,9vw,7.5rem)] leading-[0.9] tracking-[-0.04em] md:mt-16"
+              {...fade(0.08)}
             >
-              {HOME_INTRO}
-            </motion.p>
-
-            <motion.p
-              className="text-ink-soft mt-4 max-w-xl text-sm leading-relaxed"
-              initial={reduce ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35, ease: easeOut }}
-            >
-              {HOME_BIO}
-            </motion.p>
-
-            <motion.div
-              className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
-              initial={reduce ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45, ease: easeOut }}
-            >
-              <a
-                href="#builds"
-                className="bg-ink inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85"
-              >
-                See the builds
-                <span aria-hidden>↓</span>
-              </a>
-              <Link
-                href="/path"
-                className="border-ink/25 text-ink hover:border-ink inline-flex items-center gap-2 border px-4 py-2.5 text-sm font-medium transition-colors"
-              >
-                Full record
-                <span aria-hidden>→</span>
-              </Link>
-              <div className="text-ink-soft flex gap-4 text-sm">
-                {CONTACT_LINKS.map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.link}
-                    {...external(l.link)}
-                    className="hover:text-ink transition-colors"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+              Alan
+              <br />
+              Shen
+            </motion.h1>
           </div>
-
-          <motion.div
-            className="lg:col-span-5"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: easeOut }}
-          >
-            <DossierCard />
-          </motion.div>
+          <div className="flex flex-col justify-end md:col-span-5 md:col-start-8 md:pb-2">
+            <motion.p
+              className="text-ink text-[clamp(1.15rem,1.9vw,1.45rem)] leading-[1.3] tracking-[-0.01em]"
+              {...fade(0.16)}
+            >
+              a programme of work, 2023 – 2026: education software, competitive
+              programming, robotics, research — and the violin.
+            </motion.p>
+            <motion.p
+              className="text-ink-soft mt-4 max-w-md text-[13px] leading-relaxed"
+              {...fade(0.24)}
+            >
+              founder of Studious and Scribe · USACO Gold · VEX World
+              Championship qualifier · Cambridge University Press, forthcoming ·
+              ABRSM grade 8, violin and piano
+            </motion.p>
+            <motion.nav
+              aria-label="Contents"
+              className="border-line mt-6 grid grid-cols-2 gap-x-6 gap-y-1.5 border-t pt-4 text-[13px] sm:grid-cols-3"
+              {...fade(0.32)}
+            >
+              {CONTENTS.map((c, i) => (
+                <a
+                  key={c.href}
+                  href={c.href}
+                  className="text-ink-soft hover:text-ink flex items-baseline gap-1.5 transition-colors"
+                >
+                  <span className="numeral text-ink-faint w-5 text-[11px]">
+                    {roman(i + 1)}
+                  </span>
+                  {c.label}
+                </a>
+              ))}
+            </motion.nav>
+            <motion.p
+              className="mt-3 flex flex-wrap gap-x-5 text-[13px]"
+              {...fade(0.36)}
+            >
+              {CONTACT.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.link}
+                  {...ext(l.link)}
+                  className="rule-link"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </motion.p>
+          </div>
         </div>
 
-        {/* Proof strip */}
         <motion.div
-          className="section-max section-pad relative z-10 mt-10 md:mt-12"
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: easeOut }}
+          className="section-max section-pad mt-10 md:mt-12"
+          {...fade(0.4)}
         >
-          <ul className="border-line bg-line grid grid-cols-2 gap-px border sm:grid-cols-3 lg:grid-cols-6">
-            {HIGHLIGHTS.map((h) => (
-              <li key={h.label} className="bg-bg-elevated">
-                <Link
-                  href={h.href}
-                  className="group hover:bg-panel-wash block h-full p-4 transition-colors"
-                >
-                  <p
-                    className={`figure text-ink group-hover:text-accent ${
-                      h.compact
-                        ? 'text-[1.2rem] md:text-[1.3rem]'
-                        : 'text-[1.45rem] md:text-[1.6rem]'
-                    }`}
-                  >
-                    {h.value}
-                  </p>
-                  <p className="eyebrow mt-2">{h.label}</p>
-                  <p className="text-ink-soft mt-1 text-[12px] leading-snug">
-                    {h.detail}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="border-line flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t pt-3 pb-4">
+            <p className="text-ink text-[15px]">
+              <span className="font-medium">the record, as a piano roll.</span>{' '}
+              <span className="text-ink-soft">
+                rows are what he does; time runs left to right; every note is an
+                event drawn to its real length. the amber hatch is the
+                continuation — the phrase isn’t finished.
+              </span>
+            </p>
+            <p className="text-ink-faint text-[13px]">
+              the roll is the interface he built for notate, turned on his own
+              record
+            </p>
+          </div>
+          <Roll />
         </motion.div>
       </section>
 
-      {/* 01 — Builds */}
-      <section
-        id="builds"
-        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
-      >
+      {/* beat — by the numbers */}
+      <NumbersInterlude
+        items={[
+          { value: '1000/1000', label: 'USACO Silver contest, feb 2026' },
+          { value: '1st', label: 'HackHarvard China 2025, overall' },
+          { value: '3', label: 'papers · one forthcoming, Cambridge UP' },
+          { value: '14', label: 'swimming medals · two-year team mvp' },
+        ]}
+        note="counted, not rounded — each figure appears again below with its date."
+      />
+
+      {/* I. Programme */}
+      <section className="py-12 md:py-16">
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <SectionHead
-              index="01"
-              title="Builds"
-              count={`${PROJECTS.length} projects · 2 companies · 3 hackathon podiums`}
-            />
-            <p className="text-ink-soft mt-4 max-w-2xl text-sm">
-              What I make: education software that runs in real classrooms,
-              hackathon builds that placed, and research-grade side projects.
-              Three flagships first, then everything else.
-            </p>
-          </Reveal>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {FLAGSHIP.map((p, i) => (
-              <ProjectCard key={p.id} p={p} delay={i * 0.05} />
-            ))}
-          </div>
-
-          <Reveal className="mt-8" y={12}>
-            <p className="eyebrow-faint">More builds</p>
-            <ul className="ledger border-line mt-2 border-y">
-              {MORE_BUILDS.map((p) => (
-                <li
-                  key={p.id}
-                  id={p.id}
-                  className="grid scroll-mt-28 gap-x-6 gap-y-1.5 py-3.5 md:grid-cols-12 md:items-baseline"
-                >
-                  <div className="flex items-baseline gap-2.5 md:col-span-3">
-                    <h3 className="text-ink text-base font-semibold">
-                      {p.name}
-                    </h3>
-                    <span className="pill">
-                      {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
-                    </span>
-                  </div>
-                  <p className="text-ink-soft text-sm leading-snug md:col-span-4">
-                    {p.description}
-                  </p>
-                  <p className="text-accent-deep text-[13px] font-medium md:col-span-3">
-                    {p.outcome}
-                  </p>
-                  <div className="flex items-baseline justify-between gap-3 md:col-span-2 md:justify-end">
-                    <span className="eyebrow-faint">{p.role}</span>
-                    <a
-                      href={p.link}
-                      {...external(p.link)}
-                      className="row-link text-[13px]"
-                    >
-                      {linkLabel(p.link)} ↗
-                    </a>
-                  </div>
+          <Movement
+            n={1}
+            id="programme"
+            title="programme"
+            standfirst={`${PROGRAMME.length} works and results, in the order a reader should meet them. each line links to its note.`}
+          />
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
+            <ol className="ledger border-line border-y">
+              {PROGRAMME.map((e, i) => (
+                <li key={e.title}>
+                  <ProgrammeRow
+                    n={i + 1}
+                    title={e.title}
+                    subtitle={e.subtitle}
+                    right={e.right}
+                    href={e.href}
+                  />
                 </li>
               ))}
-            </ul>
-            <div className="mt-3 flex justify-between text-[13px]">
-              <span className="text-ink-faint">
-                Roles, stack, and placements for each build →
+            </ol>
+            <p className="text-ink-faint mt-3 flex flex-wrap justify-between gap-2 text-[13px]">
+              <span>
+                roles, dates and placements as listed; full detail under notes
+                and honours.
               </span>
               <Link href="/work" className="row-link">
-                Open work portfolio →
+                complete programme notes →
               </Link>
-            </div>
+            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 02 — Honors */}
+      {/* beat — a line */}
+      <QuoteInterlude source="Alan, on why he builds">
+        “{LINES.code}”
+      </QuoteInterlude>
+
+      {/* II. Programme notes */}
+      <section className="bg-bg-elevated py-12 md:py-16">
+        <div className="section-max section-pad">
+          <Movement
+            n={2}
+            id="notes"
+            title="programme notes"
+            standfirst="what each of the major works is, what Alan did, and what came of it."
+          />
+
+          <div className="mt-8">
+            <Note
+              id="note-studious"
+              n={1}
+              title="Studious"
+              meta={`${STUDIOUS.role} · ${STUDIOUS.timeframe}`}
+              paragraphs={NOTES.studious}
+              link={{ href: STUDIOUS.link, label: 'studious.sh' }}
+              spread={
+                <AppPlate
+                  domain="studious.sh"
+                  screens={STUDIOUS_SCREENS}
+                  spread
+                />
+              }
+              aside={
+                <div className="grid gap-3">
+                  <Figures
+                    className="border-line border-t pt-1"
+                    items={[
+                      { value: '2023', label: 'founded' },
+                      { value: 'live', label: 'in classrooms' },
+                      { value: '2', label: 'schools in Romania' },
+                    ]}
+                  />
+                </div>
+              }
+            />
+            <Note
+              id="note-scribe"
+              n={2}
+              title="Scribe"
+              meta={`SWE & co-founder · ${SCRIBE.timeframe}`}
+              paragraphs={NOTES.scribe}
+              link={{ href: SCRIBE.link, label: 'scribe.study' }}
+              spread={
+                <AppPlate
+                  domain="scribe.study"
+                  screens={SCRIBE_SCREENS}
+                  ratio="aspect-[4/3]"
+                  spread
+                />
+              }
+              flip
+              aside={
+                <div className="grid gap-3">
+                  <Plate
+                    src="/media/hackathons/hackharvard-china.jpg"
+                    alt="On stage at HackHarvard China 2025"
+                    caption="HackHarvard China 2025 — 1st Place Overall."
+                    ratio="aspect-[16/7]"
+                    position="object-center"
+                  />
+                </div>
+              }
+            />
+            <Note
+              id="note-notate"
+              n={3}
+              title="notate"
+              meta={`${NOTATE.role} · ${NOTATE.timeframe}`}
+              paragraphs={NOTES.notate}
+              link={{ href: NOTATE.link, label: 'source on GitHub' }}
+              aside={
+                <div className="grid gap-3">
+                  <figure>
+                    <PianoRoll className="aspect-[16/10] w-full" />
+                    <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
+                      a sketched phrase (ink) and the model’s continuation
+                      (amber).
+                    </figcaption>
+                  </figure>
+                  <Figures
+                    className="border-line border-t pt-1"
+                    items={[
+                      { value: '21M', label: 'parameters' },
+                      { value: '6×512', label: 'layers × width' },
+                      { value: '8', label: 'attention heads' },
+                    ]}
+                  />
+                </div>
+              }
+            />
+            <Note
+              id="note-competition"
+              n={4}
+              title="competition"
+              meta="USACO · VEX Robotics 15520X · 2025 – 26"
+              paragraphs={NOTES.competition}
+              flip
+              link={{ href: '/path', label: 'scores and standings' }}
+              aside={
+                <div className="grid gap-3">
+                  <Loop
+                    src="/media/vex/driver.mp4"
+                    poster="/media/vex/worlds-arena.jpeg"
+                    alt="VEX robot under driver control"
+                    caption="driver control — the interface Alan programmed, on the loop."
+                    ratio="aspect-[16/9]"
+                  />
+                  <div className="border-line grid grid-cols-2 border-t pt-3 text-center">
+                    <div className="border-line border-r">
+                      <p className="figure text-ink text-4xl">1000</p>
+                      <p className="eyebrow-faint mt-1">
+                        of 1000 · USACO Silver
+                      </p>
+                    </div>
+                    <div>
+                      <p className="figure text-ink text-4xl">Worlds</p>
+                      <p className="eyebrow-faint mt-1">
+                        VEX · Excellence Award
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
+            <Note
+              id="note-research"
+              n={5}
+              title="research"
+              meta="co-author · three papers · 2026"
+              paragraphs={NOTES.research}
+              link={{ href: '/path#research', label: 'published works' }}
+              aside={
+                <ol className="ledger border-line border-y">
+                  {PUBLICATIONS.map((pub) => (
+                    <li key={pub.id} className="py-3">
+                      <p className="display-quiet text-ink text-[1.05rem] leading-snug">
+                        {pub.title}
+                      </p>
+                      <p className="text-ink-soft mt-1 text-[13px]">
+                        {pub.authors}
+                      </p>
+                      <p className="text-ink-faint mt-0.5 text-[13px]">
+                        {pub.venue} · {pub.status}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/hackathons/hackmit-workspace.jpg"
+        alt="The HackMIT China 2026 workspace"
+        caption="HackMIT China 2026 — the workspace. Nomad came out of it in 36 hours: 3rd place, education track, outstanding impact award."
+        credit="ii · notes, continued on the works page"
+        position="center 45%"
+      />
+
+      {/* III. Interval */}
       <section
-        id="honors"
-        className="border-line scroll-mt-20 border-t py-12 md:py-16"
+        id="interval"
+        className="bg-ink scroll-mt-24 py-12 text-white md:py-16"
       >
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <SectionHead
-              index="02"
-              title="Honors & competition"
-              count={`${AWARDS.length} awards · 2023–2026`}
-            />
-          </Reveal>
+          <Movement
+            n={3}
+            title="interval"
+            dark
+            standfirst="ABRSM grade 8 on both violin and piano; orchestra and solo stage; two singles released under his own name."
+          />
+          <div className="mt-10 grid gap-8 md:grid-cols-12 md:items-start">
+            <Reveal className="md:col-span-5" y={12}>
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src="/media/site/banner.jpg"
+                  alt="Alan Shen performing violin on stage"
+                  fill
+                  className="object-cover object-[35%_center]"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                />
+              </div>
+            </Reveal>
+            <div className="md:col-span-7">
+              <Reveal y={12}>
+                <ol className="ledger-dark border-y border-white/15">
+                  {MUSIC_RELEASES.map((r, i) => (
+                    <li key={r.id} className="flex items-center gap-4 py-3.5">
+                      <span className="numeral w-6 text-[13px] text-white/45">
+                        {roman(i + 1)}.
+                      </span>
+                      <span className="relative h-12 w-12 shrink-0 overflow-hidden">
+                        <Image
+                          src={r.cover}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="48px"
+                        />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="display-quiet block text-lg">
+                          {r.title}
+                        </span>
+                        <span className="text-[13px] text-white/55">
+                          {r.type} · {r.artist}
+                        </span>
+                      </span>
+                      <span className="leaders leaders-dark hidden flex-1 md:block" />
+                      {r.hyperfollow && (
+                        <a
+                          href={r.hyperfollow}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent-bright text-[13px] hover:underline"
+                        >
+                          stream →
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+              <Reveal className="mt-6" y={12} delay={0.05}>
+                <div className="grid grid-cols-4 gap-2">
+                  {[
+                    '/media/music/violin-portrait.jpg',
+                    '/media/music/orchestra.png',
+                    '/media/music/violin-group.png',
+                    '/media/music/violin-stage.png',
+                  ].map((src) => (
+                    <div
+                      key={src}
+                      className="relative aspect-[4/3] overflow-hidden"
+                    >
+                      <Image
+                        src={src}
+                        alt="Performance photograph"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 33vw, 15vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-white/70">
+                  from concert halls to orphanages in Oradea, Romania, where he
+                  prepared and performed for the Liceul de Arte and wrote a song
+                  for more than sixty students.
+                </p>
+                <Link
+                  href="/music"
+                  className="text-accent-bright mt-4 inline-block text-sm hover:underline"
+                >
+                  players, stores and stage photographs →
+                </Link>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
-            <Reveal className="lg:col-span-7" y={14}>
-              <ul className="ledger border-line border-y">
+      {/* beat — plate */}
+      <PlateInterlude
+        src="/media/music/orchestra-hall.jpg"
+        alt="Orchestra in a concert hall"
+        caption="with the orchestra."
+        credit="iii · interval"
+        position="center 40%"
+      />
+
+      {/* IV. Biography */}
+      <section className="py-12 md:py-16">
+        <div className="section-max section-pad">
+          <Movement n={4} id="biography" title="biography" />
+          <div className="mt-8 grid gap-8 md:grid-cols-12 md:gap-10">
+            <Reveal className="md:col-span-3" y={12}>
+              <div className="bg-mist relative aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/media/portrait/award-ceremony.png"
+                  alt="Alan Shen"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+              </div>
+              <dl className="mt-4 text-[13px]">
+                {[
+                  ['school', 'Institut Le Rosey, Rolle, Switzerland'],
+                  ['programme', 'IB diploma · class of 2027'],
+                  ['summer 2026', 'Penn ESAP — AI and its mathematics'],
+                  ['languages', 'TypeScript · C++ · Python'],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="border-line flex justify-between gap-3 border-b py-1.5"
+                  >
+                    <dt className="text-ink-faint">{k}</dt>
+                    <dd className="text-ink text-right">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal className="md:col-span-5" y={12} delay={0.04}>
+              <p className="note-text drop-cap">{HOME_BIO}</p>
+              <p className="note-text">
+                outside the programme he swims for Le Rosey — two-year team MVP,
+                fourteen medals across IM, freestyle, relays and open water —
+                and has volunteered in Romania and for The Lost Food Project,
+                where he led four students building an Earth Day game.
+              </p>
+              <div className="mt-6">
+                <p className="eyebrow">stack</p>
+                <dl className="mt-2 text-[13px]">
+                  {SKILL_GROUPS.filter((g) => g.label !== 'music').map((g) => (
+                    <div
+                      key={g.label}
+                      className="border-line grid grid-cols-[6.5rem_1fr] gap-3 border-b py-1.5"
+                    >
+                      <dt className="text-ink-faint">{g.label}</dt>
+                      <dd className="text-ink">{g.items}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </Reveal>
+
+            <Reveal className="md:col-span-4" y={12} delay={0.08}>
+              <p className="eyebrow">appointments</p>
+              <ol className="ledger border-line mt-2 border-b">
+                {ROLES.map((job) => (
+                  <li key={job.id} className="py-2.5">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="display-quiet text-ink text-base">
+                        {job.company}
+                      </span>
+                      <span className="text-ink-faint text-[13px] whitespace-nowrap">
+                        {dateRange(job.start, job.end)}
+                      </span>
+                    </div>
+                    <p className="text-ink-soft text-[13px]">{job.title}</p>
+                  </li>
+                ))}
+              </ol>
+              <p className="eyebrow mt-6">education</p>
+              <ol className="ledger border-line mt-2 border-b">
+                {EDUCATION.map((e) => (
+                  <li key={e.id} className="py-2.5">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="display-quiet text-ink text-base leading-snug">
+                        {e.institution}
+                      </span>
+                      <span className="text-ink-faint text-[13px] whitespace-nowrap">
+                        {dateRange(e.start, e.end)}
+                      </span>
+                    </div>
+                    <p className="text-ink-soft text-[13px]">{e.degree}</p>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* beat — loop */}
+      <PlateInterlude
+        src="/media/swim/team.jpg"
+        video="/media/swim/reel.mp4"
+        alt="Swimming meet footage"
+        caption="off stage — the pool. fourteen medals, two-year team mvp, one school record."
+        credit="v · honours, below"
+      />
+
+      {/* V. Honours */}
+      <section className="bg-bg-elevated py-12 md:py-16">
+        <div className="section-max section-pad">
+          <Movement
+            n={5}
+            id="honours"
+            title="honours & off stage"
+            standfirst="the back matter: every award with its date, and the swimming and service record."
+          />
+          <div className="mt-8 grid gap-10 md:grid-cols-12">
+            <Reveal className="md:col-span-7" y={12}>
+              <p className="eyebrow">honours</p>
+              <ol className="ledger border-line mt-2 border-y">
                 {AWARDS.map((a) => (
                   <li
                     key={a.id}
-                    className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-[5.5rem_2.75rem_1fr_auto]"
+                    className="grid gap-x-4 gap-y-1 py-3 md:grid-cols-[5.5rem_1fr_auto]"
                   >
-                    <p className="eyebrow-faint pt-1">{a.date ?? '—'}</p>
-                    {a.image ? (
-                      <div className="bg-panel-wash relative hidden h-9 w-9 overflow-hidden md:block">
-                        <Image
-                          src={a.image}
-                          alt=""
-                          fill
-                          className="object-contain p-1"
-                          sizes="36px"
-                        />
-                      </div>
-                    ) : (
-                      <span className="hidden md:block" />
-                    )}
-                    <div className="min-w-0">
-                      <h3 className="text-ink text-[15px] leading-snug font-semibold">
+                    <span className="text-ink-faint pt-0.5 text-[13px]">
+                      {a.date ?? '—'}
+                    </span>
+                    <div>
+                      <p className="text-ink text-[15px] leading-snug font-medium">
                         {a.title}
-                      </h3>
+                      </p>
                       {a.description && (
-                        <p className="text-ink-soft mt-1 text-[13px] leading-snug">
+                        <p className="text-ink-soft mt-0.5 text-[13px] leading-snug">
                           {a.description}
                         </p>
                       )}
                     </div>
-                    {/* VEX photo already sits in the card to the right */}
-                    {a.photo && a.id !== 'award-vex' && (
-                      <div className="bg-mist relative mt-1 h-16 w-24 overflow-hidden md:mt-0 md:h-14 md:w-[5.25rem]">
+                    {a.photo && (
+                      <div className="bg-mist relative hidden h-12 w-20 overflow-hidden md:block">
                         <Image
                           src={a.photo}
-                          alt={`${a.title} — photo`}
+                          alt=""
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 84px"
+                          sizes="80px"
                         />
                       </div>
                     )}
                   </li>
                 ))}
-              </ul>
-              <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2 text-[13px]">
-                <p className="text-ink-faint">
-                  Also: ABRSM Grade 8 Violin & Piano · TOEFL iBT 117 / 120
-                </p>
+              </ol>
+              <p className="text-ink-faint mt-2 text-[13px]">
+                also: ABRSM grade 8 piano and violin · TOEFL iBT 117 / 120.{' '}
                 <Link href="/path" className="row-link">
-                  Scores, timeline, athletics →
+                  full record →
                 </Link>
-              </div>
+              </p>
             </Reveal>
 
-            <Reveal className="lg:col-span-5" y={14} delay={0.06}>
-              <UsacoBoard />
-              <div className="card mt-4">
-                <div className="relative aspect-[16/7]">
-                  <Image
-                    src="/media/vex/worlds-team.jpeg"
-                    alt="VEX team 15520X at their competition booth"
-                    fill
-                    className="object-cover object-[center_60%]"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
-                  <span className="pill pill-ink absolute bottom-2 left-2">
-                    Team 15520X
-                  </span>
+            <div className="md:col-span-5">
+              <Reveal y={12} delay={0.04}>
+                <p className="eyebrow">off stage — swimming</p>
+                <div className="border-line mt-2 grid grid-cols-3 border-y py-3 text-center">
+                  {[
+                    ['14', 'medals'],
+                    ['2×', 'team mvp'],
+                    ['1', 'school record'],
+                  ].map(([v, l]) => (
+                    <div key={l}>
+                      <p className="figure text-ink text-3xl">{v}</p>
+                      <p className="text-ink-faint mt-1 text-[13px]">{l}</p>
+                    </div>
+                  ))}
                 </div>
-                <div className="p-4">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <p className="eyebrow">VEX Robotics · 15520X</p>
-                    <p className="eyebrow-faint">Sep 2025 – present</p>
-                  </div>
-                  <p className="text-ink mt-2 text-sm leading-snug">
-                    Engineer and programmer. Autonomous routines plus the
-                    driver-control interface.
-                  </p>
-                  <ul className="tick-list text-ink-soft mt-2.5 space-y-1 text-[13px]">
-                    <li>
-                      Excellence Award, Alpine Robo Games 2026 → VEX Worlds,
-                      Dallas.
-                    </li>
-                    <li>3rd skills · 3rd qualifiers at Alpine Robo Games.</li>
-                    <li>4th skills · 7th overall, Swiss Regional (ISBasel).</li>
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 03 — Research (dark band) */}
-      <section
-        id="research"
-        className="bg-ink scroll-mt-20 py-12 text-white md:py-16"
-      >
-        <div className="section-max section-pad">
-          <Reveal y={10}>
-            <SectionHead
-              index="03"
-              title="Research"
-              count={`${PUBLICATIONS.length} papers · co-author`}
-              dark
-            />
-            <p className="mt-4 max-w-2xl text-sm text-white/65">
-              AI-based pragmatics assessment and AI-enhanced pedagogy.
-              Contributing author on all three; one forthcoming from Cambridge
-              University Press with a CALICO conference talk attached.
-            </p>
-          </Reveal>
-
-          <ul className="ledger-dark mt-6 border-y border-white/12">
-            {PUBLICATIONS.map((pub, i) => (
-              <Reveal key={pub.id} delay={i * 0.04} y={12}>
-                <li className="grid gap-x-6 gap-y-1.5 py-4 md:grid-cols-12">
-                  <div className="flex flex-wrap items-center gap-2 md:col-span-3 md:flex-col md:items-start">
-                    <span className="pill pill-dark">{pub.status}</span>
-                    <span className="font-mono text-[11px] text-white/45">
-                      {pub.date}
-                    </span>
-                  </div>
-                  <div className="md:col-span-9">
-                    <h3 className="text-base leading-snug font-semibold md:text-lg">
-                      {pub.title}
-                    </h3>
-                    <p className="mt-1 text-[13px] text-white/65">
-                      {pub.authors}
-                    </p>
-                    <p className="mt-0.5 text-[13px] text-white/45 italic">
-                      {pub.venue}
-                    </p>
-                    {pub.presentation && (
-                      <p className="mt-2 text-[13px] text-white/75">
-                        <span className="pill pill-dark mr-2">Talk</span>
-                        {pub.presentation}
-                      </p>
-                    )}
-                  </div>
-                </li>
+                <p className="text-ink-soft mt-2 text-[13px] leading-snug">
+                  {SWIM?.title}, Le Rosey, since 2023 — individual medley,
+                  freestyle, relays and open water.
+                </p>
               </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 04 — Roles & education */}
-      <section
-        id="roles"
-        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
-      >
-        <div className="section-max section-pad grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7">
-            <Reveal y={10}>
-              <SectionHead
-                index="04"
-                title="Roles"
-                count={`${ROLES.length} positions`}
-              />
-            </Reveal>
-            <ul className="ledger border-line mt-4 border-b">
-              {ROLES.map((job, i) => (
-                <Reveal key={job.id} delay={i * 0.03} y={10}>
-                  <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
-                    <p className="eyebrow-faint pt-[3px] md:col-span-3">
-                      {dateRange(job.start, job.end)}
-                    </p>
-                    <div className="md:col-span-9">
-                      <div className="flex flex-wrap items-baseline gap-x-2.5">
-                        <h3 className="text-ink text-base font-semibold">
-                          {job.company}
-                        </h3>
-                        <span className="text-ink-soft text-[13px]">
-                          {job.title}
+              <Reveal className="mt-8" y={12} delay={0.08}>
+                <p className="eyebrow">off stage — service</p>
+                <ol className="ledger border-line mt-2 border-y">
+                  {VOLUNTEERING.map((v) => (
+                    <li key={v.id} className="py-2.5">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <span className="text-ink text-[14px] font-medium">
+                          {v.organization}
                         </span>
-                        {job.link && (
-                          <a
-                            href={job.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="row-link ml-auto text-[12px]"
-                          >
-                            Visit ↗
-                          </a>
-                        )}
+                        <span className="text-ink-faint text-[13px] whitespace-nowrap">
+                          {dateRange(v.start, v.end)}
+                        </span>
                       </div>
-                      <ul className="tick-list text-ink-soft mt-1.5 space-y-1 text-[13px] leading-snug">
-                        {job.bullets
-                          ?.slice(0, 2)
-                          .map((b) => <li key={b}>{b}</li>)}
-                      </ul>
-                    </div>
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-5">
-            <Reveal y={10}>
-              <SectionHead index="04b" title="Education" />
-            </Reveal>
-            <ul className="ledger border-line mt-4 border-b">
-              {EDUCATION.map((e) => (
-                <li key={e.id} className="py-3.5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-ink text-[15px] font-semibold">
-                      {e.institution}
-                    </h3>
-                    <span className="eyebrow-faint whitespace-nowrap">
-                      {dateRange(e.start, e.end)}
-                    </span>
-                  </div>
-                  <p className="text-ink-soft mt-0.5 text-[13px]">
-                    {e.degree}
-                    {e.location ? ` · ${e.location}` : ''}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            <Reveal className="mt-8" y={10}>
-              <SectionHead index="04c" title="Stack" />
-            </Reveal>
-            <ul className="ledger border-line mt-4 border-b">
-              {SKILL_GROUPS.filter((g) => g.label !== 'Music').map((g) => (
-                <li
-                  key={g.label}
-                  className="grid grid-cols-[6.5rem_1fr] gap-3 py-2.5"
-                >
-                  <span className="eyebrow-faint pt-[3px]">{g.label}</span>
-                  <span className="text-ink text-[13px] leading-snug">
-                    {g.items}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* 05 — Music & athletics */}
-      <section
-        id="beyond"
-        className="border-line scroll-mt-20 border-t py-12 md:py-16"
-      >
-        <div className="section-max section-pad">
-          <Reveal y={10}>
-            <SectionHead
-              index="05"
-              title="Music & athletics"
-              count="ABRSM Grade 8 ×2 · 14 medals"
-            />
-          </Reveal>
-
-          <div className="mt-6 grid gap-4 lg:grid-cols-2">
-            <Reveal y={14}>
-              <div className="card card-hover grid h-full gap-0 sm:grid-cols-5">
-                <div className="relative min-h-[180px] sm:col-span-2">
-                  <Image
-                    src="/media/music/violin-performance.png"
-                    alt="Alan Shen performing on violin"
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 640px) 100vw, 20vw"
-                  />
-                </div>
-                <div className="p-4 sm:col-span-3 md:p-5">
-                  <div className="flex items-baseline justify-between">
-                    <p className="eyebrow">Music</p>
-                    <Link href="/music" className="row-link text-[12px]">
-                      Listen →
-                    </Link>
-                  </div>
-                  <h3 className="display-quiet text-ink mt-2 text-xl">
-                    Violin & piano, ABRSM Grade 8 in both.
-                  </h3>
-                  <p className="text-ink-soft mt-2 text-[13px] leading-snug">
-                    Orchestra and solo stage performance, from concert halls to
-                    orphanages in Romania. Two singles released under my own
-                    name.
-                  </p>
-                  <ul className="ledger border-line mt-3 border-t">
-                    {MUSIC_RELEASES.map((r) => (
-                      <li
-                        key={r.id}
-                        className="flex items-center gap-3 py-2 text-[13px]"
-                      >
-                        <span className="bg-mist relative h-8 w-8 shrink-0 overflow-hidden">
-                          <Image
-                            src={r.cover}
-                            alt=""
-                            fill
-                            className="object-cover"
-                            sizes="32px"
-                          />
-                        </span>
-                        <span className="text-ink font-medium">{r.title}</span>
-                        <span className="eyebrow-faint">{r.type}</span>
-                        {r.hyperfollow && (
-                          <a
-                            href={r.hyperfollow}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="row-link ml-auto text-[12px]"
-                          >
-                            Stream ↗
-                          </a>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal y={14} delay={0.05}>
-              <div className="card card-hover grid h-full gap-0 sm:grid-cols-5">
-                <div className="p-4 sm:col-span-3 md:p-5">
-                  <div className="flex items-baseline justify-between">
-                    <p className="eyebrow">Athletics</p>
-                    <Link
-                      href="/path#athletics"
-                      className="row-link text-[12px]"
-                    >
-                      Every meet →
-                    </Link>
-                  </div>
-                  <h3 className="display-quiet text-ink mt-2 text-xl">
-                    Competitive swimmer, 2× team MVP.
-                  </h3>
-                  <p className="text-ink-soft mt-2 text-[13px] leading-snug">
-                    {SWIM?.title} at Le Rosey since {SWIM?.start.split(' ')[1]}.
-                    IM, freestyle, relays, open water. School record in 2023.
-                  </p>
-                  <MedalBars className="mt-4" />
-                </div>
-                <div className="relative order-first min-h-[180px] sm:order-none sm:col-span-2">
-                  <Image
-                    src="/media/swim/medals-rooftop.png"
-                    alt="Swimming medals"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 20vw"
-                  />
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 06 — Service */}
-      <section
-        id="service"
-        className="border-line bg-bg-elevated scroll-mt-20 border-t py-12 md:py-16"
-      >
-        <div className="section-max section-pad">
-          <Reveal y={10}>
-            <SectionHead
-              index="06"
-              title="Service"
-              count={`${VOLUNTEERING.length} programmes`}
-            />
-          </Reveal>
-          <ul className="ledger border-line mt-4 border-b">
-            {VOLUNTEERING.map((v, i) => (
-              <Reveal key={v.id} delay={i * 0.03} y={10}>
-                <li className="grid gap-x-5 gap-y-1.5 py-4 md:grid-cols-12">
-                  <div className="md:col-span-3">
-                    <p className="eyebrow-faint">{dateRange(v.start, v.end)}</p>
-                    <p className="text-ink-faint mt-1 text-[12px]">{v.cause}</p>
-                  </div>
-                  <div className="md:col-span-9">
-                    <div className="flex flex-wrap items-baseline gap-x-2.5">
-                      <h3 className="text-ink text-base font-semibold">
-                        {v.organization}
-                      </h3>
-                      <span className="text-ink-soft text-[13px]">
-                        {v.role}
-                      </span>
-                      {v.link && (
-                        <a
-                          href={v.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="row-link ml-auto text-[12px]"
-                        >
-                          Visit ↗
-                        </a>
-                      )}
-                    </div>
-                    {v.description && (
-                      <p className="text-ink-soft mt-1.5 text-[13px] leading-snug">
-                        {v.description}
+                      <p className="text-ink-soft text-[13px] leading-snug">
+                        {v.role} · {v.cause}
+                        {v.description ? ` — ${v.description}` : ''}
+                        {v.bullets ? ` — ${v.bullets[0]}` : ''}
                       </p>
-                    )}
-                    {v.bullets && (
-                      <ul className="tick-list text-ink-soft mt-1.5 space-y-1 text-[13px] leading-snug">
-                        {v.bullets.slice(0, 3).map((b) => (
-                          <li key={b}>{b}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </li>
+                    </li>
+                  ))}
+                </ol>
               </Reveal>
-            ))}
-          </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 07 — Contact */}
+      {/* VI. Contact / colophon */}
       <section
         id="contact"
-        className="border-line scroll-mt-20 border-t py-14 md:py-20"
+        className="border-line scroll-mt-24 border-t py-12 md:py-16"
       >
-        <div className="section-max section-pad grid gap-8 lg:grid-cols-12">
-          <Reveal className="lg:col-span-7" y={10}>
-            <SectionHead index="07" title="Contact" />
-            <h2 className="display-quiet text-ink mt-5 text-[clamp(1.7rem,4vw,2.6rem)]">
-              Happy to talk about any of this.
-            </h2>
+        <div className="section-max section-pad text-center">
+          <Movement n={6} title="contact" align="center" />
+          <Reveal className="mt-6" y={10}>
             <a
               href={`mailto:${EMAIL}`}
-              className="display-quiet border-ink/25 text-ink hover:border-ink mt-4 inline-block border-b pb-1 text-[clamp(1.1rem,3vw,1.7rem)] break-all transition-colors"
+              className="display-quiet text-ink hover:text-accent inline-block text-[clamp(1.4rem,3.4vw,2.4rem)] break-all transition-colors"
             >
               {EMAIL}
             </a>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               {SOCIAL_LINKS.map((l) => (
                 <a
                   key={l.label}
                   href={l.link}
-                  {...external(l.link)}
-                  className="pill hover:border-ink hover:text-ink"
+                  {...ext(l.link)}
+                  className="rule-link"
                 >
-                  {l.label} ↗
+                  {l.label}
                 </a>
               ))}
             </div>
-          </Reveal>
-          <Reveal className="lg:col-span-5" y={10} delay={0.05}>
-            <p className="eyebrow-faint">Deep dives</p>
-            <ul className="ledger border-line mt-2 border-y">
-              {[
-                {
-                  href: '/work',
-                  title: 'Work',
-                  detail: 'Every build with role, stack, and placement',
-                },
-                {
-                  href: '/path',
-                  title: 'Path',
-                  detail: 'Scores, awards, research, athletics, service',
-                },
-                {
-                  href: '/music',
-                  title: 'Music',
-                  detail: 'Releases with players and store links',
-                },
-              ].map((g) => (
-                <li key={g.href}>
-                  <Link
-                    href={g.href}
-                    className="group flex items-baseline justify-between gap-4 py-3"
-                  >
-                    <span className="display-quiet text-ink group-hover:text-accent text-lg">
-                      {g.title}
-                    </span>
-                    <span className="text-ink-soft text-[13px]">
-                      {g.detail}
-                    </span>
-                    <span
-                      aria-hidden
-                      className="text-accent transition-transform group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="text-ink-faint mx-auto mt-10 max-w-md text-[13px] leading-relaxed">
+              set in Instrument Sans. built with Next.js and Motion. every
+              placement, score and date on this page appears as recorded;
+              nothing is rounded up.
+            </p>
           </Reveal>
         </div>
       </section>

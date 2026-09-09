@@ -5,7 +5,10 @@ import { useReducedMotion } from 'motion/react'
 
 type Line =
   | { kind: 'comment'; text: string }
-  | { kind: 'code'; parts: { tone: 'kw' | 'str' | 'plain' | 'fn' | 'num'; text: string }[] }
+  | {
+      kind: 'code'
+      parts: { tone: 'kw' | 'str' | 'plain' | 'fn' | 'num'; text: string }[]
+    }
   | { kind: 'ok'; text: string }
 
 const LINES: Line[] = [
@@ -52,7 +55,10 @@ const LINES: Line[] = [
   },
   {
     kind: 'code',
-    parts: [{ tone: 'kw', text: '  else ' }, { tone: 'plain', text: 'lo = mid + 1;' }],
+    parts: [
+      { tone: 'kw', text: '  else ' },
+      { tone: 'plain', text: 'lo = mid + 1;' },
+    ],
   },
   { kind: 'code', parts: [{ tone: 'plain', text: '}' }] },
   { kind: 'ok', text: '✓ 1000 / 1000 · promoted to Gold' },
@@ -86,13 +92,13 @@ export function CodeTerminal({ className = '' }: { className?: string }) {
 
   return (
     <div
-      className={`overflow-hidden border border-line bg-ink text-[13px] leading-relaxed ${className}`}
+      className={`border-line bg-ink overflow-hidden border text-[13px] leading-relaxed ${className}`}
       aria-hidden
     >
       <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-        <span className="h-2.5 w-2.5 rounded-full bg-accent/80" />
+        <span className="bg-accent/80 h-2.5 w-2.5 rounded-full" />
         <span className="ml-2 font-mono text-[10px] tracking-[0.14em] text-white/40 uppercase">
           contest · usaco
         </span>
@@ -100,7 +106,7 @@ export function CodeTerminal({ className = '' }: { className?: string }) {
       <pre className="min-h-[220px] overflow-x-auto p-4 font-mono md:p-5">
         {LINES.slice(0, visible).map((line, i) => (
           <div key={i} className="whitespace-pre">
-            <span className="mr-3 select-none text-white/25">
+            <span className="mr-3 text-white/25 select-none">
               {String(i + 1).padStart(2, '0')}
             </span>
             {line.kind === 'comment' && (
@@ -119,10 +125,10 @@ export function CodeTerminal({ className = '' }: { className?: string }) {
         ))}
         {(visible < LINES.length || blink) && (
           <div>
-            <span className="mr-3 select-none text-white/25">
+            <span className="mr-3 text-white/25 select-none">
               {String(Math.min(visible + 1, LINES.length)).padStart(2, '0')}
             </span>
-            <span className="inline-block h-4 w-2 translate-y-0.5 bg-accent" />
+            <span className="bg-accent inline-block h-4 w-2 translate-y-0.5" />
           </div>
         )}
       </pre>

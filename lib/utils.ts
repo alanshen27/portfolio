@@ -18,3 +18,24 @@ export function dateRange(start: string, end: string) {
   const e = shortDate(end)
   return s === e ? s : `${s} – ${e}`
 }
+
+const ROMAN = [
+  '',
+  'i',
+  'ii',
+  'iii',
+  'iv',
+  'v',
+  'vi',
+  'vii',
+  'viii',
+  'ix',
+  'x',
+  'xi',
+  'xii',
+]
+
+/** 1 → "i", 4 → "iv" — programme numbering, lowercase. */
+export function roman(n: number) {
+  return ROMAN[n] ?? String(n)
+}

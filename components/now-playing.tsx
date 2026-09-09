@@ -241,17 +241,17 @@ export function NowPlaying({
       <button
         type="button"
         onClick={toggle}
-        className="inline-flex h-11 w-11 shrink-0 items-center justify-center bg-white text-ink transition-colors hover:bg-mist"
+        className="text-ink hover:bg-mist inline-flex h-11 w-11 shrink-0 items-center justify-center bg-white transition-colors"
         aria-label={playing ? 'Pause' : 'Play'}
       >
         {playing ? (
           <span className="flex gap-1" aria-hidden>
-            <span className="h-3.5 w-1 bg-ink" />
-            <span className="h-3.5 w-1 bg-ink" />
+            <span className="bg-ink h-3.5 w-1" />
+            <span className="bg-ink h-3.5 w-1" />
           </span>
         ) : (
           <span
-            className="ml-0.5 border-y-[7px] border-l-[12px] border-y-transparent border-l-ink"
+            className="border-l-ink ml-0.5 border-y-[7px] border-l-[12px] border-y-transparent"
             aria-hidden
           />
         )}
@@ -267,7 +267,7 @@ export function NowPlaying({
               {track.artist} · {track.type}
             </p>
           </div>
-          <span className="shrink-0 text-[10px] tracking-[0.16em] text-lake uppercase">
+          <span className="text-lake shrink-0 text-[10px] tracking-[0.16em] uppercase">
             {needsGesture && !playing ? 'Tap play' : 'Now playing'}
           </span>
         </div>
@@ -281,7 +281,7 @@ export function NowPlaying({
           aria-valuenow={progress}
         >
           <div
-            className="h-full bg-accent transition-[width] duration-75"
+            className="bg-accent h-full transition-[width] duration-75"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -295,10 +295,15 @@ export function NowPlaying({
 
   return (
     <>
-      <audio ref={audioRef} preload="auto" playsInline crossOrigin="anonymous" />
+      <audio
+        ref={audioRef}
+        preload="auto"
+        playsInline
+        crossOrigin="anonymous"
+      />
 
       <motion.div
-        className={`relative overflow-hidden border border-white/15 bg-ink/75 backdrop-blur-md ${className}`}
+        className={`bg-ink/75 relative overflow-hidden border border-white/15 backdrop-blur-md ${className}`}
         initial={reduce ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.85, ease: easeSnap }}
@@ -307,7 +312,7 @@ export function NowPlaying({
           <button
             type="button"
             onClick={toggle}
-            className="absolute inset-0 z-20 flex items-center justify-center bg-ink/55 text-sm font-semibold tracking-[0.18em] text-white uppercase backdrop-blur-[2px]"
+            className="bg-ink/55 absolute inset-0 z-20 flex items-center justify-center text-sm font-semibold tracking-[0.18em] text-white uppercase backdrop-blur-[2px]"
           >
             Tap to play — {track.title}
           </button>
@@ -320,7 +325,7 @@ export function NowPlaying({
               className="absolute inset-0 h-full w-full"
               aria-hidden
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
+            <div className="from-ink/40 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent" />
           </div>
         )}
 
@@ -335,7 +340,7 @@ export function NowPlaying({
               priority
             />
             {playing && (
-              <span className="absolute inset-0 flex items-end justify-center gap-0.5 bg-ink/20 pb-2">
+              <span className="bg-ink/20 absolute inset-0 flex items-end justify-center gap-0.5 pb-2">
                 {[0, 1, 2].map((i) => (
                   <motion.span
                     key={i}
@@ -355,7 +360,7 @@ export function NowPlaying({
           {controls}
           <Link
             href="/music"
-            className="hidden shrink-0 text-xs tracking-[0.14em] text-accent uppercase hover:text-white sm:inline"
+            className="text-accent hidden shrink-0 text-xs tracking-[0.14em] uppercase hover:text-white sm:inline"
           >
             More →
           </Link>
@@ -364,7 +369,7 @@ export function NowPlaying({
 
       {sticky && (
         <motion.div
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-ink/95 backdrop-blur-md md:left-16 lg:left-[4.5rem]"
+          className="bg-ink/95 fixed inset-x-0 bottom-0 z-50 border-t border-white/10 backdrop-blur-md md:left-16 lg:left-[4.5rem]"
           initial={{ y: '100%' }}
           animate={{ y: 0 }}
           transition={{ duration: 0.35, ease: easeSnap }}
@@ -391,7 +396,7 @@ export function NowPlaying({
             {controls}
             <Link
               href="/music"
-              className="hidden shrink-0 text-xs tracking-[0.14em] text-accent uppercase hover:text-white sm:inline"
+              className="text-accent hidden shrink-0 text-xs tracking-[0.14em] uppercase hover:text-white sm:inline"
             >
               Music →
             </Link>

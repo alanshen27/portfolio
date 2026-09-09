@@ -5,8 +5,13 @@ import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { EMAIL, SITE_NAV } from './data'
+import { roman } from '@/components/programme'
 import { easeOut } from '@/components/portfolio-motion'
 
+/**
+ * Running head, like the folio line of a printed programme:
+ * name at left, section at centre, contents at right.
+ */
 export function Header() {
   const pathname = usePathname()
   const reduce = useReducedMotion()
@@ -23,58 +28,67 @@ export function Header() {
     }
   }, [open])
 
+  const current =
+    SITE_NAV.find((n) => n.href !== '/' && pathname.startsWith(n.href)) ??
+    SITE_NAV[0]
+
   return (
     <>
-      <header className="border-line/60 bg-bg/85 text-ink fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md">
-        <div className="section-max section-pad flex h-16 items-center justify-between md:h-[4.25rem]">
+      <header className="border-line/70 bg-bg/90 text-ink fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md">
+        <div className="section-max section-pad grid h-14 grid-cols-[1fr_auto] items-center gap-6 md:h-16 md:grid-cols-[auto_1fr_auto]">
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight md:text-[1.35rem]"
-            aria-label="Alan Shen — Home"
+            className="display-quiet text-[1.2rem] md:text-[1.3rem]"
+            aria-label="Alan Shen — Programme"
           >
             Alan Shen
           </Link>
 
+          <p className="eyebrow-faint hidden min-w-0 truncate text-center lg:block">
+            programme of work
+            {current.href !== '/' && ` · ${current.label}`}
+          </p>
+          <span className="hidden md:block lg:hidden" aria-hidden />
+
           <nav
-            className="hidden items-center gap-6 md:flex"
+            className="hidden items-center justify-end gap-5 md:flex"
             aria-label="Primary"
           >
             {SITE_NAV.map((item, i) => {
-              const isPage = !item.href.includes('#')
-              const active = isPage && pathname.startsWith(item.href)
-              const firstPage =
-                isPage && SITE_NAV.findIndex((n) => !n.href.includes('#')) === i
+              const active =
+                item.href === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(item.href)
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`hover:text-ink relative text-[13px] transition-colors ${
+                  className={`hover:text-ink flex items-baseline gap-1.5 text-[13px] transition-colors ${
                     active ? 'text-ink' : 'text-ink-soft'
-                  } ${firstPage ? 'border-line ml-2 border-l pl-6' : ''}`}
+                  }`}
                 >
-                  {item.label}
-                  {active && (
-                    <span
-                      aria-hidden
-                      className="bg-accent absolute -bottom-1.5 left-0 h-px w-full"
-                    />
-                  )}
+                  <span className="numeral text-ink-faint text-[10.5px]">
+                    {roman(i + 1)}
+                  </span>
+                  <span className={active ? 'rule-link' : ''}>
+                    {item.label}
+                  </span>
                 </Link>
               )
             })}
             <a
               href={`mailto:${EMAIL}`}
-              className="border-ink/20 hover:bg-ink border px-3.5 py-1.5 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors hover:text-white"
+              className="text-ink-soft hover:text-ink ml-1 text-[13px] transition-colors"
             >
-              Email
+              email
             </a>
           </nav>
 
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 justify-self-end md:hidden"
             aria-expanded={open}
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
@@ -103,6 +117,7 @@ export function Header() {
             exit={{ opacity: 0 }}
           >
             <div className="flex h-full flex-col justify-end px-6 pt-28 pb-16">
+              <p className="eyebrow-faint mb-4">contents</p>
               <ul>
                 {SITE_NAV.map((item, i) => (
                   <motion.li
@@ -120,42 +135,39 @@ export function Header() {
                       onClick={() => setOpen(false)}
                       className="border-line flex items-baseline gap-4 border-b py-3"
                     >
-                      <span className="text-accent font-mono text-[11px]">
-                        {String(i + 1).padStart(2, '0')}
+                      <span className="numeral text-ink-faint text-[13px]">
+                        {roman(i + 1)}.
                       </span>
                       <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
                         {item.label}
-                      </span>
-                      <span className="text-ink-faint ml-auto font-mono text-[10px] tracking-[0.12em] uppercase">
-                        {item.href.includes('#') ? 'Home' : 'Page'}
                       </span>
                     </Link>
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="pill pill-accent"
+                  className="rule-link"
                   onClick={() => setOpen(false)}
                 >
-                  Email ↗
+                  email
                 </a>
                 <a
                   href="https://github.com/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pill"
+                  className="rule-link"
                 >
-                  GitHub ↗
+                  GitHub
                 </a>
                 <a
                   href="https://www.linkedin.com/in/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pill"
+                  className="rule-link"
                 >
-                  LinkedIn ↗
+                  LinkedIn
                 </a>
               </div>
             </div>

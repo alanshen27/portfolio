@@ -131,7 +131,7 @@ export function StackRadar({
         })}
       </svg>
 
-      <p className="mt-2 text-center font-mono text-[11px] tracking-[0.12em] text-ink-faint uppercase">
+      <p className="text-ink-faint mt-2 text-center font-mono text-[11px] tracking-[0.12em] uppercase">
         {active !== null
           ? `${axes[active]!.label} · ${Math.round(axes[active]!.value * 100)}`
           : 'Stack signal · hover an axis'}

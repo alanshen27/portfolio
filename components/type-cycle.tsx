@@ -56,7 +56,7 @@ export function TypeCycle({
     <span className={className}>
       {text}
       <span
-        className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[0.12em] bg-ink/55 align-baseline"
+        className="bg-ink/55 ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[0.12em] align-baseline"
         aria-hidden
       />
     </span>

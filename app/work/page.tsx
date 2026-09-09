@@ -3,11 +3,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Reveal } from '@/components/portfolio-motion'
-import { PageHero } from '@/components/page-hero'
+import {
+  Movement,
+  Numeral,
+  PageTitle,
+  ProgrammeRow,
+} from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
+import {
+  Figures,
+  NumbersInterlude,
+  QuoteInterlude,
+} from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
+import { AppPlate, InkShot } from '@/components/app-plate'
+import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
+import { Roll } from '@/components/roll'
 import { dateRange } from '@/lib/utils'
 import {
+  LINES,
+  NOTES,
   PROJECT_KIND_LABEL,
   PROJECTS,
   WORK_EXPERIENCE,
@@ -15,56 +30,86 @@ import {
 } from '../data'
 
 function linkLabel(href: string) {
-  if (href.includes('youtu')) return 'Watch demo'
-  if (href.includes('github')) return 'Source'
-  if (href.includes('linkedin')) return 'Context'
-  return 'Open live'
+  if (href.includes('youtu')) return 'watch the demo'
+  if (href.includes('github')) return 'source on GitHub'
+  if (href.includes('linkedin')) return 'context'
+  return 'open the live site'
 }
 
-const STAGES = ['Ideate', 'Engineer', 'Verify', 'Launch']
+const NOTE_KEY: Record<string, keyof typeof NOTES> = {
+  project1: 'studious',
+  project2: 'scribe',
+  'project-notate': 'notate',
+}
 
-/** Placeholder visual for image-less builds — Foundry's four-stage pipeline. */
-function StageStrip() {
+const STAGES = ['ideate', 'engineer', 'verify', 'launch']
+
+function Pipeline() {
   return (
     <div
-      className="bg-ink flex h-full w-full flex-col justify-center gap-3 p-5"
+      className="bg-panel-wash flex aspect-[16/10] w-full flex-col justify-center gap-4 p-6"
       aria-hidden
     >
-      <p className="font-mono text-[10px] tracking-[0.16em] text-white/45 uppercase">
-        Brief → storefront
-      </p>
-      <ol className="grid grid-cols-4 gap-1.5">
+      <p className="eyebrow-faint">from brief to storefront</p>
+      <ol className="border-line-strong flex items-center border-y py-4">
         {STAGES.map((s, i) => (
-          <li
-            key={s}
-            className="border border-white/15 bg-white/[0.04] px-2 py-3 text-center"
-          >
-            <p className="font-mono text-[9px] text-white/40">0{i + 1}</p>
-            <p className="mt-1 text-[11px] font-medium text-white/85">{s}</p>
+          <li key={s} className="flex flex-1 items-center">
+            <span className="display-quiet text-ink text-[clamp(0.95rem,1.4vw,1.2rem)]">
+              {s}
+            </span>
+            {i < STAGES.length - 1 && (
+              <span className="text-ink-faint mx-2 flex-1 text-center text-sm">
+                →
+              </span>
+            )}
           </li>
         ))}
       </ol>
-      <p className="font-mono text-[10px] leading-relaxed text-white/45">
+      <p className="text-ink-faint text-[13px] leading-relaxed">
         CAD · PCB · code · verification gates · Shopify checkout
       </p>
     </div>
   )
 }
 
-function Visual({ p }: { p: Project }) {
-  if (p.image) {
+/** Product screens shown as a full-width spread beneath the note. */
+function Spread({ p }: { p: Project }) {
+  if (p.id === 'project1')
+    return <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} spread />
+  if (p.id === 'project2')
     return (
-      <Image
-        src={p.image}
-        alt={`${p.name} screenshot`}
-        fill
-        className="object-cover object-top"
-        sizes="(max-width: 1024px) 100vw, 40vw"
+      <AppPlate
+        domain="scribe.study"
+        screens={SCRIBE_SCREENS}
+        ratio="aspect-[4/3]"
+        spread
       />
     )
+  return null
+}
+
+function Visual({ p }: { p: Project }) {
+  if (p.id === 'project1')
+    return (
+      <Figures
+        className="border-line border-t pt-1"
+        items={[
+          { value: '2023', label: 'founded' },
+          { value: 'live', label: 'in classrooms' },
+          { value: '2', label: 'schools in Romania' },
+        ]}
+      />
+    )
+  if (p.id === 'project2') return null
+  if (p.image) {
+    const own = p.link && !/linkedin|github|devpost/.test(p.link)
+    const head = own
+      ? p.link!.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+      : p.name.toLowerCase()
+    return <InkShot src={p.image} alt={`${p.name} screenshot`} head={head} />
   }
-  if (p.id === 'project-notate') return <PianoRoll className="h-full w-full" />
-  return <StageStrip />
+  if (p.id === 'project-notate') return <PianoRoll className="aspect-[16/10]" />
+  return <Pipeline />
 }
 
 export default function WorkPage() {
@@ -73,215 +118,220 @@ export default function WorkPage() {
   return (
     <>
       <ScrollProgress />
-      <PageHero
-        kicker="Work · software & product"
-        title="Every build, with the role and the result."
-        description={`${PROJECTS.length} projects: two companies, three hackathon podiums, and research-grade side builds. Index first, details below.`}
-        image="/media/hackathons/hackmit-workspace.jpg"
-        imagePosition="center 45%"
+      <PageTitle
+        kicker="ii · works"
+        title="complete programme notes"
+        standfirst={`${PROJECTS.length} works — two companies, three hackathon podiums, and two research-grade side builds — each with what it is, what Alan did, and what came of it.`}
+        contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
 
-      {/* Index */}
-      <section className="border-line bg-bg-elevated border-b py-8 md:py-10">
+      {/* the roll — this page's rows */}
+      <section className="border-line border-b py-8 md:py-10">
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <div className="section-head">
-              <span className="idx">00</span>
-              <h2 className="eyebrow">Index</h2>
-              <span className="count">{PROJECTS.length} entries</span>
-            </div>
-            <ul className="ledger border-line border-b">
+          <p className="text-ink-faint mb-3 text-[13px]">
+            the builds row of the roll — every work drawn to its length; amber
+            marks a placement.
+          </p>
+          <Roll rows={['builds']} compact playback={false} />
+        </div>
+      </section>
+
+      {/* Listing */}
+      <section className="py-12 md:py-16">
+        <div className="section-max section-pad">
+          <Reveal className="md:ml-[33.333%]" y={12}>
+            <ol className="ledger border-line border-y">
               {PROJECTS.map((p, i) => (
                 <li key={p.id}>
-                  <a
+                  <ProgrammeRow
+                    n={i + 1}
+                    title={p.name}
+                    subtitle={p.description}
+                    right={p.outcome ?? p.role ?? ''}
                     href={`#${p.id}`}
-                    className="group grid gap-x-5 gap-y-1 py-2.5 text-sm md:grid-cols-12 md:items-baseline"
-                  >
-                    <span className="flex items-baseline gap-2.5 md:col-span-3">
-                      <span className="text-ink-faint font-mono text-[11px]">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className="text-ink group-hover:text-accent font-semibold">
-                        {p.name}
-                      </span>
-                      <span className="pill">
-                        {p.kind ? PROJECT_KIND_LABEL[p.kind] : 'Build'}
-                      </span>
-                    </span>
-                    <span className="text-ink-soft md:col-span-3">
-                      {p.role}
-                    </span>
-                    <span className="text-accent-deep text-[13px] font-medium md:col-span-4">
-                      {p.outcome}
-                    </span>
-                    <span className="eyebrow-faint md:col-span-2 md:text-right">
-                      {p.timeframe}
-                    </span>
-                  </a>
+                  />
                 </li>
               ))}
-            </ul>
+            </ol>
           </Reveal>
         </div>
       </section>
 
-      {/* Detail blocks */}
-      <section className="bg-bg py-10 md:py-14">
+      {/* beat — by the numbers */}
+      <NumbersInterlude
+        items={[
+          { value: String(PROJECTS.length), label: 'works' },
+          { value: '2', label: 'companies founded or co-founded' },
+          { value: '3', label: 'hackathon podiums' },
+          { value: '2', label: 'research-grade side builds' },
+        ]}
+      />
+
+      {/* Notes */}
+      <section className="bg-bg-elevated py-12 md:py-16">
         <div className="section-max section-pad">
-          <ul className="ledger">
-            {PROJECTS.map((project, i) => (
-              <li key={project.id} className="py-8 first:pt-0 md:py-10">
-                <Reveal y={18}>
+          <Movement n={2} title="notes on the works" />
+          <div className="mt-6">
+            {PROJECTS.map((project, i) => {
+              const key = NOTE_KEY[project.id]
+              const paragraphs = key ? NOTES[key] : [project.description]
+              const flip = i % 2 === 1
+              return (
+                <Reveal key={project.id} y={16}>
                   <article
                     id={project.id}
-                    className="grid scroll-mt-24 gap-6 lg:grid-cols-12 lg:gap-10"
+                    className="border-line grid scroll-mt-24 gap-6 border-t py-10 md:grid-cols-12 md:gap-10 md:py-12"
                   >
-                    <div className="lg:col-span-5">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="card bg-mist relative block aspect-[16/10] overflow-hidden"
-                      >
+                    <div
+                      className={`md:col-span-5 ${flip ? 'md:order-2 md:col-start-8' : ''}`}
+                    >
+                      {project.id === 'project1' ||
+                      project.id === 'project2' ? (
                         <Visual p={project} />
-                        <span className="pill pill-ink absolute top-3 left-3">
-                          {project.kind
-                            ? PROJECT_KIND_LABEL[project.kind]
-                            : 'Build'}
-                        </span>
-                      </a>
+                      ) : (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <Visual p={project} />
+                        </a>
+                      )}
                       {project.photo && (
-                        <figure className="mt-2 flex items-center gap-3">
-                          <div className="bg-mist relative h-14 w-24 shrink-0 overflow-hidden">
+                        <figure className="mt-3">
+                          <div className="bg-mist relative aspect-[16/7] overflow-hidden">
                             <Image
                               src={project.photo}
-                              alt={
-                                project.photoCaption ?? `${project.name} team`
-                              }
+                              alt={project.photoCaption ?? `${project.name}`}
                               fill
-                              className="object-cover"
-                              sizes="96px"
+                              className="object-cover object-center"
+                              sizes="(max-width: 768px) 100vw, 40vw"
                             />
                           </div>
-                          <figcaption className="eyebrow-faint leading-snug">
+                          <figcaption className="text-ink-faint mt-2 text-[13px] leading-snug">
                             {project.photoCaption}
                           </figcaption>
                         </figure>
                       )}
                     </div>
-
-                    <div className="lg:col-span-7">
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <span className="text-ink-faint font-mono text-[11px]">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <h2 className="display-quiet text-ink text-[clamp(1.5rem,3vw,2.1rem)]">
-                          {project.name}
-                        </h2>
-                        <span className="eyebrow-faint ml-auto">
-                          {project.role}
+                    <div
+                      className={`md:col-span-7 ${flip ? 'md:order-1 md:col-start-1' : ''}`}
+                    >
+                      <p className="eyebrow">
+                        <Numeral n={i + 1} className="text-accent mr-1.5" />
+                        {project.kind
+                          ? PROJECT_KIND_LABEL[project.kind]
+                          : 'Build'}
+                        <span className="text-ink-faint">
+                          {' '}
+                          · {project.role}
                           {project.timeframe ? ` · ${project.timeframe}` : ''}
                         </span>
-                      </div>
-                      <p className="text-ink mt-2.5 text-base leading-snug">
-                        {project.description}
                       </p>
+                      <h3 className="display-quiet text-ink mt-2 text-[clamp(1.7rem,3.2vw,2.3rem)]">
+                        {project.name}
+                      </h3>
                       {project.outcome && (
-                        <p className="border-accent text-accent-deep mt-3 inline-block border-l-2 pl-2.5 text-sm font-medium">
+                        <p className="text-accent-deep mt-2 text-base font-medium">
                           {project.outcome}
                         </p>
                       )}
+                      <div className="mt-4">
+                        {paragraphs.map((para, j) => (
+                          <p
+                            key={j}
+                            className={`note-text ${j === 0 ? 'drop-cap' : ''}`}
+                          >
+                            {para}
+                          </p>
+                        ))}
+                      </div>
                       {project.points && (
-                        <ul className="tick-list text-ink-soft mt-4 grid gap-x-8 gap-y-1.5 text-sm leading-snug md:grid-cols-2">
+                        <ul className="tick-list text-ink-soft mt-4 grid gap-x-6 gap-y-1.5 text-[13px] leading-snug sm:grid-cols-2">
                           {project.points.map((point) => (
                             <li key={point}>{point}</li>
                           ))}
                         </ul>
                       )}
-                      <div className="mt-5 flex flex-wrap items-center gap-1.5">
-                        {project.tags?.map((t) => (
-                          <span key={t} className="pill">
-                            {t}
-                          </span>
-                        ))}
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="row-link ml-auto text-sm"
-                        >
-                          {linkLabel(project.link)} ↗
-                        </a>
-                        {project.repo && project.repo !== project.link && (
+                      <div className="border-line mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5 border-t pt-3">
+                        <p className="text-ink-faint text-[13px]">
+                          {project.tags?.join(' · ')}
+                        </p>
+                        <span className="flex gap-4 text-sm">
                           <a
-                            href={project.repo}
+                            href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="row-link text-sm"
+                            className="row-link"
                           >
-                            Source ↗
+                            {linkLabel(project.link)} →
                           </a>
-                        )}
+                          {project.repo && project.repo !== project.link && (
+                            <a
+                              href={project.repo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="row-link"
+                            >
+                              source →
+                            </a>
+                          )}
+                        </span>
                       </div>
                     </div>
+                    {(project.id === 'project1' ||
+                      project.id === 'project2') && (
+                      <div className="md:order-3 md:col-span-12">
+                        <Spread p={project} />
+                      </div>
+                    )}
                   </article>
                 </Reveal>
-              </li>
-            ))}
-          </ul>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Roles — where the builds happened */}
-      <section className="border-line bg-bg-elevated border-t py-10 md:py-14">
+      {/* beat — a line */}
+      <QuoteInterlude source="Alan, on the work">
+        “{LINES.systems}”
+      </QuoteInterlude>
+
+      {/* Appointments */}
+      <section className="py-12 md:py-16">
         <div className="section-max section-pad">
-          <Reveal y={10}>
-            <div className="section-head">
-              <span className="idx">→</span>
-              <h2 className="eyebrow">Roles behind the builds</h2>
-              <span className="count">{roles.length} positions</span>
-            </div>
+          <Movement
+            n={3}
+            title="appointments"
+            standfirst="where the works were made."
+          />
+          <Reveal className="mt-8 md:ml-[33.333%]" y={12}>
+            <ol className="ledger border-line border-y">
+              {roles.map((job, i) => (
+                <li key={job.id}>
+                  <ProgrammeRow
+                    n={i + 1}
+                    title={job.company}
+                    subtitle={job.title}
+                    right={dateRange(job.start, job.end)}
+                    href={job.link}
+                  />
+                </li>
+              ))}
+            </ol>
           </Reveal>
-          <ul className="ledger border-line border-b">
-            {roles.map((job) => (
-              <li
-                key={job.id}
-                className="grid gap-x-5 gap-y-1 py-3.5 md:grid-cols-12 md:items-baseline"
-              >
-                <p className="eyebrow-faint md:col-span-3">
-                  {dateRange(job.start, job.end)}
-                </p>
-                <p className="md:col-span-3">
-                  <span className="text-ink font-semibold">{job.company}</span>
-                </p>
-                <p className="text-ink-soft text-sm md:col-span-5">
-                  {job.title}
-                </p>
-                <p className="md:col-span-1 md:text-right">
-                  {job.link && (
-                    <a
-                      href={job.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="row-link text-[13px]"
-                    >
-                      Visit ↗
-                    </a>
-                  )}
-                </p>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      <section className="border-line bg-bg border-t py-10">
-        <div className="section-max section-pad flex flex-wrap items-end justify-between gap-6">
-          <p className="display-quiet text-ink text-[clamp(1.3rem,2.6vw,1.8rem)]">
-            Next: scores, awards, research, athletics.
+      <section className="border-line bg-bg-elevated border-t py-10">
+        <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
+          <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
+            next: the record — scores, honours, publications.
           </p>
           <Link href="/path" className="row-link text-sm">
-            Open path →
+            iii · record →
           </Link>
         </div>
       </section>
