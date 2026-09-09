@@ -70,6 +70,7 @@ function Note({
   bullets,
   aside,
   link,
+  spread,
   flip = false,
 }: {
   id: string
@@ -80,6 +81,8 @@ function Note({
   bullets?: string[]
   aside: React.ReactNode
   link?: { href: string; label: string }
+  /** A full-width figure beneath the note — product screens, mostly */
+  spread?: React.ReactNode
   flip?: boolean
 }) {
   return (
@@ -128,6 +131,7 @@ function Note({
             </a>
           )}
         </div>
+        {spread && <div className="md:order-3 md:col-span-12">{spread}</div>}
       </article>
     </Reveal>
   )
@@ -339,9 +343,15 @@ export default function Home() {
               meta={`${STUDIOUS.role} · ${STUDIOUS.timeframe}`}
               paragraphs={NOTES.studious}
               link={{ href: STUDIOUS.link, label: 'studious.sh' }}
+              spread={
+                <AppPlate
+                  domain="studious.sh"
+                  screens={STUDIOUS_SCREENS}
+                  spread
+                />
+              }
               aside={
                 <div className="grid gap-3">
-                  <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} />
                   <Figures
                     className="border-line border-t pt-1"
                     items={[
@@ -360,14 +370,17 @@ export default function Home() {
               meta={`SWE & co-founder · ${SCRIBE.timeframe}`}
               paragraphs={NOTES.scribe}
               link={{ href: SCRIBE.link, label: 'scribe.study' }}
+              spread={
+                <AppPlate
+                  domain="scribe.study"
+                  screens={SCRIBE_SCREENS}
+                  ratio="aspect-[4/3]"
+                  spread
+                />
+              }
               flip
               aside={
                 <div className="grid gap-3">
-                  <AppPlate
-                    domain="scribe.study"
-                    screens={SCRIBE_SCREENS}
-                    ratio="aspect-[4/3]"
-                  />
                   <Plate
                     src="/media/hackathons/hackharvard-china.jpg"
                     alt="On stage at HackHarvard China 2025"

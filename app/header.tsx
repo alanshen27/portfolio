@@ -35,7 +35,7 @@ export function Header() {
   return (
     <>
       <header className="border-line/70 bg-bg/90 text-ink fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md">
-        <div className="section-max section-pad grid h-14 grid-cols-[1fr_auto] items-center md:h-16 md:grid-cols-3">
+        <div className="section-max section-pad grid h-14 grid-cols-[1fr_auto] items-center gap-6 md:h-16 md:grid-cols-[auto_1fr_auto]">
           <Link
             href="/"
             className="display-quiet text-[1.2rem] md:text-[1.3rem]"
@@ -44,9 +44,11 @@ export function Header() {
             Alan Shen
           </Link>
 
-          <p className="eyebrow-faint hidden text-center md:block">
-            programme of work · {current.label}
+          <p className="eyebrow-faint hidden min-w-0 truncate text-center lg:block">
+            programme of work
+            {current.href !== '/' && ` · ${current.label}`}
           </p>
+          <span className="hidden md:block lg:hidden" aria-hidden />
 
           <nav
             className="hidden items-center justify-end gap-5 md:flex"

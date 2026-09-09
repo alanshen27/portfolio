@@ -10,7 +10,11 @@ import {
   ProgrammeRow,
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
-import { NumbersInterlude, QuoteInterlude } from '@/components/interlude'
+import {
+  Figures,
+  NumbersInterlude,
+  QuoteInterlude,
+} from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { AppPlate, InkShot } from '@/components/app-plate'
 import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
@@ -68,17 +72,35 @@ function Pipeline() {
   )
 }
 
-function Visual({ p }: { p: Project }) {
+/** Product screens shown as a full-width spread beneath the note. */
+function Spread({ p }: { p: Project }) {
   if (p.id === 'project1')
-    return <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} />
+    return <AppPlate domain="studious.sh" screens={STUDIOUS_SCREENS} spread />
   if (p.id === 'project2')
     return (
       <AppPlate
         domain="scribe.study"
         screens={SCRIBE_SCREENS}
         ratio="aspect-[4/3]"
+        spread
       />
     )
+  return null
+}
+
+function Visual({ p }: { p: Project }) {
+  if (p.id === 'project1')
+    return (
+      <Figures
+        className="border-line border-t pt-1"
+        items={[
+          { value: '2023', label: 'founded' },
+          { value: 'live', label: 'in classrooms' },
+          { value: '2', label: 'schools in Romania' },
+        ]}
+      />
+    )
+  if (p.id === 'project2') return null
   if (p.image) {
     const own = p.link && !/linkedin|github|devpost/.test(p.link)
     const head = own
@@ -163,14 +185,19 @@ export default function WorkPage() {
                     <div
                       className={`md:col-span-5 ${flip ? 'md:order-2 md:col-start-8' : ''}`}
                     >
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block"
-                      >
+                      {project.id === 'project1' ||
+                      project.id === 'project2' ? (
                         <Visual p={project} />
-                      </a>
+                      ) : (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <Visual p={project} />
+                        </a>
+                      )}
                       {project.photo && (
                         <figure className="mt-3">
                           <div className="bg-mist relative aspect-[16/7] overflow-hidden">
@@ -253,6 +280,12 @@ export default function WorkPage() {
                         </span>
                       </div>
                     </div>
+                    {(project.id === 'project1' ||
+                      project.id === 'project2') && (
+                      <div className="md:order-3 md:col-span-12">
+                        <Spread p={project} />
+                      </div>
+                    )}
                   </article>
                 </Reveal>
               )
