@@ -326,14 +326,18 @@
     border-color: var(--color-amber);
   }
 
-  .roll-hit:hover .roll-tip,
-  .roll-hit:focus-visible .roll-tip {
-    display: block;
+  .roll-hit {
+    cursor: pointer;
   }
 
-  .roll-hit:hover .roll-note {
+  .roll-hit.is-shown .roll-note,
+  .roll-hit:focus-visible .roll-note {
     outline: 2px solid var(--color-amber);
     outline-offset: 1px;
+  }
+
+  .roll-hit:focus-visible {
+    outline: none;
   }
 
   .roll-future {
@@ -349,6 +353,16 @@
   .ink-shot {
     filter: grayscale(1) brightness(1.08) contrast(0.92);
     mix-blend-mode: multiply;
+  }
+
+  .app-tag {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    padding: 1px 6px;
+    font-size: 11.5px;
+    line-height: 16px;
+    white-space: nowrap;
   }
 
   .app-callout {

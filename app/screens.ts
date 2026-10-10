@@ -17,16 +17,19 @@ export const STUDIOUS_SCREENS: Screen[] = [
       {
         x: 24.9,
         y: 15.6,
+        tag: 'grading queue',
         text: 'the term at a glance — 15 submissions to grade, 41 missing, across two classes',
       },
       {
         x: 72.8,
         y: 71.4,
+        tag: 'up next',
         text: 'grading progress per assignment; one click into the submissions',
       },
       {
         x: 88.4,
         y: 87.5,
+        tag: 'messages',
         text: 'student and faculty chat inside the same tool',
       },
     ],
@@ -40,16 +43,19 @@ export const STUDIOUS_SCREENS: Screen[] = [
       {
         x: 60.5,
         y: 31.7,
+        tag: 'AI-use level',
         text: 'an AI-use level set per assignment — this one is independent work, no AI',
       },
       {
         x: 57.3,
         y: 79.7,
+        tag: 'submissions',
         text: 'late, submitted, returned — each student’s state and grade in one table',
       },
       {
         x: 8.3,
         y: 46.1,
+        tag: 'class rail',
         text: 'a class rail: assignments, quizzes, modules, worksheets, grades, attendance, AI labs',
       },
     ],
@@ -63,11 +69,13 @@ export const STUDIOUS_SCREENS: Screen[] = [
       {
         x: 51.8,
         y: 32.8,
+        tag: 'class stream',
         text: 'the class stream — posts with attachments, formatting and an equation button',
       },
       {
         x: 89,
         y: 23.4,
+        tag: 'up next',
         text: 'up next: what’s due, and how many have handed it in',
       },
     ],
@@ -84,16 +92,19 @@ export const SCRIBE_SCREENS: Screen[] = [
       {
         x: 19.5,
         y: 47.1,
+        tag: 'practice question',
         text: 'a chat that teaches — one practice question at a time, in typeset maths',
       },
       {
         x: 36.6,
         y: 79.7,
+        tag: 'study session',
         text: 'the same conversation assembles a 30-minute study session',
       },
       {
         x: 85.5,
         y: 24.4,
+        tag: 'materials',
         text: 'the workspace’s materials and sessions, kept at the side',
       },
     ],
@@ -107,11 +118,13 @@ export const SCRIBE_SCREENS: Screen[] = [
       {
         x: 34.8,
         y: 23.6,
+        tag: 'study guide',
         text: 'a study guide generated from the workspace, structured into sections',
       },
       {
         x: 49.7,
         y: 61.8,
+        tag: 'rendered maths',
         text: 'integration by parts derived from the product rule, then boxed — rendered maths',
       },
     ],
@@ -125,11 +138,13 @@ export const SCRIBE_SCREENS: Screen[] = [
       {
         x: 11.6,
         y: 31.7,
+        tag: 'continue',
         text: 'pick up where you left off — 17% through the reading',
       },
       {
         x: 23.8,
         y: 64.2,
+        tag: 'session plan',
         text: 'sessions planned as sequences: reading, questions, a worksheet, flashcards',
       },
     ],

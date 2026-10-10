@@ -8,6 +8,8 @@ export type Callout = {
   x: number
   /** percent of the frame, from the top */
   y: number
+  /** two or three words shown beside the marker on the image */
+  tag?: string
   text: string
 }
 
@@ -90,11 +92,20 @@ export function AppPlate({
         {s.callouts.map((c, k) => (
           <span
             key={k}
-            className="app-callout absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: `${c.x}%`, top: `${c.y}%` }}
+            className={`absolute flex -translate-y-1/2 items-center gap-1.5 ${
+              c.x > 70 ? 'flex-row-reverse' : ''
+            }`}
+            style={{
+              left: c.x > 70 ? undefined : `calc(${c.x}% - 10px)`,
+              right: c.x > 70 ? `calc(${100 - c.x}% - 10px)` : undefined,
+              top: `${c.y}%`,
+            }}
             aria-hidden
           >
-            {k + 1}
+            <span className="app-callout shrink-0">{k + 1}</span>
+            {c.tag && spread && (
+              <span className="app-tag hidden md:inline-block">{c.tag}</span>
+            )}
           </span>
         ))}
       </div>

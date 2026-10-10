@@ -28,6 +28,31 @@ function pct(mi: number) {
   return ((mi - T0) / SPAN) * 100
 }
 
+const MONTHS = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+]
+function fmt(ym: string) {
+  if (ym === 'now') return 'present'
+  const [y, m] = ym.split('-')
+  return m ? `${MONTHS[Number(m) - 1]} ${y}` : y
+}
+function when(n: RollNote) {
+  if (n.precision === 'year') return `${n.start} · month not recorded`
+  if (n.end) return `${fmt(n.start)} → ${fmt(n.end)}`
+  return fmt(n.start)
+}
+
 type Placed = RollNote & {
   a: number
   b: number
@@ -124,6 +149,21 @@ export function Roll({
   }, [playback, reduce])
   const head = T0 + (NOW - T0) * t
 
+  const [pinned, setPinned] = useState<string | null>(null)
+  const [hovered, setHovered] = useState<string | null>(null)
+  const shownId = hovered ?? pinned
+  const shown = shownId ? ROLL_NOTES.find((n) => n.id === shownId) : undefined
+  const results = useMemo(
+    () =>
+      ROLL_NOTES.filter(
+        (n) =>
+          n.result &&
+          n.precision !== 'year' &&
+          byRow.some((r) => r.id === n.row),
+      ).map((n) => monthIndex(n.start)),
+    [byRow],
+  )
+
   const firstYear = Math.ceil(T0 / 12)
   const years = Array.from(
     { length: Math.floor(T1 / 12) - firstYear + 1 },
@@ -137,23 +177,50 @@ export function Roll({
       </p>
       <div className="overflow-x-auto">
         <div className="min-w-[880px]">
-          {/* axis */}
+          {/* ruler */}
           <div className="grid grid-cols-[9rem_1fr]">
-            <div className="text-ink-faint self-end pb-1 text-[13px]">
+            <div className="text-ink-faint self-end pb-1.5 text-[13px]">
               {compact ? '' : 'sep 2022 → jun 2027'}
             </div>
-            <div className="relative h-6">
+            <div className="relative h-9">
+              {Array.from({ length: SPAN + 1 }, (_, k) => T0 + k).map((mi) => {
+                const month = mi % 12
+                const isYear = month === 0
+                const isQuarter = month % 3 === 0
+                return (
+                  <span
+                    key={mi}
+                    className={`absolute bottom-0 w-px ${
+                      isYear
+                        ? 'bg-ink h-4'
+                        : isQuarter
+                          ? 'bg-line-strong h-2.5'
+                          : 'bg-line h-1.5'
+                    }`}
+                    style={{ left: `${pct(mi)}%` }}
+                    aria-hidden
+                  />
+                )
+              })}
+              {results.map((mi, k) => (
+                <span
+                  key={`r${k}`}
+                  className="bg-amber absolute bottom-0 h-3 w-[2px] -translate-x-px"
+                  style={{ left: `${pct(mi)}%` }}
+                  aria-hidden
+                />
+              ))}
               {years.map((y) => (
                 <span
                   key={y}
-                  className="text-ink-soft absolute bottom-1 -translate-x-1/2 text-[13px] tabular-nums"
+                  className="text-ink-soft absolute top-0 ml-1.5 text-[13px] tabular-nums"
                   style={{ left: `${pct(y * 12)}%` }}
                 >
                   {y}
                 </span>
               ))}
               <span
-                className="text-accent absolute bottom-1 -translate-x-1/2 text-[13px] font-medium"
+                className="text-accent absolute top-0 -translate-x-1/2 text-[13px] font-medium"
                 style={{ left: `${pct(NOW)}%` }}
               >
                 now
@@ -221,49 +288,33 @@ export function Roll({
                           >
                             {n.label}
                           </span>
-                          <span className="roll-tip text-ink bg-bg border-line absolute top-[26px] left-0 z-20 hidden w-64 border p-2.5 text-[13px] leading-snug shadow-[0_1px_0_0_var(--color-line-strong)]">
-                            <span className="text-accent block font-medium">
-                              {n.label}
-                            </span>
-                            <span className="text-ink-faint block">
-                              {n.precision === 'year'
-                                ? n.start
-                                : n.end
-                                  ? `${n.start} → ${n.end}`
-                                  : n.start}
-                            </span>
-                            <span className="mt-1 block">{n.detail}</span>
-                          </span>
                         </>
                       )
-                      const cls = 'roll-hit group absolute block'
-                      const style = {
-                        left: `${left}%`,
-                        top,
-                        width: `${width}%`,
-                        opacity: sounded ? 1 : 0.28,
-                        transition: 'opacity 0.35s ease',
-                      }
-                      return n.href?.startsWith('/') ? (
-                        <Link
+                      const isShown = shownId === n.id
+                      return (
+                        <button
                           key={n.id}
-                          href={n.href}
-                          className={cls}
-                          style={style}
+                          type="button"
+                          className={`roll-hit absolute block text-left ${isShown ? 'is-shown' : ''}`}
+                          style={{
+                            left: `${left}%`,
+                            top,
+                            width: `${width}%`,
+                            opacity: sounded ? 1 : 0.28,
+                            transition: 'opacity 0.35s ease',
+                          }}
+                          aria-pressed={pinned === n.id}
                           aria-label={`${n.label}: ${n.detail}`}
+                          onMouseEnter={() => setHovered(n.id)}
+                          onMouseLeave={() => setHovered(null)}
+                          onFocus={() => setHovered(n.id)}
+                          onBlur={() => setHovered(null)}
+                          onClick={() =>
+                            setPinned((p) => (p === n.id ? null : n.id))
+                          }
                         >
                           {inner}
-                        </Link>
-                      ) : (
-                        <a
-                          key={n.id}
-                          href={n.href}
-                          className={cls}
-                          style={style}
-                          aria-label={`${n.label}: ${n.detail}`}
-                        >
-                          {inner}
-                        </a>
+                        </button>
                       )
                     })}
                   </div>
@@ -293,6 +344,36 @@ export function Roll({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* reading line — what the hovered or pinned note is */}
+      <div
+        className="border-line mt-3 grid min-h-[3.75rem] gap-x-6 gap-y-1 border-t pt-2 md:grid-cols-[9rem_1fr_auto]"
+        aria-live="polite"
+      >
+        {shown ? (
+          <>
+            <p className="text-ink-faint text-[13px]">{when(shown)}</p>
+            <p className="text-[15px] leading-snug">
+              <span className="text-ink font-medium">{shown.label}</span>
+              <span className="text-ink-soft"> — {shown.detail}</span>
+            </p>
+            {shown.href &&
+              (shown.href.startsWith('/') ? (
+                <Link href={shown.href} className="row-link text-[13px]">
+                  read the note →
+                </Link>
+              ) : (
+                <a href={shown.href} className="row-link text-[13px]">
+                  read the note →
+                </a>
+              ))}
+          </>
+        ) : (
+          <p className="text-ink-faint text-[13px] md:col-span-3">
+            hover or tap a note to read it; tap again to unpin.
+          </p>
+        )}
       </div>
 
       {!compact && (
