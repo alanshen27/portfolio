@@ -11,7 +11,6 @@ import {
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { Roll } from '@/components/roll'
-import { NumbersInterlude, PlateInterlude } from '@/components/interlude'
 import { MedalBars } from '@/components/viz/medal-bars'
 import { ScoreRing } from '@/components/viz/score-ring'
 import { UsacoBoard } from '@/components/viz/usaco-board'
@@ -45,7 +44,7 @@ export default function PathPage() {
       <ScrollProgress />
       <PageTitle
         kicker="iii · record"
-        title="the record"
+        title="record"
         standfirst="contest scores, honours, publications, meets and service — every entry dated so it can be checked."
         contents={CONTENTS}
       />
@@ -59,7 +58,6 @@ export default function PathPage() {
           </p>
           <Roll
             rows={['competition', 'research', 'athletics', 'service']}
-            compact
             playback={false}
           />
         </div>
@@ -109,15 +107,6 @@ export default function PathPage() {
           </Reveal>
         </div>
       </section>
-
-      {/* beat — plate */}
-      <PlateInterlude
-        src="/media/vex/worlds-arena.jpeg"
-        alt="The VEX Robotics World Championship arena"
-        caption="the World Championship arena — reached through the Excellence Award at Alpine Robo Games 2026."
-        credit="ii · honours, below"
-        position="center 55%"
-      />
 
       {/* II. Honours */}
       <section
@@ -170,16 +159,6 @@ export default function PathPage() {
           </Reveal>
         </div>
       </section>
-
-      {/* beat — by the numbers */}
-      <NumbersInterlude
-        items={[
-          { value: String(AWARDS.length), label: 'awards, 2023 – 2026' },
-          { value: String(PUBLICATIONS.length), label: 'papers as co-author' },
-          { value: String(techWork.length), label: 'appointments' },
-          { value: '14', label: 'swimming medals' },
-        ]}
-      />
 
       {/* III. Publications */}
       <section

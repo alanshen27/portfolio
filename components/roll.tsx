@@ -104,17 +104,15 @@ function lanes(notes: RollNote[]): Placed[] {
 
 /* ---- component --------------------------------------------------------- */
 
-const LANE = 30 // px
-const ROW_PAD = 10
+const LANE = 24 // px
+const ROW_PAD = 8
 
 export function Roll({
   rows,
-  compact = false,
   playback = true,
   className = '',
 }: {
   rows?: RollRow[]
-  compact?: boolean
   /** Sweep the playhead from the start to now on mount */
   playback?: boolean
   className?: string
@@ -179,9 +177,7 @@ export function Roll({
         <div className="min-w-[880px]">
           {/* ruler */}
           <div className="grid grid-cols-[9rem_1fr]">
-            <div className="text-ink-faint self-end pb-1.5 text-[13px]">
-              {compact ? '' : 'sep 2022 → jun 2027'}
-            </div>
+            <div />
             <div className="relative h-9">
               {Array.from({ length: SPAN + 1 }, (_, k) => T0 + k).map((mi) => {
                 const month = mi % 12
@@ -239,7 +235,7 @@ export function Roll({
                   className="border-line grid grid-cols-[9rem_1fr] border-b"
                   style={{ height: h }}
                 >
-                  <div className="text-ink border-line flex items-start border-r px-0 pt-2.5 text-[15px] font-medium">
+                  <div className="text-ink-soft border-line flex items-start border-r px-0 pt-2 text-[13px]">
                     {r.label}
                   </div>
                   <div className="relative">
@@ -267,7 +263,7 @@ export function Roll({
                       const inner = (
                         <>
                           <span
-                            className={`roll-note block h-[22px] w-full ${
+                            className={`roll-note block h-[16px] w-full ${
                               n.precision === 'year'
                                 ? 'roll-note-year'
                                 : n.result
@@ -276,7 +272,7 @@ export function Roll({
                             } ${sounded ? 'is-on' : ''}`}
                           />
                           <span
-                            className={`roll-label absolute top-0 text-[13px] leading-[22px] whitespace-nowrap ${
+                            className={`roll-label absolute top-0 text-[12.5px] leading-[16px] whitespace-nowrap ${
                               n.inside
                                 ? n.precision === 'year' || n.result
                                   ? 'text-ink left-2'
@@ -371,31 +367,10 @@ export function Roll({
           </>
         ) : (
           <p className="text-ink-faint text-[13px] md:col-span-3">
-            hover or tap a note to read it; tap again to unpin.
+            hover or tap a note to read it.
           </p>
         )}
       </div>
-
-      {!compact && (
-        <div className="text-ink-faint mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[13px]">
-          <span className="flex items-center gap-2">
-            <span className="roll-note is-on inline-block h-[10px] w-6" /> a
-            span of work, drawn to its length
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="roll-note roll-note-result is-on inline-block h-[10px] w-3" />{' '}
-            a result — placement, award, release
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="roll-note roll-note-year is-on inline-block h-[10px] w-3" />{' '}
-            year known, month not recorded
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="roll-future inline-block h-[10px] w-6" /> the
-            continuation
-          </span>
-        </div>
-      )}
     </div>
   )
 }

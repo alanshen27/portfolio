@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { EMAIL, SITE_NAV } from './data'
-import { roman } from '@/components/programme'
 import { easeOut } from '@/components/portfolio-motion'
 
 /**
@@ -28,33 +27,23 @@ export function Header() {
     }
   }, [open])
 
-  const current =
-    SITE_NAV.find((n) => n.href !== '/' && pathname.startsWith(n.href)) ??
-    SITE_NAV[0]
-
   return (
     <>
-      <header className="border-line/70 bg-bg/90 text-ink fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md">
-        <div className="section-max section-pad grid h-14 grid-cols-[1fr_auto] items-center gap-6 md:h-16 md:grid-cols-[auto_1fr_auto]">
+      <header className="border-line bg-bg text-ink fixed inset-x-0 top-0 z-50 border-b">
+        <div className="section-max section-pad flex h-14 items-center justify-between gap-6 md:h-16">
           <Link
             href="/"
-            className="display-quiet text-[1.2rem] md:text-[1.3rem]"
-            aria-label="Alan Shen — Programme"
+            className="text-ink text-[15px] font-medium"
+            aria-label="Alan Shen — home"
           >
             Alan Shen
           </Link>
 
-          <p className="eyebrow-faint hidden min-w-0 truncate text-center lg:block">
-            programme of work
-            {current.href !== '/' && ` · ${current.label}`}
-          </p>
-          <span className="hidden md:block lg:hidden" aria-hidden />
-
           <nav
-            className="hidden items-center justify-end gap-5 md:flex"
+            className="hidden items-center gap-6 md:flex"
             aria-label="Primary"
           >
-            {SITE_NAV.map((item, i) => {
+            {SITE_NAV.map((item) => {
               const active =
                 item.href === '/'
                   ? pathname === '/'
@@ -64,22 +53,17 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`hover:text-ink flex items-baseline gap-1.5 text-[13px] transition-colors ${
+                  className={`hover:text-ink text-[13px] transition-colors ${
                     active ? 'text-ink' : 'text-ink-soft'
                   }`}
                 >
-                  <span className="numeral text-ink-faint text-[10.5px]">
-                    {roman(i + 1)}
-                  </span>
-                  <span className={active ? 'rule-link' : ''}>
-                    {item.label}
-                  </span>
+                  {item.label}
                 </Link>
               )
             })}
             <a
               href={`mailto:${EMAIL}`}
-              className="text-ink-soft hover:text-ink ml-1 text-[13px] transition-colors"
+              className="text-ink-soft hover:text-ink text-[13px] transition-colors"
             >
               email
             </a>
@@ -135,9 +119,6 @@ export function Header() {
                       onClick={() => setOpen(false)}
                       className="border-line flex items-baseline gap-4 border-b py-3"
                     >
-                      <span className="numeral text-ink-faint text-[13px]">
-                        {roman(i + 1)}.
-                      </span>
                       <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
                         {item.label}
                       </span>

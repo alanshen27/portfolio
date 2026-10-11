@@ -319,7 +319,7 @@
 
   .roll-note-year {
     background: transparent;
-    border: 1.5px dashed var(--color-ink);
+    border: 1px solid var(--color-line-strong);
   }
 
   .roll-note-result.roll-note-year {
@@ -343,8 +343,8 @@
   .roll-future {
     background-image: repeating-linear-gradient(
       -45deg,
-      color-mix(in oklab, var(--color-amber) 28%, transparent) 0 1px,
-      transparent 1px 7px
+      color-mix(in oklab, var(--color-amber) 16%, transparent) 0 1px,
+      transparent 1px 9px
     );
   }
 

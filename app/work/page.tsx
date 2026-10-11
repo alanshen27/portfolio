@@ -10,18 +10,13 @@ import {
   ProgrammeRow,
 } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
-import {
-  Figures,
-  NumbersInterlude,
-  QuoteInterlude,
-} from '@/components/interlude'
+import { Figures } from '@/components/interlude'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { AppPlate, InkShot } from '@/components/app-plate'
 import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
 import { Roll } from '@/components/roll'
 import { dateRange } from '@/lib/utils'
 import {
-  LINES,
   NOTES,
   PROJECT_KIND_LABEL,
   PROJECTS,
@@ -119,8 +114,8 @@ export default function WorkPage() {
     <>
       <ScrollProgress />
       <PageTitle
-        kicker="ii · works"
-        title="complete programme notes"
+        kicker="works"
+        title="work"
         standfirst={`${PROJECTS.length} works — two companies, three hackathon podiums, and two research-grade side builds — each with what it is, what Alan did, and what came of it.`}
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
@@ -132,7 +127,7 @@ export default function WorkPage() {
             the builds row of the roll — every work drawn to its length; amber
             marks a placement.
           </p>
-          <Roll rows={['builds']} compact playback={false} />
+          <Roll rows={['builds']} playback={false} />
         </div>
       </section>
 
@@ -157,20 +152,10 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* beat — by the numbers */}
-      <NumbersInterlude
-        items={[
-          { value: String(PROJECTS.length), label: 'works' },
-          { value: '2', label: 'companies founded or co-founded' },
-          { value: '3', label: 'hackathon podiums' },
-          { value: '2', label: 'research-grade side builds' },
-        ]}
-      />
-
       {/* Notes */}
       <section className="bg-bg-elevated py-12 md:py-16">
         <div className="section-max section-pad">
-          <Movement n={2} title="notes on the works" />
+          <Movement title="notes" />
           <div className="mt-6">
             {PROJECTS.map((project, i) => {
               const key = NOTE_KEY[project.id]
@@ -293,11 +278,6 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
-
-      {/* beat — a line */}
-      <QuoteInterlude source="Alan, on the work">
-        “{LINES.systems}”
-      </QuoteInterlude>
 
       {/* Appointments */}
       <section className="py-12 md:py-16">

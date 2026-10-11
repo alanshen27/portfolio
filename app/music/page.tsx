@@ -7,7 +7,6 @@ import { MusicVisualizer } from '@/components/music-visualizer'
 import { Movement, PageTitle, ProgrammeRow } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { Roll } from '@/components/roll'
-import { PlateInterlude } from '@/components/interlude'
 import { MUSIC_RELEASES, STAGE_PHOTOS } from '../data'
 
 export default function MusicPage() {
@@ -20,7 +19,7 @@ export default function MusicPage() {
       <ScrollProgress />
       <PageTitle
         kicker="iv · music"
-        title="interval"
+        title="music"
         standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
         contents={[
           { label: 'listen', href: '#listen' },
@@ -35,7 +34,7 @@ export default function MusicPage() {
           <p className="text-ink-faint mb-3 text-[13px]">
             the music row of the roll.
           </p>
-          <Roll rows={['music']} compact playback={false} />
+          <Roll rows={['music']} playback={false} />
         </div>
       </section>
 
@@ -47,15 +46,6 @@ export default function MusicPage() {
           </Reveal>
         </div>
       </section>
-
-      {/* beat — plate */}
-      <PlateInterlude
-        src="/media/music/violin-performance.png"
-        alt="Alan Shen performing on violin"
-        caption="solo, on stage."
-        credit="ii · releases, below"
-        position="center 30%"
-      />
 
       {/* II. Releases */}
       <section
