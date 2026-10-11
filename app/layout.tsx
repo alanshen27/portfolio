@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Alan Shen — a programme of work',
+    default: 'Alan Shen',
     template: '%s | Alan Shen',
   },
   description:
