@@ -83,7 +83,7 @@ export function DeviceFrame({
         {/* Thin glass edge — not a plastic bezel */}
         <div className="absolute inset-0 rounded-[10px] bg-[#0a0e14] shadow-[0_40px_100px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)]" />
 
-        <div className="absolute inset-[3px] overflow-hidden rounded-[8px] bg-ink md:inset-[4px]">
+        <div className="bg-ink absolute inset-[3px] overflow-hidden rounded-[8px] md:inset-[4px]">
           <Image
             src={image}
             alt={alt}
@@ -113,7 +113,10 @@ export function DeviceFrame({
           />
 
           {/* Subtle film grain */}
-          <div aria-hidden className="shot-grain pointer-events-none absolute inset-0" />
+          <div
+            aria-hidden
+            className="shot-grain pointer-events-none absolute inset-0"
+          />
         </div>
       </motion.div>
 

@@ -173,7 +173,13 @@ function DeviceContent({
 
   const kind = model === 'desk' ? 'monitor' : model
   const scale =
-    kind === 'laptop' ? 5.2 : kind === 'tvModern' ? 4.4 : kind === 'tvVintage' ? 5.8 : 5.6
+    kind === 'laptop'
+      ? 5.2
+      : kind === 'tvModern'
+        ? 4.4
+        : kind === 'tvVintage'
+          ? 5.8
+          : 5.6
 
   return (
     <group
@@ -223,7 +229,11 @@ function Scene({
       >
         <SpinIn active={active} spinKey={spinKey}>
           <Suspense fallback={null}>
-            <DeviceContent key={`${spinKey}-${image}`} model={model} image={image} />
+            <DeviceContent
+              key={`${spinKey}-${image}`}
+              model={model}
+              image={image}
+            />
           </Suspense>
         </SpinIn>
       </PresentationControls>

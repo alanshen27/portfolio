@@ -49,9 +49,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
             </span>
             <span
               className={`h-px transition-all duration-300 ${
-                on
-                  ? 'w-6 bg-white'
-                  : 'w-3 bg-white/30 group-hover:bg-white/60'
+                on ? 'w-6 bg-white' : 'w-3 bg-white/30 group-hover:bg-white/60'
               }`}
             />
             <span

@@ -142,7 +142,9 @@ export function Constellation({
             y1={cy}
             x2={n.x}
             y2={n.y}
-            stroke={hover === n.id ? 'var(--color-accent)' : 'var(--color-line)'}
+            stroke={
+              hover === n.id ? 'var(--color-accent)' : 'var(--color-line)'
+            }
             strokeWidth={hover === n.id ? 1.5 : 1}
             opacity={hover === n.id ? 0.9 : 0.55}
           />
@@ -234,7 +236,7 @@ export function Constellation({
         ))}
       </svg>
 
-      <div className="mt-2 min-h-[1.25rem] text-center font-mono text-[11px] tracking-[0.12em] text-ink-faint uppercase">
+      <div className="text-ink-faint mt-2 min-h-[1.25rem] text-center font-mono text-[11px] tracking-[0.12em] uppercase">
         {hover
           ? placed.find((n) => n.id === hover)?.detail
           : 'Hover a node · click to enter'}

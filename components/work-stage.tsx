@@ -9,8 +9,7 @@ import { easeSnap } from '@/components/portfolio-motion'
 import { PROJECTS } from '@/app/data'
 
 const ProjectDeviceCanvas = dynamic(
-  () =>
-    import('@/components/devices-3d').then((m) => m.ProjectDeviceCanvas),
+  () => import('@/components/devices-3d').then((m) => m.ProjectDeviceCanvas),
   {
     ssr: false,
     loading: () => (
@@ -56,7 +55,7 @@ export function WorkStage() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[#070b10] text-white md:pl-16 lg:pl-[4.5rem]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_70%_40%,rgba(13,107,107,0.28),transparent_60%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-size-[56px_56px] opacity-50" />
+      <div className="bg-size-[56px_56px] pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] opacity-50" />
 
       {/* 3D machine */}
       <div className="absolute inset-0 z-0 md:left-[8%] lg:left-[5%]">
@@ -79,20 +78,16 @@ export function WorkStage() {
             key={project.id}
             className="pointer-events-auto w-full max-w-sm border border-white/15 bg-[#070b10]/80 p-6 backdrop-blur-md md:p-7"
             initial={
-              reduce
-                ? false
-                : { opacity: 0, x: -36, filter: 'blur(8px)' }
+              reduce ? false : { opacity: 0, x: -36, filter: 'blur(8px)' }
             }
             animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             exit={
-              reduce
-                ? undefined
-                : { opacity: 0, x: -20, filter: 'blur(6px)' }
+              reduce ? undefined : { opacity: 0, x: -20, filter: 'blur(6px)' }
             }
             transition={{ duration: 0.45, ease: easeSnap }}
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="font-[family-name:var(--font-display)] text-xs font-bold tracking-[0.2em] text-accent">
+              <span className="text-accent font-[family-name:var(--font-display)] text-xs font-bold tracking-[0.2em]">
                 {String(index + 1).padStart(2, '0')} /{' '}
                 {String(total).padStart(2, '0')}
               </span>
@@ -105,7 +100,7 @@ export function WorkStage() {
               {project.name}
             </h2>
 
-            <p className="mt-2 text-[10px] tracking-[0.14em] text-lake uppercase">
+            <p className="text-lake mt-2 text-[10px] tracking-[0.14em] uppercase">
               {project.role}
               {project.timeframe ? ` · ${project.timeframe}` : ''}
             </p>
@@ -121,7 +116,7 @@ export function WorkStage() {
                     key={point}
                     className="flex gap-2 text-xs leading-relaxed text-white/55"
                   >
-                    <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    <span className="bg-accent mt-1 h-1 w-1 shrink-0 rounded-full" />
                     {point}
                   </li>
                 ))}
@@ -132,7 +127,7 @@ export function WorkStage() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 border border-accent/50 bg-accent/15 px-3.5 py-2 text-[11px] font-semibold tracking-[0.14em] text-lake uppercase transition-colors hover:bg-accent hover:text-white"
+              className="border-accent/50 bg-accent/15 text-lake hover:bg-accent mt-6 inline-flex items-center gap-2 border px-3.5 py-2 text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors hover:text-white"
             >
               {linkLabel(project.link)}
               <span aria-hidden>↗</span>
@@ -146,7 +141,7 @@ export function WorkStage() {
         <button
           type="button"
           onClick={() => go(-1)}
-          className="flex h-12 w-12 items-center justify-center border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent"
+          className="hover:border-accent hover:bg-accent flex h-12 w-12 items-center justify-center border border-white/25 text-white transition-colors"
           aria-label="Previous project"
         >
           ←
@@ -162,7 +157,7 @@ export function WorkStage() {
               aria-current={i === index}
               className={`h-1.5 transition-all ${
                 i === index
-                  ? 'w-8 bg-accent'
+                  ? 'bg-accent w-8'
                   : 'w-1.5 bg-white/25 hover:bg-white/50'
               }`}
             />
@@ -172,7 +167,7 @@ export function WorkStage() {
         <button
           type="button"
           onClick={() => go(1)}
-          className="flex h-12 w-12 items-center justify-center border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent"
+          className="hover:border-accent hover:bg-accent flex h-12 w-12 items-center justify-center border border-white/25 text-white transition-colors"
           aria-label="Next project"
         >
           →
@@ -185,7 +180,7 @@ export function WorkStage() {
 
       <Link
         href="/music"
-        className="absolute top-6 left-5 z-30 text-[10px] tracking-[0.18em] text-white/50 uppercase transition-colors hover:text-accent sm:left-8 md:left-24 lg:left-28"
+        className="hover:text-accent absolute top-6 left-5 z-30 text-[10px] tracking-[0.18em] text-white/50 uppercase transition-colors sm:left-8 md:left-24 lg:left-28"
       >
         Exit → Music
       </Link>

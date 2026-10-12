@@ -52,17 +52,21 @@ export function ScoreRing({
             strokeWidth={stroke}
             strokeLinecap="round"
             strokeDasharray={c}
-            initial={reduce ? { strokeDashoffset: c * (1 - ratio) } : { strokeDashoffset: c }}
+            initial={
+              reduce
+                ? { strokeDashoffset: c * (1 - ratio) }
+                : { strokeDashoffset: c }
+            }
             whileInView={{ strokeDashoffset: c * (1 - ratio) }}
             viewport={{ once: true, margin: '-10% 0px' }}
             transition={{ duration: 1.6, ease: easeOut }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className={`text-4xl font-bold tracking-tight tabular-nums ${ink}`}>
+          <p className={`figure text-4xl ${ink}`}>
             <CountUp to={value} duration={1600} />
           </p>
-          <p className={`mt-0.5 font-mono text-[11px] ${faint}`}>/ {max}</p>
+          <p className={`mt-0.5 text-sm ${faint}`}>/ {max}</p>
         </div>
       </div>
       <p className={`mt-4 text-sm font-medium ${ink}`}>{label}</p>

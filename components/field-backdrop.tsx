@@ -59,7 +59,7 @@ export function FieldBackdrop({
       </svg>
 
       {math && (
-        <div className="absolute inset-0 select-none font-mono text-ink/[0.08]">
+        <div className="text-ink/[0.08] absolute inset-0 font-mono select-none">
           <span className="absolute top-[14%] right-[8%] text-2xl">∑</span>
           <span className="absolute bottom-[18%] left-[6%] text-[11px] tracking-wider">
             O(V+E)

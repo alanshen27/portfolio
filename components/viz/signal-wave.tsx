@@ -82,7 +82,11 @@ export function SignalWave({
   }, [bars, tone])
 
   return (
-    <div ref={wrapRef} className={`relative h-24 w-full ${className}`} aria-hidden>
+    <div
+      ref={wrapRef}
+      className={`relative h-24 w-full ${className}`}
+      aria-hidden
+    >
       <canvas ref={canvasRef} className="h-full w-full" />
     </div>
   )

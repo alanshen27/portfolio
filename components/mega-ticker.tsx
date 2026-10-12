@@ -27,7 +27,7 @@ export function MegaTicker({
   return (
     <div className={`overflow-hidden select-none ${className}`} aria-hidden>
       <motion.div
-        className={`flex w-max gap-8 whitespace-nowrap font-[family-name:var(--font-display)] text-[clamp(3.5rem,10vw,8rem)] font-extrabold tracking-tight uppercase ${color}`}
+        className={`flex w-max gap-8 font-[family-name:var(--font-display)] text-[clamp(3.5rem,10vw,8rem)] font-extrabold tracking-tight whitespace-nowrap uppercase ${color}`}
         animate={
           reduce
             ? undefined
@@ -45,7 +45,7 @@ export function MegaTicker({
           <span key={`${item}-${i}`} className="flex items-center gap-8">
             {item}
             <motion.span
-              className="text-[0.35em] text-accent"
+              className="text-accent text-[0.35em]"
               animate={reduce ? undefined : { rotate: [0, 90, 180, 270, 360] }}
               transition={
                 reduce

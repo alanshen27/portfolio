@@ -63,8 +63,10 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
   const streamLink = track.hyperfollow ?? track.links[0]?.href
 
   return (
-    <div className="flex gap-4 border border-line bg-bg-elevated p-4 md:gap-5 md:p-5">
-      {track.audio && <audio ref={audioRef} src={track.audio} preload="metadata" />}
+    <div className="border-line bg-bg-elevated flex gap-4 border p-4 md:gap-5 md:p-5">
+      {track.audio && (
+        <audio ref={audioRef} src={track.audio} preload="metadata" />
+      )}
 
       <div className="relative h-20 w-20 shrink-0 overflow-hidden md:h-24 md:w-24">
         <Image
@@ -78,10 +80,10 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
 
       <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
         <div className="flex items-baseline justify-between gap-3">
-          <p className="display-quiet truncate text-lg text-ink md:text-xl">
+          <p className="display-quiet text-ink truncate text-lg md:text-xl">
             {track.title}
           </p>
-          <span className="shrink-0 font-mono text-[10px] tracking-[0.12em] text-ink-faint uppercase">
+          <span className="text-ink-faint shrink-0 text-[10px] font-medium tracking-[0.12em] uppercase">
             {track.type}
           </span>
         </div>
@@ -91,8 +93,10 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
             <button
               type="button"
               onClick={toggle}
-              aria-label={playing ? `Pause ${track.title}` : `Play ${track.title}`}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-white transition-colors hover:bg-accent"
+              aria-label={
+                playing ? `Pause ${track.title}` : `Play ${track.title}`
+              }
+              className="bg-ink hover:bg-accent flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-colors"
             >
               {playing ? (
                 <span className="flex gap-[3px]" aria-hidden>
@@ -115,15 +119,15 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
               aria-valuemax={duration || 0}
               aria-valuenow={progress}
             >
-              <div className="absolute top-1/2 right-0 left-0 h-[3px] -translate-y-1/2 bg-line" />
+              <div className="bg-line absolute top-1/2 right-0 left-0 h-[3px] -translate-y-1/2" />
               <div
-                className="absolute top-1/2 left-0 h-[3px] -translate-y-1/2 bg-accent"
+                className="bg-accent absolute top-1/2 left-0 h-[3px] -translate-y-1/2"
                 style={{
                   width: `${duration ? (progress / duration) * 100 : 0}%`,
                 }}
               />
             </div>
-            <span className="shrink-0 font-mono text-[10px] text-ink-faint tabular-nums">
+            <span className="text-ink-faint shrink-0 text-[11px] tabular-nums">
               {fmt(progress)} / {fmt(duration)}
             </span>
           </div>
@@ -134,7 +138,7 @@ export function TrackPlayer({ track }: { track: MusicRelease }) {
             href={streamLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex items-center gap-1 self-start text-[12px] text-accent transition-opacity hover:opacity-70"
+            className="text-accent mt-2 inline-flex items-center gap-1 self-start text-[12px] transition-opacity hover:opacity-70"
           >
             Stream everywhere
             <span aria-hidden>↗</span>
