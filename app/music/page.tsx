@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { CropFrame, Reveal } from '@/components/portfolio-motion'
-import { MegaTicker } from '@/components/mega-ticker'
+import { Reveal } from '@/components/portfolio-motion'
 import { MusicVisualizer } from '@/components/music-visualizer'
-import { PageHero } from '@/components/page-hero'
+import { Movement, PageTitle, ProgrammeRow } from '@/components/programme'
 import { ScrollProgress } from '@/components/scroll-progress'
-import { DISTROKID_ARTIST, MUSIC_RELEASES, NAME } from '../data'
+import { Roll } from '@/components/roll'
+import { MUSIC_RELEASES, STAGE_PHOTOS } from '../data'
 
 export default function MusicPage() {
   const streamLinks = MUSIC_RELEASES.flatMap((r) =>
@@ -17,115 +17,161 @@ export default function MusicPage() {
   return (
     <>
       <ScrollProgress />
-      <PageHero
-        label="Music"
-        title="Off"
-        titleLine2="Stage"
-        description={`Releases as ${NAME} on DistroKid (${DISTROKID_ARTIST}) — local previews with a live visualizer.`}
-        image="/alan/orchestra-hall.jpg"
-        ticker={[
-          "I'd Stay",
-          'Dreams of the Blue',
-          'Violin',
-          'Piano',
-          'DistroKid',
-          'HyperFollow',
+      <PageTitle
+        kicker="iv · music"
+        title="music"
+        standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
+        contents={[
+          { label: 'listen', href: '#listen' },
+          { label: 'releases', href: '#releases' },
+          { label: 'on stage', href: '#stage' },
         ]}
       />
 
-      <section className="overflow-x-clip bg-bg py-10 md:py-16">
+      {/* the roll — this page's rows */}
+      <section className="border-line border-b py-8 md:py-10">
+        <div className="section-max section-pad">
+          <p className="text-ink-faint mb-3 text-[13px]">
+            the music row of the roll.
+          </p>
+          <Roll rows={['music']} playback={false} />
+        </div>
+      </section>
+
+      {/* I. Listen */}
+      <section id="listen" className="scroll-mt-24 py-12 md:py-16">
         <div className="section-max section-pad">
           <Reveal>
             <MusicVisualizer tracks={MUSIC_RELEASES} />
           </Reveal>
+        </div>
+      </section>
 
-          <div className="mt-16 grid gap-0 overflow-hidden border border-line lg:grid-cols-12">
-            <Reveal className="relative min-h-[340px] lg:col-span-7 lg:min-h-[480px]">
+      {/* II. Releases */}
+      <section
+        id="releases"
+        className="bg-bg-elevated scroll-mt-24 py-12 md:py-16"
+      >
+        <div className="section-max section-pad grid gap-10 md:grid-cols-12 md:items-start">
+          <Reveal className="md:col-span-5" y={12}>
+            <div className="relative aspect-[4/3] overflow-hidden">
               <Image
-                src="/alan/orchestra-ensemble.jpg"
-                alt="Alan Shen with orchestra ensemble"
+                src="/media/music/orchestra-ensemble.jpg"
+                alt="Alan Shen performing with orchestra ensemble"
                 fill
                 className="object-cover object-[center_35%]"
-                sizes="(max-width: 1024px) 100vw, 58vw"
+                sizes="(max-width: 768px) 100vw, 40vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-              <div className="absolute inset-5 border border-white/25" />
+            </div>
+            <p className="note-text drop-cap mt-5">
+              grade 8 in both violin and piano, with orchestra and solo stage
+              performance — from concert halls to orphanages in Romania, where
+              he prepared and performed for the Liceul de Arte Oradea and wrote
+              a song for more than sixty students.
+            </p>
+          </Reveal>
+          <div className="md:col-span-7">
+            <Movement n={2} title="releases" align="left" />
+            <Reveal y={12}>
+              <ol className="ledger border-line mt-2 border-b">
+                {MUSIC_RELEASES.map((r, i) => (
+                  <li key={r.id} className="flex items-center gap-4 py-3.5">
+                    <span className="relative h-14 w-14 shrink-0 overflow-hidden">
+                      <Image
+                        src={r.cover}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                      />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <ProgrammeRow
+                        n={i + 1}
+                        title={r.title}
+                        subtitle={`${r.type} · ${r.artist}`}
+                        right={r.hyperfollow ? 'every store' : ''}
+                        href={r.hyperfollow}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </Reveal>
-
-            <Reveal className="bg-ink p-8 text-white md:p-10 lg:col-span-5" delay={0.08}>
-              <p className="text-xs tracking-[0.28em] text-lake uppercase">
-                DistroKid
-              </p>
-              <h3 className="display-smash mt-4 text-4xl text-white normal-case md:text-5xl">
-                {DISTROKID_ARTIST}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
-                Stream beyond this page — HyperFollow routes every major store.
-              </p>
-
-              <ul className="mt-8 space-y-1 border-t border-white/15 pt-6">
-                {MUSIC_RELEASES.filter((r) => r.hyperfollow).map((r) => (
-                  <li key={r.id}>
-                    <a
-                      href={r.hyperfollow}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between py-3 text-sm text-white/75 transition-colors hover:text-white"
-                    >
-                      <span>{r.title} · HyperFollow</span>
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-300 group-hover:translate-x-1.5"
-                      >
-                        →
-                      </span>
-                    </a>
+            <Reveal className="mt-6" y={12} delay={0.04}>
+              <p className="eyebrow">stores</p>
+              <ol className="ledger border-line mt-2 border-y">
+                {streamLinks.map((l) => (
+                  <li key={`${l.release}-${l.label}`}>
+                    <ProgrammeRow
+                      title={l.label}
+                      right={l.release}
+                      href={l.href}
+                    />
                   </li>
                 ))}
-                {streamLinks.map((link) => (
-                  <li key={`${link.release}-${link.label}`}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between py-3 text-sm text-white/75 transition-colors hover:text-white"
-                    >
-                      <span>
-                        {link.label}
-                        <span className="text-white/35"> · {link.release}</span>
-                      </span>
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-300 group-hover:translate-x-1.5"
-                      >
-                        →
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              </ol>
             </Reveal>
           </div>
         </div>
       </section>
 
-      <div className="spine-pad bg-accent py-4">
-        <MegaTicker
-          items={['Play it loud', 'Write it honest', 'Ship the song']}
-          tone="white"
-        />
-      </div>
+      {/* III. On stage */}
+      <section
+        id="stage"
+        className="border-line scroll-mt-24 border-t py-14 md:py-20"
+      >
+        <div className="section-max section-pad">
+          <Movement
+            n={3}
+            title="on stage"
+            standfirst="orchestra, section and solo — five photographs."
+          />
+          <ul className="mt-8 grid grid-cols-2 gap-2 md:grid-cols-6">
+            {STAGE_PHOTOS.map((p, i) => (
+              <Reveal
+                key={p.src}
+                delay={i * 0.04}
+                y={12}
+                className={
+                  i === 0
+                    ? 'col-span-2 row-span-2 md:col-span-3'
+                    : i === 1
+                      ? 'col-span-2 md:col-span-3'
+                      : i === 4
+                        ? 'col-span-2 md:col-span-1'
+                        : 'md:col-span-1'
+                }
+              >
+                <figure className="group relative h-full min-h-[160px] overflow-hidden">
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes={
+                      i < 2
+                        ? '(max-width: 768px) 100vw, 50vw'
+                        : '(max-width: 768px) 50vw, 17vw'
+                    }
+                  />
+                  <figcaption className="text-ink absolute bottom-2 left-2 bg-[color-mix(in_oklab,var(--color-bg-elevated)_92%,transparent)] px-2 py-0.5 text-[13px]">
+                    {p.caption}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-      <section className="spine-pad bg-ink py-16 text-center text-white md:py-20">
-        <div className="section-pad">
-          <p className="display-smash text-[clamp(2rem,6vw,4rem)]">
-            Still curious? <span className="text-accent">Path</span>
+      <section className="border-line bg-bg-elevated border-t py-10">
+        <div className="section-max section-pad flex flex-wrap items-baseline justify-between gap-4">
+          <p className="display-quiet text-ink text-[clamp(1.2rem,2.4vw,1.6rem)]">
+            back to the programme.
           </p>
-          <Link
-            href="/path"
-            className="mt-8 inline-flex items-center bg-white px-6 py-3.5 text-sm font-semibold tracking-[0.14em] text-ink uppercase transition-colors hover:bg-mist"
-          >
-            Open path →
+          <Link href="/" className="row-link text-sm">
+            i · programme →
           </Link>
         </div>
       </section>

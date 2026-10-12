@@ -81,7 +81,10 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const w = canvas.clientWidth
     const h = canvas.clientHeight
-    if (canvas.width !== Math.floor(w * dpr) || canvas.height !== Math.floor(h * dpr)) {
+    if (
+      canvas.width !== Math.floor(w * dpr) ||
+      canvas.height !== Math.floor(h * dpr)
+    ) {
       canvas.width = Math.floor(w * dpr)
       canvas.height = Math.floor(h * dpr)
     }
@@ -103,7 +106,14 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
     // Soft radial wash
     const cx = w * 0.5
     const cy = h * 0.52
-    const glow = c.createRadialGradient(cx, cy, 20, cx, cy, Math.max(w, h) * 0.55)
+    const glow = c.createRadialGradient(
+      cx,
+      cy,
+      20,
+      cx,
+      cy,
+      Math.max(w, h) * 0.55,
+    )
     glow.addColorStop(0, 'rgba(15, 110, 110, 0.22)')
     glow.addColorStop(0.45, 'rgba(183, 205, 216, 0.12)')
     glow.addColorStop(1, 'rgba(18, 24, 31, 0)')
@@ -244,7 +254,7 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
   if (!track) return null
 
   return (
-    <div className="overflow-hidden border border-line bg-ink text-white">
+    <div className="border-line bg-ink overflow-hidden border text-white">
       <audio ref={audioRef} preload="metadata" />
 
       <div ref={wrapRef} className="relative min-h-[420px] md:min-h-[520px]">
@@ -253,12 +263,12 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
             src={track.cover}
             alt=""
             fill
-            className="object-cover opacity-35 blur-sm scale-105"
+            className="scale-105 object-cover opacity-35 blur-sm"
             sizes="100vw"
             priority
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/70 to-ink" />
+        <div className="from-ink/40 via-ink/70 to-ink absolute inset-0 bg-gradient-to-b" />
 
         <canvas
           ref={canvasRef}
@@ -269,7 +279,7 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
         <div className="relative z-10 flex h-full min-h-[420px] flex-col justify-between p-6 md:min-h-[520px] md:p-10">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs tracking-[0.18em] text-lake uppercase">
+              <p className="text-lake text-xs tracking-[0.18em] uppercase">
                 Now playing
               </p>
               <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight md:text-5xl">
@@ -301,7 +311,7 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
               aria-valuenow={progress}
             >
               <div
-                className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-75"
+                className="bg-accent absolute inset-y-0 left-0 transition-[width] duration-75"
                 style={{
                   width: `${duration ? (progress / duration) * 100 : 0}%`,
                 }}
@@ -317,7 +327,7 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
                 type="button"
                 onClick={toggle}
                 disabled={!ready && !track.audio}
-                className="inline-flex min-w-28 items-center justify-center bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-mist disabled:opacity-50"
+                className="text-ink hover:bg-mist inline-flex min-w-28 items-center justify-center bg-white px-5 py-3 text-sm font-semibold transition-colors disabled:opacity-50"
               >
                 {playing ? 'Pause' : 'Play'}
               </button>
@@ -336,12 +346,15 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
         </div>
       </div>
 
-      <div className="border-t border-white/10 bg-ink/95">
+      <div className="bg-ink/95 border-t border-white/10">
         <ul>
           {tracks.map((t) => {
             const active = t.id === track.id
             return (
-              <li key={t.id} className="border-b border-white/10 last:border-b-0">
+              <li
+                key={t.id}
+                className="border-b border-white/10 last:border-b-0"
+              >
                 <button
                   type="button"
                   onClick={() => selectTrack(t.id)}
@@ -367,7 +380,7 @@ export function MusicVisualizer({ tracks }: { tracks: MusicRelease[] }) {
                       {t.audio ? ' · Local preview' : ''}
                     </span>
                   </span>
-                  <span className="text-sm text-accent">
+                  <span className="text-accent text-sm">
                     {active && playing ? 'Playing' : 'Play'}
                   </span>
                 </button>

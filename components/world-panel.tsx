@@ -2,12 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import { easeSnap } from '@/components/portfolio-motion'
 
@@ -58,7 +53,7 @@ export function WorldPanel({
     <section
       ref={ref}
       className={`relative overflow-hidden border-b ${
-        invert ? 'border-white/10 bg-ink' : 'border-line bg-bg'
+        invert ? 'bg-ink border-white/10' : 'border-line bg-bg'
       }`}
     >
       <Link href={href} className="group block md:pl-16 lg:pl-[4.5rem]">
@@ -73,7 +68,7 @@ export function WorldPanel({
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.65, ease: easeSnap }}
           >
-            <p className="font-[family-name:var(--font-display)] text-xs font-bold tracking-[0.28em] text-accent uppercase">
+            <p className="text-accent font-[family-name:var(--font-display)] text-xs font-bold tracking-[0.28em] uppercase">
               {index}
             </p>
             <h2 className="mt-2 font-[family-name:var(--font-display)] text-[clamp(2.2rem,4.5vw,3.4rem)] leading-none font-extrabold tracking-[-0.03em] uppercase">
@@ -117,7 +112,7 @@ export function WorldPanel({
                 ))}
               </ul>
             )}
-            <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold tracking-[0.14em] text-accent uppercase">
+            <span className="text-accent mt-8 inline-flex items-center gap-2 text-sm font-semibold tracking-[0.14em] uppercase">
               {cta}
               <span aria-hidden>→</span>
             </span>
