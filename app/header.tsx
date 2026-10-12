@@ -29,32 +29,29 @@ export function Header() {
 
   return (
     <>
-      <header className="border-line bg-bg text-ink fixed inset-x-0 top-0 z-50 border-b">
+      <header className="fixed inset-x-0 top-0 z-50 text-white mix-blend-difference">
         <div className="section-max section-pad flex h-14 items-center justify-between gap-6 md:h-16">
           <Link
             href="/"
-            className="text-ink text-[15px] font-medium"
+            className="text-[14px] font-medium"
             aria-label="Alan Shen — home"
           >
             Alan Shen
           </Link>
 
           <nav
-            className="hidden items-center gap-6 md:flex"
+            className="hidden items-center gap-7 md:flex"
             aria-label="Primary"
           >
-            {SITE_NAV.map((item) => {
-              const active =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href)
+            {SITE_NAV.filter((item) => item.href !== '/').map((item) => {
+              const active = pathname.startsWith(item.href)
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`hover:text-ink text-[13px] transition-colors ${
-                    active ? 'text-ink' : 'text-ink-soft'
+                  className={`text-[14px] transition-opacity hover:opacity-100 ${
+                    active ? 'opacity-100' : 'opacity-60'
                   }`}
                 >
                   {item.label}
@@ -63,7 +60,7 @@ export function Header() {
             })}
             <a
               href={`mailto:${EMAIL}`}
-              className="text-ink-soft hover:text-ink text-[13px] transition-colors"
+              className="text-[14px] opacity-60 transition-opacity hover:opacity-100"
             >
               email
             </a>
@@ -101,7 +98,6 @@ export function Header() {
             exit={{ opacity: 0 }}
           >
             <div className="flex h-full flex-col justify-end px-6 pt-28 pb-16">
-              <p className="eyebrow-faint mb-4">contents</p>
               <ul>
                 {SITE_NAV.map((item, i) => (
                   <motion.li
@@ -117,28 +113,23 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="border-line flex items-baseline gap-4 border-b py-3"
+                      className="block py-1"
                     >
-                      <span className="display-quiet text-[clamp(1.6rem,7vw,2.2rem)]">
+                      <span className="display block text-[clamp(3.5rem,17vw,5.5rem)]">
                         {item.label}
                       </span>
                     </Link>
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="rule-link"
-                  onClick={() => setOpen(false)}
-                >
+              <div className="text-ink-soft mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
+                <a href={`mailto:${EMAIL}`} onClick={() => setOpen(false)}>
                   email
                 </a>
                 <a
                   href="https://github.com/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rule-link"
                 >
                   GitHub
                 </a>
@@ -146,7 +137,6 @@ export function Header() {
                   href="https://www.linkedin.com/in/alanshen27"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rule-link"
                 >
                   LinkedIn
                 </a>

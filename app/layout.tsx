@@ -7,7 +7,7 @@ import { Footer } from './footer'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f1eee8',
+  themeColor: '#f4f4f1',
 }
 
 export const metadata: Metadata = {
@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${instrument.variable} ${jetbrains.variable}`}>
       <body className="antialiased">
-        <div className="flex min-h-screen flex-col">
+        <div id="top" className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
