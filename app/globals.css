@@ -22,6 +22,18 @@
     font-feature-settings: 'tnum' 1;
   }
 
+  main img,
+  main video {
+    filter: grayscale(1);
+    transition: filter 0.6s ease;
+  }
+
+  main img:hover,
+  main video:hover,
+  main a:hover img {
+    filter: grayscale(0);
+  }
+
   ::selection {
     background: color-mix(in oklab, var(--color-accent) 22%, white);
     color: var(--color-ink);
@@ -29,23 +41,23 @@
 }
 
 @theme {
-  /* Warm paper — print dossier, not console */
-  --color-bg: #f1eee8;
-  --color-bg-elevated: #f9f7f3;
-  --color-ink: #17191c;
-  --color-ink-soft: #4f5257;
-  --color-ink-faint: #85878c;
-  --color-line: #d9d4cb;
-  --color-line-strong: #b9b3a8;
+  /* Near-white page, near-black ink, one accent used sparingly */
+  --color-bg: #f4f4f1;
+  --color-bg-elevated: #fafaf8;
+  --color-ink: #0e0e0d;
+  --color-ink-soft: #55554f;
+  --color-ink-faint: #93938c;
+  --color-line: #dadad4;
+  --color-line-strong: #b4b4ad;
   /* Amber: the colour notate draws its continuation in. Ink is what happened. */
-  --color-accent: #a8591a;
-  --color-accent-deep: #7f4210;
+  --color-accent: #c2561b;
+  --color-accent-deep: #8f3d10;
   --color-amber: #d9922f;
   /* Accent for use on dark (ink) surfaces */
-  --color-accent-bright: #e9ad4f;
-  --color-mist: #e6e1d8;
+  --color-accent-bright: #f0a24f;
+  --color-mist: #e7e7e2;
   --color-lake: #7b8d99;
-  --color-panel-wash: #ebe6dd;
+  --color-panel-wash: #ebebe6;
 
   --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
@@ -73,10 +85,45 @@
 .section-max {
   margin-inline: auto;
   width: 100%;
-  max-width: 72rem;
+  max-width: 96rem;
 }
 
 @layer components {
+  /* Big type: slightly condensed, tight, set solid */
+  .display {
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    font-stretch: 82%;
+    font-variation-settings: 'wdth' 82;
+    letter-spacing: -0.045em;
+    line-height: 0.86;
+  }
+
+  .display-soft {
+    font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 450;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+  }
+
+  .label {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-ink-faint);
+  }
+
+  .hover-line {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hover-line:hover {
+    background-size: 100% 1px;
+  }
+
   /* Display type: serif, medium weight, gentle tracking */
   .display-quiet {
     font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;

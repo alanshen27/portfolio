@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { EMAIL, NAME, SITE_NAV, SOCIAL_LINKS } from './data'
+import { NAME, SOCIAL_LINKS } from './data'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -8,21 +7,12 @@ export function Footer() {
   )
 
   return (
-    <footer className="border-line bg-bg border-t">
-      <div className="section-max section-pad text-ink-faint flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 py-6 text-[13px]">
+    <footer className="bg-bg">
+      <div className="section-max section-pad label flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 py-8">
         <span>
           © {year} {NAME}
         </span>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
-          {SITE_NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="hover:text-ink transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
           {external.map((link) => (
             <a
               key={link.label}
@@ -34,11 +24,8 @@ export function Footer() {
               {link.label}
             </a>
           ))}
-          <a
-            href={`mailto:${EMAIL}`}
-            className="hover:text-ink transition-colors"
-          >
-            email
+          <a href="#top" className="hover:text-ink transition-colors">
+            top ↑
           </a>
         </nav>
       </div>

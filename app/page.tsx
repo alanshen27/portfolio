@@ -1,474 +1,420 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { Reveal } from '@/components/portfolio-motion'
-import { PianoRoll } from '@/components/viz/piano-roll'
-import { Roll } from '@/components/roll'
-import { AppPlate } from '@/components/app-plate'
-import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
-import { dateRange } from '@/lib/utils'
+import {
+  BigRow,
+  Block,
+  Drift,
+  Fade,
+  Line,
+  Rise,
+  SmartLink,
+  Words,
+} from '@/components/beats'
+import { Media } from '@/components/media'
 import {
   AWARDS,
-  EDUCATION,
   EMAIL,
   HOME_BIO,
+  LINES,
   MUSIC_RELEASES,
-  NOTES,
-  PROGRAMME,
   PROJECTS,
-  SKILL_GROUPS,
   SOCIAL_LINKS,
-  VOLUNTEERING,
-  WORK_EXPERIENCE,
 } from './data'
 
-const STUDIOUS = PROJECTS.find((p) => p.id === 'project1')!
-const SCRIBE = PROJECTS.find((p) => p.id === 'project2')!
-const NOTATE = PROJECTS.find((p) => p.id === 'project-notate')!
-const ROLES = WORK_EXPERIENCE.filter((w) => w.company !== 'Institut Le Rosey')
+const SELECTED: { id: string; year: string }[] = [
+  { id: 'project1', year: '2023 —' },
+  { id: 'project2', year: '2025' },
+  { id: 'project-notate', year: '2026' },
+  { id: 'project-foundry', year: '2026' },
+  { id: 'project-nomad', year: '2026' },
+]
 
-function ext(href: string) {
-  return href.startsWith('http')
-    ? { target: '_blank', rel: 'noopener noreferrer' }
-    : {}
+const WORK_PHOTOS = [
+  {
+    src: '/media/projects/studious/home.jpg',
+    alt: 'Studious teacher home screen',
+    caption: 'Studious, a teacher’s home',
+    position: 'top left',
+  },
+  {
+    src: '/media/hackathons/hackharvard-china.jpg',
+    alt: 'Presenting Scribe on stage at HackHarvard China',
+    caption: 'Scribe, on stage at HackHarvard China',
+  },
+  {
+    src: '/media/hackathons/hackmit-workspace.jpg',
+    alt: 'Laptops and hardware on the HackMIT China workspace',
+    caption: 'the Nomad table, HackMIT China',
+  },
+]
+
+const MOMENTS = [
+  {
+    src: '/media/hackathons/hackharvard-win.jpg',
+    alt: 'Alan holding a certificate in front of the HackHarvard backdrop',
+    caption: 'HackHarvard China, 2025',
+    place: 'md:col-span-7',
+    ratio: 'aspect-[3/2]',
+  },
+  {
+    src: '/media/portrait/award-ceremony.png',
+    alt: 'Alan walking back from the stage at a school prize-giving',
+    caption: 'prize-giving',
+    place: 'md:col-span-5',
+    ratio: 'aspect-[3/2] md:aspect-auto md:h-full',
+  },
+  {
+    src: '/media/service/romania-housing.png',
+    alt: 'Volunteers at a housing construction site in Oradea, Romania',
+    caption: 'building houses in Oradea, Romania, 2025',
+    place: 'md:col-span-12',
+    ratio: 'aspect-[16/9] md:aspect-[21/8]',
+  },
+]
+
+type Tile = {
+  src: string
+  video?: string
+  alt: string
+  caption: string
+  ratio: string
+  /** stretches to meet the bottom of the tallest column */
+  grow?: boolean
 }
 
-/* ---- primitives: a section is a small label and a hairline ---------------- */
+const MASONRY: Tile[][] = [
+  [
+    {
+      src: '/media/loops/driver.jpg',
+      video: '/media/vex/driver.mp4',
+      alt: 'The VEX robot driving across the field',
+      caption: 'driver control, VEX team 15520X',
+      ratio: 'aspect-[16/10]',
+    },
+    {
+      src: '/media/swim/team.jpg',
+      alt: 'The Le Rosey swim team on deck',
+      caption: 'the Le Rosey swim team',
+      ratio: 'aspect-[1290/941]',
+    },
+    {
+      src: '/media/swim/lake-medals.webp',
+      alt: 'The team with medals after the lake relay',
+      caption: 'after the lake relay',
+      ratio: 'aspect-[4/3]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/loops/reel.jpg',
+      video: '/media/swim/reel.mp4',
+      alt: 'Racing at a swim meet',
+      caption: 'race footage, Le Rosey',
+      ratio: 'aspect-[4/5]',
+    },
+    {
+      src: '/media/vex/worlds-arena.jpeg',
+      alt: 'The arena at the VEX Robotics World Championship',
+      caption: 'the World Championship arena, Dallas',
+      ratio: 'aspect-[4/3]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/vex/team.png',
+      alt: 'VEX team 15520X with their robot',
+      caption: 'team 15520X',
+      ratio: 'aspect-square',
+    },
+    {
+      src: '/media/vex/worlds-team.jpeg',
+      alt: 'The team at the VEX World Championship',
+      caption: 'at Worlds',
+      ratio: 'aspect-[16/9]',
+    },
+    {
+      src: '/media/swim/medals-rooftop.png',
+      alt: 'The swim team with their medals on a rooftop',
+      caption: 'medals, on the roof',
+      ratio: 'aspect-[4/3]',
+    },
+  ],
+]
 
-function Section({
-  id,
-  label,
-  children,
-  className = '',
-}: {
-  id?: string
-  label: string
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <section
-      id={id}
-      className={`section-max section-pad scroll-mt-24 py-14 md:py-20 ${className}`}
-    >
-      <div className="grid gap-6 md:grid-cols-12 md:gap-10">
-        <h2 className="text-ink-faint text-[13px] md:col-span-2">{label}</h2>
-        <div className="min-w-0 md:col-span-10">{children}</div>
-      </div>
-    </section>
-  )
-}
-
-function Row({
-  title,
-  subtitle,
-  right,
-  href,
-}: {
-  title: string
-  subtitle?: string
-  right?: string
-  href?: string
-}) {
-  const body = (
-    <div className="border-line grid gap-x-6 gap-y-0.5 border-b py-3.5 md:grid-cols-[1fr_auto]">
-      <div className="min-w-0">
-        <p className="text-ink text-[16px] leading-snug font-medium">{title}</p>
-        {subtitle && (
-          <p className="text-ink-soft text-[15px] leading-snug">{subtitle}</p>
-        )}
-      </div>
-      {right && (
-        <p className="text-ink-faint text-[13px] md:pt-0.5 md:text-right">
-          {right}
-        </p>
-      )}
-    </div>
-  )
-  if (!href) return body
-  return href.startsWith('/') || href.startsWith('#') ? (
-    <Link href={href} className="hover:bg-bg-elevated -mx-2 block px-2">
-      {body}
-    </Link>
-  ) : (
-    <a
-      href={href}
-      {...ext(href)}
-      className="hover:bg-bg-elevated -mx-2 block px-2"
-    >
-      {body}
-    </a>
-  )
-}
-
-function Note({
-  id,
-  title,
-  meta,
-  paragraphs,
-  link,
-  figure,
-}: {
-  id: string
-  title: string
-  meta: string
-  paragraphs: string[]
-  link?: { href: string; label: string }
-  figure?: React.ReactNode
-}) {
-  return (
-    <article id={id} className="scroll-mt-24 py-10 first:pt-0 last:pb-0">
-      <div className="grid gap-6 md:grid-cols-12 md:gap-10">
-        <div className="md:col-span-4">
-          <h3 className="text-ink text-[22px] leading-tight font-medium">
-            {title}
-          </h3>
-          <p className="text-ink-faint mt-1 text-[13px]">{meta}</p>
-          {link && (
-            <a
-              href={link.href}
-              {...ext(link.href)}
-              className="row-link mt-3 inline-block text-[13px]"
-            >
-              {link.label} →
-            </a>
-          )}
-        </div>
-        <div className="md:col-span-8">
-          {paragraphs.map((p, i) => (
-            <p
-              key={i}
-              className="text-ink-soft max-w-[62ch] text-[16px] leading-relaxed [&+&]:mt-3"
-            >
-              {p}
-            </p>
-          ))}
-        </div>
-      </div>
-      {figure && <div className="mt-8">{figure}</div>}
-    </article>
-  )
-}
-
-/* ---- page ------------------------------------------------------------------ */
+const FACTS = [
+  ['school', 'Institut Le Rosey, Rolle'],
+  ['programme', 'IB diploma, class of 2027'],
+  ['summer 2026', 'Penn ESAP — AI and its mathematics'],
+  ['languages', 'TypeScript, C++, Python'],
+]
 
 export default function Home() {
   return (
     <div className="bg-bg text-ink">
-      {/* cover: a name, a line, the roll */}
-      <section className="section-max section-pad pt-28 md:pt-36">
-        <Reveal y={8}>
-          <h1 className="text-ink text-[clamp(2rem,4vw,2.75rem)] leading-tight font-medium tracking-[-0.02em]">
-            Alan Shen
-          </h1>
-          <p className="text-ink-soft mt-3 max-w-[58ch] text-[18px] leading-relaxed">
-            Student at Institut Le Rosey, class of 2027. He builds education
-            software, competes in programming and robotics, contributes to
-            research on AI in language assessment, and plays the violin.
-          </p>
-        </Reveal>
-        <Reveal className="mt-14 md:mt-20" y={8} delay={0.1}>
-          <Roll />
-          <p className="text-ink-faint mt-3 text-[13px]">
-            everything since arriving at Le Rosey, drawn to its length on the
-            piano roll he built for notate. amber is a result; the hatch is what
-            comes next.
-          </p>
-        </Reveal>
+      {/* cover */}
+      <section className="section-max section-pad flex min-h-[100svh] flex-col justify-end pt-28 pb-10 md:pb-14">
+        <div className="mb-8 grid gap-6 md:mb-12 md:grid-cols-12">
+          <Fade delay={0.5} className="md:col-span-5">
+            <p className="text-ink text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug">
+              Builds education software, competes in programming and robotics,
+              writes research on AI, and plays the violin.
+            </p>
+          </Fade>
+          <Fade
+            delay={0.6}
+            className="label md:col-span-3 md:col-start-10 md:text-right"
+          >
+            <p>Institut Le Rosey</p>
+            <p>class of 2027</p>
+          </Fade>
+        </div>
+        <h1 className="sr-only">Alan Shen</h1>
+        <div aria-hidden>
+          <Rise now delay={0.05}>
+            <span className="display -ml-[0.04em] block text-[clamp(4rem,26vw,26rem)] leading-[0.8] whitespace-nowrap">
+              Alan Shen
+            </span>
+          </Rise>
+        </div>
       </section>
 
-      <Section id="work" label="work" className="mt-6 md:mt-10">
-        <div className="border-line border-t">
-          {PROGRAMME.map((p) => (
-            <Row
-              key={p.title}
-              title={p.title}
-              subtitle={p.subtitle}
-              right={p.right}
-              href={p.href}
+      {/* statement */}
+      <section className="section-max section-pad py-28 md:py-44">
+        <Words
+          text={LINES.code}
+          className="display-soft max-w-[22ch] text-[clamp(2.25rem,5.6vw,5.75rem)]"
+        />
+      </section>
+
+      {/* robotics and swimming, as a masonry */}
+      <section className="section-max section-pad pb-12 md:pb-20">
+        <div className="grid gap-x-3 gap-y-6 md:grid-cols-3">
+          {MASONRY.map((column, c) => (
+            <div key={c} className="flex flex-col gap-6">
+              {column.map((m) => (
+                <Fade
+                  key={m.src}
+                  delay={c * 0.06}
+                  className={m.grow ? 'flex flex-col md:flex-1' : ''}
+                >
+                  <Media
+                    src={m.src}
+                    video={m.video}
+                    alt={m.alt}
+                    caption={m.caption}
+                    ratio={
+                      m.grow
+                        ? `${m.ratio} md:aspect-auto md:min-h-0 md:flex-1`
+                        : m.ratio
+                    }
+                    className={m.grow ? 'flex flex-col md:flex-1' : ''}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </Fade>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Block
+        id="work"
+        label="selected work"
+        aside={
+          <Link href="/work" className="hover:text-ink transition-colors">
+            all work →
+          </Link>
+        }
+      >
+        {SELECTED.map(({ id, year }) => {
+          const p = PROJECTS.find((x) => x.id === id)!
+          return (
+            <BigRow
+              key={id}
+              title={p.name}
+              detail={p.description}
+              meta={year}
+              href={`/work#${id}`}
+            />
+          )
+        })}
+        <div className="mt-10 grid gap-3 md:mt-14 md:grid-cols-3">
+          {WORK_PHOTOS.map((ph, i) => (
+            <Fade key={ph.src} delay={i * 0.06}>
+              <Media
+                src={ph.src}
+                alt={ph.alt}
+                caption={ph.caption}
+                position={ph.position}
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </Fade>
+          ))}
+        </div>
+      </Block>
+
+      <Drift
+        text="build — compete — research — play —"
+        className="py-6 md:py-10"
+      />
+
+      {/* music */}
+      <Block
+        id="music"
+        label="music"
+        aside={
+          <Link href="/music" className="hover:text-ink transition-colors">
+            listen →
+          </Link>
+        }
+      >
+        <Fade className="border-line border-t pt-8 md:pt-10">
+          <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
+            Violin and piano. Orchestra and solo stage. Two singles of his own.
+          </p>
+        </Fade>
+        <Media
+          className="mt-12 md:mt-16"
+          src="/media/site/banner.jpg"
+          alt="Alan Shen performing violin on stage"
+          ratio="aspect-[4/5] md:aspect-[21/9]"
+          position="35% center"
+          travel={0.16}
+          sizes="100vw"
+        />
+        <div className="mt-3 grid grid-cols-3 gap-3">
+          {[
+            [
+              '/media/music/violin-performance.png',
+              'Alan playing violin on a dark stage',
+              'solo',
+            ],
+            [
+              '/media/music/orchestra-ensemble.jpg',
+              'Alan with the orchestra ensemble',
+              'orchestra',
+            ],
+            [
+              '/media/music/violin-group.png',
+              'The violin section in performance',
+              'the violin section',
+            ],
+          ].map(([src, alt, caption]) => (
+            <Media
+              key={src}
+              src={src}
+              alt={alt}
+              caption={caption}
+              ratio="aspect-[4/3]"
+              sizes="33vw"
             />
           ))}
         </div>
-        <p className="text-ink-faint mt-3 text-[13px]">
-          <Link href="/work" className="row-link">
-            all works, with notes →
-          </Link>
-        </p>
-      </Section>
-
-      <Section id="notes" label="notes">
-        <div className="divide-line divide-y">
-          <Note
-            id="note-studious"
-            title="Studious"
-            meta={`${STUDIOUS.role} · ${STUDIOUS.timeframe}`}
-            paragraphs={NOTES.studious}
-            link={{ href: STUDIOUS.link, label: 'studious.sh' }}
-            figure={
-              <AppPlate
-                domain="studious.sh"
-                screens={STUDIOUS_SCREENS}
-                spread
-              />
-            }
-          />
-          <Note
-            id="note-scribe"
-            title="Scribe"
-            meta={`co-founder & engineer · ${SCRIBE.timeframe}`}
-            paragraphs={NOTES.scribe}
-            link={{ href: SCRIBE.link, label: 'scribe.study' }}
-            figure={
-              <AppPlate
-                domain="scribe.study"
-                screens={SCRIBE_SCREENS}
-                ratio="aspect-[4/3]"
-                spread
-              />
-            }
-          />
-          <Note
-            id="note-notate"
-            title="notate"
-            meta={`${NOTATE.role} · ${NOTATE.timeframe}`}
-            paragraphs={NOTES.notate}
-            link={{ href: NOTATE.link, label: 'source on GitHub' }}
-            figure={
-              <figure className="grid gap-6 md:grid-cols-12 md:gap-10">
-                <div className="border-line border md:col-span-8">
-                  <PianoRoll className="aspect-[16/9] w-full" />
-                </div>
-                <figcaption className="text-ink-soft text-[15px] leading-snug md:col-span-4">
-                  a sketched phrase in ink; the model’s continuation in amber.
-                </figcaption>
-              </figure>
-            }
-          />
-          <Note
-            id="note-competition"
-            title="Competition"
-            meta="USACO · VEX Robotics · 2025 – 2026"
-            paragraphs={NOTES.competition}
-          />
-          <Note
-            id="note-research"
-            title="Research"
-            meta="Luduan.ai · Cambridge University Press · CALICO"
-            paragraphs={NOTES.research}
-          />
+        <div className="mt-10 md:mt-14">
+          {MUSIC_RELEASES.map((r) => (
+            <BigRow
+              key={r.id}
+              title={r.title}
+              detail={`${r.type} · ${r.artist}`}
+              meta="listen"
+              href={r.hyperfollow ?? '/music'}
+            />
+          ))}
         </div>
-      </Section>
+      </Block>
 
-      <Section id="interval" label="music">
-        <div className="grid gap-8 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-7">
-            <p className="text-ink-soft max-w-[62ch] text-[16px] leading-relaxed">
-              ABRSM grade 8 on both violin and piano; orchestra and solo stage,
-              from concert halls to orphanages in Oradea, Romania, where he
-              wrote and performed a song for more than sixty students. Two
-              singles released under his own name.
-            </p>
-            <div className="border-line mt-6 border-t">
-              {MUSIC_RELEASES.map((r) => (
-                <div
-                  key={r.id}
-                  className="border-line flex items-center gap-4 border-b py-3"
-                >
-                  <span className="relative h-10 w-10 shrink-0 overflow-hidden">
-                    <Image
-                      src={r.cover}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="40px"
-                    />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="text-ink block text-[16px] font-medium">
-                      {r.title}
-                    </span>
-                    <span className="text-ink-faint text-[13px]">
-                      {r.type} · {r.artist}
-                    </span>
-                  </span>
-                  {r.hyperfollow && (
-                    <a
-                      href={r.hyperfollow}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="row-link text-[13px]"
-                    >
-                      listen →
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-            <p className="text-ink-faint mt-3 text-[13px]">
-              <Link href="/music" className="row-link">
-                players, stores and stage photographs →
-              </Link>
-            </p>
-          </div>
-          <div className="md:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <Image
-                src="/media/site/banner.jpg"
-                alt="Alan Shen performing violin on stage"
-                fill
-                className="object-cover object-[35%_center]"
-                sizes="(max-width: 768px) 100vw, 40vw"
+      {/* moments */}
+      <Block id="moments" label="moments">
+        <div className="border-line grid gap-3 border-t pt-8 md:grid-cols-12 md:pt-10">
+          {MOMENTS.map((m, i) => (
+            <Fade key={m.src} className={m.place} delay={(i % 2) * 0.08}>
+              <Media
+                src={m.src}
+                alt={m.alt}
+                caption={m.caption}
+                ratio={m.ratio}
+                className="flex h-full flex-col [&>div]:flex-1"
               />
-            </div>
-          </div>
+            </Fade>
+          ))}
         </div>
-      </Section>
+      </Block>
 
-      <Section id="honours" label="record">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-7">
-            <div className="border-line border-t">
-              {AWARDS.map((a) => (
-                <div
-                  key={a.id}
-                  className="border-line grid gap-x-6 gap-y-0.5 border-b py-3 md:grid-cols-[5.5rem_1fr]"
-                >
-                  <p className="text-ink-faint text-[13px] md:pt-0.5">
-                    {a.date ?? '—'}
-                  </p>
-                  <div>
-                    <p className="text-ink text-[16px] leading-snug font-medium">
-                      {a.title}
-                    </p>
-                    {a.description && (
-                      <p className="text-ink-soft text-[15px] leading-snug">
-                        {a.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-ink-faint mt-3 text-[13px]">
-              also ABRSM grade 8 piano and violin · TOEFL iBT 117 / 120.{' '}
-              <Link href="/path" className="row-link">
-                full record →
-              </Link>
-            </p>
-          </div>
-          <div className="md:col-span-5">
-            <h3 className="text-ink-faint text-[13px]">swimming</h3>
-            <p className="text-ink-soft mt-2 text-[15px] leading-snug">
-              competitive swimmer for Le Rosey since 2023 — fourteen medals
-              across IM, freestyle, relays and open water; two-year team mvp;
-              one school record.
-            </p>
-            <h3 className="text-ink-faint mt-8 text-[13px]">service</h3>
-            <div className="border-line mt-2 border-t">
-              {VOLUNTEERING.map((v) => (
-                <div key={v.id} className="border-line border-b py-3">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="text-ink text-[16px] leading-snug font-medium">
-                      {v.organization}
-                    </p>
-                    <p className="text-ink-faint text-[13px] whitespace-nowrap">
-                      {dateRange(v.start, v.end)}
-                    </p>
-                  </div>
-                  <p className="text-ink-soft text-[15px] leading-snug">
-                    {v.role} · {v.cause}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section id="biography" label="about">
-        <div className="grid gap-8 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-7">
-            <p className="text-ink-soft max-w-[62ch] text-[16px] leading-relaxed">
+      {/* about */}
+      <Block id="about" label="about">
+        <div className="border-line grid gap-12 border-t pt-8 md:grid-cols-12 md:gap-8 md:pt-10">
+          <Fade className="md:col-span-7">
+            <p className="display-soft text-[clamp(1.4rem,2.2vw,2.1rem)] leading-[1.18]">
               {HOME_BIO}
             </p>
-            <dl className="mt-6 text-[15px]">
-              {[
-                ['school', 'Institut Le Rosey, Rolle, Switzerland'],
-                ['programme', 'IB diploma · class of 2027'],
-                ['summer 2026', 'Penn ESAP — AI and its mathematics'],
-                ...SKILL_GROUPS.filter((g) => g.label !== 'music').map((g) => [
-                  g.label,
-                  g.items,
-                ]),
-              ].map(([k, v]) => (
+          </Fade>
+          <Fade className="md:col-span-4 md:col-start-9" delay={0.1}>
+            <dl>
+              {FACTS.map(([k, v]) => (
                 <div
                   key={k}
-                  className="border-line grid grid-cols-[7rem_1fr] gap-4 border-b py-2"
+                  className="border-line border-t py-3 first:border-t-0 first:pt-0"
                 >
-                  <dt className="text-ink-faint">{k}</dt>
-                  <dd className="text-ink">{v}</dd>
+                  <dt className="label">{k}</dt>
+                  <dd className="text-ink mt-0.5 text-[16px]">{v}</dd>
                 </div>
               ))}
             </dl>
-          </div>
-          <div className="md:col-span-5">
-            <h3 className="text-ink-faint text-[13px]">appointments</h3>
-            <div className="border-line mt-2 border-t">
-              {ROLES.map((job) => (
-                <div key={job.id} className="border-line border-b py-3">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="text-ink text-[16px] leading-snug font-medium">
-                      {job.company}
-                    </p>
-                    <p className="text-ink-faint text-[13px] whitespace-nowrap">
-                      {dateRange(job.start, job.end)}
-                    </p>
-                  </div>
-                  <p className="text-ink-soft text-[15px]">{job.title}</p>
-                </div>
-              ))}
-            </div>
-            <h3 className="text-ink-faint mt-8 text-[13px]">education</h3>
-            <div className="border-line mt-2 border-t">
-              {EDUCATION.map((e) => (
-                <div key={e.id} className="border-line border-b py-3">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="text-ink text-[16px] leading-snug font-medium">
-                      {e.institution}
-                    </p>
-                    <p className="text-ink-faint text-[13px] whitespace-nowrap">
-                      {dateRange(e.start, e.end)}
-                    </p>
-                  </div>
-                  <p className="text-ink-soft text-[15px]">{e.degree}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          </Fade>
         </div>
-      </Section>
+      </Block>
 
-      <Section id="contact" label="contact" className="pb-24">
-        <a
-          href={`mailto:${EMAIL}`}
-          className="text-ink hover:text-accent text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] break-all transition-colors"
-        >
-          {EMAIL}
+      <Block
+        id="record"
+        label="honours"
+        aside={
+          <Link href="/path" className="hover:text-ink transition-colors">
+            full record →
+          </Link>
+        }
+        className="pt-0 md:pt-0"
+      >
+        {AWARDS.map((a) => (
+          <Line
+            key={a.id}
+            date={a.date}
+            title={a.title}
+            detail={a.description}
+          />
+        ))}
+      </Block>
+
+      {/* contact */}
+      <section
+        id="contact"
+        className="section-max section-pad scroll-mt-16 pt-16 pb-24 md:pt-24 md:pb-32"
+      >
+        <h2 className="display-soft text-ink mb-6 text-[clamp(1.75rem,2.6vw,2.5rem)]">
+          contact
+        </h2>
+        <a href={`mailto:${EMAIL}`} className="group block">
+          <Rise>
+            <span className="display group-hover:text-accent block text-[clamp(3.5rem,13vw,14rem)] transition-colors">
+              Say hello.
+            </span>
+          </Rise>
+          <span className="text-ink-soft group-hover:text-ink mt-6 block text-[clamp(1.125rem,2vw,1.75rem)] break-all transition-colors">
+            {EMAIL}
+          </span>
         </a>
-        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+        <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
           {SOCIAL_LINKS.filter((l) => l.label !== 'email').map((l) => (
-            <a
+            <SmartLink
               key={l.label}
               href={l.link}
-              {...ext(l.link)}
-              className="row-link"
+              className="text-ink-soft hover:text-ink transition-colors"
             >
               {l.label}
-            </a>
+            </SmartLink>
           ))}
         </div>
-      </Section>
+      </section>
     </div>
   )
 }

@@ -26,6 +26,8 @@ export type Project = {
   tags?: string[]
   /** Source repository when public */
   repo?: string
+  /** Hackathon submission page */
+  devpost?: string
   /** Photo from the event or team, shown under the screenshot on /work */
   photo?: string
   photoCaption?: string
@@ -203,7 +205,9 @@ export const PROJECTS: Project[] = [
     name: 'Nomad',
     description:
       'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
-    link: 'https://www.linkedin.com/in/alanshen27/',
+    link: 'https://www.youtube.com/watch?v=zUIMYg8ByNI',
+    devpost: 'https://devpost.com/software/nomad-j58qea',
+    repo: 'https://github.com/usenomad',
     image: '/media/projects/nomad.png',
     id: 'project-nomad',
     role: 'HackMIT China 2026',
@@ -213,7 +217,6 @@ export const PROJECTS: Project[] = [
     outcome: '3rd Place, Education Track · Outstanding Impact Award',
     tags: ['Graphs', 'Planning', 'Social'],
     points: [
-      '3rd Place, Education Track — Outstanding Impact Award.',
       'Interactive course planner with prerequisite dependency graphs.',
       'Social layer for finding classmates, communities, and relevant peers.',
     ],
@@ -221,8 +224,10 @@ export const PROJECTS: Project[] = [
   {
     name: 'Synapse',
     description:
-      'Neural network visualization and analysis — built for HackHarvard.',
+      'An AI messaging app that reads tone, emotion and intent — from voice, text and facial expression — and carries it with every message. Built at HackHarvard 2025.',
     link: 'https://youtu.be/nuEoH_5YOi4',
+    devpost: 'https://devpost.com/software/synapse-n7hwr3',
+    repo: 'https://github.com/gosynapse',
     image: '/media/projects/synapse.png',
     id: 'project3',
     role: 'HackHarvard 2025',
@@ -232,17 +237,20 @@ export const PROJECTS: Project[] = [
     photoCaption: 'team at HackHarvard 2025, Cambridge MA',
     kind: 'hackathon',
     outcome: 'invitational · one of two high-school teams',
-    tags: ['Visualization', 'ML'],
+    tags: ['Emotion recognition', 'Speech', 'Voice cloning'],
     points: [
-      'Interactive viz for inspecting network structure and behavior.',
-      'Full demo walkthrough on YouTube.',
+      'Voice messages transcribed with the emotion detected from tone, pitch and rhythm.',
+      'Text messages tagged with emotion read from facial expression on the webcam.',
+      'Any annotated message can be played back as expressive speech in the sender’s cloned voice.',
     ],
   },
   {
     name: 'Hive',
     description:
-      'Collaborative project management — built for Empower 3.0 Hacks.',
+      'Study groups that connect students across borders and languages, with an AI assistant in every group — built for Empower 3.0 Hacks.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
+    devpost: 'https://devpost.com/software/hive-140hcn',
+    repo: 'https://github.com/alanshen27/hive',
     image: '/media/projects/hive.png',
     id: 'project4',
     role: 'Empower 3.0',
@@ -251,10 +259,6 @@ export const PROJECTS: Project[] = [
     kind: 'hackathon',
     outcome: '3rd Place, Coding track · 450+ participants',
     tags: ['Collaboration', 'Realtime'],
-    points: [
-      '3rd Place, Coding track (450+ participants).',
-      'Shared workspace for coordinating collaborative builds.',
-    ],
   },
 ]
 
@@ -425,18 +429,6 @@ export const CERTIFICATIONS: Certification[] = [
     issuer: 'performance',
     image: 'https://upload.wikimedia.org/wikipedia/en/f/f6/ABRSM_logo.svg',
     id: 'cert2',
-  },
-  {
-    name: 'Building Biosensor Software for Public Health Research',
-    issuer: 'pre-college course',
-    id: 'cert3',
-  },
-  {
-    name: 'TOEFL iBT',
-    issuer: 'score: 117 / 120',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNmS9EYfLaBhhQnpC3-ShH-eOu6PjkzPAyYQ&s',
-    id: 'cert4',
   },
 ]
 
@@ -912,7 +904,7 @@ export const ROLL_NOTES: RollNote[] = [
     label: 'Synapse',
     start: '2025-10',
     detail:
-      'HackHarvard 2025 — neural-network visualisation; one of two high-school teams invited',
+      'HackHarvard 2025 — an emotion-aware messaging app; one of two high-school teams invited',
     href: '/work#project3',
   },
   {
