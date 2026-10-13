@@ -224,7 +224,7 @@ export default function WorkPage() {
         )
       })}
 
-      <Next href="/path" label="Record" />
+      <Next href="/tech" label="Tech" />
     </>
   )
 }
