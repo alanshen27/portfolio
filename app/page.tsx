@@ -9,6 +9,7 @@ import {
   SmartLink,
   Words,
 } from '@/components/beats'
+import { Masonry, type Tile } from '@/components/masonry'
 import { Media } from '@/components/media'
 import {
   AWARDS,
@@ -70,16 +71,6 @@ const MOMENTS = [
     ratio: 'aspect-[16/9] md:aspect-[21/8]',
   },
 ]
-
-type Tile = {
-  src: string
-  video?: string
-  alt: string
-  caption: string
-  ratio: string
-  /** stretches to meet the bottom of the tallest column */
-  grow?: boolean
-}
 
 const MASONRY: Tile[][] = [
   [
@@ -189,33 +180,7 @@ export default function Home() {
 
       {/* robotics and swimming, as a masonry */}
       <section className="section-max section-pad pb-12 md:pb-20">
-        <div className="grid gap-x-3 gap-y-6 md:grid-cols-3">
-          {MASONRY.map((column, c) => (
-            <div key={c} className="flex flex-col gap-6">
-              {column.map((m) => (
-                <Fade
-                  key={m.src}
-                  delay={c * 0.06}
-                  className={m.grow ? 'flex flex-col md:flex-1' : ''}
-                >
-                  <Media
-                    src={m.src}
-                    video={m.video}
-                    alt={m.alt}
-                    caption={m.caption}
-                    ratio={
-                      m.grow
-                        ? `${m.ratio} md:aspect-auto md:min-h-0 md:flex-1`
-                        : m.ratio
-                    }
-                    className={m.grow ? 'flex flex-col md:flex-1' : ''}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </Fade>
-              ))}
-            </div>
-          ))}
-        </div>
+        <Masonry columns={MASONRY} />
       </section>
 
       <Block

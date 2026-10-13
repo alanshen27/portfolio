@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Fade, Next, PageHead, Rise, SmartLink } from '@/components/beats'
+import { ScrollRow } from '@/components/scroll-row'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { IMAGE_SIZES } from '@/app/image-sizes'
 import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
@@ -90,43 +91,44 @@ function Gallery({ p }: { p: Project }) {
   const shots = SHOTS[p.id] ?? []
   if (!shots.length) return null
   return (
-    <div className="-mx-[clamp(1.5rem,5vw,4rem)] overflow-x-auto px-[clamp(1.5rem,5vw,4rem)] pb-3 [scrollbar-width:thin]">
-      <ul className="flex snap-x snap-mandatory gap-3 [--tile-h:clamp(11rem,40vw,14rem)] md:[--tile-h:clamp(14rem,20vw,19rem)]">
-        {shots.map((s) => {
-          const [w, h] = IMAGE_SIZES[s.src] ?? [16, 10]
-          return (
-            <li
-              key={s.src}
-              className="shrink-0 snap-start"
-              style={{ width: `calc(var(--tile-h) * ${w / h})` }}
+    <ScrollRow
+      label={`${p.name} · ${shots.length} images`}
+      className="[--tile-h:clamp(11rem,40vw,14rem)] md:[--tile-h:clamp(14rem,20vw,19rem)]"
+    >
+      {shots.map((s) => {
+        const [w, h] = IMAGE_SIZES[s.src] ?? [16, 10]
+        return (
+          <div
+            key={s.src}
+            className="shrink-0"
+            style={{ width: `calc(var(--tile-h) * ${w / h})` }}
+          >
+            <a
+              href={s.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
             >
-              <a
-                href={s.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <figure>
-                  <div
-                    className="bg-mist relative overflow-hidden"
-                    style={{ aspectRatio: `${w} / ${h}` }}
-                  >
-                    <Image
-                      src={s.src}
-                      alt={s.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 80vw, 36vw"
-                    />
-                  </div>
-                  <figcaption className="label mt-2">{s.label}</figcaption>
-                </figure>
-              </a>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+              <figure>
+                <div
+                  className="bg-mist relative overflow-hidden"
+                  style={{ aspectRatio: `${w} / ${h}` }}
+                >
+                  <Image
+                    src={s.src}
+                    alt={s.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 80vw, 36vw"
+                  />
+                </div>
+                <figcaption className="label mt-2">{s.label}</figcaption>
+              </figure>
+            </a>
+          </div>
+        )
+      })}
+    </ScrollRow>
   )
 }
 
@@ -222,7 +224,7 @@ export default function WorkPage() {
         )
       })}
 
-      <Next href="/path" label="Record" />
+      <Next href="/tech" label="Tech" />
     </>
   )
 }

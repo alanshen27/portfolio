@@ -682,6 +682,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
 export const SITE_NAV = [
   { label: 'home', href: '/' },
   { label: 'work', href: '/work' },
+  { label: 'tech', href: '/tech' },
   { label: 'record', href: '/path' },
   { label: 'music', href: '/music' },
 ] as const
