@@ -168,6 +168,19 @@ export default function MusicPage() {
         </div>
       </Block>
 
+      <section className="section-max section-pad pb-8">
+        <Fade>
+          <Media
+            src="/media/tech/midi.jpg"
+            alt="A MIDI keyboard and boxed hardware on a desk"
+            caption="the desk"
+            ratio="aspect-[16/9] md:aspect-[21/9]"
+            travel={0.1}
+            sizes="(max-width: 1536px) 100vw, 1536px"
+          />
+        </Fade>
+      </section>
+
       <Next href="/" label="Home" />
     </>
   )
