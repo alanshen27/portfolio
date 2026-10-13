@@ -1,25 +1,136 @@
 import Image from 'next/image'
-import { BigRow, Block, Fade, Line, Next, PageHead } from '@/components/beats'
+import {
+  Block,
+  Drift,
+  Fade,
+  Next,
+  PageHead,
+  Rise,
+  SmartLink,
+  Words,
+} from '@/components/beats'
+import { Masonry, type Tile } from '@/components/masonry'
+import { Media } from '@/components/media'
 import { MusicVisualizer } from '@/components/music-visualizer'
-import { ParallaxPlane } from '@/components/parallax'
-import { MUSIC_RELEASES, STAGE_PHOTOS } from '../data'
+import { MUSIC_RELEASES } from '../data'
+
+const STAGE: Tile[][] = [
+  [
+    {
+      src: '/media/music/violin-portrait.jpg',
+      alt: 'Alan playing violin on stage, close-up',
+      caption: 'solo, close',
+      ratio: 'aspect-square',
+    },
+    {
+      src: '/media/music/orchestra-hall.jpg',
+      alt: 'The orchestra rehearsing in a concert hall',
+      caption: 'rehearsal, in the hall',
+      ratio: 'aspect-[3/2]',
+    },
+  ],
+  [
+    {
+      src: '/media/site/banner.jpg',
+      alt: 'Wide shot of Alan performing violin on a lit stage',
+      caption: 'solo, stage',
+      ratio: 'aspect-[4/3]',
+      position: '35% center',
+    },
+    {
+      src: '/media/music/violin-stage.png',
+      alt: 'Alan performing violin in a dark hall',
+      caption: 'recital',
+      ratio: 'aspect-[16/9]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/music/violin-performance.png',
+      alt: 'Alan playing violin on a dark stage',
+      caption: 'at the stand',
+      ratio: 'aspect-[16/9]',
+      position: '40% center',
+    },
+    {
+      src: '/media/music/violin-group.png',
+      alt: 'The violin section in performance',
+      caption: 'the violin section',
+      ratio: 'aspect-[16/9]',
+    },
+    {
+      src: '/media/music/orchestra.png',
+      alt: 'Alan playing in an orchestra violin section',
+      caption: 'orchestra',
+      ratio: 'aspect-[16/9]',
+      grow: true,
+    },
+  ],
+]
 
 export default function MusicPage() {
-  const streamLinks = MUSIC_RELEASES.flatMap((r) =>
-    r.links.map((l) => ({ ...l, release: r.title })),
-  )
-
   return (
     <>
       <PageHead
         title="Music"
         standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
         contents={[
-          { label: 'listen', href: '#listen' },
           { label: 'releases', href: '#releases' },
+          { label: 'listen', href: '#listen' },
           { label: 'on stage', href: '#stage' },
         ]}
       />
+
+      <Block id="releases" label="releases">
+        {MUSIC_RELEASES.map((r, i) => (
+          <div
+            key={r.id}
+            className="border-line grid items-end gap-6 border-t py-8 md:grid-cols-12 md:gap-8 md:py-10"
+          >
+            <Fade className="w-40 md:col-span-3 md:w-auto">
+              <div className="bg-mist relative aspect-square max-w-[15rem] overflow-hidden">
+                <Image
+                  src={r.cover}
+                  alt={`${r.title} cover`}
+                  fill
+                  className="object-cover"
+                  sizes="240px"
+                />
+              </div>
+            </Fade>
+            <div className="md:col-span-9">
+              <p className="label">
+                {String(i + 1).padStart(2, '0')} · {r.type} · {r.artist}
+              </p>
+              <Rise className="mt-2">
+                <span className="display block text-[clamp(3rem,9vw,9rem)]">
+                  {r.title}
+                </span>
+              </Rise>
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[15px]">
+                {r.hyperfollow && (
+                  <SmartLink
+                    href={r.hyperfollow}
+                    className="text-ink hover-line"
+                  >
+                    every store →
+                  </SmartLink>
+                )}
+                {r.links.map((l) => (
+                  <SmartLink
+                    key={l.href}
+                    href={l.href}
+                    className="text-ink-soft hover:text-ink transition-colors"
+                  >
+                    {l.label}
+                  </SmartLink>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </Block>
 
       <section
         id="listen"
@@ -30,81 +141,31 @@ export default function MusicPage() {
         </Fade>
       </section>
 
-      <Block id="releases" label="releases">
-        {MUSIC_RELEASES.map((r) => (
-          <BigRow
-            key={r.id}
-            title={r.title}
-            detail={`${r.type} · ${r.artist}`}
-            meta="every store"
-            href={r.hyperfollow}
-          />
-        ))}
-        {streamLinks.length > 0 && (
-          <div className="mt-12">
-            <h3 className="text-ink mb-4 text-[20px] font-medium">stores</h3>
-            {streamLinks.map((l) => (
-              <Line
-                key={`${l.release}-${l.label}`}
-                title={l.label}
-                right={l.release}
-                href={l.href}
-              />
-            ))}
-          </div>
-        )}
-      </Block>
+      <Media
+        src="/media/music/orchestra-ensemble.jpg"
+        alt="Alan with the orchestra ensemble"
+        ratio="h-[70vh] min-h-[360px]"
+        position="center 35%"
+        travel={0.18}
+        sizes="100vw"
+      />
 
-      <section className="relative h-[70vh] min-h-[360px] overflow-hidden">
-        <ParallaxPlane travel={0.18}>
-          <Image
-            src="/media/music/orchestra-ensemble.jpg"
-            alt="Alan Shen performing with orchestra ensemble"
-            fill
-            className="object-cover object-[center_35%]"
-            sizes="100vw"
-          />
-        </ParallaxPlane>
+      <Drift
+        text="violin — piano — orchestra — songs —"
+        className="py-10 md:py-16"
+      />
+
+      <section className="section-max section-pad py-16 md:py-28">
+        <Words
+          text="From concert halls to orphanages in Oradea, Romania, where he wrote and performed a song for more than sixty students."
+          className="display-soft max-w-[24ch] text-[clamp(2rem,4.8vw,4.75rem)]"
+        />
       </section>
 
       <Block id="stage" label="on stage">
-        <Fade className="border-line border-t pt-8 md:pt-10">
-          <p className="display-soft max-w-[26ch] text-[clamp(1.8rem,4vw,4rem)]">
-            From concert halls to orphanages in Oradea, Romania, where he wrote
-            and performed a song for more than sixty students.
-          </p>
-        </Fade>
-        <ul className="mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-6">
-          {STAGE_PHOTOS.map((p, i) => (
-            <li
-              key={p.src}
-              className={
-                i < 2 ? 'col-span-2 md:col-span-3' : 'col-span-1 md:col-span-2'
-              }
-            >
-              <Fade delay={i * 0.04}>
-                <figure>
-                  <div
-                    className={`bg-mist relative overflow-hidden ${i < 2 ? 'aspect-[4/3]' : 'aspect-square'}`}
-                  >
-                    <Image
-                      src={p.src}
-                      alt={p.alt}
-                      fill
-                      className="object-cover"
-                      sizes={
-                        i < 2
-                          ? '(max-width: 768px) 100vw, 50vw'
-                          : '(max-width: 768px) 50vw, 33vw'
-                      }
-                    />
-                  </div>
-                  <figcaption className="label mt-2">{p.caption}</figcaption>
-                </figure>
-              </Fade>
-            </li>
-          ))}
-        </ul>
+        <div className="border-line border-t pt-8 md:pt-10">
+          <Masonry columns={STAGE} />
+        </div>
       </Block>
 
       <Next href="/" label="Home" />
