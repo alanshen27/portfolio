@@ -43,7 +43,7 @@ export function PortfolioAudio({ title, src }: { title: string; src: string }) {
           <a href={src} className="rule-link">
             Open the audio file
           </a>{' '}
-          or use the streaming link below.
+          to listen directly.
         </p>
       )}
     </div>

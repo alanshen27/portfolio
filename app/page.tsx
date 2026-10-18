@@ -242,7 +242,7 @@ export default function Home() {
             href="/music-technology"
             className="rule-link mt-6 inline-block text-base"
           >
-            Music &amp; technology portfolio — listen &amp; explore →
+            Music &amp; technology portfolio — view selected work →
           </Link>
         </Fade>
         <Media

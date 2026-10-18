@@ -96,8 +96,8 @@ export default function MusicPage() {
               Music &amp; technology
             </span>
             <span className="text-ink-soft mt-3 block text-base">
-              notate, two singles, and the process behind the work. Listen and
-              explore in one place.
+              Regrets, inkform 拳墨, and 問答 Wèndá — Call &amp; Blossom.
+              Songwriting, movement, and interactive music.
             </span>
           </span>
           <span
