@@ -11,6 +11,8 @@ export type PortfolioWork = {
   process?: { title: string; description: string }[]
   // Add supplied assets here; absent media never renders an empty player or image.
   image?: { src: string; alt: string }
+  video?: { src: string; poster?: string; captions?: string }
+  gallery?: { src: string; alt: string; caption?: string }[]
   audio?: string
   links?: { label: string; href: string }[]
 }
