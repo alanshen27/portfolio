@@ -76,11 +76,38 @@ export default function MusicPage() {
         title="Music"
         standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
         contents={[
+          { label: 'music & technology portfolio', href: '/music-technology' },
           { label: 'releases', href: '#releases' },
           { label: 'listen', href: '#listen' },
           { label: 'on stage', href: '#stage' },
         ]}
       />
+
+      <section className="section-max section-pad pb-12 md:pb-16">
+        <SmartLink
+          href="/music-technology"
+          className="group border-line grid gap-4 border-y py-6 md:grid-cols-12 md:items-center md:gap-8"
+        >
+          <span className="text-ink-soft text-sm md:col-span-3">
+            selected portfolio
+          </span>
+          <span className="md:col-span-8">
+            <span className="display-soft block text-3xl md:text-4xl">
+              Music &amp; technology
+            </span>
+            <span className="text-ink-soft mt-3 block text-base">
+              notate, two singles, and the process behind the work. Listen and
+              explore in one place.
+            </span>
+          </span>
+          <span
+            aria-hidden
+            className="text-2xl transition-transform group-hover:translate-x-1 md:text-right"
+          >
+            →
+          </span>
+        </SmartLink>
+      </section>
 
       <Block id="releases" label="releases">
         {MUSIC_RELEASES.map((r, i) => (

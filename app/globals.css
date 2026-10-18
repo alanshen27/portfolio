@@ -88,6 +88,11 @@
   max-width: 96rem;
 }
 
+.music-portfolio a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 5px;
+}
+
 @layer components {
   /* Big type: slightly condensed, tight, set solid */
   .display {

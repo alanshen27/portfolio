@@ -238,6 +238,12 @@ export default function Home() {
           <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
             Violin and piano. Orchestra and solo stage. Two singles of his own.
           </p>
+          <Link
+            href="/music-technology"
+            className="rule-link mt-6 inline-block text-base"
+          >
+            Music &amp; technology portfolio — listen &amp; explore →
+          </Link>
         </Fade>
         <Media
           className="mt-12 md:mt-16"
