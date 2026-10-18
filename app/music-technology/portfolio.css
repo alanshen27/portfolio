@@ -72,13 +72,16 @@
   margin-top: 36px;
 }
 .mp-index-art {
+  position: relative;
   aspect-ratio: 1.6;
   overflow: hidden;
 }
-.mp-index-art .mp-title-card {
+.mp-index-art .mp-title-card,
+.mp-index-art img {
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.mp-index-link:hover .mp-title-card {
+.mp-index-link:hover .mp-title-card,
+.mp-index-link:hover .mp-index-art img {
   transform: scale(1.035);
 }
 .mp-index-caption {
@@ -545,10 +548,12 @@
   html:has(.music-portfolio) {
     scroll-behavior: auto;
   }
-  .mp-index-art .mp-title-card {
+  .mp-index-art .mp-title-card,
+  .mp-index-art img {
     transition: none;
   }
-  .mp-index-link:hover .mp-title-card {
+  .mp-index-link:hover .mp-title-card,
+  .mp-index-link:hover .mp-index-art img {
     transform: none;
   }
 }

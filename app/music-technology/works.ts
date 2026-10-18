@@ -42,6 +42,42 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
       { label: 'Input', value: 'Martial arts movement' },
       { label: 'Output', value: 'Music' },
     ],
+    image: {
+      src: '/media/music-technology/inkform/turning-climax.webp',
+      alt: 'A white martial artist silhouette kicks through red and white ink effects against dark mountains in inkform.',
+    },
+    gallery: [
+      {
+        src: '/media/music-technology/inkform/carrying-kick.webp',
+        alt: 'A black silhouette performs a high kick among soft ink trails in a pale mountain landscape.',
+        caption: '承 / Carrying — movement against a pale ink landscape.',
+      },
+      {
+        src: '/media/music-technology/inkform/carrying-impact.webp',
+        alt: 'A high kick surrounded by a red trail and radiating ink strokes during the Carrying section.',
+        caption: '承 / Carrying — a kick framed by radiating ink.',
+      },
+      {
+        src: '/media/music-technology/inkform/turning-flow.webp',
+        alt: 'A white martial artist silhouette with flowing pale ink and a red glow against dark mountains.',
+        caption: '转 / Turning — the landscape shifts into darkness.',
+      },
+      {
+        src: '/media/music-technology/inkform/turning-climax.webp',
+        alt: 'A white silhouette at the height of a kick, surrounded by red and white strokes in the dark Turning section.',
+        caption: '转 / Turning — a burst of colour and ink.',
+      },
+      {
+        src: '/media/music-technology/inkform/closing-dark.webp',
+        alt: 'A white silhouette extends an arm beneath a fading ink trail in the dark Closing section.',
+        caption: '合 / Closing — a gesture in the dark landscape.',
+      },
+      {
+        src: '/media/music-technology/inkform/closing-light.webp',
+        alt: 'A dark silhouette performs a kick as the Closing section returns to a pale mountain landscape.',
+        caption: '合 / Closing — returning to the pale landscape.',
+      },
+    ],
   },
   {
     id: 'wenda',

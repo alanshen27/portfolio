@@ -120,7 +120,17 @@ function Demo({
   if (!work.video || failed) {
     return (
       <div className="mp-demo-placeholder">
-        <TitleCard work={work} demo={!work.video} />
+        {work.image ? (
+          <Image
+            src={work.image.src}
+            alt={work.image.alt}
+            fill
+            sizes="90vw"
+            className="object-contain"
+          />
+        ) : (
+          <TitleCard work={work} demo={!work.video} />
+        )}
         {failed && (
           <a className="mp-video-fallback" href={work.video?.src}>
             Open demo video ↗
@@ -476,7 +486,17 @@ export function MusicPortfolioExperience({
           {works.map((work, index) => (
             <a href={`#${work.id}`} key={work.id} className="mp-index-link">
               <div className="mp-index-art">
-                <TitleCard work={work} />
+                {work.image ? (
+                  <Image
+                    src={work.image.src}
+                    alt={work.image.alt}
+                    fill
+                    sizes="(max-width: 899px) 30vw, 33vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <TitleCard work={work} />
+                )}
               </div>
               <div className="mp-index-caption">
                 <span>0{index + 1}</span>
