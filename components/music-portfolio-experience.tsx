@@ -186,9 +186,16 @@ function Description({ work }: { work: PortfolioWork }) {
       </h2>
       {work.subtitle && <p className="mp-work-subtitle">{work.subtitle}</p>}
       <p className="mp-summary">{work.summary}</p>
-      <p className="mp-description">{work.description}</p>
+      {work.description.map((paragraph, index) => (
+        <p key={`${work.id}-description-${index}`} className="mp-description">
+          {paragraph}
+        </p>
+      ))}
       {work.process && (
-        <ol className="mp-process" aria-label="How Call & Blossom works">
+        <ol
+          className="mp-process"
+          aria-label={`How ${work.subtitle ?? work.title} works`}
+        >
           {work.process.map((step, i) => (
             <li key={step.title} title={step.description}>
               <span>0{i + 1}</span> {step.title}

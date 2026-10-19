@@ -5,7 +5,7 @@ import { PORTFOLIO_WORKS } from './works'
 
 const title = 'Music & Technology'
 const description =
-  'Selected work by Alan Shen: Regrets, an original song; inkform 拳墨, movement turned into music; and 問答 Wèndá — Call & Blossom, a musical dialogue with notate.'
+  'Selected work by Alan Shen: Regrets, an original song; Inkform 拳墨, movement turned into music; and 蝶戀花 — Butterflies in Love with Flowers, a musical dialogue with Notate.'
 
 export const metadata: Metadata = {
   title,
