@@ -8,7 +8,14 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react'
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import {
+  type CSSProperties,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react'
 import type { PortfolioWork } from '@/app/music-technology/works'
 import { SmartLink } from '@/components/beats'
 import { PortfolioAudio } from '@/components/portfolio-audio'
@@ -279,13 +286,32 @@ function ChapterFooter({ next }: { next?: PortfolioWork }) {
 }
 
 function SimpleGallery({ work }: { work: PortfolioWork }) {
+  const gallery = useRef<HTMLDivElement>(null)
+  const [current, setCurrent] = useState(1)
+  const count = work.gallery?.length || (work.image ? 1 : 3)
+  const { scrollXProgress: progress } = useScroll({ container: gallery })
+
+  useMotionValueEvent(progress, 'change', (value) => {
+    setCurrent(Math.min(count, Math.round(value * (count - 1)) + 1))
+  })
+
   return (
     <div className="mp-gallery">
       <div className="mp-gallery-heading">
         <span>Screenshots</span>
         <span>Swipe or scroll to see screenshots →</span>
+        <span
+          className="mp-gallery-count"
+          aria-label={`Screenshot ${current} of ${count}`}
+        >
+          {String(current).padStart(2, '0')} / {String(count).padStart(2, '0')}
+        </span>
+      </div>
+      <div className="mp-gallery-progress" aria-hidden="true">
+        <motion.div style={{ scaleX: progress }} />
       </div>
       <div
+        ref={gallery}
         className="mp-simple-gallery"
         tabIndex={0}
         role="region"
@@ -300,7 +326,13 @@ function SimpleGallery({ work }: { work: PortfolioWork }) {
   )
 }
 
-function ScrollGallery({ work }: { work: PortfolioWork }) {
+function ScrollGallery({
+  work,
+  top = 88,
+}: {
+  work: PortfolioWork
+  top?: number
+}) {
   const section = useRef<HTMLDivElement>(null)
   const gallery = useRef<HTMLDivElement>(null)
   const track = useRef<HTMLDivElement>(null)
@@ -309,7 +341,7 @@ function ScrollGallery({ work }: { work: PortfolioWork }) {
   const count = work.gallery?.length || (work.image ? 1 : 3)
   const { scrollYProgress: progress } = useScroll({
     target: section,
-    offset: ['start 88px', 'end end'],
+    offset: [`start ${top}px`, 'end end'],
   })
   const x = useTransform(progress, [0, 1], [0, -distance])
 
@@ -336,7 +368,12 @@ function ScrollGallery({ work }: { work: PortfolioWork }) {
     <div
       ref={section}
       className="mp-scroll-gallery"
-      style={{ height: `calc(100svh + ${distance}px)` }}
+      style={
+        {
+          height: `calc(100svh - ${top}px + ${distance}px)`,
+          '--mp-gallery-top': `${top}px`,
+        } as CSSProperties
+      }
       role="region"
       aria-label={`${work.title} screenshot gallery`}
     >
@@ -368,12 +405,7 @@ function ScrollGallery({ work }: { work: PortfolioWork }) {
   )
 }
 
-function WorkChapter({
-  work,
-  index,
-  next,
-  cinematic,
-}: ChapterProps & { cinematic: boolean }) {
+function WorkChapter({ work, index, next }: ChapterProps) {
   return (
     <section
       id={work.id}
@@ -394,11 +426,206 @@ function WorkChapter({
           <Description work={work} />
         </div>
       </div>
-      {cinematic ? (
-        <ScrollGallery work={work} />
-      ) : (
-        <SimpleGallery work={work} />
-      )}
+      <SimpleGallery work={work} />
+      <div className="mp-simple-next">
+        <ChapterFooter next={next} />
+      </div>
+    </section>
+  )
+}
+
+const stageTop = 144
+const chapterPhases = ['Image', 'Description', 'Screenshots'] as const
+
+function CinematicChapter({ work, index, next }: ChapterProps) {
+  const section = useRef<HTMLElement>(null)
+  const reading = useRef<HTMLDivElement>(null)
+  const mediaColumn = useRef<HTMLDivElement>(null)
+  const screenshots = useRef<HTMLDivElement>(null)
+  const [layout, setLayout] = useState({
+    width: 0,
+    height: 600,
+    scale: 0.42,
+    lead: 720,
+    travel: 1,
+    descriptionAt: 720,
+    screenshotsAt: Infinity,
+  })
+  const [status, setStatus] = useState({ phase: 0, percent: 0 })
+  const [copyVisible, setCopyVisible] = useState(false)
+  const { scrollYProgress: progress } = useScroll({
+    target: section,
+    offset: ['start 64px', 'end end'],
+  })
+  const { scrollYProgress: reveal } = useScroll({
+    target: reading,
+    offset: [`start ${stageTop}px`, `${layout.lead}px ${stageTop}px`],
+  })
+  const scale = useTransform(reveal, [0, 0.72], [1, layout.scale])
+  const copyOpacity = useTransform(reveal, [0.76, 0.98], [0, 1])
+  const factsOpacity = useTransform(reveal, [0.72, 0.84], [0, 1])
+
+  useMotionValueEvent(reveal, 'change', (value) => {
+    setCopyVisible(value >= 0.76)
+  })
+
+  useEffect(() => {
+    const measure = () => {
+      if (
+        !section.current ||
+        !reading.current ||
+        !mediaColumn.current ||
+        !screenshots.current
+      )
+        return
+      const width = reading.current.clientWidth
+      const lead = Math.round(window.innerHeight * 0.85)
+      const nextLayout = {
+        width,
+        height: Math.min(width / 1.6, window.innerHeight - stageTop - 32),
+        scale: mediaColumn.current.clientWidth / Math.max(1, width),
+        lead,
+        travel: Math.max(
+          1,
+          section.current.offsetHeight - window.innerHeight + 64,
+        ),
+        descriptionAt:
+          reading.current.offsetTop - (stageTop - 64) + lead * 0.72,
+        screenshotsAt: screenshots.current.offsetTop - (stageTop - 64),
+      }
+      setLayout((previous) =>
+        Object.keys(nextLayout).every(
+          (key) =>
+            previous[key as keyof typeof previous] ===
+            nextLayout[key as keyof typeof nextLayout],
+        )
+          ? previous
+          : nextLayout,
+      )
+    }
+    const observer = new ResizeObserver(measure)
+    for (const element of [
+      section.current,
+      reading.current,
+      mediaColumn.current,
+      screenshots.current,
+    ]) {
+      if (element) observer.observe(element)
+    }
+    window.addEventListener('resize', measure)
+    measure()
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', measure)
+    }
+  }, [])
+
+  const updateStatus = useCallback(
+    (value: number) => {
+      const distance = value * layout.travel
+      const phase =
+        distance >= layout.screenshotsAt
+          ? 2
+          : distance >= layout.descriptionAt
+            ? 1
+            : 0
+      const percent = Math.round(Math.max(0, Math.min(1, value)) * 100)
+      setStatus((previous) =>
+        previous.phase === phase && previous.percent === percent
+          ? previous
+          : { phase, percent },
+      )
+    },
+    [layout],
+  )
+  useMotionValueEvent(progress, 'change', updateStatus)
+  useEffect(() => {
+    updateStatus(progress.get())
+    setCopyVisible(reveal.get() >= 0.76)
+  }, [updateStatus, progress, reveal]) // Recalculate after fonts, resizing, or a direct chapter link.
+
+  const goToPhase = (phase: number) => {
+    if (!reading.current || !screenshots.current) return
+    const element = phase === 2 ? screenshots.current : reading.current
+    const top = window.scrollY + element.getBoundingClientRect().top - stageTop
+    window.scrollTo({
+      top: top + (phase === 1 ? layout.lead : 0),
+      behavior: 'smooth',
+    })
+  }
+
+  return (
+    <section
+      ref={section}
+      id={work.id}
+      className="mp-work-chapter mp-cinematic-chapter section-max section-pad"
+      aria-label={work.subtitle ?? work.title}
+    >
+      <div className="mp-chapter-status">
+        <div className="mp-chapter-status-row">
+          <p>
+            0{index + 1} / <WorkName work={work} />
+          </p>
+          <ol aria-label={`${work.title} sections`}>
+            {chapterPhases.map((phase, i) => (
+              <li key={phase}>
+                <button
+                  onClick={() => goToPhase(i)}
+                  aria-current={status.phase === i ? 'step' : undefined}
+                >
+                  <span>0{i + 1}</span> {phase}
+                </button>
+              </li>
+            ))}
+          </ol>
+          <span className="mp-chapter-percent">{status.percent}%</span>
+        </div>
+        <div
+          className="mp-chapter-progress"
+          role="progressbar"
+          aria-label={`${work.title} scroll progress`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={status.percent}
+          aria-valuetext={`${chapterPhases[status.phase]}, ${status.percent}%`}
+        >
+          <motion.div style={{ scaleX: progress }} />
+        </div>
+      </div>
+      <div ref={reading} className="mp-cinematic-reading mp-reading-layout">
+        <div ref={mediaColumn} className="mp-cinematic-media mp-reading-media">
+          <div className="mp-media-anchor">
+            <div
+              className="mp-media-slot"
+              style={{ height: layout.height * layout.scale }}
+            >
+              <motion.div
+                className="mp-shrink-frame"
+                style={{
+                  width: layout.width || '100%',
+                  height: layout.height,
+                  scale,
+                }}
+              >
+                <Demo work={work} />
+              </motion.div>
+            </div>
+            <motion.div style={{ opacity: factsOpacity }}>
+              <Details work={work} />
+            </motion.div>
+          </div>
+        </div>
+        <motion.div
+          className="mp-reading-copy mp-cinematic-copy"
+          style={{ paddingTop: layout.lead, opacity: copyOpacity }}
+          inert={!copyVisible}
+        >
+          <Description work={work} />
+        </motion.div>
+      </div>
+      <div ref={screenshots} className="mp-screenshots-section">
+        <ScrollGallery work={work} top={stageTop} />
+      </div>
       <div className="mp-simple-next">
         <ChapterFooter next={next} />
       </div>
@@ -494,15 +721,23 @@ export function MusicPortfolioExperience({
           </a>
         </div>
       </section>
-      {works.map((work, index) => (
-        <WorkChapter
-          key={work.id}
-          work={work}
-          index={index}
-          next={works[index + 1]}
-          cinematic={cinematic}
-        />
-      ))}
+      {works.map((work, index) =>
+        cinematic ? (
+          <CinematicChapter
+            key={work.id}
+            work={work}
+            index={index}
+            next={works[index + 1]}
+          />
+        ) : (
+          <WorkChapter
+            key={work.id}
+            work={work}
+            index={index}
+            next={works[index + 1]}
+          />
+        ),
+      )}
       <div className="mp-end section-max section-pad">
         <p className="display-soft">
           I am still exploring

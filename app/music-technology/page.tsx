@@ -5,7 +5,7 @@ import { PORTFOLIO_WORKS } from './works'
 
 const title = 'Music & Technology'
 const description =
-  'Three ways I have explored making music: songwriting in Regrets, movement in Inkform 拳墨, and call and response with Notate in 蝶戀花 — Butterflies in Love with Flowers.'
+  'Three ways I have explored making music: movement in Inkform 拳墨, call and response with Notate in 蝶戀花 — Butterflies in Love with Flowers, and songwriting in Regrets.'
 
 export const metadata: Metadata = {
   title,
