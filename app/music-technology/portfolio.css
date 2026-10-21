@@ -340,13 +340,92 @@
   font-size: 16px;
   line-height: 1.7;
 }
+.mp-cinematic-chapter {
+  position: relative;
+  scroll-margin-top: 64px;
+  padding-top: 0;
+}
+.mp-chapter-status {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  height: 64px;
+  padding-block: 12px;
+  margin-bottom: 16px;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.mp-chapter-status-row,
+.mp-chapter-status ol {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.mp-chapter-status-row {
+  justify-content: space-between;
+}
+.mp-chapter-status button {
+  color: var(--color-ink-soft);
+  padding: 3px 0;
+}
+.mp-chapter-status button[aria-current='step'] {
+  color: var(--color-accent);
+}
+.mp-chapter-status button span {
+  margin-right: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.mp-chapter-percent {
+  width: 4ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mp-chapter-progress {
+  height: 3px;
+  background: var(--color-line);
+}
+.mp-chapter-progress > div {
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+}
+.mp-cinematic-reading,
+.mp-screenshots-section {
+  position: relative;
+}
+.mp-cinematic-media {
+  align-self: stretch;
+  min-width: 0;
+}
+.mp-media-anchor {
+  position: sticky;
+  top: 144px;
+}
+.mp-media-slot {
+  position: relative;
+}
+.mp-shrink-frame {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 2;
+  background: var(--color-ink);
+  transform-origin: left top;
+}
+.mp-shrink-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .mp-scroll-gallery {
   position: relative;
 }
 .mp-gallery-stage {
   position: sticky;
-  top: 88px;
-  height: calc(100svh - 112px);
+  top: var(--mp-gallery-top, 88px);
+  height: calc(100svh - var(--mp-gallery-top, 88px) - 24px);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -390,6 +469,7 @@
   color: var(--color-ink-soft);
 }
 .mp-simple-gallery {
+  margin-top: 14px;
   overflow-x: auto;
   padding-bottom: 14px;
   scrollbar-width: thin;
@@ -503,6 +583,8 @@
   }
   .mp-gallery-heading {
     font-size: 11px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .mp-gallery-pending p {
     font-size: 12px;
