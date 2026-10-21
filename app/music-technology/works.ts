@@ -19,45 +19,6 @@ export type PortfolioWork = {
 
 export const PORTFOLIO_WORKS: PortfolioWork[] = [
   {
-    id: 'regrets',
-    title: 'Regrets',
-    category: 'songwriting / production',
-    summary: 'I wrote this ballad about holding on after loss.',
-    description: [
-      'I wrote Regrets to explore the difficulty of letting go after loss. I was interested in the tension between wanting to move forward and wanting to keep a memory close. I chose a mid-tempo, 90 BPM R&B ballad in 4/4, with images of a faded sunset and passing moments in the opening lyrics.',
-      'I began with layered piano sounds and spatial delay, hoping to suggest the uncertain space between remembering and imagining. In the lyrics, I returned to laughter, old messages, things left unsaid, and broken promises. I wanted the repeated movement between acceptance and resistance to become more insistent as the song continued.',
-      'I added live-recorded acoustic guitar and adjusted its EQ to give the arrangement a warmer, more intimate sound alongside the delayed piano.',
-      'I used Serum to make soft sine-wave synth textures, then added echo and delay. I gradually brought in bass, kicks, snares, hi-hats, toms, shakers, risers, and crashes to give the song more movement while keeping the floating textures underneath.',
-      'I included short violin fragments and repeated “come let me sing for you” near the end. I wanted to leave the longing unresolved, as though the speaker still had something to say.',
-    ],
-    details: [
-      { label: 'Work', value: 'Original song' },
-      { label: 'My role', value: 'Songwriting · production · mixing' },
-    ],
-    image: {
-      src: '/media/music-technology/regrets/production-and-instrumentation.png',
-      alt: 'The Regrets session in Logic Pro, showing piano, guitar, synth, bass, percussion and vocal tracks at 90 BPM.',
-    },
-    audio: '/media/music-technology/regrets/regrets.m4a',
-    gallery: [
-      {
-        src: '/media/music-technology/regrets/production-and-instrumentation.png',
-        alt: 'The Regrets arrangement in Logic Pro at 90 BPM, showing piano, guitar, synth, bass, percussion and vocal tracks.',
-        caption: 'Regrets — Production and instrumentation',
-      },
-      {
-        src: '/media/music-technology/regrets/mixing.png',
-        alt: 'The Regrets mixer in Logic Pro, showing channel levels, panning, effects and shared sends.',
-        caption: 'Regrets — Mixing',
-      },
-      {
-        src: '/media/music-technology/regrets/mixing-vocals-and-sound-design.png',
-        alt: 'The Regrets session in Ableton Live, showing the accompaniment, lead vocal edits, backing vocals and effects returns.',
-        caption: 'Regrets — Mixing, vocals, and sound design',
-      },
-    ],
-  },
-  {
     id: 'inkform',
     title: 'Inkform',
     originalTitle: '拳墨',
@@ -179,6 +140,45 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
       {
         title: 'Continue',
         description: 'Keep taking turns to build the piece.',
+      },
+    ],
+  },
+  {
+    id: 'regrets',
+    title: 'Regrets',
+    category: 'songwriting / production',
+    summary: 'I wrote this ballad about holding on after loss.',
+    description: [
+      'I wrote Regrets to explore the difficulty of letting go after loss. I was interested in the tension between wanting to move forward and wanting to keep a memory close. I chose a mid-tempo, 90 BPM R&B ballad in 4/4, with images of a faded sunset and passing moments in the opening lyrics.',
+      'I began with layered piano sounds and spatial delay, hoping to suggest the uncertain space between remembering and imagining. In the lyrics, I returned to laughter, old messages, things left unsaid, and broken promises. I wanted the repeated movement between acceptance and resistance to become more insistent as the song continued.',
+      'I added live-recorded acoustic guitar and adjusted its EQ to give the arrangement a warmer, more intimate sound alongside the delayed piano.',
+      'I used Serum to make soft sine-wave synth textures, then added echo and delay. I gradually brought in bass, kicks, snares, hi-hats, toms, shakers, risers, and crashes to give the song more movement while keeping the floating textures underneath.',
+      'I included short violin fragments and repeated “come let me sing for you” near the end. I wanted to leave the longing unresolved, as though the speaker still had something to say.',
+    ],
+    details: [
+      { label: 'Work', value: 'Original song' },
+      { label: 'My role', value: 'Songwriting · production · mixing' },
+    ],
+    image: {
+      src: '/media/music-technology/regrets/production-and-instrumentation.png',
+      alt: 'The Regrets session in Logic Pro, showing piano, guitar, synth, bass, percussion and vocal tracks at 90 BPM.',
+    },
+    audio: '/media/music-technology/regrets/regrets.m4a',
+    gallery: [
+      {
+        src: '/media/music-technology/regrets/production-and-instrumentation.png',
+        alt: 'The Regrets arrangement in Logic Pro at 90 BPM, showing piano, guitar, synth, bass, percussion and vocal tracks.',
+        caption: 'Regrets — Production and instrumentation',
+      },
+      {
+        src: '/media/music-technology/regrets/mixing.png',
+        alt: 'The Regrets mixer in Logic Pro, showing channel levels, panning, effects and shared sends.',
+        caption: 'Regrets — Mixing',
+      },
+      {
+        src: '/media/music-technology/regrets/mixing-vocals-and-sound-design.png',
+        alt: 'The Regrets session in Ableton Live, showing the accompaniment, lead vocal edits, backing vocals and effects returns.',
+        caption: 'Regrets — Mixing, vocals, and sound design',
       },
     ],
   },

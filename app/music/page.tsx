@@ -96,9 +96,9 @@ export default function MusicPage() {
               Music &amp; technology
             </span>
             <span className="text-ink-soft mt-3 block text-base">
-              I explore songwriting, movement, and musical call and response in
-              Regrets, Inkform 拳墨, and 蝶戀花 — Butterflies in Love with
-              Flowers.
+              I explore movement, musical call and response, and songwriting in
+              Inkform 拳墨, 蝶戀花 — Butterflies in Love with Flowers, and
+              Regrets.
             </span>
           </span>
           <span
