@@ -391,9 +391,6 @@ function ScrollGallery({
             {String(count).padStart(2, '0')}
           </span>
         </div>
-        <div className="mp-gallery-progress" aria-hidden="true">
-          <motion.div style={{ scaleX: progress }} />
-        </div>
         <div ref={gallery} className="mp-gallery-window">
           <motion.div ref={track} className="mp-gallery-track" style={{ x }}>
             <GalleryItems work={work} />
