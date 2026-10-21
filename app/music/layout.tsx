@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Music',
   description:
-    "Alan Shen’s music on DistroKid — listen to the single I'd Stay on Spotify, Apple Music, and more.",
+    'I play violin and piano, write songs, and experiment with interactive music. Listen to my releases and explore my performances and projects.',
 }
 
 export default function MusicLayout({

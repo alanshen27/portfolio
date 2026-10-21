@@ -74,7 +74,7 @@ export default function MusicPage() {
     <>
       <PageHead
         title="Music"
-        standfirst="ABRSM grade 8 on violin and piano; orchestra and solo stage; two singles released under his own name."
+        standfirst="I play violin and piano, serve as concertmaster of the Le Rosey Orchestra and Camerata, and write songs. I have ABRSM Grade 8 in both instruments and have released two singles."
         contents={[
           { label: 'music & technology portfolio', href: '/music-technology' },
           { label: 'releases', href: '#releases' },
@@ -96,8 +96,9 @@ export default function MusicPage() {
               Music &amp; technology
             </span>
             <span className="text-ink-soft mt-3 block text-base">
+              I explore songwriting, movement, and musical call and response in
               Regrets, Inkform 拳墨, and 蝶戀花 — Butterflies in Love with
-              Flowers. Songwriting, movement, and interactive music.
+              Flowers.
             </span>
           </span>
           <span
@@ -184,7 +185,7 @@ export default function MusicPage() {
 
       <section className="section-max section-pad py-16 md:py-28">
         <Words
-          text="From concert halls to orphanages in Oradea, Romania, where he wrote and performed a song for more than sixty students."
+          text="I have played in concert halls and during visits to schools and orphanages in Oradea, Romania. On one visit, I wrote and performed a song for more than sixty students."
           className="display-soft max-w-[24ch] text-[clamp(2rem,4.8vw,4.75rem)]"
         />
       </section>

@@ -19,42 +19,42 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Studious',
     detail:
-      'Next.js frontend on a tRPC backend; Pusher sockets for realtime, Supabase read replicas, load balancing on Render and Vercel at the edge.',
+      'I work on the Next.js frontend and tRPC backend, with Pusher for live updates and Supabase, Render, and Vercel for hosting and data.',
     tags: 'infrastructure',
     href: '/work#project1',
   },
   {
-    title: 'notate',
+    title: 'Notate',
     detail:
-      'A decoder-only Transformer (6 × 512, 8 heads, ~21M parameters) trained on REMI-tokenised MIDI, played through a polyphonic synth written as a Web Audio AudioWorklet.',
+      'Using AI-assisted programming, I developed a bidirectional, 44.3M-parameter encoder-decoder transformer with eight attention heads and a REMI-style MIDI tokenizer.',
     tags: 'ML · audio',
     href: '/work#project-notate',
   },
   {
     title: 'Foundry',
     detail:
-      'A project-aware copilot with streaming tool execution; mechanical CAD in KCL, schematic and PCB workspaces, a Monaco editor with Yjs multiplayer, Shopify checkout.',
+      'I brought an AI assistant, CAD and PCB workspaces, a shared code editor, and storefront tools into one project at Penn ESAP.',
     tags: 'AI · hardware',
     href: '/work#project-foundry',
   },
   {
     title: 'Synapse',
     detail:
-      'Emotion read from voice tone and facial expression, attached to each message, and played back as expressive speech in the sender’s cloned voice.',
+      'We experimented with estimating emotional cues from speech and facial expressions, then using those cues in message labels and speech playback.',
     tags: 'speech · vision',
     href: '/work#project3',
   },
   {
     title: 'Scribe',
     detail:
-      'Frontend redesign, backend infrastructure, and the inference design behind its AI study workflows.',
+      'I worked with friends on the frontend, backend, and AI study workflows, using feedback from classmates to revise the exercise navigation.',
     tags: 'AI · full-stack',
     href: '/work#project2',
   },
   {
     title: 'Nomad',
     detail:
-      'Course planning on prerequisite dependency graphs, with a social layer for finding classmates and communities.',
+      'We used prerequisite graphs for course planning and added ways to find classmates and student communities.',
     tags: 'graphs',
     href: '/work#project-nomad',
   },
@@ -136,7 +136,7 @@ export default function TechPage() {
     <>
       <PageHead
         title="Tech"
-        standfirst="What sits behind the screenshots — the stack, how each thing is built, a robot coming together part by part, and the rooms where the hackathons happened."
+        standfirst="Some of the tools I use, the projects I am working on, and what I have learned alongside my teammates."
         contents={[
           { label: 'stack', href: '#stack' },
           { label: 'how it’s built', href: '#built' },

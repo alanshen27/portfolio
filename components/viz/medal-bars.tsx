@@ -32,7 +32,7 @@ export function MedalBars({
             dark ? 'text-white/55' : 'text-ink-faint'
           }`}
         >
-          medals · 2× team mvp
+          medals · 3× team MVP
         </p>
       </div>
       <ul className="mt-6 space-y-3.5">

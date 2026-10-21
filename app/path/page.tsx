@@ -40,7 +40,7 @@ export default function PathPage() {
     <>
       <PageHead
         title="Record"
-        standfirst="Honours, publications, meets and service — every entry dated so it can be checked."
+        standfirst="A record of my studies, team activities, research contributions, and time spent volunteering."
         contents={CONTENTS}
       />
 
@@ -70,6 +70,11 @@ export default function PathPage() {
                 </p>
                 <p className="text-ink-soft mt-4 text-[15px]">{pub.authors}</p>
                 <p className="label">{pub.venue}</p>
+                {pub.description && (
+                  <p className="text-ink-soft mt-3 max-w-[62ch] text-[15px] leading-relaxed">
+                    {pub.description}
+                  </p>
+                )}
                 {pub.presentation && (
                   <p className="text-ink mt-2 text-[15px]">
                     presented at {pub.presentation}
@@ -123,8 +128,10 @@ export default function PathPage() {
       <Block id="athletics" label="swimming">
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
-            {swim?.title ?? 'competitive swimmer'} for Le Rosey since 2023 —
-            fourteen medals, one school record, team mvp two years running.
+            I swim freestyle and butterfly with the Le Rosey team. I have
+            received the school MVP award three consecutive times, set one
+            school record, and won fourteen medals at ADISR and SGIS
+            competitions.
           </p>
           <div className="mt-10 grid gap-3 md:grid-cols-12">
             <Media

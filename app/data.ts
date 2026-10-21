@@ -128,83 +128,83 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'A modern LMS for schools — AI in the daily workflow, not bolted on as a demo.',
-    link: 'https://www.studious.sh',
+      'I started Studious to help teachers organise coursework and explore AI-assisted lesson planning.',
+    link: 'https://studious.ac',
     image: '/media/projects/studious.png',
     id: 'project1',
-    role: 'founder',
+    role: 'project initiator & lead app developer',
     timeframe: 'Sep 2023 – present',
     device: 'laptop',
-    kind: 'company',
-    outcome: 'live product · School Development Program',
+    kind: 'build',
+    outcome: 'teacher pilot at Colegiul Economic Partenie Cosma',
     tags: ['Next.js', 'tRPC', 'Supabase', 'Pusher'],
     points: [
-      'Led frontend in Next.js and backend with tRPC.',
-      'Scaled with Pusher sockets, Supabase read replicas, Render load balancing, and Vercel edge delivery.',
-      'Started the Studious School Development Program for under-resourced classrooms.',
+      'I lead a group of seven students working on the platform, including its Next.js frontend and tRPC backend.',
+      'I added tools for scheduling, assignments, worksheets, feedback, and gradebook management.',
+      'We began teacher testing at Colegiul Economic Partenie Cosma in Romania, with pilots planned at four other schools.',
     ],
   },
   {
     name: 'Scribe',
     description:
-      'AI study assistant that teaches how to learn — structured methods, not just answers.',
+      'I built Scribe with friends to give students more ways to work through their notes and practise ideas in depth.',
     link: 'https://www.scribe.study',
     image: '/media/projects/scribe.png',
     id: 'project2',
-    role: 'SWE & co-founder',
-    timeframe: 'Aug 2025 – Jan 2026',
+    role: 'founder & lead app developer',
+    timeframe: '2025 – present',
     device: 'tvModern',
     photo: '/media/hackathons/hackharvard-china.jpg',
     photoCaption: 'on stage · HackHarvard China 2025, 1st place overall',
-    kind: 'company',
-    outcome: '1st place overall · HackHarvard China 2025',
+    kind: 'build',
+    outcome: '5,000+ users · 1st place overall, HackHarvard China 2025',
     tags: ['AI workflows', 'Inference', 'Full-stack'],
     points: [
-      '1st Place Overall at HackHarvard China 2025.',
-      'Led frontend redesign and backend infrastructure.',
-      'Supported inference design for AI-driven study workflows.',
+      'Our team received 1st Place Overall at HackHarvard China 2025.',
+      'I led three students in developing interactive learning aids, visualisations, and guided summaries.',
+      'I used classmates’ feedback to revise navigation and added exercises that ask students to explain ideas in their own words.',
     ],
   },
   {
-    name: 'notate',
+    name: 'Notate',
     description:
-      'AI music co-writer: sketch on a piano roll, a Transformer continues the phrase, and it plays back through a synth written from scratch.',
+      'I am exploring musical call and response with Notate, a model that can infill and continue a phrase.',
     link: 'https://github.com/alanshen27/notate',
     repo: 'https://github.com/alanshen27/notate',
     id: 'project-notate',
-    role: 'solo build',
+    role: 'personal project · AI-assisted programming',
     timeframe: 'May 2026 – present',
     kind: 'research',
-    outcome: '~21M-param Transformer · Prelude / Canon / Sinfonia models',
+    outcome: '44.3M-parameter encoder-decoder transformer',
     tags: ['PyTorch', 'Transformer', 'FastAPI', 'Web Audio'],
     points: [
-      'Decoder-only Transformer (6×512, 8 heads) trained on REMI-tokenised MIDI — POP909 and larger piano corpora.',
-      'Polyphonic subtractive synth built as a Web Audio AudioWorklet; same DSP drives playback and WAV export.',
-      'Piano-roll UI: sketch → continue with AI → accept / edit → continue again.',
+      'I developed a bidirectional encoder-decoder transformer with eight attention heads and a REMI-style MIDI tokenizer, using AI-assisted programming.',
+      'I pretrained the model on classical performances and fine-tuned it on selected contemporary pieces.',
+      'I connected Notate to Butterflies in Love with Flowers, where it exchanges four-bar phrases with the performer.',
     ],
   },
   {
     name: 'Foundry',
     description:
-      'AI-native workspace that takes a physical-product idea from brief to CAD, PCB, verification, storefront, and checkout.',
+      'I built Foundry at Penn ESAP to explore how an AI workspace could connect a product brief with design and engineering tools.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
     role: 'Penn ESAP 2026',
     timeframe: 'Jul – Aug 2026',
     kind: 'build',
-    outcome: 'ideate → engineer → verify → launch pipeline',
+    outcome: 'final project · Penn ESAP AI track',
     tags: ['TypeScript', 'KCL CAD', 'Yjs', 'Shopify'],
     points: [
-      'Project-aware AI copilot with streaming tool execution and background jobs.',
-      'Mechanical CAD (KCL / Zoo), schematic and PCB workspaces, Monaco editor with Yjs multiplayer.',
-      'Verification gates, then v0-generated storefront and Shopify-backed checkout.',
+      'I worked on an assistant that uses project context to call tools and run background tasks.',
+      'I brought CAD, schematic and PCB workspaces, and a shared code editor into one interface.',
+      'I experimented with connecting design checks to storefront generation and Shopify checkout.',
     ],
   },
   {
     name: 'Nomad',
     description:
-      'Campus planner plus student network — prerequisite graphs, dependency-aware plans, and people discovery.',
+      'I worked on Nomad, a campus planner that helps students explore course prerequisites and find classmates.',
     link: 'https://www.youtube.com/watch?v=zUIMYg8ByNI',
     devpost: 'https://devpost.com/software/nomad-j58qea',
     repo: 'https://github.com/usenomad',
@@ -217,14 +217,14 @@ export const PROJECTS: Project[] = [
     outcome: '3rd Place, Education Track · Outstanding Impact Award',
     tags: ['Graphs', 'Planning', 'Social'],
     points: [
-      'Interactive course planner with prerequisite dependency graphs.',
-      'Social layer for finding classmates, communities, and relevant peers.',
+      'We built a course planner around prerequisite graphs.',
+      'We added ways to find classmates and student communities.',
     ],
   },
   {
     name: 'Synapse',
     description:
-      'An AI messaging app that reads tone, emotion and intent — from voice, text and facial expression — and carries it with every message. Built at HackHarvard 2025.',
+      'At HackHarvard 2025, I worked on Synapse, an experiment in adding speech and facial-expression cues to messages.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     devpost: 'https://devpost.com/software/synapse-n7hwr3',
     repo: 'https://github.com/gosynapse',
@@ -239,15 +239,15 @@ export const PROJECTS: Project[] = [
     outcome: 'invitational · one of two high-school teams',
     tags: ['Emotion recognition', 'Speech', 'Voice cloning'],
     points: [
-      'Voice messages transcribed with the emotion detected from tone, pitch and rhythm.',
-      'Text messages tagged with emotion read from facial expression on the webcam.',
-      'Any annotated message can be played back as expressive speech in the sender’s cloned voice.',
+      'We transcribed voice messages and used tone, pitch, and rhythm to estimate emotional cues.',
+      'We explored attaching estimated facial-expression cues to text messages.',
+      'We added speech playback using voice cloning, with the estimated cues influencing delivery.',
     ],
   },
   {
     name: 'Hive',
     description:
-      'Study groups that connect students across borders and languages, with an AI assistant in every group — built for Empower 3.0 Hacks.',
+      'I worked on Hive at Empower 3.0 Hacks to explore study groups with shared chat and an AI assistant.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
     devpost: 'https://devpost.com/software/hive-140hcn',
     repo: 'https://github.com/alanshen27/hive',
@@ -272,44 +272,44 @@ export const PROJECT_KIND_LABEL: Record<ProjectKind, string> = {
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Studious',
-    title: 'founder',
+    title: 'project initiator & lead app developer',
     start: 'September 2023',
     end: 'present',
-    link: 'https://www.studious.sh',
+    link: 'https://studious.ac',
     image: 'https://www.studious.sh/logo.png',
     bullets: [
-      'Designed scalable infrastructure with sockets (Pusher.js), Supabase read replication, Render with load balancer, and Vercel for minimized geographical latency.',
-      'Created the Studious School Development Program, intended to bring modern learning to underprivileged communities.',
-      'Led frontend development with Next.js.',
-      'Led backend development with tRPC and React.',
+      'I worked on the infrastructure using Pusher, Supabase, Render, and Vercel.',
+      'I led seven students in starting a teacher pilot at Colegiul Economic Partenie Cosma; we have four further school pilots planned.',
+      'I lead frontend development in Next.js and work on the backend with tRPC.',
+      'I added AI-assisted course design and automated feedback tools for teachers to try.',
     ],
     id: 'work1',
   },
   {
     company: 'Scribe',
-    title: 'SWE and co-founder',
-    start: 'August 2025',
+    title: 'founder & lead app developer',
+    start: '2025',
     end: 'present',
     link: 'https://www.scribe.study',
     image: '/media/logos/scribe.png',
     bullets: [
-      'Worked as frontend and backend developer with AI-driven workflows.',
-      'Led frontend redesign.',
-      'Developed backend infrastructure.',
-      'Assisted in inferencing infrastructure and design.',
+      'I built Scribe with friends and led three students working on learning aids, visualisations, and guided summaries.',
+      'I redesigned the exercise navigation using feedback from classmates.',
+      'I worked on the backend and used retrieval-augmented generation to help create study materials.',
+      'The project has reached more than 5,000 users across 27 countries.',
     ],
     id: 'work2',
   },
   {
     company: 'Luduan.ai',
-    title: 'frontend and UI/UX design contributor',
+    title: 'student intern · frontend and UX',
     start: 'February 2026',
     end: 'present',
     link: 'https://www.luduan.ai',
     image: '/media/logos/luduan.png',
     bullets: [
-      'Assisting in frontend rebuild ideation and architecture (unpublished).',
-      'Working on migrating features to a new codebase to serve 30+ U.S. institutions.',
+      'I rebuilt the frontend and designed the user experience for web apps on the platform.',
+      'I assisted with the relaunch at the 2026 CALICO Conference. The platform serves more than 30 U.S. institutions.',
     ],
     id: 'work3',
   },
@@ -321,11 +321,11 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     image: '/media/logos/vex.jpg',
     photo: '/media/vex/team.png',
     bullets: [
-      '3rd place skills and 3rd place qualifiers at Alpine Robo Games 2026.',
-      'Ranked 4th Skills, 7th Overall at Swiss Regional Competition (Santa Clash @ ISBasel).',
-      'Assisted in robot creation and design.',
-      'Engineered autonomous control mode.',
-      'Programmed interface for human interactions (controller).',
+      'Our team placed third in skills and qualifiers at Alpine Robo Games 2026.',
+      'We placed fourth in skills and seventh overall at the Swiss Regional Competition (Santa Clash @ ISBasel).',
+      'I helped design and build the robot.',
+      'I programmed the autonomous routines.',
+      'I worked on the driver-control interface.',
     ],
     id: 'work4',
   },
@@ -337,7 +337,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     image: '/media/logos/lerosey.png',
     location: 'Switzerland',
     bullets: [
-      '2-year Swimming MVP at Le Rosey.',
+      'I received the Le Rosey swimming MVP award three consecutive times.',
       'Events: Individual Medley, Freestyle (100 m, 200 m relay, 50×4 IM relay), Medley Relay, Open Water.',
       'ADISR 2025 EHL: Silver 50 m Free; Gold 4×50 Free.',
       'MLS 2025 June/July: Silver (IM); Gold — 100 m Free | 200 m Freestyle Relay | 200 m Medley Relay.',
@@ -363,7 +363,7 @@ export const EDUCATION: Education[] = [
   {
     institution:
       'University of Pennsylvania — Engineering Summer Academy (ESAP)',
-    degree: 'AI and its mathematics · three-week intensive',
+    degree: 'AI track · three-week summer programme · A+',
     start: 'Jul 2026',
     end: 'Jul 2026',
     location: 'Philadelphia, PA',
@@ -371,7 +371,7 @@ export const EDUCATION: Education[] = [
   },
   {
     institution: 'Singapore American School',
-    degree: 'K–10',
+    degree: 'School studies',
     start: 'August 2014',
     end: 'September 2022',
     location: 'Singapore',
@@ -435,7 +435,8 @@ export const CERTIFICATIONS: Certification[] = [
 export const AWARDS: Award[] = [
   {
     title: 'HackHarvard 2025 China — 1st Place',
-    description: '1st Place Overall, "Best Overall Hack" Winner.',
+    description:
+      'Our Scribe team received 1st Place Overall, the “Best Overall Hack” award.',
     date: 'Nov 2025',
     image: '/media/logos/hackharvard.svg',
     photo: '/media/hackathons/hackharvard-win.jpg',
@@ -445,7 +446,7 @@ export const AWARDS: Award[] = [
     title:
       'HackMIT China 2026 — 3rd Place (Education Track) & Outstanding Impact Award',
     description:
-      'Podium finish out of 300+ participants during the 2026 HackMIT China Challenge. Built Nomad in 36 hours.',
+      'We built Nomad in 36 hours and received third place in the Education Track and the Outstanding Impact Award.',
     date: 'Mar 2026',
     image: '/media/logos/hackmit.png',
     id: 'award-hackmit',
@@ -453,7 +454,7 @@ export const AWARDS: Award[] = [
   {
     title: 'USACO Gold division',
     description:
-      'Achieved 1000 / 1000 in the USACO Silver contest to be directly promoted to USACO Gold.',
+      'I scored 1000 / 1000 in the Silver contest and was promoted to Gold.',
     date: 'Feb 2026',
     image: '/media/projects/usaco.png',
     id: 'award4',
@@ -461,7 +462,7 @@ export const AWARDS: Award[] = [
   {
     title: 'Excellence Award | Alpine Robo Games 2026',
     description:
-      'Won Excellence Award for VEX Robotics Swiss qualifications and qualified for VEX Worlds in Dallas, Texas. Issued by VEX Robotics.',
+      'Our team received the Excellence Award at Alpine Robo Games and qualified for the VEX World Championship in Dallas.',
     date: 'Feb 2026',
     image: '/media/logos/vex.jpg',
     photo: '/media/vex/worlds-team.jpeg',
@@ -470,7 +471,7 @@ export const AWARDS: Award[] = [
   {
     title: 'HackHarvard 2025 — Compile the Decade (Invitational)',
     description:
-      'Invited as one of only two high school teams to attend HackHarvard 2025.',
+      'I attended HackHarvard 2025 with one of the two high-school teams invited.',
     date: 'Oct 2025',
     image: '/media/logos/hackharvard.svg',
     photo: '/media/hackathons/hackharvard-2025.jpg',
@@ -478,7 +479,8 @@ export const AWARDS: Award[] = [
   },
   {
     title: 'Empower 3.0 Hacks — 3rd Place',
-    description: '3rd Place, "Coding" track; 450+ participants in total.',
+    description:
+      'Our Hive project placed third in the Coding track; the event had more than 450 participants.',
     date: '2025',
     image: '/media/projects/empower.png',
     id: 'award3',
@@ -496,11 +498,14 @@ export const PUBLICATIONS: Publication[] = [
   {
     title: 'Training AI for Pragmatics Assessment',
     authors: 'Xiao, F., Taguchi, N., Li, S. & Shen, A.',
-    venue: 'Cambridge University Press',
+    venue:
+      'Generative AI for Pragmatics: Research, Teaching, and Assessment · edited by Naoko Taguchi · Cambridge University Press',
     status: 'forthcoming',
     date: '2026',
     presentation:
       'CALICO — Computer Assisted Language Instruction Consortium · Jun 15, 2026',
+    description:
+      'I worked with Professor Feng Xiao at Pomona College on fine-tuning and evaluation pipelines for pragmatics assessment. I am the fourth author of this forthcoming chapter.',
     id: 'pub-pragmatics',
   },
   {
@@ -531,11 +536,11 @@ export const VOLUNTEERING: Volunteering[] = [
     end: 'Jun 2025',
     cause: 'disaster & humanitarian relief',
     bullets: [
-      'Built and worked on multiple housing units with 10 classmates in rural Romania (Oradea).',
-      'Visited orphanages and the local liceul for cultural exchange.',
-      'Prepared and performed violin music for the Liceul De Arte Oradea and orphanages.',
-      'Initiated the Studious Student Development Program, bringing AI-empowered education to two local schools.',
-      'Wrote a song and performed it for 60+ students to raise awareness.',
+      'I helped build housing units with ten classmates in rural Romania, near Oradea.',
+      'I joined visits to orphanages and a local school for cultural exchange.',
+      'I prepared and performed violin music at Liceul de Arte Oradea and local orphanages.',
+      'I spoke with students at Liceul de Arte Oradea about their learning experiences to inform my work on Studious.',
+      'I wrote a song and performed it for more than sixty students during the visit.',
     ],
     image: '/media/service/romania-housing.png',
     id: 'vol-casa',
@@ -547,7 +552,7 @@ export const VOLUNTEERING: Volunteering[] = [
     end: 'May 2026',
     cause: 'environment',
     description:
-      'Led a team of 4 students building a web-based game for Earth Day to spread awareness about food waste — 3+ hours of playtime across 30+ players, with largely positive feedback.',
+      'I led four students in building an Earth Day web game about food waste. More than thirty people played it, with over three hours of playtime in total.',
     image: '/media/logos/lostfood.png',
     link: 'https://www.thelostfoodproject.org',
     id: 'vol-lostfood',
@@ -559,9 +564,9 @@ export const VOLUNTEERING: Volunteering[] = [
     end: 'Jul 2023',
     cause: 'poverty alleviation',
     bullets: [
-      'Researched the needs and situation of children in Dharia, India, raising 2,500 CHF.',
-      'Organised a school-wide fundraising event with 3 classmates.',
-      'Hosted a 120-student cadet talent show, organised Indian Night and themed decoration.',
+      'I helped research the needs of children in Dharia, India, and our fundraising raised CHF 2,500.',
+      'I organised a school fundraising event with three classmates.',
+      'We hosted a talent show for 120 students and organised an Indian Night event.',
     ],
     id: 'vol-chemin',
   },
@@ -663,7 +668,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: 'Studious',
-    link: 'https://www.studious.sh',
+    link: 'https://studious.ac',
   },
   {
     label: 'Scribe',
@@ -690,21 +695,21 @@ export const SITE_NAV = [
 export const EMAIL = 'alan.shen27@gmail.com'
 
 export const HEADLINE =
-  'USACO Gold ’26 | VEX Excellence Award, Worlds Qualifier ’26 | Forthcoming Cambridge University Press ’26 | Aspiring National Second Class Athlete | 3x Hackathon Podium | 2x Founder'
+  'Student at Institut Le Rosey · education software, music, and swimming'
 
 export const TAGLINE =
-  'Building education systems at the intersection of AI, product, and competition.'
+  'I am exploring how software can give students and teachers more room to work through ideas.'
 
 export const SUMMARY =
-  'High school student at Institut Le Rosey building at the intersection of computer science, education, and AI. 2× founder of Studious (a modern LMS built on Next.js / tRPC / Supabase) and Scribe (AI study assistant — 1st Place Overall at HackHarvard China 2025, 3rd Place at HackMIT China 2026). Competing in USACO Gold ’26 and VEX Robotics (Excellence Award, Worlds Qualifier ’26), with forthcoming research on AI-based pragmatics assessment (Cambridge University Press, 2026). Outside tech: competitive swimmer and ABRSM Grade 8 Piano & Violin.'
+  'I am a student at Institut Le Rosey interested in computer science, education, and music. I started Studious and founded Scribe with friends, and I contribute to research on AI and language learning. Outside these projects, I swim, play violin and piano, and write music.'
 
 /** One-sentence positioning — the first thing a reader should absorb. */
 export const HOME_INTRO =
-  'I build education software that students actually use. Also: USACO Gold, VEX Worlds qualifier, forthcoming Cambridge University Press research, and ABRSM Grade 8 on violin and piano.'
+  'I am a student exploring how software can support learning. I also enjoy making music, swimming, and working on robots with my teammates.'
 
 /** Slightly longer bio for the About block. */
 export const HOME_BIO =
-  'Founder of Studious (a modern LMS, live since 2023) and co-founder of Scribe (AI study assistant, 1st Place Overall at HackHarvard China 2025). Lately: a Transformer music co-writer, an AI hardware-product workspace built at Penn ESAP, and a VEX robot that qualified for Worlds. Research contributor on AI-based pragmatics assessment. Also a competitive swimmer and violinist.'
+  'I am a student at Institut Le Rosey, interested in how people learn and how software might help. I started Studious and built Scribe with friends, learning from the teachers and classmates who try them. I also contribute to research on AI and language learning. Away from coding, I play violin and piano, write music, and swim with my school team.'
 
 /** Proof strip — six numbers a reader can verify in ten seconds. */
 export type Highlight = {
@@ -720,7 +725,7 @@ export const HIGHLIGHTS: Highlight[] = [
   {
     value: '1000/1000',
     label: 'USACO',
-    detail: 'Perfect Silver → promoted to Gold, Feb 2026',
+    detail: '1000 / 1000 in Silver; promoted to Gold, Feb 2026',
     href: '/path',
   },
   {
@@ -770,20 +775,20 @@ export type ProgrammeEntry = {
 export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Studious',
-    subtitle: 'a learning-management system for schools, live since 2023',
-    right: 'founder · 2023 – present',
+    subtitle: 'a learning-management system with a teacher pilot in Romania',
+    right: 'project initiator & lead app developer · 2023 – present',
     href: '#note-studious',
   },
   {
     title: 'Scribe',
     subtitle: 'AI study assistant — 1st place overall, HackHarvard China 2025',
-    right: 'co-founder & engineer · 2025',
+    right: 'founder & lead app developer · 2025 – present',
     href: '#note-scribe',
   },
   {
-    title: 'notate',
-    subtitle: 'AI music co-writer: a Transformer continues a sketched phrase',
-    right: 'solo build · 2026',
+    title: 'Notate',
+    subtitle: 'my experiment in musical call and response with a transformer',
+    right: 'personal project · AI-assisted programming · 2026',
     href: '#note-notate',
   },
   {
@@ -801,7 +806,8 @@ export const PROGRAMME: ProgrammeEntry[] = [
   },
   {
     title: 'Training AI for Pragmatics Assessment',
-    subtitle: 'co-author, with a CALICO 2026 conference talk',
+    subtitle:
+      'fourth author of a forthcoming chapter; work presented at CALICO 2026',
     right: 'Cambridge University Press · forthcoming',
     href: '#note-research',
   },
@@ -820,8 +826,8 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Luduan.ai',
     subtitle:
-      'frontend and UI/UX contributor on a platform serving 30+ U.S. institutions',
-    right: 'contributor · 2026 – present',
+      'student internship in frontend development and UX; platform serving 30+ U.S. institutions',
+    right: 'student intern · 2026 – present',
     href: '/path#appointments',
   },
   {
@@ -832,8 +838,8 @@ export const PROGRAMME: ProgrammeEntry[] = [
   },
   {
     title: 'swimming, Le Rosey',
-    subtitle: 'fourteen medals across IM, freestyle, relays and open water',
-    right: 'two-year team mvp · school record',
+    subtitle: 'fourteen medals at ADISR and SGIS competitions',
+    right: 'three-time team MVP · one school record',
     href: '#honours',
   },
 ]
@@ -887,16 +893,17 @@ export const ROLL_NOTES: RollNote[] = [
     label: 'Studious',
     start: '2023-09',
     end: 'now',
-    detail: 'founder — a learning-management system, live in classrooms',
+    detail: 'project initiator & lead app developer — teacher pilot in Romania',
     href: '#note-studious',
   },
   {
     id: 'r-scribe',
     row: 'builds',
     label: 'Scribe',
-    start: '2025-08',
-    end: '2026-01',
-    detail: 'co-founder & engineer — AI study assistant',
+    start: '2025',
+    precision: 'year',
+    end: 'now',
+    detail: 'founder & lead app developer — AI study app',
     href: '#note-scribe',
   },
   {
@@ -924,7 +931,7 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2026-02',
     end: 'now',
     detail:
-      'frontend and UI/UX contributor — platform serving 30+ U.S. institutions',
+      'student intern in frontend development and UX — platform serving 30+ U.S. institutions',
     href: '/path#appointments',
   },
   {
@@ -940,10 +947,10 @@ export const ROLL_NOTES: RollNote[] = [
   {
     id: 'r-notate',
     row: 'builds',
-    label: 'notate',
+    label: 'Notate',
     start: '2026-05',
     end: 'now',
-    detail: 'AI music co-writer — a Transformer continues a sketched phrase',
+    detail: 'my experiment in phrase infilling and continuation with Notate',
     href: '#note-notate',
   },
   {
@@ -991,7 +998,7 @@ export const ROLL_NOTES: RollNote[] = [
     label: 'USACO 1000/1000 → Gold',
     start: '2026-02',
     result: true,
-    detail: 'perfect Silver contest, promoted directly to the Gold division',
+    detail: '1000 / 1000 in the Silver contest; promoted to Gold',
     href: '#note-competition',
   },
   {
@@ -1062,7 +1069,7 @@ export const ROLL_NOTES: RollNote[] = [
     label: 'swimming, Le Rosey',
     start: '2023-09',
     end: 'now',
-    detail: 'competitive swimmer — two-year team mvp',
+    detail: 'competitive swimmer — three-time team MVP',
     href: '#honours',
   },
   {
@@ -1135,7 +1142,7 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2025-03',
     end: '2025-06',
     detail:
-      'built housing units in rural Romania with ten classmates; brought Studious to two local schools',
+      'helped build housing with ten classmates; spoke with students at Liceul de Arte Oradea about learning',
     href: '/path#service',
   },
   {
@@ -1151,30 +1158,30 @@ export const ROLL_NOTES: RollNote[] = [
 
 /** Lines in Alan's own words, from earlier versions of this site's copy. */
 export const LINES = {
-  code: 'I care about writing code that solves real problems — and shipping systems that students actually use.',
+  code: 'I like working through questions with other people, then building things that might help us understand them.',
   systems:
-    'Building education systems at the intersection of AI, product, and competition.',
+    'I am exploring how software can give students and teachers more room to work through ideas.',
 }
 
-/** Programme notes — running text for the major works. Facts only. */
+/** First-person notes for the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'Studious is a learning-management system built for digital-first classrooms, and the longest-running thing on this programme. Alan founded it in September 2023 and still leads it: the frontend in Next.js, the backend on tRPC, and the infrastructure that keeps it responsive across regions — Pusher sockets for realtime, Supabase read replicas, load balancing on Render, and Vercel at the edge.',
-    'The Studious School Development Program grew out of it, bringing the platform to under-resourced classrooms, including two schools in rural Romania during a service trip in 2025.',
+    'I started Studious in 2023 to make coursework easier to organise. It grew into a learning-management system with scheduling, assignments, worksheets, feedback, and gradebook tools. I lead a group of seven students and work on the Next.js frontend and tRPC backend. I also added an AI Labs feature so teachers can experiment with simulations, assignments, and course design.',
+    'We began teacher testing at Colegiul Economic Partenie Cosma in Romania. I also spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to understand their experiences. We have pilots planned with four other schools, including in Nepal.',
   ],
   scribe: [
-    'Scribe is an AI study assistant that teaches method rather than handing over answers. Alan co-founded it and worked across the stack — he led the frontend redesign, built backend infrastructure, and supported the inference design behind its study workflows.',
-    'It took 1st Place Overall, the “Best Overall Hack”, at HackHarvard China 2025.',
+    'I began Scribe with a group of friends toward the end of Grade 10 in 2025 because we wanted more ways to practise topics in depth. I led three students working on interactive learning aids, visualisations, and guided summaries. I added long-form questions and exercises where students explain ideas in their own words, then revised the navigation using feedback from classmates.',
+    'Our team received 1st Place Overall at HackHarvard China 2025. Scribe has reached more than 5,000 users across 27 countries. I am still interested in the question that started it: how can an app help someone stay with an idea long enough to understand it?',
   ],
   notate: [
-    'Sketch a chord progression or melody on notate’s piano roll and a decoder-only Transformer — six layers, 512-wide, eight heads, about 21 million parameters, trained on REMI-tokenised MIDI from POP909 and larger piano corpora — continues the phrase. Everything plays through a polyphonic subtractive synth Alan wrote from scratch as a Web Audio AudioWorklet; the same DSP renders the WAV export.',
-    'It sits where the two halves of this programme meet: a violinist’s ear for phrase, and an engineer’s interest in what a model can learn about it.',
+    'I developed Notate using AI-assisted programming to explore how a model might respond to a musical phrase. The current model is a bidirectional, 44.3M-parameter encoder-decoder transformer with eight attention heads and a REMI-style MIDI tokenizer. I pretrained it on classical performances and fine-tuned it on selected contemporary pieces for phrase recognition, infilling, and continuation.',
+    'In Butterflies in Love with Flowers, I connected Notate to a cursor-based interface so the performer and model can exchange four-bar phrases. I wanted to explore whether a generated reply could leave room for the performer to take the music somewhere else.',
   ],
   competition: [
-    'In the February 2026 USACO contest Alan scored a perfect 1000 in the Silver division and was promoted directly to Gold. With VEX team 15520X he engineers the robot and programmes both the autonomous routines and the driver-control interface; the team took the Excellence Award at Alpine Robo Games 2026 — the Swiss qualifier — and with it a place at the World Championship in Dallas, after placing 3rd in skills and 3rd in qualifiers there and 4th in skills, 7th overall at the Swiss Regional.',
+    'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in Dallas. We also placed third in skills and qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
   ],
   research: [
-    'Alan is a contributing author on three papers on AI-based pragmatics assessment and AI-enhanced pedagogy. Training AI for Pragmatics Assessment is forthcoming from Cambridge University Press, with the work presented at CALICO in June 2026; a paper on API endpoints in Chinese international education is accepted at the Journal of Research on International Chinese Teaching and Learning Resources; and Luduan.ai: A System Solution to AI-Enhanced Pedagogy goes to the 4th Conference on Artificial Intelligence Research in Applied Linguistics at Columbia University in September 2026.',
+    'I worked with Professor Feng Xiao at Pomona College on AI and pragmatics assessment in second-language learning, building fine-tuning and evaluation pipelines. I am the fourth author of “Training AI for Pragmatics Assessment”, a chapter in Generative AI for Pragmatics: Research, Teaching, and Assessment, edited by Naoko Taguchi and forthcoming from Cambridge University Press. The work was presented at CALICO in June 2026. I also contributed to a paper on API endpoints in Chinese international education and a conference paper on Luduan.ai.',
   ],
 }
 
@@ -1182,7 +1189,7 @@ export const NOTES: Record<string, string[]> = {
 export const FACTS: { label: string; value: string; href?: string }[] = [
   { label: 'School', value: 'Institut Le Rosey, Rolle CH' },
   { label: 'Programme', value: 'IB Diploma · Class of 2027' },
-  { label: 'Roles', value: 'Founder · Engineer · Violinist' },
+  { label: 'Roles', value: 'Student · Developer · Violinist' },
   { label: 'Focus', value: 'EdTech · AI/ML systems · CP' },
   { label: 'Summer ’26', value: 'Penn ESAP — AI & mathematics' },
   { label: 'Languages', value: 'TypeScript · C++ · Python' },
@@ -1192,4 +1199,4 @@ export const NAME = 'Alan Shen'
 
 export const LOCATION = 'Geneva Metropolitan Area'
 
-export const ROLE = 'Founder · Developer · Violinist'
+export const ROLE = 'Student · Developer · Violinist'

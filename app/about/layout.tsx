@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'About Alan Shen — Institut Le Rosey student, founder, developer, musician. Get in touch.',
+    'I am Alan, a student at Institut Le Rosey interested in learning, software, and music. Here is a little about me and how to get in touch.',
 }
 
 export default function AboutLayout({
