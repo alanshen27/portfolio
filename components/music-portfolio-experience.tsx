@@ -226,15 +226,22 @@ function GalleryItems({ work }: { work: PortfolioWork }) {
   return images.length
     ? images.map((item, i) => (
         <figure key={item.src} className="mp-gallery-item">
-          <div className="mp-gallery-image">
+          <a
+            className="mp-gallery-image"
+            href={item.src}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open full-size image: ${item.caption ?? item.alt}`}
+          >
             <Image
               src={item.src}
               alt={item.alt}
               fill
-              sizes="(max-width: 899px) 85vw, 55vw"
+              sizes="(max-width: 899px) 85vw, 76vw"
+              quality={90}
               className="object-contain"
             />
-          </div>
+          </a>
           <figcaption>
             <span>0{i + 1}</span>
             {item.caption ?? item.alt}
@@ -271,82 +278,52 @@ function ChapterFooter({ next }: { next?: PortfolioWork }) {
   )
 }
 
-function SimpleChapter({ work, index, next }: ChapterProps) {
+function SimpleGallery({ work }: { work: PortfolioWork }) {
   return (
-    <section
-      id={work.id}
-      className="mp-simple-chapter section-max section-pad"
-      aria-labelledby={`${work.id}-title`}
-    >
-      <p className="mp-eyebrow">
-        0{index + 1} / {work.category}
-      </p>
-      <div className="mp-simple-demo">
-        <Demo work={work} />
-      </div>
-      <div className="mp-simple-copy">
-        <Details work={work} />
-        <div>
-          <Description work={work} />
-        </div>
-      </div>
+    <div className="mp-gallery">
       <div className="mp-gallery-heading">
-        <span>Gallery</span>
-        <span>Scroll to explore →</span>
+        <span>Screenshots</span>
+        <span>Swipe or scroll to see screenshots →</span>
       </div>
       <div
         className="mp-simple-gallery"
         tabIndex={0}
         role="region"
-        aria-label={`${work.title} image gallery`}
+        aria-label={`${work.title} screenshot gallery`}
       >
         <div className="mp-gallery-track">
           <GalleryItems work={work} />
         </div>
       </div>
-      <div className="mp-simple-next">
-        <ChapterFooter next={next} />
-      </div>
-    </section>
+      <p className="mp-gallery-help">Select an image to view it full size.</p>
+    </div>
   )
 }
 
-function ScrollChapter({ work, index, next }: ChapterProps) {
-  const section = useRef<HTMLElement>(null)
+function ScrollGallery({ work }: { work: PortfolioWork }) {
+  const section = useRef<HTMLDivElement>(null)
   const gallery = useRef<HTMLDivElement>(null)
   const track = useRef<HTMLDivElement>(null)
   const [distance, setDistance] = useState(0)
-  const [phase, setPhase] = useState<'intro' | 'demo' | 'details'>('intro')
+  const [current, setCurrent] = useState(1)
+  const count = work.gallery?.length || (work.image ? 1 : 3)
   const { scrollYProgress: progress } = useScroll({
     target: section,
-    offset: ['start 64px', 'end end'],
+    offset: ['start 88px', 'end end'],
   })
-  const scale = useTransform(
-    progress,
-    [0, 0.16, 0.35, 0.55, 1],
-    [0.76, 1, 1, 0.34, 0.34],
-  )
-  const x = useTransform(
-    progress,
-    [0, 0.16, 0.35, 0.55],
-    ['12%', '0%', '0%', '0%'],
-  )
-  const y = useTransform(progress, [0, 0.16], ['8%', '0%'])
-  const copyOpacity = useTransform(progress, [0.43, 0.56], [0, 1])
-  const copyY = useTransform(progress, [0.43, 0.56], [24, 0])
-  const galleryOpacity = useTransform(progress, [0.54, 0.64], [0, 1])
-  const galleryX = useTransform(progress, [0.65, 0.94], [0, -distance])
+  const x = useTransform(progress, [0, 1], [0, -distance])
 
   useMotionValueEvent(progress, 'change', (value) => {
-    const nextPhase = value < 0.1 ? 'intro' : value < 0.45 ? 'demo' : 'details'
-    if (phase !== nextPhase) setPhase(nextPhase)
+    setCurrent(Math.min(count, Math.round(value * (count - 1)) + 1))
   })
+
   useEffect(() => {
     const measure = () => {
-      if (gallery.current && track.current)
+      if (gallery.current && track.current) {
         setDistance(
           Math.max(0, track.current.scrollWidth - gallery.current.clientWidth),
         )
+      }
     }
     const observer = new ResizeObserver(measure)
     if (gallery.current) observer.observe(gallery.current)
@@ -355,81 +332,75 @@ function ScrollChapter({ work, index, next }: ChapterProps) {
     return () => observer.disconnect()
   }, [])
 
-  const skipToDetails = () => {
-    if (!section.current) return
-    const start =
-      window.scrollY + section.current.getBoundingClientRect().top - 64
-    const travel = section.current.offsetHeight - window.innerHeight + 64
-    window.scrollTo({ top: start + travel * 0.63, behavior: 'smooth' })
-  }
+  return (
+    <div
+      ref={section}
+      className="mp-scroll-gallery"
+      style={{ height: `calc(100svh + ${distance}px)` }}
+      role="region"
+      aria-label={`${work.title} screenshot gallery`}
+    >
+      <div className="mp-gallery-stage">
+        <div className="mp-gallery-heading">
+          <span>Screenshots</span>
+          <p className="mp-gallery-cue">
+            <span aria-hidden="true">↓</span> Scroll to see screenshots
+          </p>
+          <span
+            className="mp-gallery-count"
+            aria-label={`Screenshot ${current} of ${count}`}
+          >
+            {String(current).padStart(2, '0')} /{' '}
+            {String(count).padStart(2, '0')}
+          </span>
+        </div>
+        <div className="mp-gallery-progress" aria-hidden="true">
+          <motion.div style={{ scaleX: progress }} />
+        </div>
+        <div ref={gallery} className="mp-gallery-window">
+          <motion.div ref={track} className="mp-gallery-track" style={{ x }}>
+            <GalleryItems work={work} />
+          </motion.div>
+        </div>
+        <p className="mp-gallery-help">Select an image to view it full size.</p>
+      </div>
+    </div>
+  )
+}
 
+function WorkChapter({
+  work,
+  index,
+  next,
+  cinematic,
+}: ChapterProps & { cinematic: boolean }) {
   return (
     <section
-      ref={section}
       id={work.id}
-      className="mp-scroll-chapter"
+      className="mp-work-chapter section-max section-pad"
       aria-labelledby={`${work.id}-title`}
     >
-      <div className="mp-stage">
-        <div className="mp-chapter-bar">
-          <p>
-            0{index + 1} / <WorkName work={work} />
-          </p>
-          <button onClick={skipToDetails}>Skip to description ↓</button>
-        </div>
-        <div className="mp-stage-content">
-          <motion.div
-            className="mp-zoom-media"
-            style={{ scale, x, y }}
-            inert={phase === 'details'}
-          >
-            <Demo work={work} active={phase === 'demo'} />
-          </motion.div>
-          <motion.div
-            className="mp-stage-facts"
-            style={{ opacity: copyOpacity }}
-            inert={phase !== 'details'}
-          >
-            <Details work={work} />
-          </motion.div>
-          <motion.div
-            className="mp-stage-copy"
-            style={{ opacity: copyOpacity, y: copyY }}
-            inert={phase !== 'details'}
-          >
-            <Description work={work} />
-          </motion.div>
-          <motion.div
-            className="mp-stage-gallery"
-            style={{ opacity: galleryOpacity }}
-            inert={phase !== 'details'}
-          >
-            <div className="mp-gallery-heading">
-              <span>Gallery</span>
-              <span>Keep scrolling to explore →</span>
-            </div>
-            <div ref={gallery} className="mp-gallery-window">
-              <motion.div
-                ref={track}
-                className="mp-gallery-track"
-                style={{ x: galleryX }}
-              >
-                <GalleryItems work={work} />
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-        <div className="mp-stage-footer">
-          <span>
-            {phase === 'details'
-              ? 'Description & gallery'
-              : 'Scroll into the work'}
-          </span>
-          <div className="mp-progress">
-            <motion.div style={{ scaleX: progress }} />
+      <p className="mp-eyebrow">
+        0{index + 1} / {work.category}
+      </p>
+      <div className="mp-reading-layout">
+        <div className="mp-reading-media">
+          <div className="mp-reading-demo">
+            <Demo work={work} />
           </div>
-          <ChapterFooter next={next} />
+          <Details work={work} />
         </div>
+        <div className="mp-reading-copy">
+          <Description work={work} />
+        </div>
+      </div>
+      {cinematic ? (
+        <ScrollGallery work={work} />
+      ) : (
+        <SimpleGallery work={work} />
+      )}
+      <div className="mp-simple-next">
+        <ChapterFooter next={next} />
       </div>
     </section>
   )
@@ -450,7 +421,7 @@ export function MusicPortfolioExperience({
 
   const restoredHash = useRef(false)
   useEffect(() => {
-    // Hydration swaps the static chapters for taller scroll chapters. Restore a
+    // Hydration adds the taller scroll galleries. Restore a
     // direct project link once that layout is ready, without disturbing resizes.
     if (restoredHash.current || canAnimate !== getSnapshot()) return
     const id = window.location.hash.slice(1)
@@ -523,23 +494,15 @@ export function MusicPortfolioExperience({
           </a>
         </div>
       </section>
-      {works.map((work, index) =>
-        cinematic ? (
-          <ScrollChapter
-            key={work.id}
-            work={work}
-            index={index}
-            next={works[index + 1]}
-          />
-        ) : (
-          <SimpleChapter
-            key={work.id}
-            work={work}
-            index={index}
-            next={works[index + 1]}
-          />
-        ),
-      )}
+      {works.map((work, index) => (
+        <WorkChapter
+          key={work.id}
+          work={work}
+          index={index}
+          next={works[index + 1]}
+          cinematic={cinematic}
+        />
+      ))}
       <div className="mp-end section-max section-pad">
         <p className="display-soft">
           Three ways into music.

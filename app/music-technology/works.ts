@@ -24,39 +24,36 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     category: 'songwriting / production',
     summary: 'A hazy R&B ballad at 90 BPM.',
     description: [
-      'Titled "Regrets", this mid-tempo 90 bpm, and 4/4 R&B-ish ballad song creates a hazy, dreamlike atmosphere that can pulls listeners straight into an emotional late-night reverie. The track opens with atmospheric, multi-textured pianos drenched in spatial delay, instantly evoking a misty and nostalgic soundscape. This ethereal mood is wonderfully grounded by a warm, live-recorded acoustic guitar with carefully sculpted EQ, adding an intimate, human connection.',
-      'The sound design features soft sine-wave synth textures crafted via Serum, utilizing echo and delay effects to weave a psychedelic, floating ambient backdrop. As the track progresses, a rich bassline and dynamic drum arrangement—comprising crisp kicks, snares, hi-hats, toms, shakers, risers, and subtle crashes—build a steady, hypnotic groove. Complemented by weeping violin fragments, "Regrets" effortlessly balances vulnerable intimacy with sweeping cinematic depth.',
+      'Regrets is a musical composition about the difficulty of letting go after loss. To me, part of that difficulty is wanting to move forward while fearing that we might lose the memories most important to us. The song begins with longing and quiet reflection, using the faded sunset and passing moments to suggest the struggle to accept loss. This mid-tempo 90 bpm, 4/4 R&B-ish ballad pulls the listener straight into an emotional late-night reverie.',
+      'To establish this atmosphere, I opened the track with atmospheric, multi-textured pianos drenched in spatial delay to evoke a misty and nostalgic soundscape. I wrote the lyrics to move repeatedly between recognizing the loss and resisting it: memories of laughter, old messages, things left unsaid, broken promises. As the song progresses, the lyrics become increasingly desperate, with the hazy instrumental textures reflecting the transitional phase between remembering and imagining, symbolizing the act of holding onto a memory in desperation as it slips away.',
+      'To complement this emotional atmosphere, I added a warm, live-recorded acoustic guitar with carefully sculpted EQ to bring an intimate, human connection to the ethereal atmosphere.',
+      'To complement the grounded acoustics and further support the floating piano textures, I crafted soft sine-wave synth textures using Serum, utilizing echo and delay effects to weave a psychedelic, floating ambient backdrop. As the track progresses, a rich bassline and dynamic drum arrangement—comprising crisp kicks, snares, hi-hats, toms, shakers, risers, and subtle crashes—build a steady, hypnotic groove.',
+      'Complemented by weeping violin fragments, "Regrets" balances vulnerable intimacy with sweeping cinematic depth. Towards the end of the song, I repeated the invitation “come let me sing for you” to leave the longing and desperation reflected throughout the song unresolved.',
     ],
     details: [
       { label: 'Work', value: 'Original song' },
       { label: 'My role', value: 'Songwriting · production · mixing' },
     ],
     image: {
-      src: '/media/music-technology/regrets/logic-arrangement.webp',
+      src: '/media/music-technology/regrets/production-and-instrumentation.png',
       alt: 'The Regrets session in Logic Pro, showing piano, guitar, synth, bass, percussion and vocal tracks at 90 BPM.',
     },
     audio: '/media/music-technology/regrets/regrets.m4a',
     gallery: [
       {
-        src: '/media/music-technology/regrets/logic-arrangement.webp',
-        alt: 'The full Regrets arrangement in Logic Pro, with verse and chorus sections across its instrument and vocal tracks.',
-        caption: 'Arrangement — the song taking shape in Logic Pro.',
+        src: '/media/music-technology/regrets/production-and-instrumentation.png',
+        alt: 'The Regrets arrangement in Logic Pro at 90 BPM, showing piano, guitar, synth, bass, percussion and vocal tracks.',
+        caption: 'Regrets — Production and instrumentation',
       },
       {
-        src: '/media/music-technology/regrets/logic-instrument-mixer.webp',
-        alt: 'Logic Pro mixer channels for the piano, guitar, pads, plucks and bass, with instrument and effect plugins visible.',
-        caption:
-          'Instrument mix — balancing the piano, guitar, synths and bass.',
+        src: '/media/music-technology/regrets/mixing.png',
+        alt: 'The Regrets mixer in Logic Pro, showing channel levels, panning, effects and shared sends.',
+        caption: 'Regrets — Mixing',
       },
       {
-        src: '/media/music-technology/regrets/logic-vocal-effects.webp',
-        alt: 'Logic Pro mixer channels showing percussion, vocal tracks, sends and effects returns.',
-        caption: 'Mixing — percussion, vocals and shared effects.',
-      },
-      {
-        src: '/media/music-technology/regrets/ableton-vocals.webp',
-        alt: 'An Ableton Live session with the Regrets backing track, lead vocals, vocal layers and processing chain.',
-        caption: 'Vocal work — lead and backing layers in Ableton Live.',
+        src: '/media/music-technology/regrets/mixing-vocals-and-sound-design.png',
+        alt: 'The Regrets session in Ableton Live, showing the accompaniment, lead vocal edits, backing vocals and effects returns.',
+        caption: 'Regrets — Mixing, vocals, and sound design',
       },
     ],
   },
@@ -67,9 +64,11 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     category: 'movement / music',
     summary: 'Sanda movements become music and ink.',
     description: [
-      'An interactive digital art installation that transforms Chinese kickboxing (Sanda) movements into traditional Chinese music with animated ink-wash painting effects. I used large language models in Cursor to help write and debug the code, and AI image generation to create the landscape background.',
-      '“Inkform” combines “ink” with “form,” a word that refers both to a martial arts routine and to the structure of a piece of music. The performer appears on screen as an ink silhouette against a Chinese landscape painting, with trails and splashes following each movement. As the music develops, the image changes with it, shifting between pale paper with dark ink and a black background with white lines.',
-      'The left fist triggers a guqin sound and the right a guzheng sound. Each punch triggers a complete musical phrase, rather than a single note. Kicks drive the harmony, while a stop in a held pose brings a phrase to a close. The piece moves on its own at 92 BPM through four sections—opening (起qǐ), carrying (承chéng), turning (转 zhuǎn), and closing (合hé). Rooted in the ancient Chinese poetry,  起承转合(Qǐ chéng zhuǎn hé)is a four-section musical structure that introduces a theme or a tone, develops it, takes a dramatic turn, and brings the piece to a unified ending. One round is one song in 90 seconds. When it ends, the world fades white and waits for the next martial artist.',
+      'Inkform is an interactive music performance combining Sanda, a Chinese martial art; Chinese instrumental sounds; and traditional landscape painting. It grew from hours of shadow boxing while listening to music, where quick footwork, varying level changes, and kicks transformed my movements into rhythm and expression. The music is shaped through strikes, combinations, and pauses, creating phrases played by a traditional instrument whose volume follows strike intensity.',
+      'I designed this piece to follow a cycle of life, with the ending reflecting the beginning. I chose a predetermined structure to let performers experiment with changing textures and timbres in a coherent arc, bringing variation and novelty to each performance.',
+      'I organized the approximately 90-second piece into four sections to develop the musicality, exploring turbulent and calm textures. The “opening” introduces a motif through guqin and guzheng phrases. This motif is expanded in “development” through the introduction of a seven-note scale, with percussion and xiao responses to kicks. In “turning”, I combined a rhythmic bassline with xiao phrases played an octave higher and flanger processing on the guzheng, creating a more turbulent texture. At the end, the closing reintroduces the opening motif an octave higher, with C-major triads as the sound and landscape fade.',
+      "The background consists of an AI-generated Chinese landscape painting (山水画), with ink trails and an aura, both of which follow the performer's changing movements. I used an ink landscape and visual environment because I saw its connection to Chinese instrumental sounds: to me, the smudged yet translucent ink strokes reflect the breathy sound of the xiao, while the sharp edges of the strokes echo the plucked notes of a guzheng. I added inversions in color to introduce visual change and sustain interest throughout the performance.",
+      'Using AI-assisted programming, I combined motion data from wrist-mounted phone sensors with MediaPipe pose tracking to link physical gestures to visual responses and musical phrases.',
     ],
     details: [
       { label: 'Input', value: 'Martial arts movement' },
@@ -87,12 +86,12 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
       {
         src: '/media/music-technology/inkform/carrying-kick.webp',
         alt: 'A black silhouette performs a high kick among soft ink trails in a pale mountain landscape.',
-        caption: '承 / Carrying — movement against a pale ink landscape.',
+        caption: '承 / Development — movement against a pale ink landscape.',
       },
       {
         src: '/media/music-technology/inkform/carrying-impact.webp',
-        alt: 'A high kick surrounded by a red trail and radiating ink strokes during the Carrying section.',
-        caption: '承 / Carrying — a kick framed by radiating ink.',
+        alt: 'A high kick surrounded by a red trail and radiating ink strokes during the Development section.',
+        caption: '承 / Development — a kick framed by radiating ink.',
       },
       {
         src: '/media/music-technology/inkform/turning-flow.webp',
@@ -115,14 +114,9 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
         caption: '合 / Closing — returning to the pale landscape.',
       },
       {
-        src: '/media/music-technology/inkform/reverb-output.webp',
-        alt: 'Inkform audio code in Cursor showing reverb diffusion, filtering and output gain.',
-        caption: 'Audio development — shaping the hall reverb tail.',
-      },
-      {
-        src: '/media/music-technology/inkform/reverb-network.webp',
-        alt: 'Inkform audio code in Cursor showing the stereo delay network used for hall reverb.',
-        caption: 'Audio development — the stereo reverb network.',
+        src: '/media/music-technology/inkform/reverb-with-webaudio.png',
+        alt: 'Inkform code in Cursor showing the WebAudio hall reverb network, stereo panning, diffusion, filtering and output gain.',
+        caption: 'Inkform — Coding process: reverb with WebAudio',
       },
     ],
   },
@@ -133,9 +127,12 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     category: 'interactive music / visual landscape',
     summary: 'Take turns making music with Notate.',
     description: [
-      '“蝶戀花” (Butterflies in Love with Flowers) is an interactive music piece inspired by Su Shi’s poem “蝶戀花·春景.” The player takes turns with Notate, an autoregressive transformer model trained to generate music by predicting what comes next in a musical sequence. I used large language models in Cursor to help write and debug the code.',
-      'The player creates a melody by clicking and dragging on the screen. Moving up or down changes the pitch, while faster gestures make the music louder, with the volume easing back as the movement slows. After four bars, Notate plays a four-bar reply based on the music so far, and the player takes another turn.',
-      'The piece uses recorded sounds of guqin and guzheng, two Chinese string instruments, alongside the xiao, a bamboo flute, and percussion. It follows the four-part structure of 起承轉合: an opening, development, a contrasting turn and a conclusion. The music begins quietly, grows fuller and then returns to a gentle close. As the player and Notate exchange phrases, a painted branch grows across the screen, with leaves, blossoms and butterflies appearing along it.',
+      'Inspired by Su Shi’s poem “蝶戀花·春景”, Butterflies in Love with Flowers is an interactive musical piece that introduces a call-and-response melodic progression through cursor interactions.',
+      'I created this piece to explore music as back-and-forth communication. I wanted to explore the recognition of larger phrases and movements in musicality, and how they can be acknowledged and developed while leaving room for interpretation. To create this exchange, I used AI-assisted, human-led programming to create Notate, an AI composition tool, and integrate it into an interface where it responds to the performer’s musical ideas in alternating four-bar phrases.',
+      'Notate is a bidirectional 44.3M-parameter encoder-decoder transformer with eight attention heads that I developed. Pretrained on classical performances and fine-tuned on selected contemporary pieces, Notate can recognize, infill, and continue musical phrases across many genres. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
+      'The performer creates a melody by clicking and dragging across the screen: the vertical positioning of the cursor adjusts pitch, while horizontal movement controls the speed of the created music. Faster movements and note progressions carry momentum, introducing varying dynamics throughout the performance. Every four bars, control over the musical progression alternates between the performer and the Notate AI model.',
+      'The sound palette features the guqin and guzheng as the lead voices, with background ambience created using the xiao flute and percussion from the jiangu and daluo. These sounds remind me of the Chinese instrumental textures embedded inside the pop songs I listened to in my mother’s car—a familiar atmosphere that I wanted to bring to this performance.',
+      'As the piece opens and closes, a visual exchange unfolds: a painted branch grows across the screen, accompanied by leaves, blossoms, and butterflies. The growing image gives the musical exchange a visible form representing changing musical intentions.',
     ],
     details: [
       { label: 'Interaction', value: 'Click and drag to play a melody' },
@@ -165,6 +162,12 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
         src: '/media/music-technology/wenda/blossoms.webp',
         alt: 'Red, yellow and purple blossoms appear on the ink branch as Notate plays its answer.',
         caption: 'Notate’s reply — colour and blossoms join the scroll.',
+      },
+      {
+        src: '/media/music-technology/wenda/interactive-pitch-indicator.png',
+        alt: 'Butterflies in Love with Flowers code in Cursor showing the interactive pitch ladder, note labels and pointer controls.',
+        caption:
+          'Butterflies in Love with Flowers — Coding process: the interactive pitch indicator',
       },
     ],
     process: [
