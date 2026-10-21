@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects by Alan Shen — Studious, Nomad, Scribe, Synapse, and Hive.',
+    'Projects I have started or contributed to, including Studious, Scribe, Notate, Foundry, Nomad, Synapse, and Hive.',
 }
 
 export default function WorkLayout({

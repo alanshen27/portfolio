@@ -137,7 +137,7 @@ export default function WorkPage() {
     <>
       <PageHead
         title="Work"
-        standfirst="Two companies, a handful of hackathon builds and two longer research projects — what each one is, what Alan did, and what came of it."
+        standfirst="Projects I have started or contributed to, with notes on what I worked on and the questions behind each one."
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
 

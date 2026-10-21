@@ -37,7 +37,7 @@ export function UsacoBoard({ className = '' }: { className?: string }) {
         </div>
 
         <p className="mt-2 max-w-sm text-[15px] leading-snug text-white/70">
-          a perfect score in the Silver contest, promoting straight to Gold.
+          I scored 1000 in the Silver contest and was promoted to Gold.
         </p>
 
         <div className="mt-6 h-px overflow-hidden bg-white/10">

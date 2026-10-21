@@ -454,11 +454,11 @@ export function MusicPortfolioExperience({
         </h1>
         <div className="mp-intro">
           <p>
-            Writing a song. Moving into sound.
+            I write songs and experiment with movement,
             <br />
-            Making music through a dialogue.
+            sound, and musical conversation.
           </p>
-          <span>Three works. Three ways into music.</span>
+          <span>Three projects I have been exploring.</span>
         </div>
         <nav aria-label="Selected works" className="mp-project-index">
           {works.map((work, index) => (
@@ -505,9 +505,9 @@ export function MusicPortfolioExperience({
       ))}
       <div className="mp-end section-max section-pad">
         <p className="display-soft">
-          Three ways into music.
+          I am still exploring
           <br />
-          One ongoing exploration.
+          how these ideas can become music.
         </p>
         <div>
           <Link href="/music" className="rule-link">

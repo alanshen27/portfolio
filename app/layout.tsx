@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     template: '%s | Alan Shen',
   },
   description:
-    'High school founder and developer. Studious & Scribe, USACO Gold, VEX Worlds, research, and music.',
+    'I am a student at Institut Le Rosey exploring education software, AI, and music. This is a collection of my projects and the work I have contributed to with others.',
   openGraph: {
     type: 'website',
     url: 'https://alanshen.me/',
-    title: 'Alan Shen | High School Founder & Developer',
+    title: 'Alan Shen | Student, Developer & Musician',
     description:
-      'Studious & Scribe founder. USACO Gold, VEX Worlds qualifier, forthcoming Cambridge University Press research, ABRSM Grade 8 violin & piano.',
+      'I am a student at Institut Le Rosey exploring education software, AI, and music. This is a collection of my projects and the work I have contributed to with others.',
     images: [
       {
         url: '/media/site/banner.jpg',

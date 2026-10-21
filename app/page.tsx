@@ -148,8 +148,9 @@ export default function Home() {
         <div className="mb-8 grid gap-6 md:mb-12 md:grid-cols-12">
           <Fade delay={0.5} className="md:col-span-5">
             <p className="text-ink text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug">
-              Builds education software, competes in programming and robotics,
-              writes research on AI, and plays the violin.
+              I am a student interested in learning, software, and music. I
+              build projects with friends, contribute to AI research, and play
+              the violin.
             </p>
           </Fade>
           <Fade
@@ -236,7 +237,8 @@ export default function Home() {
       >
         <Fade className="border-line border-t pt-8 md:pt-10">
           <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
-            Violin and piano. Orchestra and solo stage. Two singles of his own.
+            I play violin and piano, perform with my school orchestra, and write
+            songs of my own.
           </p>
           <Link
             href="/music-technology"

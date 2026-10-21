@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Record',
   description:
-    'Experience, athletics, awards, and research — Alan Shen’s path as founder, competitor, and student.',
+    'My studies, research contributions, team activities, swimming, and volunteering, with dates and details.',
 }
 
 export default function PathLayout({
