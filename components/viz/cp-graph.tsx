@@ -59,7 +59,7 @@ export function CpGraph({
         viewBox="0 0 280 140"
         className="h-auto w-full overflow-visible"
         role="img"
-        aria-label="Graph search visualization — nodes explored in BFS order"
+        aria-label="Graph search visualisation — nodes explored in BFS order"
       >
         {EDGES.map((e, i) => {
           const a = map[e.from]

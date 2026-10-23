@@ -74,7 +74,7 @@ export default function MusicPage() {
     <>
       <PageHead
         title="Music"
-        standfirst="I play violin and piano, serve as concertmaster of the Le Rosey Orchestra and Camerata, and write songs. I have ABRSM Grade 8 in both instruments and have released two singles."
+        standfirst="I play violin and piano, and I am concertmaster of the Le Rosey Orchestra and Camerata in Grades 11 and 12. I have composed five songs and released two of them."
         contents={[
           { label: 'music & technology portfolio', href: '/music-technology' },
           { label: 'releases', href: '#releases' },
@@ -96,9 +96,8 @@ export default function MusicPage() {
               Music &amp; technology
             </span>
             <span className="text-ink-soft mt-3 block text-base">
-              I explore movement, musical call and response, and songwriting in
-              Inkform 拳墨, 蝶戀花 — Butterflies in Love with Flowers, and
-              Regrets.
+              Movement, a musical exchange, and a song: Inkform 拳墨, 蝶戀花 —
+              Butterflies in Love with Flowers, and Regrets.
             </span>
           </span>
           <span
@@ -111,6 +110,12 @@ export default function MusicPage() {
       </section>
 
       <Block id="releases" label="releases">
+        <p className="text-ink-soft max-w-[62ch] pb-2 text-[17px] leading-relaxed">
+          I have composed five songs in Logic Pro and Melodyne, and released two
+          of them as singles. On @alan.music27 I also post covers of pop and
+          R&amp;B songs. That channel has 900+ followers, 11,000 likes, and more
+          than 300,000 views.
+        </p>
         {MUSIC_RELEASES.map((r, i) => (
           <div
             key={r.id}
@@ -192,6 +197,12 @@ export default function MusicPage() {
 
       <Block id="stage" label="on stage">
         <div className="border-line border-t pt-8 md:pt-10">
+          <p className="text-ink-soft mb-10 max-w-[62ch] text-[17px] leading-relaxed">
+            I am concertmaster of the Le Rosey Orchestra and Camerata in Grades
+            11 and 12, leading more than 40 musicians. We have collaborated with
+            the Menuhin Academy and played at Carnal Hall, Saanen Church, and
+            Karina. In 2024 I sat first desk with the SGIS Symphony Orchestra.
+          </p>
           <Masonry columns={STAGE} />
         </div>
       </Block>

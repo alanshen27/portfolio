@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Record',
   description:
-    'My studies, research contributions, team activities, swimming, and volunteering, with dates and details.',
+    'Studies, roles, research, swimming, and volunteering, with dates and results.',
 }
 
 export default function PathLayout({

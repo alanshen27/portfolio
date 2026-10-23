@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Tech',
   description:
-    'The tools I work with, the maths I am exploring, and projects I have contributed to in robotics and hackathons.',
+    'The stack behind Studious, Scribe, and Notate, plus VEX Robotics and hackathon projects.',
 }
 
 export default function TechLayout({
