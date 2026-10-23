@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     template: '%s | Alan Shen',
   },
   description:
-    'I am a student at Institut Le Rosey exploring education software, AI, and music. This is a collection of my projects and the work I have contributed to with others.',
+    'I am a student at Institut Le Rosey. I build education software, contribute to research on AI and language learning, and write and perform music.',
   openGraph: {
     type: 'website',
     url: 'https://alanshen.me/',
     title: 'Alan Shen | Student, Developer & Musician',
     description:
-      'I am a student at Institut Le Rosey exploring education software, AI, and music. This is a collection of my projects and the work I have contributed to with others.',
+      'I build education software, contribute to research on AI and language learning, and write and perform music.',
     images: [
       {
         url: '/media/site/banner.jpg',

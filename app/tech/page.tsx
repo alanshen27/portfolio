@@ -19,42 +19,42 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Studious',
     detail:
-      'I work on the Next.js frontend and tRPC backend, with Pusher for live updates and Supabase, Render, and Vercel for hosting and data.',
+      'Next.js and tRPC, with Pusher for live updates. Data and hosting are Supabase, Render, and Vercel.',
     tags: 'infrastructure',
     href: '/work#project1',
   },
   {
     title: 'Notate',
     detail:
-      'Using AI-assisted programming, I developed a bidirectional, 44.3M-parameter encoder-decoder transformer with eight attention heads and a REMI-style MIDI tokenizer.',
+      'The current model is a 44.3M-parameter encoder–decoder transformer with eight attention heads. Bidirectional attention is in the encoder; the decoder’s self-attention is causal. I developed it with AI-assisted programming.',
     tags: 'ML · audio',
     href: '/work#project-notate',
   },
   {
     title: 'Foundry',
     detail:
-      'I brought an AI assistant, CAD and PCB workspaces, a shared code editor, and storefront tools into one project at Penn ESAP.',
+      'Co-developed with three teammates at Penn ESAP. My work was the project-aware assistant, the CAD, schematic, and PCB workspaces, the shared editor, and the link from design checks to Shopify checkout.',
     tags: 'AI · hardware',
     href: '/work#project-foundry',
   },
   {
     title: 'Synapse',
     detail:
-      'We experimented with estimating emotional cues from speech and facial expressions, then using those cues in message labels and speech playback.',
+      'Tone, pitch, and rhythm estimate emotional cues from speech. Those cues label messages and shape cloned-voice playback.',
     tags: 'speech · vision',
     href: '/work#project3',
   },
   {
     title: 'Scribe',
     detail:
-      'I worked with friends on the frontend, backend, and AI study workflows, using feedback from classmates to revise the exercise navigation.',
+      'I worked on the frontend, the backend, and retrieval-augmented generation for guides and practice questions.',
     tags: 'AI · full-stack',
     href: '/work#project2',
   },
   {
     title: 'Nomad',
     detail:
-      'We used prerequisite graphs for course planning and added ways to find classmates and student communities.',
+      'Course plans are prerequisite graphs, with pages for classmates and student communities. Third place in the HackMIT China Education Track, and the Outstanding Impact Award.',
     tags: 'graphs',
     href: '/work#project-nomad',
   },
@@ -136,7 +136,7 @@ export default function TechPage() {
     <>
       <PageHead
         title="Tech"
-        standfirst="Some of the tools I use, the projects I am working on, and what I have learned alongside my teammates."
+        standfirst="The tools I use, how the main projects are put together, and the robot and hackathon work."
         contents={[
           { label: 'stack', href: '#stack' },
           { label: 'how it’s built', href: '#built' },

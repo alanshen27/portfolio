@@ -2,7 +2,7 @@ import type { Screen } from '@/components/app-plate'
 
 /**
  * Product screens for the programme notes. Captured from the live apps in
- * September 2026 — Studious on a teacher demo account, Scribe on Alan's own
+ * September 2026 — Studious on a teacher demo account (the teacher dashboard), Scribe on Alan's own
  * workspace with the account rail cropped away — and exported in greyscale
  * so they read as ink on paper.
  */
@@ -10,9 +10,9 @@ import type { Screen } from '@/components/app-plate'
 export const STUDIOUS_SCREENS: Screen[] = [
   {
     src: '/media/projects/studious/home.jpg',
-    alt: 'Studious teacher home: grading counts, the week, up-next assignments, classes and messages',
+    alt: 'Studious teacher dashboard: grading counts, the week, up-next assignments, classes and messages',
     route: 'home',
-    label: 'a teacher’s home, demo account',
+    label: 'teacher dashboard, demo account',
     callouts: [
       {
         x: 24.9,
