@@ -160,7 +160,7 @@ export default function PathPage() {
             ['/media/swim/team.jpg', 'Le Rosey swim team'],
             [
               '/media/swim/lake-medals.webp',
-              'Team with medals after the lake relay',
+              'Team with medals after the 2026 MLS open water relay',
             ],
             ['/media/swim/medals-rooftop.png', 'Swimming medals'],
           ].map(([src, alt], i) => (

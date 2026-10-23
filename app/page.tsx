@@ -89,8 +89,8 @@ const MASONRY: Tile[][] = [
     },
     {
       src: '/media/swim/lake-medals.webp',
-      alt: 'The team with medals after the lake relay',
-      caption: 'after the lake relay',
+      alt: 'The team with medals after the 2026 MLS open water relay',
+      caption: 'after the 2026 MLS open water relay',
       ratio: 'aspect-[4/3]',
       grow: true,
     },

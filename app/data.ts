@@ -162,7 +162,7 @@ export const PROJECTS: Project[] = [
       '5,000+ users · 27 countries · ~US$5,000 ARR · 1st place, HackHarvard China',
     tags: ['Full-stack development and AI workflows'],
     points: [
-      'I lead six students on interactive learning aids, visualisations, and guided summaries.',
+      'I lead three students on interactive learning aids, visualisations, and guided summaries.',
       'Students practise by explaining ideas in their own words. I revised the navigation after feedback from classmates.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR. The team took first place overall at HackHarvard China in August 2025.',
     ],
@@ -295,7 +295,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://www.scribe.study',
     image: '/media/logos/scribe.png',
     bullets: [
-      'I founded Scribe with friends and lead six students on learning aids, visualisations, and guided summaries.',
+      'I founded Scribe with friends and lead three students on learning aids, visualisations, and guided summaries.',
       'I redesigned the exercise navigation after feedback from classmates, and added questions that ask students to explain an idea in their own words.',
       'I worked on the backend and used retrieval-augmented generation to prepare study materials.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR.',
@@ -311,7 +311,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     image: '/media/logos/luduan.png',
     bullets: [
       'I rebuilt the frontend and designed the user experience for the web apps.',
-      'I helped with the relaunch at the 2026 CALICO Conference. The platform serves 40+ U.S. institutions.',
+      'I helped with the relaunch at the 2026 CALICO Conference. The platform serves 30+ U.S. institutions.',
     ],
     id: 'work3',
   },
@@ -345,7 +345,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
       'MLS 2025 June/July: Silver (IM); Gold — 100 m Free | 200 m Freestyle Relay | 200 m Medley Relay.',
       'ADISR 2024 EHL: Bronze — 100 m Free; Gold — IM Relay & Freestyle Relay.',
       'MLS 2024 Beau Soleil: Silver — 50×4 IM Relay (Freestyle leg).',
-      'MLS 2024 Lake Swim Relay: ~150 m per lap; Team 1st Place.',
+      '2026 MLS open water relay: team 1st place, about 150 m a lap.',
       'ADISR 2023 EHL: 1st Place (Moyen Category) — 3 Gold Medals + 1 New School Record (Le Rosey).',
     ],
     id: 'work5',
@@ -833,7 +833,7 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Luduan.ai',
     subtitle:
-      'student internship in frontend development and UX; platform serving 40+ U.S. institutions',
+      'student internship in frontend development and UX; platform serving 30+ U.S. institutions',
     right: 'student intern · 2026 – present',
     href: '/path#experience',
   },
@@ -941,7 +941,7 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2026-02',
     end: 'now',
     detail:
-      'student intern in frontend development and UX — platform serving 40+ U.S. institutions',
+      'student intern in frontend development and UX — platform serving 30+ U.S. institutions',
     href: '/path#experience',
   },
   {
@@ -1102,7 +1102,17 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2024',
     precision: 'year',
     result: true,
-    detail: 'Beau Soleil — silver, 4×50 IM relay; lake swim relay, team 1st',
+    detail: 'Beau Soleil — silver, 4×50 IM relay',
+    href: '/path#athletics',
+  },
+  {
+    id: 'r-mls-openwater',
+    row: 'athletics',
+    label: 'MLS open water relay · 1st',
+    start: '2026',
+    precision: 'year',
+    result: true,
+    detail: '2026 MLS open water relay — team 1st place',
     href: '/path#athletics',
   },
   {
@@ -1182,7 +1192,7 @@ export const NOTES: Record<string, string[]> = {
     'Teachers are testing it at Colegiul Economic Partenie Cosma in Romania. Separately, I have made inquiries at other schools: during a service trip I spoke with students at Liceul de Arte Oradea, and I have also spoken with students at Chinese high schools about how they study. Four further school pilots are planned, including one in Nepal. The inquiries and the planned pilots are not live deployments.',
   ],
   scribe: [
-    'I started Scribe with friends towards the end of Grade 10, in 2025, so we could practise a topic in more depth. I lead six students on interactive learning aids, visualisations, and guided summaries. The exercises ask students to explain an idea in their own words, and I revised the navigation after feedback from classmates.',
+    'I started Scribe with friends towards the end of Grade 10, in 2025, so we could practise a topic in more depth. I lead three students on interactive learning aids, visualisations, and guided summaries. The exercises ask students to explain an idea in their own words, and I revised the navigation after feedback from classmates.',
     'Our team took first place overall at HackHarvard China in August 2025. Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR.',
   ],
   notate: [
