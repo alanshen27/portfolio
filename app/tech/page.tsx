@@ -19,7 +19,7 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Studious',
     detail:
-      'Next.js and tRPC, with Pusher for live updates. Data and hosting are Supabase, Render, and Vercel.',
+      'Built with Next.js and tRPC, using Pusher for live updates and Supabase, Render, and Vercel for data and hosting.',
     tags: 'infrastructure',
     href: '/work#project1',
   },
@@ -33,14 +33,14 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Foundry',
     detail:
-      'Co-developed with three teammates at Penn ESAP. My work was the project-aware assistant, the CAD, schematic, and PCB workspaces, the shared editor, and the link from design checks to Shopify checkout.',
+      'I worked with three teammates at Penn ESAP. My contributions included the assistant, CAD, schematic, and PCB workspaces, the shared editor, and the connection from design checks to Shopify checkout.',
     tags: 'AI · hardware',
     href: '/work#project-foundry',
   },
   {
     title: 'Synapse',
     detail:
-      'Tone, pitch, and rhythm estimate emotional cues from speech. Those cues label messages and shape cloned-voice playback.',
+      'We used tone, pitch, and rhythm in speech to estimate emotional cues, then used those cues to label messages and guide voice-cloned playback.',
     tags: 'speech · vision',
     href: '/work#project3',
   },
@@ -72,12 +72,12 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/robot-build.jpg',
       alt: 'The VEX robot partway through its build',
-      caption: 'the robot, mid-build',
+      caption: 'building the robot',
       ratio: 'aspect-[3/4]',
     },
     {
       src: '/media/tech/hall.jpg',
-      alt: 'A wide, bright competition hall',
+      alt: 'The competition hall with robotics fields and team areas',
       caption: 'the competition hall',
       ratio: 'aspect-[4/3]',
     },
@@ -86,20 +86,20 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/check-in.jpg',
       video: '/media/tech/check-in.mp4',
-      alt: 'Walking in through team check-in at a VEX competition',
-      caption: 'team check-in',
+      alt: 'Team members carrying equipment through the competition venue',
+      caption: 'arriving with the team',
       ratio: 'aspect-[16/9]',
     },
     {
       src: '/media/tech/gear.jpg',
-      alt: 'A red drive gear held up to the camera',
-      caption: 'a drive gear',
+      alt: 'A wheel assembly with red gears held up to the camera',
+      caption: 'wheel and gear assembly',
       ratio: 'aspect-[3/4]',
     },
     {
       src: '/media/tech/robot-close.jpg',
       alt: 'A close-up of the robot’s metal frame and wheels',
-      caption: 'the frame, up close',
+      caption: 'robot frame',
       ratio: 'aspect-[4/3]',
       grow: true,
     },
@@ -108,7 +108,7 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/drivetrain-pair.jpg',
       alt: 'Two drivetrain modules side by side',
-      caption: 'the drivetrain, left and right',
+      caption: 'drivetrain assembly',
       ratio: 'aspect-[3/4]',
     },
     {
@@ -123,7 +123,7 @@ const ROBOT: Tile[][] = [
 
 const BOARD = [
   ['/media/tech/board-gradient.jpg', 'the gradient'],
-  ['/media/tech/board-field.jpg', 'a vector field'],
+  ['/media/tech/board-field.jpg', 'contour lines'],
   ['/media/tech/board-svd.jpg', 'singular values'],
 ]
 
@@ -136,7 +136,7 @@ export default function TechPage() {
     <>
       <PageHead
         title="Tech"
-        standfirst="The tools I use, how the main projects are put together, and the robot and hackathon work."
+        standfirst="I spend a lot of time tinkering with computers. These are some of the tools I use and the ideas I have been working through in my projects, robotics, and hackathons."
         contents={[
           { label: 'stack', href: '#stack' },
           { label: 'how it’s built', href: '#built' },
@@ -269,7 +269,7 @@ export default function TechPage() {
             [
               '/media/hackathons/hackmit-workspace.jpg',
               'Laptops and hardware on the HackMIT China workspace',
-              'the HackMIT China table',
+              'working at HackMIT China',
             ],
             [
               '/media/tech/pair-coding.jpg',

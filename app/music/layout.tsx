@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { MUSIC_INTRO } from '../data'
 
 export const metadata: Metadata = {
   title: 'Music',
-  description:
-    'Violin and piano, concertmaster of the Le Rosey Orchestra and Camerata in Grades 11 and 12, five composed songs, and two released singles.',
+  description: MUSIC_INTRO,
 }
 
 export default function MusicLayout({

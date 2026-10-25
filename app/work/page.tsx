@@ -4,7 +4,13 @@ import { ScrollRow } from '@/components/scroll-row'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { IMAGE_SIZES } from '@/app/image-sizes'
 import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
-import { NOTES, PROJECT_KIND_LABEL, PROJECTS, type Project } from '../data'
+import {
+  NOTES,
+  PROJECT_KIND_LABEL,
+  PROJECTS,
+  TAGLINE,
+  type Project,
+} from '../data'
 
 type Shot = { src: string; alt: string; label: string }
 
@@ -12,6 +18,8 @@ const NOTE_KEY: Record<string, keyof typeof NOTES> = {
   project1: 'studious',
   project2: 'scribe',
   'project-notate': 'notate',
+  'project-foundry': 'foundry',
+  project3: 'synapse',
 }
 
 const shot = (src: string, label: string, alt = label): Shot => ({
@@ -26,39 +34,45 @@ const SHOTS: Record<string, Shot[]> = {
     ...SCRIBE_SCREENS,
     shot(
       '/media/hackathons/hackharvard-china.jpg',
-      'on stage, HackHarvard China 2025',
-      'Presenting Scribe on stage at HackHarvard China',
+      'first-place award, HackHarvard China 2025',
+      'The Scribe team on stage for the first-place award at HackHarvard China',
     ),
   ],
   'project-foundry': [
-    shot('/media/projects/foundry/landing.jpg', 'start from a sentence'),
-    shot('/media/projects/foundry/brief.jpg', 'the product brief'),
+    shot('/media/projects/foundry/landing.jpg', 'creating a project'),
+    shot('/media/projects/foundry/brief.jpg', 'project brief'),
     shot('/media/projects/foundry/cad.jpg', 'mechanical CAD'),
-    shot('/media/projects/foundry/pcb.jpg', 'the PCB workspace'),
-    shot('/media/projects/foundry/firmware.jpg', 'firmware in the editor'),
-    shot('/media/projects/foundry/renders.jpg', 'product renders'),
-    shot('/media/projects/foundry/storefront.jpg', 'the storefront editor'),
+    shot('/media/projects/foundry/pcb.jpg', 'PCB design'),
+    shot('/media/projects/foundry/firmware.jpg', 'firmware editor'),
+    shot(
+      '/media/projects/foundry/renders.jpg',
+      'generating product images and videos',
+    ),
+    shot('/media/projects/foundry/storefront.jpg', 'storefront editor'),
   ],
   'project-nomad': [
-    shot('/media/projects/nomad/calendar.jpg', 'the week'),
-    shot('/media/projects/nomad/plan.jpg', 'a plan as a prerequisite graph'),
-    shot('/media/projects/nomad/feed.jpg', 'the feed'),
-    shot('/media/projects/nomad/group.jpg', 'a community page'),
+    shot('/media/projects/nomad/calendar.jpg', 'weekly calendar'),
+    shot('/media/projects/nomad/plan.jpg', 'course prerequisites'),
+    shot('/media/projects/nomad/feed.jpg', 'community feed'),
+    shot('/media/projects/nomad/group.jpg', 'community page'),
     shot('/media/projects/nomad/communities.jpg', 'communities'),
     shot('/media/projects/nomad/courses.jpg', 'courses and classmates'),
   ],
   project3: [
     shot(
       '/media/projects/synapse/chat.jpg',
-      'Messages with estimated emotional cues.',
+      'group chat with colour-coded messages',
     ),
     shot(
       '/media/projects/synapse/voice.jpg',
       'Voice messages with estimated emotional cues',
     ),
-    shot('/media/projects/synapse/emotion.jpg', 'emotion per message'),
-    shot('/media/projects/synapse/heatmap.jpg', 'an emotion heatmap'),
-    shot('/media/projects/synapse/group.jpg', 'group and direct messages'),
+    shot(
+      '/media/projects/synapse/emotion.jpg',
+      'estimated emotion breakdown for a message',
+    ),
+    shot('/media/projects/synapse/heatmap.jpg', 'emotion labels on a map'),
+    shot('/media/projects/synapse/group.jpg', 'creating a group chat'),
     shot(
       '/media/hackathons/hackharvard-2025.jpg',
       'the team at HackHarvard 2025, Cambridge MA',
@@ -66,9 +80,9 @@ const SHOTS: Record<string, Shot[]> = {
   ],
   project4: [
     shot('/media/projects/hive/explore.jpg', 'study groups to join'),
-    shot('/media/projects/hive/overview.jpg', 'a group overview'),
+    shot('/media/projects/hive/overview.jpg', 'study group overview'),
     shot('/media/projects/hive/group.jpg', 'group chat'),
-    shot('/media/projects/hive/chat.jpg', 'the assistant in a group'),
+    shot('/media/projects/hive/chat.jpg', 'AI assistant in a study group'),
   ],
 }
 
@@ -84,7 +98,7 @@ function Gallery({ p }: { p: Project }) {
       <figure className="md:max-w-[58rem]">
         <PianoRoll className="aspect-[21/9] w-full" />
         <figcaption className="label mt-2">
-          a sketched phrase in ink; the model’s continuation in amber
+          illustration of a musical phrase and continuation
         </figcaption>
       </figure>
     )
@@ -137,7 +151,7 @@ export default function WorkPage() {
     <>
       <PageHead
         title="Work"
-        standfirst="Projects I have started or joined, with what each one does, who I worked with, and what came of it."
+        standfirst={TAGLINE}
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
 

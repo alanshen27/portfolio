@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { SUMMARY } from '../data'
 
 export const metadata: Metadata = {
   title: 'About',
-  description:
-    'I am Alan, a student at Institut Le Rosey interested in learning, software, and music. Here is a little about me and how to get in touch.',
+  description: SUMMARY,
 }
 
 export default function AboutLayout({

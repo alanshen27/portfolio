@@ -38,7 +38,7 @@ export const STUDIOUS_SCREENS: Screen[] = [
     src: '/media/projects/studious/assignment.jpg',
     alt: 'A Studious assignment: instructions, AI-use level, and a submissions table with statuses and grades',
     route: 'assignment',
-    label: 'an assignment’s submissions',
+    label: 'assignment submissions',
     callouts: [
       {
         x: 60.5,
@@ -64,7 +64,7 @@ export const STUDIOUS_SCREENS: Screen[] = [
     src: '/media/projects/studious/class.jpg',
     alt: 'A Studious class overview: a post composer and the class stream',
     route: 'class',
-    label: 'a class stream',
+    label: 'class posts',
     callouts: [
       {
         x: 51.8,
@@ -76,7 +76,7 @@ export const STUDIOUS_SCREENS: Screen[] = [
         x: 89,
         y: 23.4,
         tag: 'up next',
-        text: 'up next: what’s due, and how many have handed it in',
+        text: 'up next: upcoming assignments and their due dates',
       },
     ],
   },
@@ -87,7 +87,7 @@ export const SCRIBE_SCREENS: Screen[] = [
     src: '/media/projects/scribe/chat.jpg',
     alt: 'A Scribe workspace chat: the assistant poses an integration-by-parts question and offers a study session',
     route: 'chat',
-    label: 'a workspace conversation',
+    label: 'study chat',
     callouts: [
       {
         x: 19.5,
@@ -113,7 +113,7 @@ export const SCRIBE_SCREENS: Screen[] = [
     src: '/media/projects/scribe/guide.jpg',
     alt: 'A Scribe study guide on integration by parts, with derived and boxed formulae',
     route: 'guide',
-    label: 'a generated study guide',
+    label: 'generated study guide',
     callouts: [
       {
         x: 34.8,

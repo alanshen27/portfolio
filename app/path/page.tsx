@@ -40,7 +40,7 @@ export default function PathPage() {
     <>
       <PageHead
         title="Record"
-        standfirst="Studies, roles, research, swimming, and volunteering, with the dates and results."
+        standfirst="Alongside my studies, I build apps, contribute to research, swim with my school team, and volunteer."
         contents={CONTENTS}
       />
 
@@ -128,19 +128,19 @@ export default function PathPage() {
       <Block id="athletics" label="swimming">
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
-            I swim freestyle and butterfly for the Le Rosey team, and I mentor
-            teammates on technique. I have received the school MVP award three
-            consecutive times, set one school record, and won fourteen medals.
-            The meet list below keeps each competition’s own name: ADISR, and
-            MLS (Mountain and Lakes Schools).
+            I swim freestyle and butterfly for the Le Rosey team and help my
+            teammates with their technique. I’ve won fourteen medals, set a
+            school record, and been named school MVP three times in a row. The
+            results below include ADISR and MLS (Mountain and Lakes Schools)
+            competitions.
           </p>
           <div className="mt-10 grid gap-3 md:grid-cols-12">
             <Media
               className="md:col-span-6"
               src="/media/loops/reel.jpg"
               video="/media/swim/reel.mp4"
-              alt="Racing at a swim meet"
-              caption="race footage"
+              alt="Alan training in an indoor pool in China"
+              caption="training in China"
               ratio="aspect-[16/9]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -148,8 +148,8 @@ export default function PathPage() {
               className="md:col-span-6"
               src="/media/loops/freestyle.jpg"
               video="/media/loops/freestyle.mp4"
-              alt="Alan swimming butterfly down a lane"
-              caption="butterfly"
+              alt="Alan training butterfly in an indoor pool in China"
+              caption="training in China"
               ratio="aspect-[16/9]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -162,7 +162,10 @@ export default function PathPage() {
               '/media/swim/lake-medals.webp',
               'Team with medals after the 2026 MLS open water relay',
             ],
-            ['/media/swim/medals-rooftop.png', 'Swimming medals'],
+            [
+              '/media/swim/medals-rooftop.png',
+              'The swim team wearing their medals',
+            ],
           ].map(([src, alt], i) => (
             <div
               key={src}

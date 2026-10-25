@@ -5,7 +5,7 @@ import { easeOut } from '@/components/portfolio-motion'
 
 type Note = { t: number; p: number; d: number; ai?: boolean }
 
-/* Sketch (ink) followed by a model continuation (accent) — same idea as the notate UI. */
+/* Hand-authored illustration of a phrase and continuation, not a model output. */
 const NOTES: Note[] = [
   { t: 0, p: 7, d: 2 },
   { t: 0, p: 3, d: 2 },
@@ -97,7 +97,7 @@ export function PianoRoll({ className = '' }: { className?: string }) {
       </svg>
       <div className="text-ink-faint pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 text-[11px]">
         <span>sketch</span>
-        <span className="text-accent">continued by the model →</span>
+        <span className="text-accent">example continuation →</span>
       </div>
     </div>
   )

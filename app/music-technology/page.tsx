@@ -5,7 +5,7 @@ import { PORTFOLIO_WORKS } from './works'
 
 const title = 'Music & Technology'
 const description =
-  'Three pieces: movement in Inkform 拳墨, a musical exchange with Notate in 蝶戀花 — Butterflies in Love with Flowers, and the song Regrets.'
+  'I explore how technology can intertwine with music through Inkform 拳墨, 蝶戀花 — Butterflies in Love with Flowers, and Regrets.'
 
 export const metadata: Metadata = {
   title,

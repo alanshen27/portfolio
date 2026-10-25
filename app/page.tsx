@@ -4,7 +4,6 @@ import {
   Block,
   Drift,
   Fade,
-  Line,
   Rise,
   SmartLink,
   Words,
@@ -15,7 +14,9 @@ import {
   AWARDS,
   EMAIL,
   HOME_BIO,
+  HOME_INTRO,
   LINES,
+  MUSIC_INTRO,
   MUSIC_RELEASES,
   PROJECTS,
   SOCIAL_LINKS,
@@ -38,13 +39,13 @@ const WORK_PHOTOS = [
   },
   {
     src: '/media/hackathons/hackharvard-china.jpg',
-    alt: 'Presenting Scribe on stage at HackHarvard China',
-    caption: 'Scribe, on stage at HackHarvard China',
+    alt: 'The Scribe team on stage for the first-place award at HackHarvard China',
+    caption: 'Scribe, first-place award at HackHarvard China',
   },
   {
     src: '/media/hackathons/hackmit-workspace.jpg',
     alt: 'Laptops and hardware on the HackMIT China workspace',
-    caption: 'the Nomad table, HackMIT China',
+    caption: 'laptops and hardware, HackMIT China',
   },
 ]
 
@@ -65,8 +66,8 @@ const MOMENTS = [
   },
   {
     src: '/media/service/romania-housing.png',
-    alt: 'Volunteers at a housing construction site in Oradea, Romania',
-    caption: 'building houses in Oradea, Romania, 2025',
+    alt: 'Volunteers wearing hard hats at a housing construction site near Oradea, Romania',
+    caption: 'with the housing volunteers near Oradea, Romania, 2025',
     place: 'md:col-span-12',
     ratio: 'aspect-[16/9] md:aspect-[21/8]',
   },
@@ -99,14 +100,14 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/loops/reel.jpg',
       video: '/media/swim/reel.mp4',
-      alt: 'Racing at a swim meet',
-      caption: 'race footage, Le Rosey',
+      alt: 'Alan training in an indoor pool in China',
+      caption: 'training in China',
       ratio: 'aspect-[4/5]',
     },
     {
       src: '/media/vex/worlds-arena.jpeg',
       alt: 'The arena at the VEX Robotics World Championship',
-      caption: 'the World Championship arena, Dallas',
+      caption: 'the VEX World Championship arena',
       ratio: 'aspect-[4/3]',
       grow: true,
     },
@@ -127,7 +128,7 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/swim/medals-rooftop.png',
       alt: 'The swim team with their medals on a rooftop',
-      caption: 'medals, on the roof',
+      caption: 'with the swim team',
       ratio: 'aspect-[4/3]',
     },
   ],
@@ -148,8 +149,7 @@ export default function Home() {
         <div className="mb-8 grid gap-6 md:mb-12 md:grid-cols-12">
           <Fade delay={0.5} className="md:col-span-5">
             <p className="text-ink text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug">
-              I build education software, contribute to research on AI and
-              language learning, and write and perform music.
+              {HOME_INTRO}
             </p>
           </Fade>
           <Fade
@@ -236,8 +236,7 @@ export default function Home() {
       >
         <Fade className="border-line border-t pt-8 md:pt-10">
           <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
-            I play violin and piano with the school orchestra, and I have
-            released two of the five songs I have written.
+            {MUSIC_INTRO}
           </p>
           <Link
             href="/music-technology"
@@ -315,46 +314,51 @@ export default function Home() {
 
       {/* about */}
       <Block id="about" label="about">
-        <div className="border-line grid gap-12 border-t pt-8 md:grid-cols-12 md:gap-8 md:pt-10">
-          <Fade className="md:col-span-7">
-            <p className="display-soft text-[clamp(1.4rem,2.2vw,2.1rem)] leading-[1.18]">
+        <div className="border-line grid gap-12 border-t pt-8 md:pt-10 lg:grid-cols-12 lg:gap-8">
+          <Fade className="lg:col-span-6">
+            <p className="display-soft text-[clamp(1.4rem,2.2vw,2.1rem)] leading-[1.3]">
               {HOME_BIO}
             </p>
-          </Fade>
-          <Fade className="md:col-span-4 md:col-start-9" delay={0.1}>
-            <dl>
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4">
               {FACTS.map(([k, v]) => (
-                <div
-                  key={k}
-                  className="border-line border-t py-3 first:border-t-0 first:pt-0"
-                >
+                <div key={k} className="border-line border-t pt-3">
                   <dt className="label">{k}</dt>
-                  <dd className="text-ink mt-0.5 text-[16px]">{v}</dd>
+                  <dd className="text-ink mt-1 text-sm">{v}</dd>
                 </div>
               ))}
             </dl>
           </Fade>
+          <Fade className="lg:col-span-5 lg:col-start-8" delay={0.1}>
+            <aside
+              id="record"
+              className="scroll-mt-24"
+              aria-labelledby="home-honours-title"
+            >
+              <h3 id="home-honours-title" className="label mb-5">
+                honours and recognitions
+              </h3>
+              <ul>
+                {AWARDS.map((award) => (
+                  <li
+                    key={award.id}
+                    className="border-line grid grid-cols-[4.5rem_1fr] gap-4 border-t py-4"
+                  >
+                    <span className="label pt-0.5">{award.date}</span>
+                    <p className="text-ink text-base leading-snug">
+                      {award.title}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/path#honours"
+                className="rule-link mt-5 inline-block text-sm"
+              >
+                full record →
+              </Link>
+            </aside>
+          </Fade>
         </div>
-      </Block>
-
-      <Block
-        id="record"
-        label="honours and recognitions"
-        aside={
-          <Link href="/path" className="hover:text-ink transition-colors">
-            full record →
-          </Link>
-        }
-        className="pt-0 md:pt-0"
-      >
-        {AWARDS.map((a) => (
-          <Line
-            key={a.id}
-            date={a.date}
-            title={a.title}
-            detail={a.description}
-          />
-        ))}
       </Block>
 
       {/* contact */}

@@ -3,6 +3,7 @@ import { Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
+import { HOME_INTRO, SUMMARY } from './data'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -19,14 +20,12 @@ export const metadata: Metadata = {
     default: 'Alan Shen',
     template: '%s | Alan Shen',
   },
-  description:
-    'I am a student at Institut Le Rosey. I build education software, contribute to research on AI and language learning, and write and perform music.',
+  description: SUMMARY,
   openGraph: {
     type: 'website',
     url: 'https://alanshen.me/',
     title: 'Alan Shen | Student, Developer & Musician',
-    description:
-      'I build education software, contribute to research on AI and language learning, and write and perform music.',
+    description: HOME_INTRO,
     images: [
       {
         url: '/media/site/banner.jpg',
