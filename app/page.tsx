@@ -100,8 +100,8 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/loops/reel.jpg',
       video: '/media/swim/reel.mp4',
-      alt: 'Alan swimming in an indoor pool in China',
-      caption: 'swimming in China',
+      alt: 'Alan training in an indoor pool in China',
+      caption: 'training in China',
       ratio: 'aspect-[4/5]',
     },
     {
