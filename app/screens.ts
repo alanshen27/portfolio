@@ -76,7 +76,7 @@ export const STUDIOUS_SCREENS: Screen[] = [
         x: 89,
         y: 23.4,
         tag: 'up next',
-        text: 'up next: what’s due, and how many have handed it in',
+        text: 'up next: upcoming assignments and their due dates',
       },
     ],
   },

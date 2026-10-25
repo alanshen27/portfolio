@@ -32,8 +32,8 @@ const SHOTS: Record<string, Shot[]> = {
     ...SCRIBE_SCREENS,
     shot(
       '/media/hackathons/hackharvard-china.jpg',
-      'on stage, HackHarvard China 2025',
-      'Presenting Scribe on stage at HackHarvard China',
+      'first-place award, HackHarvard China 2025',
+      'The Scribe team on stage for the first-place award at HackHarvard China',
     ),
   ],
   'project-foundry': [
@@ -42,7 +42,10 @@ const SHOTS: Record<string, Shot[]> = {
     shot('/media/projects/foundry/cad.jpg', 'mechanical CAD'),
     shot('/media/projects/foundry/pcb.jpg', 'the PCB workspace'),
     shot('/media/projects/foundry/firmware.jpg', 'firmware in the editor'),
-    shot('/media/projects/foundry/renders.jpg', 'product renders'),
+    shot(
+      '/media/projects/foundry/renders.jpg',
+      'generating product images and videos',
+    ),
     shot('/media/projects/foundry/storefront.jpg', 'the storefront editor'),
   ],
   'project-nomad': [
@@ -56,15 +59,18 @@ const SHOTS: Record<string, Shot[]> = {
   project3: [
     shot(
       '/media/projects/synapse/chat.jpg',
-      'Messages with estimated emotional cues.',
+      'group chat with colour-coded messages',
     ),
     shot(
       '/media/projects/synapse/voice.jpg',
       'Voice messages with estimated emotional cues',
     ),
-    shot('/media/projects/synapse/emotion.jpg', 'emotion per message'),
-    shot('/media/projects/synapse/heatmap.jpg', 'an emotion heatmap'),
-    shot('/media/projects/synapse/group.jpg', 'group and direct messages'),
+    shot(
+      '/media/projects/synapse/emotion.jpg',
+      'estimated emotion breakdown for a message',
+    ),
+    shot('/media/projects/synapse/heatmap.jpg', 'emotion labels on a map'),
+    shot('/media/projects/synapse/group.jpg', 'creating a group chat'),
     shot(
       '/media/hackathons/hackharvard-2025.jpg',
       'the team at HackHarvard 2025, Cambridge MA',
@@ -90,7 +96,7 @@ function Gallery({ p }: { p: Project }) {
       <figure className="md:max-w-[58rem]">
         <PianoRoll className="aspect-[21/9] w-full" />
         <figcaption className="label mt-2">
-          a sketched phrase in ink; the model’s continuation in amber
+          illustration: a phrase in ink and a possible continuation in amber
         </figcaption>
       </figure>
     )

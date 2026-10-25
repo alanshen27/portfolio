@@ -190,7 +190,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Foundry',
     description:
-      'I built Foundry, an AI engineering workspace, for the final project at Penn ESAP.',
+      'Co-developed Foundry, an AI engineering workspace, with Jason Xiao, William Sun, and Zhiheng Li for our final project at Penn ESAP.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
@@ -200,11 +200,10 @@ export const PROJECTS: Project[] = [
     outcome: 'final project · Penn ESAP AI track · team of four',
     tags: ['TypeScript, CAD, collaborative editing and Shopify'],
     points: [
-      'At Penn ESAP, I studied linear algebra, multivariable calculus & applied AI, and earned A+ in the AI track.',
-      'I co-developed Foundry with Jason Xiao, William Sun, and Zhiheng Li for the Penn ESAP AI-track final project.',
-      'I worked on the assistant that calls tools and runs background tasks from the project context.',
-      'I worked on the CAD, schematic, and PCB workspaces, and on the shared code editor.',
-      'I worked on connecting design checks to storefront generation and Shopify checkout.',
+      'Studied linear algebra, multivariable calculus, and applied AI; earned an A+ in the AI track.',
+      'Worked on the assistant, using the project context to call tools and run background tasks.',
+      'Contributed to the CAD, schematic, and PCB workspaces and the shared code editor.',
+      'Worked on connecting design checks to storefront generation and Shopify checkout.',
     ],
   },
   {
@@ -230,7 +229,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Synapse',
     description:
-      'At HackHarvard 2025, I worked on Synapse to explore how emotional cues from speech could carry into messages and playback.',
+      'Worked on Synapse at HackHarvard 2025, exploring how emotional cues from speech could carry into messages and playback.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     devpost: 'https://devpost.com/software/synapse-n7hwr3',
     repo: 'https://github.com/gosynapse',
@@ -245,9 +244,9 @@ export const PROJECTS: Project[] = [
     outcome: 'invitational · one of two high-school teams',
     tags: ['Emotion recognition, speech and voice cloning'],
     points: [
-      'We transcribed voice messages and used tone, pitch, and rhythm to estimate emotional cues.',
-      'Text messages can carry estimated facial-expression cues.',
-      'Playback uses voice cloning, and those cues shape the delivery.',
+      'Transcribed voice messages and used tone, pitch, and rhythm to estimate emotional cues.',
+      'Added estimated facial-expression cues to text messages.',
+      'Used voice cloning for playback, with the estimated cues shaping the delivery.',
     ],
   },
   {
@@ -641,12 +640,12 @@ export const STAGE_PHOTOS: { src: string; alt: string; caption: string }[] = [
   {
     src: '/media/music/violin-portrait.jpg',
     alt: 'Alan Shen playing violin on stage, close-up',
-    caption: 'solo · close',
+    caption: 'violin · close-up',
   },
   {
     src: '/media/site/banner.jpg',
     alt: 'Wide shot of Alan Shen performing violin on a lit stage',
-    caption: 'solo · stage',
+    caption: 'performing on stage',
   },
   {
     src: '/media/music/orchestra.png',
@@ -720,7 +719,7 @@ export const MUSIC_INTRO =
 
 /** Slightly longer bio for the About block. */
 export const HOME_BIO =
-  'I am a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. I spend my time shipping EdTech platforms like Scribe and Studious, experimenting with new app ideas, and conducting AI-related research. Away from the screen, I play the violin and piano, work on singing and songwriting, swim for my school team, and practise Sanda, a Chinese martial art.'
+  'IB Diploma student at Institut Le Rosey, based in Rolle, Switzerland. Building EdTech platforms like Scribe and Studious, experimenting with new app ideas, and contributing to AI research. Outside of school and projects: violin, piano, singing and songwriting, swimming for my school team, and Sanda, a Chinese martial art.'
 
 /** Proof strip — six numbers a reader can verify in ten seconds. */
 export type Highlight = {
@@ -1194,13 +1193,13 @@ export const LINES = {
     'I enjoy figuring out how things work, from the software I build to the robots I programme.',
 }
 
-/** First-person notes for the major projects and research contributions. */
+/** Notes on the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'Studious began as an LMS to simplify coursework organization, then expanded to support an AI-native experience. I started it in September 2023 and lead seven students, working on the Next.js frontend and tRPC backend.',
-    'I built a platform for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, file sharing, and a marketplace for teachers to share materials.',
-    'I created an AI Labs feature, giving teachers the tools to use AI-assisted means for designing simulations, creating assignments, and monitoring student performance. I also implemented automated feedback.',
-    'I began teacher testing at Colegiul Economic Partenie Cosma, Romania. I conducted inquiries with students at Liceul de Arte Oradea during a service trip and at Chinese high schools. Four further school pilots are planned, including one in Nepal.',
+    'Started Studious in September 2023 as an LMS to simplify coursework organization, then expanded it with AI features. Lead seven students, working on the Next.js frontend and tRPC backend.',
+    'Built tools for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, and file sharing, plus a marketplace for teachers to share materials.',
+    'Created AI Labs for teachers to design simulations, create assignments, and monitor student performance with AI assistance. Added automated feedback.',
+    'Began teacher testing at Colegiul Economic Partenie Cosma, Romania. Spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform development. Four further school pilots are planned, including one in Nepal.',
   ],
   scribe: [
     'I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth. We started towards the end of Grade 10, in 2025. I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
@@ -1209,10 +1208,10 @@ export const NOTES: Record<string, string[]> = {
     'Scribe reached 5,000+ users across 27 countries, with 47,600+ practice artifacts and 5,630+ study activities generated, generating US$5,000 ARR. Our team took first place overall at HackHarvard China in August 2025.',
   ],
   notate: [
-    'Notate is a 44.3M-parameter encoder-decoder transformer with eight attention heads that I developed. Pretrained on classical performances and fine-tuned on selected contemporary pieces, Notate can recognize, infill, and continue musical phrases across many genres. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
-    'Bidirectional attention is in the encoder, so it can read the phrase on both sides of a gap; the decoder uses causal self-attention to write what comes next. I developed it with AI-assisted programming.',
-    'The repository also includes an earlier decoder-only continuation model of about 21 million parameters. That version is not the model I use now.',
-    'In Butterflies in Love with Flowers, the performer and Notate exchange four-bar phrases. Vertical cursor position sets the pitch, horizontal movement sets the pace, and faster movements and note progressions change the dynamics.',
+    'Developed Notate with AI-assisted programming: a 44.3M-parameter encoder-decoder transformer with eight attention heads to recognize, infill, and continue musical phrases across many genres.',
+    'Pretrained on classical performances and fine-tuned on selected contemporary pieces. Used a REMI-style tokenizer to preserve time signature, variations, and dynamics in MIDI outputs.',
+    'Used bidirectional attention in the encoder to read both sides of a gap, and causal self-attention in the decoder to write what comes next. The repository also contains an earlier, separate decoder-only continuation model of about 21 million parameters.',
+    'Integrated Notate into Butterflies in Love with Flowers, where it exchanges four-bar phrases with the performer. Vertical cursor position sets pitch, horizontal movement sets pace, and faster movements and note progressions change the dynamics.',
   ],
   competition: [
     'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in Dallas. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',

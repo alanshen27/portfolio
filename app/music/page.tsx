@@ -19,21 +19,21 @@ const STAGE: Tile[][] = [
     {
       src: '/media/music/violin-portrait.jpg',
       alt: 'Alan playing violin on stage, close-up',
-      caption: 'solo, close',
+      caption: 'violin, close-up',
       ratio: 'aspect-square',
     },
     {
       src: '/media/music/orchestra-hall.jpg',
-      alt: 'The orchestra rehearsing in a concert hall',
-      caption: 'rehearsal, in the hall',
+      alt: 'The orchestra playing with a conductor in a concert hall',
+      caption: 'the orchestra, in the hall',
       ratio: 'aspect-[3/2]',
     },
   ],
   [
     {
       src: '/media/site/banner.jpg',
-      alt: 'Wide shot of Alan performing violin on a lit stage',
-      caption: 'solo, stage',
+      alt: 'Alan performing violin alongside another performer on a lit stage',
+      caption: 'performing on stage',
       ratio: 'aspect-[4/3]',
       position: '35% center',
     },
@@ -211,8 +211,8 @@ export default function MusicPage() {
         <Fade>
           <Media
             src="/media/tech/midi.jpg"
-            alt="A MIDI keyboard and boxed hardware on a desk"
-            caption="the desk"
+            alt="A MIDI keyboard and boxed audio equipment on a wooden floor"
+            caption="MIDI keyboard and audio equipment"
             ratio="aspect-[16/9] md:aspect-[21/9]"
             travel={0.1}
             sizes="(max-width: 1536px) 100vw, 1536px"

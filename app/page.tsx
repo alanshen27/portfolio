@@ -39,13 +39,13 @@ const WORK_PHOTOS = [
   },
   {
     src: '/media/hackathons/hackharvard-china.jpg',
-    alt: 'Presenting Scribe on stage at HackHarvard China',
-    caption: 'Scribe, on stage at HackHarvard China',
+    alt: 'The Scribe team on stage for the first-place award at HackHarvard China',
+    caption: 'Scribe, first-place award at HackHarvard China',
   },
   {
     src: '/media/hackathons/hackmit-workspace.jpg',
     alt: 'Laptops and hardware on the HackMIT China workspace',
-    caption: 'the Nomad table, HackMIT China',
+    caption: 'laptops and hardware, HackMIT China',
   },
 ]
 
@@ -66,8 +66,8 @@ const MOMENTS = [
   },
   {
     src: '/media/service/romania-housing.png',
-    alt: 'Volunteers at a housing construction site in Oradea, Romania',
-    caption: 'building houses in Oradea, Romania, 2025',
+    alt: 'Volunteers wearing hard hats at a housing construction site near Oradea, Romania',
+    caption: 'with the housing volunteers near Oradea, Romania, 2025',
     place: 'md:col-span-12',
     ratio: 'aspect-[16/9] md:aspect-[21/8]',
   },
@@ -107,7 +107,7 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/vex/worlds-arena.jpeg',
       alt: 'The arena at the VEX Robotics World Championship',
-      caption: 'the World Championship arena, Dallas',
+      caption: 'the VEX World Championship arena',
       ratio: 'aspect-[4/3]',
       grow: true,
     },

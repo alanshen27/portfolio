@@ -86,14 +86,14 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/check-in.jpg',
       video: '/media/tech/check-in.mp4',
-      alt: 'Walking in through team check-in at a VEX competition',
-      caption: 'team check-in',
+      alt: 'Team members carrying equipment through the competition venue',
+      caption: 'arriving with the team',
       ratio: 'aspect-[16/9]',
     },
     {
       src: '/media/tech/gear.jpg',
-      alt: 'A red drive gear held up to the camera',
-      caption: 'a drive gear',
+      alt: 'A wheel assembly with red gears held up to the camera',
+      caption: 'wheel and gear assembly',
       ratio: 'aspect-[3/4]',
     },
     {
@@ -123,7 +123,7 @@ const ROBOT: Tile[][] = [
 
 const BOARD = [
   ['/media/tech/board-gradient.jpg', 'the gradient'],
-  ['/media/tech/board-field.jpg', 'a vector field'],
+  ['/media/tech/board-field.jpg', 'contour lines'],
   ['/media/tech/board-svd.jpg', 'singular values'],
 ]
 
