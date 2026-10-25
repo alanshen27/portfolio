@@ -467,7 +467,7 @@ export const AWARDS: Award[] = [
   {
     title: 'Excellence Award | Alpine Robo Games 2026',
     description:
-      'Our team received the Excellence Award at Alpine Robo Games and qualified for the VEX World Championship in Dallas.',
+      'Our team received the Excellence Award at Alpine Robo Games and qualified for the VEX World Championship in St. Louis.',
     date: 'Feb 2026',
     image: '/media/logos/vex.jpg',
     photo: '/media/vex/worlds-team.jpeg',
@@ -506,9 +506,9 @@ export const PUBLICATIONS: Publication[] = [
     venue:
       'Generative AI for Pragmatics: Research, Teaching, and Assessment · edited by Naoko Taguchi · Cambridge University Press',
     status: 'forthcoming',
-    date: '2026',
+    date: 'expected March 2027',
     presentation:
-      'CALICO — Computer Assisted Language Instruction Consortium · Jun 15, 2026',
+      'CALICO — Computer Assisted Language Instruction Consortium · May 30, 2025 (preliminary study)',
     description:
       'I worked with Professor Feng Xiao at Pomona College on fine-tuning and evaluation pipelines for pragmatics assessment. I am the fourth author of this forthcoming chapter.',
     id: 'pub-pragmatics',
@@ -518,7 +518,7 @@ export const PUBLICATIONS: Publication[] = [
     authors: 'Xiao, F. & Shen, X.',
     venue:
       'Journal of Research on International Chinese Teaching and Learning Resources, Vol. 3, pp. 111–118',
-    status: 'accepted · forthcoming',
+    status: 'published',
     date: '2026',
     id: 'pub-api',
   },
@@ -758,7 +758,7 @@ export const HIGHLIGHTS: Highlight[] = [
     value: 'Forthcoming',
     compact: true,
     label: 'Cambridge Univ. Press',
-    detail: 'Training AI for Pragmatics Assessment · CALICO 2026 talk',
+    detail: 'Training AI for Pragmatics Assessment · CALICO 2025 talk',
     href: '/#research',
   },
   {
@@ -818,7 +818,7 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Training AI for Pragmatics Assessment',
     subtitle:
-      'fourth author of a forthcoming chapter; work presented at CALICO 2026',
+      'fourth author of a forthcoming chapter; preliminary work presented at CALICO 2025',
     right: 'Cambridge University Press · forthcoming',
     href: '#note-research',
   },
@@ -1034,10 +1034,10 @@ export const ROLL_NOTES: RollNote[] = [
     id: 'r-calico',
     row: 'research',
     label: 'CALICO talk · Cambridge UP',
-    start: '2026-06',
+    start: '2025-05',
     result: true,
     detail:
-      '“Training AI for Pragmatics Assessment” — talk at CALICO; forthcoming, Cambridge University Press',
+      'preliminary pragmatics assessment study — CALICO 2025 talk; related chapter forthcoming, Cambridge University Press',
     href: '#note-research',
   },
   {
@@ -1047,7 +1047,7 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2026',
     precision: 'year',
     detail:
-      'accepted — Journal of Research on International Chinese Teaching and Learning Resources',
+      'published — Journal of Research on International Chinese Teaching and Learning Resources',
     href: '#note-research',
   },
   {
@@ -1219,10 +1219,10 @@ export const NOTES: Record<string, string[]> = {
     'To do this, we transcribed voice messages into text and used neural networks to classify vocal cues and facial features. This let users see the estimated mood in which a message was sent. We also added realistic voice replication, using the emotion labels applied to sent texts to shape the playback.',
   ],
   competition: [
-    'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in Dallas. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
+    'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in St. Louis. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
   ],
   research: [
-    'I worked with Professor Feng Xiao at Pomona College on AI and pragmatics assessment in second-language learning, building fine-tuning and evaluation pipelines. I am the fourth author of “Training AI for Pragmatics Assessment”, a chapter in Generative AI for Pragmatics: Research, Teaching, and Assessment, edited by Naoko Taguchi and forthcoming from Cambridge University Press. The work was presented at CALICO in June 2026. I also contributed to a paper on API endpoints in Chinese international education and a conference paper on Luduan.ai.',
+    'I worked with Professor Feng Xiao at Pomona College on AI and pragmatics assessment in second-language learning, building fine-tuning and evaluation pipelines. I am the fourth author of “Training AI for Pragmatics Assessment”, a chapter in Generative AI for Pragmatics: Research, Teaching, and Assessment, edited by Naoko Taguchi and forthcoming from Cambridge University Press. Preliminary work was presented at CALICO in May 2025. I also contributed to a published piece on API endpoints in Chinese international education and a conference paper on Luduan.ai.',
   ],
 }
 
