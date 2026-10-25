@@ -111,10 +111,10 @@ export default function MusicPage() {
 
       <Block id="releases" label="releases">
         <p className="text-ink-soft max-w-[62ch] pb-2 text-[17px] leading-relaxed">
-          I have composed five songs in Logic Pro and Melodyne, and released two
-          of them as singles. On @alan.music27 I also post covers of pop and
-          R&amp;B songs. That channel has 900+ followers, 11,000 likes, and more
-          than 300,000 views.
+          I have composed five songs using Logic Pro X, Ableton Live, and
+          Melodyne, and released two as singles. On @alan.music27, I have also
+          made covers for more than 20 pop and R&amp;B videos. The channel has
+          900+ followers, 11,000 likes, and more than 300,000 views.
         </p>
         {MUSIC_RELEASES.map((r, i) => (
           <div
@@ -197,12 +197,21 @@ export default function MusicPage() {
 
       <Block id="stage" label="on stage">
         <div className="border-line border-t pt-8 md:pt-10">
-          <p className="text-ink-soft mb-10 max-w-[62ch] text-[17px] leading-relaxed">
-            I am concertmaster of the Le Rosey Orchestra and Camerata in Grades
-            11 and 12, leading more than 40 musicians. We have collaborated with
-            the Menuhin Academy and played at Carnal Hall, Saanen Church, and
-            Karina. In 2024 I sat first desk with the SGIS Symphony Orchestra.
-          </p>
+          <div className="text-ink-soft mb-10 max-w-[62ch] space-y-3 text-[17px] leading-relaxed">
+            <p>
+              I am concertmaster of the Le Rosey Orchestra and Camerata in
+              Grades 11 and 12, leading more than 40 musicians. We have played
+              at Carnal Hall, Saanen Church, and Karina, and performed three
+              times with the International Menuhin Music Academy.
+            </p>
+            <p>
+              With the SGIS Symphony Orchestra, I sat first desk when Le Rosey
+              hosted in 2024 and second desk when Basel hosted. I also played
+              second violin with the Singapore Kids Philharmonic Orchestra at
+              Our Tampines Hub, and guitar in the School of Rock band programme,
+              where I was selected to perform for Fête de Noël.
+            </p>
+          </div>
           <Masonry columns={STAGE} />
         </div>
       </Block>
