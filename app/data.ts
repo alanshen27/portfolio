@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'I started Studious to help teachers keep classes, assignments, feedback, and gradebooks in one place.',
+      'Studious began as an LMS to simplify coursework organization, then expanded to support an AI-native experience.',
     link: 'https://studious.ac',
     image: '/media/projects/studious.png',
     id: 'project1',
@@ -140,14 +140,15 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js, tRPC, Supabase and Pusher'],
     points: [
       'I lead seven students on the Next.js frontend and tRPC backend.',
-      'The platform covers scheduling, assignments, worksheets, feedback, and the gradebook, plus AI Labs for course design.',
-      'Teachers are testing it at Colegiul Economic Partenie Cosma. I have also been speaking with other schools, and four further school pilots are planned.',
+      'I built a platform for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, file sharing, and a marketplace for teachers to share materials.',
+      'I created an AI Labs feature, giving teachers the tools to use AI-assisted means for designing simulations, creating assignments, and monitoring student performance.',
+      'I began teacher testing at Colegiul Economic Partenie Cosma, Romania. Four further school pilots are planned, including one in Nepal.',
     ],
   },
   {
     name: 'Scribe',
     description:
-      'I built Scribe with friends to give students more room to work through ideas, with guides, visualisations, and practice.',
+      'I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth.',
     link: 'https://www.scribe.study',
     image: '/media/projects/scribe.png',
     id: 'project2',
@@ -162,15 +163,16 @@ export const PROJECTS: Project[] = [
       '5,000+ users · 27 countries · ~US$5,000 ARR · 1st place, HackHarvard China',
     tags: ['Full-stack development and AI workflows'],
     points: [
-      'I lead three students on interactive learning aids, visualisations, and guided summaries.',
-      'Students practise by explaining ideas in their own words. I revised the navigation after feedback from classmates.',
+      'I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
+      'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives.',
+      'I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR. The team took first place overall at HackHarvard China in August 2025.',
     ],
   },
   {
     name: 'Notate',
     description:
-      'I developed Notate to explore how a model can recognise, infill, and continue a musical phrase.',
+      'Notate can recognize, infill, and continue musical phrases across many genres.',
     link: 'https://github.com/alanshen27/notate',
     repo: 'https://github.com/alanshen27/notate',
     id: 'project-notate',
@@ -188,7 +190,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Foundry',
     description:
-      'I built Foundry with three teammates at Penn ESAP to connect a product brief with CAD tools and a storefront.',
+      'I built Foundry, an AI engineering workspace, for the final project at Penn ESAP.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
@@ -198,6 +200,7 @@ export const PROJECTS: Project[] = [
     outcome: 'final project · Penn ESAP AI track · team of four',
     tags: ['TypeScript, CAD, collaborative editing and Shopify'],
     points: [
+      'At Penn ESAP, I studied linear algebra, multivariable calculus & applied AI, and earned A+ in the AI track.',
       'I co-developed Foundry with Jason Xiao, William Sun, and Zhiheng Li for the Penn ESAP AI-track final project.',
       'I worked on the assistant that calls tools and runs background tasks from the project context.',
       'I worked on the CAD, schematic, and PCB workspaces, and on the shared code editor.',
@@ -281,9 +284,11 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://studious.ac',
     image: 'https://www.studious.sh/logo.png',
     bullets: [
-      'I lead seven students on the Next.js frontend and tRPC backend, with Pusher, Supabase, Render, and Vercel.',
-      'Teachers are testing Studious at Colegiul Economic Partenie Cosma. I have made inquiries at other schools, and four further school pilots are planned, including one in Nepal.',
-      'I added AI-assisted course design and automated feedback for teachers to try.',
+      'I led seven students to start a pilot at Colegiul Economic Partenie Cosma.',
+      'I implemented AI course design & automated feedback.',
+      'I planned pilots with four further schools, including one in Nepal.',
+      'I work on the Next.js frontend and tRPC backend, with Pusher, Supabase, Render, and Vercel.',
+      'I conducted inquiries with students at Liceul de Arte Oradea during a service trip and at Chinese high schools.',
     ],
     id: 'work1',
   },
@@ -295,9 +300,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://www.scribe.study',
     image: '/media/logos/scribe.png',
     bullets: [
-      'I founded Scribe with friends and lead three students on learning aids, visualisations, and guided summaries.',
-      'I redesigned the exercise navigation after feedback from classmates, and added questions that ask students to explain an idea in their own words.',
-      'I worked on the backend and used retrieval-augmented generation to prepare study materials.',
+      'I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
+      'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives.',
+      'I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
+      'I worked on the backend and integrated generation of student materials using RAG (retrieval-augmented generation) and agentic graph loops with subagent orchestration.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR.',
     ],
     id: 'work2',
@@ -1191,15 +1197,20 @@ export const LINES = {
 /** First-person notes for the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'I started Studious in September 2023 so teachers could keep scheduling, assignments, worksheets, feedback, and the gradebook in one place. I lead seven students. I work on the Next.js frontend and the tRPC backend, and I added AI Labs so teachers can try simulations, assignments, and course design.',
-    'Teachers are testing it at Colegiul Economic Partenie Cosma in Romania. During a service trip, I spoke with students at Liceul de Arte Oradea about how they study, and I have had similar conversations with students at Chinese high schools. I have also been speaking with other schools about Studious, with four further pilots planned, including one in Nepal.',
+    'Studious began as an LMS to simplify coursework organization, then expanded to support an AI-native experience. I started it in September 2023 and lead seven students, working on the Next.js frontend and tRPC backend.',
+    'I built a platform for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, file sharing, and a marketplace for teachers to share materials.',
+    'I created an AI Labs feature, giving teachers the tools to use AI-assisted means for designing simulations, creating assignments, and monitoring student performance. I also implemented automated feedback.',
+    'I began teacher testing at Colegiul Economic Partenie Cosma, Romania. I conducted inquiries with students at Liceul de Arte Oradea during a service trip and at Chinese high schools. Four further school pilots are planned, including one in Nepal.',
   ],
   scribe: [
-    'I started Scribe with friends towards the end of Grade 10, in 2025, so we could practise a topic in more depth. I lead three students on interactive learning aids, visualisations, and guided summaries. The exercises ask students to explain an idea in their own words, and I revised the navigation after feedback from classmates.',
-    'Our team took first place overall at HackHarvard China in August 2025. Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR.',
+    'I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth. We started towards the end of Grade 10, in 2025. I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
+    'I integrated generation of student materials using RAG (retrieval-augmented generation) and agentic graph loops with subagent orchestration.',
+    'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives. I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
+    'Scribe reached 5,000+ users across 27 countries, with 47,600+ practice artifacts and 5,630+ study activities generated, generating US$5,000 ARR. Our team took first place overall at HackHarvard China in August 2025.',
   ],
   notate: [
-    'Notate infills a musical phrase and continues it. The current model is a 44.3M-parameter encoder–decoder transformer with eight attention heads and a REMI-style MIDI tokenizer. Bidirectional attention is in the encoder, so it can read the phrase on both sides of a gap; the decoder uses causal self-attention to write what comes next. I pretrained it on classical performances and fine-tuned it on selected contemporary pieces. I developed it with AI-assisted programming.',
+    'Notate is a 44.3M-parameter encoder-decoder transformer with eight attention heads that I developed. Pretrained on classical performances and fine-tuned on selected contemporary pieces, Notate can recognize, infill, and continue musical phrases across many genres. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
+    'Bidirectional attention is in the encoder, so it can read the phrase on both sides of a gap; the decoder uses causal self-attention to write what comes next. I developed it with AI-assisted programming.',
     'The repository also includes an earlier decoder-only continuation model of about 21 million parameters. That version is not the model I use now.',
     'In Butterflies in Love with Flowers, the performer and Notate exchange four-bar phrases. Vertical cursor position sets the pitch, horizontal movement sets the pace, and faster movements and note progressions change the dynamics.',
   ],

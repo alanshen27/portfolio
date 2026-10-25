@@ -128,11 +128,11 @@ export default function PathPage() {
       <Block id="athletics" label="swimming">
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
-            I swim freestyle and butterfly for the Le Rosey team, and I mentor
-            teammates on technique. I have received the school MVP award three
-            consecutive times, set one school record, and won fourteen medals.
-            The meet list below keeps each competition’s own name: ADISR, and
-            MLS (Mountain and Lakes Schools).
+            I swim freestyle and butterfly for the Le Rosey team and mentor
+            teammates in technique. I was awarded school MVP three consecutive
+            times, with one school record. I won fourteen medals. My meet
+            results below include ADISR and MLS (Mountain and Lakes Schools)
+            competitions.
           </p>
           <div className="mt-10 grid gap-3 md:grid-cols-12">
             <Media

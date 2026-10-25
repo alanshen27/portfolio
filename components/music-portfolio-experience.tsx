@@ -192,7 +192,9 @@ function Description({ work }: { work: PortfolioWork }) {
         <WorkName work={work} />
       </h2>
       {work.subtitle && <p className="mp-work-subtitle">{work.subtitle}</p>}
-      <p className="mp-summary">{work.summary}</p>
+      {!work.description[0]?.startsWith(work.summary) && (
+        <p className="mp-summary">{work.summary}</p>
+      )}
       {work.description.map((paragraph, index) => (
         <p key={`${work.id}-description-${index}`} className="mp-description">
           {paragraph}

@@ -24,13 +24,13 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     originalTitle: '拳墨',
     category: 'movement / music',
     summary:
-      'I explore how my Sanda movements can shape music and ink visuals.',
+      'Inkform is an interactive music performance combining Sanda, a Chinese martial art; Chinese instrumental sounds; and traditional landscape painting.',
     description: [
-      'I made Inkform to combine Sanda, a Chinese martial art I practise, with Chinese instrumental sounds and traditional landscape painting. The idea grew from shadowboxing while listening to music, where footwork, level changes, and kicks began to feel like rhythm and expression. I connected strikes, combinations, and pauses to musical phrases, with volume following strike intensity.',
-      'I designed the piece to follow a cycle of life, with the ending reflecting the beginning. I organised the approximately ninety-second piece into four sections: opening, development, turning, and closing. I chose a fixed structure so performers could experiment with changing textures and timbres within a familiar arc.',
-      'In the opening, I introduce a motif through guqin and guzheng phrases. I expand it in development with a seven-note scale, percussion, and xiao responses to kicks. In the turning section, I add a rhythmic bassline, raise the xiao phrases by an octave, and apply flanger processing to the guzheng. In closing, I bring back the opening motif an octave higher, with C-major triads as the sound and landscape fade.',
-      'I used an AI-generated Chinese landscape painting (山水画) as the background, with ink trails and an aura following the performer. To me, the soft ink strokes reflect the breathy sound of the xiao, while the sharper edges echo the plucked notes of a guzheng. I added colour inversions to accompany changes in the music.',
-      'I built the piece in TypeScript and Web Audio with AI-assisted programming. Wrist-mounted phone sensors and MediaPipe pose tracking supply the motion, and shaders link each gesture to both the phrase and the image.',
+      'Inkform is an interactive music performance combining Sanda, a Chinese martial art; Chinese instrumental sounds; and traditional landscape painting. It grew from hours of shadow boxing while listening to music, where quick footwork, varying level changes, and kicks transformed my movements into rhythm and expression. The music is shaped through strikes, combinations, and pauses, creating phrases played by a traditional instrument whose volume follows strike intensity.',
+      'I designed this piece to follow a cycle of life, with the ending reflecting the beginning. I chose a predetermined structure to let performers experiment with changing textures and timbres in a coherent arc, bringing variation and novelty to each performance.',
+      'I organized the approximately 90-second piece into four sections to develop the musicality, exploring turbulent and calm textures. The “opening” introduces a motif through guqin and guzheng phrases. This motif is expanded in “development” through the introduction of a seven-note scale, with percussion and xiao responses to kicks. In “turning”, I combined a rhythmic bassline with xiao phrases played an octave higher and flanger processing on the guzheng, creating a more turbulent texture. At the end, the closing reintroduces the opening motif an octave higher, with C-major triads as the sound and landscape fade.',
+      "The background consists of an AI-generated Chinese landscape painting (山水画), with ink trails and an aura, both of which follow the performer's changing movements. I used an ink landscape and visual environment because I saw its connection to Chinese instrumental sounds: to me, the smudged yet translucent ink strokes reflect the breathy sound of the xiao, while the sharp edges of the strokes echo the plucked notes of a guzheng. I added inversions in color to introduce visual change and sustain interest throughout the performance.",
+      'Using AI-assisted programming, I combined motion data from wrist-mounted phone sensors with MediaPipe pose tracking to link physical gestures to visual responses and musical phrases.',
     ],
     details: [
       { label: 'Input', value: 'Martial arts movement' },
@@ -88,13 +88,14 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     subtitle: 'Butterflies in Love with Flowers',
     category: 'interactive music / visual landscape',
     summary:
-      'I explore music as a conversation between a performer and Notate.',
+      'Inspired by Su Shi’s poem “蝶戀花·春景”, Butterflies in Love with Flowers is an interactive musical piece that introduces a call-and-response melodic progression through cursor interactions.',
     description: [
-      'I made Butterflies in Love with Flowers after reading Su Shi’s poem “蝶戀花·春景”. I wanted to explore music as back-and-forth communication, with a performer and Notate taking turns to develop a melody in four-bar phrases. I was interested in how a reply could recognise an earlier phrase while leaving room for interpretation.',
-      'I developed Notate with AI-assisted, human-led programming and connected it to that interface. The current model is a 44.3M-parameter encoder–decoder transformer with eight attention heads. Bidirectional attention is in the encoder, which reads the phrase around a gap; the decoder uses causal self-attention to write the reply. I pretrained it on classical performances, fine-tuned it on selected contemporary pieces, and used a REMI-style tokenizer for time signatures, timing, and dynamics in MIDI.',
-      'I designed the interface around clicking and dragging: vertical cursor position adjusts pitch, while horizontal movement controls the pace of the melody. Faster movements and note progressions introduce changes in dynamics. Every four bars, control alternates between the performer and Notate.',
-      'I chose guqin and guzheng as the lead voices, with xiao ambience and percussion from the jiangu and daluo. These sounds remind me of the Chinese instrumental textures in pop songs I listened to in my mother’s car, and I wanted to bring that familiar atmosphere to the piece.',
-      'I paired the exchange with a painted branch that grows across the screen, adding leaves, blossoms, and butterflies. I wanted the changing image to give the musical exchange a visible form.',
+      'Inspired by Su Shi’s poem “蝶戀花·春景”, Butterflies in Love with Flowers is an interactive musical piece that introduces a call-and-response melodic progression through cursor interactions.',
+      'I created this piece to explore music as back-and-forth communication. I wanted to explore the recognition of larger phrases and movements in musicality, and how they can be acknowledged and developed while leaving room for interpretation. To create this exchange, I used AI-assisted, human-led programming to create Notate, an AI composition tool, and integrate it into an interface where it responds to the performer’s musical ideas in alternating four-bar phrases.',
+      'Notate is a bidirectional 44.3M-parameter encoder-decoder transformer with eight attention heads that I developed. Pretrained on classical performances and fine-tuned on selected contemporary pieces, Notate can recognize, infill, and continue musical phrases across many genres. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
+      'The performer creates a melody by clicking and dragging across the screen: the vertical positioning of the cursor adjusts pitch, while horizontal movement controls the speed of the created music. Faster movements and note progressions carry momentum, introducing varying dynamics throughout the performance. Every four bars, control over the musical progression alternates between the performer and the Notate AI model.',
+      'The sound palette features the guqin and guzheng as the lead voices, with background ambience created using the xiao flute and percussion from the jiangu and daluo. These sounds remind me of the Chinese instrumental textures embedded inside the pop songs I listened to in my mother’s car—a familiar atmosphere that I wanted to bring to this performance.',
+      'As the piece opens and closes, a visual exchange unfolds: a painted branch grows across the screen, accompanied by leaves, blossoms, and butterflies. The growing image gives the musical exchange a visible form representing changing musical intentions.',
     ],
     details: [
       { label: 'Interaction', value: 'Click and drag to play a melody' },
@@ -148,13 +149,14 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     id: 'regrets',
     title: 'Regrets',
     category: 'songwriting / production',
-    summary: 'I wrote Regrets about the difficulty of letting go after loss.',
+    summary:
+      'Regrets is a musical composition about the difficulty of letting go after loss.',
     description: [
-      'I wrote Regrets about the difficulty of letting go after loss. To me, part of that difficulty is wanting to move forward while fearing the loss of important memories. I chose a mid-tempo R&B ballad at 90 BPM in 4/4, opening with a faded sunset and passing moments to suggest the struggle to accept loss.',
-      'I opened the track with layered piano sounds and spatial delay to suggest the space between remembering and imagining. I wrote the lyrics to move repeatedly between recognising the loss and resisting it: memories of laughter, old messages, things left unsaid, and broken promises. As the song progresses, the lyrics become more desperate, reflecting the attempt to hold on to a memory as it slips away.',
-      'I added live-recorded acoustic guitar and adjusted its EQ to bring a warmer, more intimate sound to the arrangement.',
-      'To complement the guitar and the floating piano textures, I created soft sine-wave synth sounds in Serum and added echo and delay. I gradually brought in bass, kicks, snares, hi-hats, toms, shakers, risers, and crashes to give the arrangement more movement.',
-      'I included short violin fragments and repeated “come let me sing for you” towards the end of the song. I wanted to leave the longing unresolved.',
+      'Regrets is a musical composition about the difficulty of letting go after loss. To me, part of that difficulty is wanting to move forward while fearing that we might lose the memories most important to us. The song begins with longing and quiet reflection, using the faded sunset and passing moments to suggest the struggle to accept loss. This mid-tempo 90 bpm, 4/4 R&B-ish ballad pulls the listener straight into an emotional late-night reverie.',
+      'To establish this atmosphere, I opened the track with atmospheric, multi-textured pianos drenched in spatial delay to evoke a misty and nostalgic soundscape. I wrote the lyrics to move repeatedly between recognizing the loss and resisting it: memories of laughter, old messages, things left unsaid, broken promises. As the song progresses, the lyrics become increasingly desperate, with the hazy instrumental textures reflecting the transitional phase between remembering and imagining, symbolizing the act of holding onto a memory in desperation as it slips away.',
+      'To complement this emotional atmosphere, I added a warm, live-recorded acoustic guitar with carefully sculpted EQ to bring an intimate, human connection to the ethereal atmosphere.',
+      'To complement the grounded acoustics and further support the floating piano textures, I crafted soft sine-wave synth textures using Serum, utilizing echo and delay effects to weave a psychedelic, floating ambient backdrop. As the track progresses, a rich bassline and dynamic drum arrangement—comprising crisp kicks, snares, hi-hats, toms, shakers, risers, and subtle crashes—build a steady, hypnotic groove.',
+      'Complemented by weeping violin fragments, "Regrets" balances vulnerable intimacy with sweeping cinematic depth. Towards the end of the song, I repeated the invitation “come let me sing for you” to leave the longing and desperation reflected throughout the song unresolved.',
     ],
     details: [
       { label: 'Work', value: 'Original song' },
