@@ -32,8 +32,8 @@ const SELECTED: { id: string; year: string }[] = [
 const WORK_PHOTOS = [
   {
     src: '/media/projects/studious/home.jpg',
-    alt: 'Studious teacher home screen',
-    caption: 'Studious, a teacher’s home',
+    alt: 'Studious teacher dashboard',
+    caption: 'Studious, teacher dashboard',
     position: 'top left',
   },
   {
@@ -89,8 +89,8 @@ const MASONRY: Tile[][] = [
     },
     {
       src: '/media/swim/lake-medals.webp',
-      alt: 'The team with medals after the lake relay',
-      caption: 'after the lake relay',
+      alt: 'The team with medals after the 2026 MLS open water relay',
+      caption: 'after the 2026 MLS open water relay',
       ratio: 'aspect-[4/3]',
       grow: true,
     },
@@ -135,8 +135,8 @@ const MASONRY: Tile[][] = [
 
 const FACTS = [
   ['school', 'Institut Le Rosey, Rolle'],
-  ['programme', 'IB diploma, class of 2027'],
-  ['summer 2026', 'Penn ESAP — AI and its mathematics'],
+  ['programme', 'IB Diploma, class of 2027'],
+  ['summer 2026', 'Penn ESAP, AI track'],
   ['languages', 'TypeScript, C++, Python'],
 ]
 
@@ -148,9 +148,8 @@ export default function Home() {
         <div className="mb-8 grid gap-6 md:mb-12 md:grid-cols-12">
           <Fade delay={0.5} className="md:col-span-5">
             <p className="text-ink text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug">
-              I am a student interested in learning, software, and music. I
-              build projects with friends, contribute to AI research, and play
-              the violin.
+              I build education software, contribute to research on AI and
+              language learning, and write and perform music.
             </p>
           </Fade>
           <Fade
@@ -237,8 +236,8 @@ export default function Home() {
       >
         <Fade className="border-line border-t pt-8 md:pt-10">
           <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
-            I play violin and piano, perform with my school orchestra, and write
-            songs of my own.
+            I play violin and piano with the school orchestra, and I have
+            released two of the five songs I have written.
           </p>
           <Link
             href="/music-technology"
@@ -340,7 +339,7 @@ export default function Home() {
 
       <Block
         id="record"
-        label="honours"
+        label="honours and recognitions"
         aside={
           <Link href="/path" className="hover:text-ink transition-colors">
             full record →

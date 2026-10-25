@@ -50,11 +50,11 @@ const SHOTS: Record<string, Shot[]> = {
   project3: [
     shot(
       '/media/projects/synapse/chat.jpg',
-      'text messages, with the emotion read',
+      'Messages with estimated emotional cues.',
     ),
     shot(
       '/media/projects/synapse/voice.jpg',
-      'voice messages and their emotion',
+      'Voice messages with estimated emotional cues',
     ),
     shot('/media/projects/synapse/emotion.jpg', 'emotion per message'),
     shot('/media/projects/synapse/heatmap.jpg', 'an emotion heatmap'),
@@ -65,7 +65,7 @@ const SHOTS: Record<string, Shot[]> = {
     ),
   ],
   project4: [
-    shot('/media/projects/hive/explore.jpg', 'exploring study groups'),
+    shot('/media/projects/hive/explore.jpg', 'study groups to join'),
     shot('/media/projects/hive/overview.jpg', 'a group overview'),
     shot('/media/projects/hive/group.jpg', 'group chat'),
     shot('/media/projects/hive/chat.jpg', 'the assistant in a group'),
@@ -137,7 +137,7 @@ export default function WorkPage() {
     <>
       <PageHead
         title="Work"
-        standfirst="Projects I have started or contributed to, with notes on what I worked on and the questions behind each one."
+        standfirst="Projects I have started or joined, with what each one does, who I worked with, and what came of it."
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
 

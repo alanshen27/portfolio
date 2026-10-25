@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Music',
   description:
-    'I play violin and piano, write songs, and experiment with interactive music. Listen to my releases and explore my performances and projects.',
+    'Violin and piano, concertmaster of the Le Rosey Orchestra and Camerata in Grades 11 and 12, five composed songs, and two released singles.',
 }
 
 export default function MusicLayout({
