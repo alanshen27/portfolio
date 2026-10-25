@@ -19,7 +19,7 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Studious',
     detail:
-      'Next.js and tRPC, with Pusher for live updates. Data and hosting are Supabase, Render, and Vercel.',
+      'Built with Next.js and tRPC, using Pusher for live updates and Supabase, Render, and Vercel for data and hosting.',
     tags: 'infrastructure',
     href: '/work#project1',
   },
@@ -33,14 +33,14 @@ const BUILT: { title: string; detail: string; tags: string; href: string }[] = [
   {
     title: 'Foundry',
     detail:
-      'Co-developed with three teammates at Penn ESAP. My work was the project-aware assistant, the CAD, schematic, and PCB workspaces, the shared editor, and the link from design checks to Shopify checkout.',
+      'I worked with three teammates at Penn ESAP. My contributions included the assistant, CAD, schematic, and PCB workspaces, the shared editor, and the connection from design checks to Shopify checkout.',
     tags: 'AI · hardware',
     href: '/work#project-foundry',
   },
   {
     title: 'Synapse',
     detail:
-      'Tone, pitch, and rhythm estimate emotional cues from speech. Those cues label messages and shape cloned-voice playback.',
+      'We used tone, pitch, and rhythm in speech to estimate emotional cues, then used those cues to label messages and guide voice-cloned playback.',
     tags: 'speech · vision',
     href: '/work#project3',
   },

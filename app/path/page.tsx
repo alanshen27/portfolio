@@ -40,7 +40,7 @@ export default function PathPage() {
     <>
       <PageHead
         title="Record"
-        standfirst="Alongside my studies, I work on projects and research, swim with my school team, and volunteer. Here is a record of that work."
+        standfirst="Alongside my studies, I build apps, contribute to research, swim with my school team, and volunteer."
         contents={CONTENTS}
       />
 
@@ -128,9 +128,9 @@ export default function PathPage() {
       <Block id="athletics" label="swimming">
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
-            I swim freestyle and butterfly for the Le Rosey team and mentor
-            teammates in technique. I was awarded school MVP three consecutive
-            times, with one school record. I won fourteen medals. My meet
+            I swim freestyle and butterfly for the Le Rosey team and help my
+            teammates with their technique. I’ve won fourteen medals, set a
+            school record, and been named school MVP three times in a row. The
             results below include ADISR and MLS (Mountain and Lakes Schools)
             competitions.
           </p>

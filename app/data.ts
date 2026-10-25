@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'Studious began as an LMS to simplify coursework organization, then expanded to support an AI-native experience.',
+      'I started Studious to make coursework easier to organise, then added AI tools to help teachers plan lessons and give feedback.',
     link: 'https://studious.ac',
     image: '/media/projects/studious.png',
     id: 'project1',
@@ -139,16 +139,16 @@ export const PROJECTS: Project[] = [
     outcome: 'teacher testing at Colegiul Economic Partenie Cosma',
     tags: ['Next.js, tRPC, Supabase and Pusher'],
     points: [
-      'I lead seven students on the Next.js frontend and tRPC backend.',
-      'I built a platform for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, file sharing, and a marketplace for teachers to share materials.',
-      'I created an AI Labs feature, giving teachers the tools to use AI-assisted means for designing simulations, creating assignments, and monitoring student performance.',
-      'I began teacher testing at Colegiul Economic Partenie Cosma, Romania. Four further school pilots are planned, including one in Nepal.',
+      'Lead seven students on the project and work on the Next.js frontend and tRPC backend.',
+      'Built tools for scheduling classes, organising assignments, creating worksheets, managing grades, viewing class statistics, and sharing files, plus a marketplace for teaching materials.',
+      'Created AI Labs to help teachers design simulations, create assignments, and monitor student performance, and added automated feedback.',
+      'Started teacher testing at Colegiul Economic Partenie Cosma in Romania. Four more school pilots are planned, including one in Nepal.',
     ],
   },
   {
     name: 'Scribe',
     description:
-      'I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth.',
+      'I built Scribe with a group of friends because we wanted more ways to practise topics in depth than we had found in other study apps.',
     link: 'https://www.scribe.study',
     image: '/media/projects/scribe.png',
     id: 'project2',
@@ -163,9 +163,9 @@ export const PROJECTS: Project[] = [
       '5,000+ users · 27 countries · ~US$5,000 ARR · 1st place, HackHarvard China',
     tags: ['Full-stack development and AI workflows'],
     points: [
-      'I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
-      'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives.',
-      'I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
+      'Led three students in designing interactive learning aids, visuals, and guided summaries to help students study topics in depth.',
+      'Added long-form questions, summaries where students explain definitions in their own words, and interactive visualisations to explore ideas from different perspectives.',
+      'Used classmates’ feedback during beta testing to redesign the navigation and guide students from one exercise to the next.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR. The team took first place overall at HackHarvard China in August 2025.',
     ],
   },
@@ -190,7 +190,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Foundry',
     description:
-      'Co-developed Foundry, an AI engineering workspace, with Jason Xiao, William Sun, and Zhiheng Li for our final project at Penn ESAP.',
+      'I worked with Jason Xiao, William Sun, and Zhiheng Li on Foundry, an AI engineering workspace, for our final project at Penn ESAP.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
@@ -200,16 +200,16 @@ export const PROJECTS: Project[] = [
     outcome: 'final project · Penn ESAP AI track · team of four',
     tags: ['TypeScript, CAD, collaborative editing and Shopify'],
     points: [
-      'Studied linear algebra, multivariable calculus, and applied AI; earned an A+ in the AI track.',
-      'Worked on the assistant, using the project context to call tools and run background tasks.',
-      'Contributed to the CAD, schematic, and PCB workspaces and the shared code editor.',
-      'Worked on connecting design checks to storefront generation and Shopify checkout.',
+      'Studied linear algebra, multivariable calculus, and applied AI, earning an A+ in the AI track.',
+      'Worked on the assistant so it could use project context to call tools and run tasks in the background.',
+      'Helped build the CAD, schematic, and PCB workspaces and the shared code editor.',
+      'Helped connect design checks to storefront generation and Shopify checkout.',
     ],
   },
   {
     name: 'Nomad',
     description:
-      'I worked on Nomad, a campus planner for prerequisites, classmates, and student communities.',
+      'I worked on Nomad, a campus planner that helps students plan their courses and find classmates and student communities.',
     link: 'https://www.youtube.com/watch?v=zUIMYg8ByNI',
     devpost: 'https://devpost.com/software/nomad-j58qea',
     repo: 'https://github.com/usenomad',
@@ -229,7 +229,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Synapse',
     description:
-      'Worked on Synapse at HackHarvard 2025, exploring how emotional cues from speech could carry into messages and playback.',
+      'I worked on Synapse at HackHarvard 2025 to explore how a message could carry more of the way someone said it.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     devpost: 'https://devpost.com/software/synapse-n7hwr3',
     repo: 'https://github.com/gosynapse',
@@ -244,9 +244,9 @@ export const PROJECTS: Project[] = [
     outcome: 'invitational · one of two high-school teams',
     tags: ['Emotion recognition, speech and voice cloning'],
     points: [
-      'Transcribed voice messages and used tone, pitch, and rhythm to estimate emotional cues.',
-      'Added estimated facial-expression cues to text messages.',
-      'Used voice cloning for playback, with the estimated cues shaping the delivery.',
+      'We transcribed voice messages and used tone, pitch, and rhythm to estimate emotional cues.',
+      'For text messages, we used facial expressions to estimate those cues.',
+      'We used voice cloning to play messages back, with the estimated cues shaping the delivery.',
     ],
   },
   {
@@ -283,11 +283,11 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://studious.ac',
     image: 'https://www.studious.sh/logo.png',
     bullets: [
-      'I led seven students to start a pilot at Colegiul Economic Partenie Cosma.',
-      'I implemented AI course design & automated feedback.',
-      'I planned pilots with four further schools, including one in Nepal.',
-      'I work on the Next.js frontend and tRPC backend, with Pusher, Supabase, Render, and Vercel.',
-      'I conducted inquiries with students at Liceul de Arte Oradea during a service trip and at Chinese high schools.',
+      'Led seven students in starting teacher testing at Colegiul Economic Partenie Cosma.',
+      'Added AI tools for course design and automated feedback.',
+      'Planned pilots with four more schools, including one in Nepal.',
+      'Work on the Next.js frontend and tRPC backend, using Pusher, Supabase, Render, and Vercel.',
+      'Spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform the project.',
     ],
     id: 'work1',
   },
@@ -299,10 +299,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://www.scribe.study',
     image: '/media/logos/scribe.png',
     bullets: [
-      'I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
-      'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives.',
-      'I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
-      'I worked on the backend and integrated generation of student materials using RAG (retrieval-augmented generation) and agentic graph loops with subagent orchestration.',
+      'Led three students in designing interactive learning aids, visuals, and guided summaries to help students study topics in depth.',
+      'Added long-form questions, summaries where students explain definitions in their own words, and interactive visualisations to explore ideas from different perspectives.',
+      'Used classmates’ feedback during beta testing to redesign the navigation and guide students from one exercise to the next.',
+      'Worked on the backend, using retrieval-augmented generation (RAG) and agentic graph loops with subagent orchestration to generate study materials.',
       'Scribe has 5,000+ users across 27 countries and approximately US$5,000 ARR.',
     ],
     id: 'work2',
@@ -315,8 +315,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://www.luduan.ai',
     image: '/media/logos/luduan.png',
     bullets: [
-      'I rebuilt the frontend and designed the user experience for the web apps.',
-      'I helped with the relaunch at the 2026 CALICO Conference. The platform serves 30+ U.S. institutions.',
+      'Rebuilt the frontend and designed the user experience for the web apps.',
+      'Helped with the relaunch at the 2026 CALICO Conference. The platform serves 30+ U.S. institutions.',
     ],
     id: 'work3',
   },
@@ -330,9 +330,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     bullets: [
       'Our team placed third in skills and qualifiers at Alpine Robo Games 2026.',
       'We placed fourth in skills and seventh overall at the Swiss Regional Competition (Santa Clash @ ISBasel).',
-      'I helped design and build the robot.',
-      'I programmed the autonomous routines.',
-      'I worked on the driver-control interface.',
+      'Helped design and build the robot, programmed its autonomous routines, and worked on the driver-control interface.',
     ],
     id: 'work4',
   },
@@ -545,7 +543,7 @@ export const VOLUNTEERING: Volunteering[] = [
     bullets: [
       'Helped build homes with ten classmates near Oradea, Romania.',
       'Took part in cultural exchanges at a local school and orphanages.',
-      'Performed violin at Liceul de Arte Oradea and local orphanages.',
+      'Played violin at Liceul de Arte Oradea and local orphanages.',
       'Spoke with students at Liceul de Arte Oradea about how they learn, using their feedback to inform Studious.',
       'Wrote and performed an original song for more than 60 students.',
     ],
@@ -571,8 +569,8 @@ export const VOLUNTEERING: Volunteering[] = [
     end: 'Jul 2023',
     cause: 'poverty alleviation',
     bullets: [
-      'I helped research the needs of children in Dharia, India, and our fundraising raised CHF 2,500.',
-      'I organised a school fundraising event with three classmates.',
+      'Helped research the needs of children in Dharia, India. Our fundraising raised CHF 2,500.',
+      'Organised a school fundraising event with three classmates.',
       'We hosted a talent show for 120 students and organised an Indian Night event.',
     ],
     id: 'vol-chemin',
@@ -719,7 +717,7 @@ export const MUSIC_INTRO =
 
 /** Slightly longer bio for the About block. */
 export const HOME_BIO =
-  'IB Diploma student at Institut Le Rosey, based in Rolle, Switzerland. Building EdTech platforms like Scribe and Studious, experimenting with new app ideas, and contributing to AI research. Outside of school and projects: violin, piano, singing and songwriting, swimming for my school team, and Sanda, a Chinese martial art.'
+  'I’m a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. I spend my time building EdTech platforms like Scribe and Studious, experimenting with new app ideas, and contributing to AI research. Away from the screen, I play the violin and piano, work on singing and songwriting, swim for my school team, and practise Sanda, a Chinese martial art.'
 
 /** Proof strip — six numbers a reader can verify in ten seconds. */
 export type Highlight = {
@@ -1196,22 +1194,22 @@ export const LINES = {
 /** Notes on the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'Started Studious in September 2023 as an LMS to simplify coursework organization, then expanded it with AI features. Lead seven students, working on the Next.js frontend and tRPC backend.',
-    'Built tools for class scheduling, assignment organization, worksheet creation, gradebook management, class statistics, and file sharing, plus a marketplace for teachers to share materials.',
-    'Created AI Labs for teachers to design simulations, create assignments, and monitor student performance with AI assistance. Added automated feedback.',
-    'Began teacher testing at Colegiul Economic Partenie Cosma, Romania. Spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform development. Four further school pilots are planned, including one in Nepal.',
+    'I started Studious in September 2023 to make coursework easier to organise. I now lead seven students on the project and work on the Next.js frontend and tRPC backend.',
+    'Teachers can use it to schedule classes, organise assignments, create worksheets, manage grades, view class statistics, and share files. I also built a marketplace for sharing teaching materials.',
+    'I later added AI Labs to help teachers design simulations, create assignments, and monitor student performance with AI assistance, along with automated feedback.',
+    'We started teacher testing at Colegiul Economic Partenie Cosma in Romania. I spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform the project. Four more school pilots are planned, including one in Nepal.',
   ],
   scribe: [
-    'I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth. We started towards the end of Grade 10, in 2025. I led three students in designing interactive learning aids, visuals, and guided summaries to improve learning depth.',
-    'I integrated generation of student materials using RAG (retrieval-augmented generation) and agentic graph loops with subagent orchestration.',
-    'I added long-form questions, active summaries where students explain definitions in their own words, and interactive visualizations that offer different perspectives. I used classmates’ beta-testing feedback to redesign navigation between exercises to be more of a guided experience.',
-    'Scribe reached 5,000+ users across 27 countries, with 47,600+ practice artifacts and 5,630+ study activities generated, generating US$5,000 ARR. Our team took first place overall at HackHarvard China in August 2025.',
+    'I started Scribe with a group of friends towards the end of Grade 10, in 2025. We wanted more ways to practise topics in depth than we had found in other study apps. I led three students in designing interactive learning aids, visuals, and guided summaries.',
+    'On the backend, I used retrieval-augmented generation (RAG) and agentic graph loops with subagent orchestration to generate study materials.',
+    'I added long-form questions, summaries where students explain definitions in their own words, and interactive visualisations to explore ideas from different perspectives. Based on classmates’ feedback during beta testing, I redesigned the navigation to guide students from one exercise to the next.',
+    'Scribe has reached 5,000+ users across 27 countries and approximately US$5,000 ARR, with 47,600+ practice artifacts and 5,630+ study activities generated. Our team took first place overall at HackHarvard China in August 2025.',
   ],
   notate: [
-    'Developed Notate with AI-assisted programming: a 44.3M-parameter encoder-decoder transformer with eight attention heads to recognize, infill, and continue musical phrases across many genres.',
-    'Pretrained on classical performances and fine-tuned on selected contemporary pieces. Used a REMI-style tokenizer to preserve time signature, variations, and dynamics in MIDI outputs.',
-    'Used bidirectional attention in the encoder to read both sides of a gap, and causal self-attention in the decoder to write what comes next. The repository also contains an earlier, separate decoder-only continuation model of about 21 million parameters.',
-    'Integrated Notate into Butterflies in Love with Flowers, where it exchanges four-bar phrases with the performer. Vertical cursor position sets pitch, horizontal movement sets pace, and faster movements and note progressions change the dynamics.',
+    'I developed Notate with AI-assisted programming to recognise, fill gaps in, and continue musical phrases across different genres. The current model is a 44.3M-parameter encoder-decoder transformer with eight attention heads.',
+    'I pretrained it on classical performances and fine-tuned it on selected contemporary pieces. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
+    'The encoder uses bidirectional attention to read both sides of a gap, while the decoder uses causal self-attention to write what comes next. The repository also has an earlier, separate decoder-only continuation model of about 21 million parameters.',
+    'In Butterflies in Love with Flowers, Notate and the performer take turns playing four-bar phrases. Moving the cursor vertically changes pitch, while horizontal movement sets the pace. Faster movements and note progressions change the dynamics.',
   ],
   competition: [
     'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in Dallas. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
