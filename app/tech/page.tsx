@@ -136,7 +136,7 @@ export default function TechPage() {
     <>
       <PageHead
         title="Tech"
-        standfirst="The tools I use, how the main projects are put together, and the robot and hackathon work."
+        standfirst="I spend a lot of time tinkering with computers. These are some of the tools I use and the ideas I have been working through in my projects, robotics, and hackathons."
         contents={[
           { label: 'stack', href: '#stack' },
           { label: 'how it’s built', href: '#built' },

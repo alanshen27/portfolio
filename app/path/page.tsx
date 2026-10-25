@@ -40,7 +40,7 @@ export default function PathPage() {
     <>
       <PageHead
         title="Record"
-        standfirst="Studies, roles, research, swimming, and volunteering, with the dates and results."
+        standfirst="Alongside my studies, I work on projects and research, swim with my school team, and volunteer. Here is a record of that work."
         contents={CONTENTS}
       />
 

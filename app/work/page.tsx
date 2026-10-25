@@ -4,7 +4,13 @@ import { ScrollRow } from '@/components/scroll-row'
 import { PianoRoll } from '@/components/viz/piano-roll'
 import { IMAGE_SIZES } from '@/app/image-sizes'
 import { SCRIBE_SCREENS, STUDIOUS_SCREENS } from '@/app/screens'
-import { NOTES, PROJECT_KIND_LABEL, PROJECTS, type Project } from '../data'
+import {
+  NOTES,
+  PROJECT_KIND_LABEL,
+  PROJECTS,
+  TAGLINE,
+  type Project,
+} from '../data'
 
 type Shot = { src: string; alt: string; label: string }
 
@@ -137,7 +143,7 @@ export default function WorkPage() {
     <>
       <PageHead
         title="Work"
-        standfirst="Projects I have started or joined, with what each one does, who I worked with, and what came of it."
+        standfirst={TAGLINE}
         contents={PROJECTS.map((p) => ({ label: p.name, href: `#${p.id}` }))}
       />
 

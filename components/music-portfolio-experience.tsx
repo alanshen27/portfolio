@@ -678,9 +678,9 @@ export function MusicPortfolioExperience({
         </h1>
         <div className="mp-intro">
           <p>
-            Three pieces: movement, a musical exchange,
+            I explore how technology
             <br />
-            and a song.
+            can intertwine with music.
           </p>
           <span>Inkform, Butterflies in Love with Flowers, and Regrets.</span>
         </div>

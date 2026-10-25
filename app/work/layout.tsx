@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { TAGLINE } from '../data'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description:
-    'Studious, Scribe, Notate, Foundry, Nomad, Synapse, and Hive: what each project does, who I worked with, and the result.',
+  description: TAGLINE,
 }
 
 export default function WorkLayout({

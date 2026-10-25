@@ -12,7 +12,7 @@ import {
 import { Masonry, type Tile } from '@/components/masonry'
 import { Media } from '@/components/media'
 import { MusicVisualizer } from '@/components/music-visualizer'
-import { MUSIC_RELEASES } from '../data'
+import { MUSIC_INTRO, MUSIC_RELEASES } from '../data'
 
 const STAGE: Tile[][] = [
   [
@@ -74,7 +74,7 @@ export default function MusicPage() {
     <>
       <PageHead
         title="Music"
-        standfirst="I play violin and piano, and I am concertmaster of the Le Rosey Orchestra and Camerata in Grades 11 and 12. I have composed five songs and released two of them."
+        standfirst={MUSIC_INTRO}
         contents={[
           { label: 'music & technology portfolio', href: '/music-technology' },
           { label: 'releases', href: '#releases' },
@@ -96,8 +96,8 @@ export default function MusicPage() {
               Music &amp; technology
             </span>
             <span className="text-ink-soft mt-3 block text-base">
-              Movement, a musical exchange, and a song: Inkform 拳墨, 蝶戀花 —
-              Butterflies in Love with Flowers, and Regrets.
+              I explore movement, musical exchange, and songwriting in Inkform
+              拳墨, 蝶戀花 — Butterflies in Love with Flowers, and Regrets.
             </span>
           </span>
           <span

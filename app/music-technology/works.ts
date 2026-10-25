@@ -23,12 +23,13 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     title: 'Inkform',
     originalTitle: '拳墨',
     category: 'movement / music',
-    summary: 'Sanda movement, played as music for guqin, guzheng, and xiao.',
+    summary:
+      'I explore how my Sanda movements can shape music and ink visuals.',
     description: [
-      'Inkform turns Sanda, a Chinese martial art I practise, into music. The idea came from shadowboxing with music on: footwork, level changes, and kicks already had a rhythm. Strikes, combinations, and pauses trigger phrases on Chinese instruments, and the volume follows how hard I strike.',
-      'The piece runs about ninety seconds, in four sections: opening, development, turning, and closing. The structure stays fixed so a performer can change texture and timbre inside a familiar arc. The ending brings the opening motif back an octave higher, as a cycle of life rather than a final stop.',
-      'The opening states a motif on guqin and guzheng. Development expands it with a seven-note scale, percussion, and xiao answers to the kicks. In the turning section I add a rhythmic bassline, raise the xiao phrases by an octave, and put a flanger on the guzheng. The closing returns to that opening motif over C-major triads as the sound and the landscape fade.',
-      'The background is an AI-generated Chinese landscape painting (山水画). Ink trails and an aura follow the performer. Soft ink strokes sit with the breathy xiao; sharper edges sit with the plucked guzheng. Colour inversions follow changes in the music.',
+      'I made Inkform to combine Sanda, a Chinese martial art I practise, with Chinese instrumental sounds and traditional landscape painting. The idea grew from shadowboxing while listening to music, where footwork, level changes, and kicks began to feel like rhythm and expression. I connected strikes, combinations, and pauses to musical phrases, with volume following strike intensity.',
+      'I designed the piece to follow a cycle of life, with the ending reflecting the beginning. I organised the approximately ninety-second piece into four sections: opening, development, turning, and closing. I chose a fixed structure so performers could experiment with changing textures and timbres within a familiar arc.',
+      'In the opening, I introduce a motif through guqin and guzheng phrases. I expand it in development with a seven-note scale, percussion, and xiao responses to kicks. In the turning section, I add a rhythmic bassline, raise the xiao phrases by an octave, and apply flanger processing to the guzheng. In closing, I bring back the opening motif an octave higher, with C-major triads as the sound and landscape fade.',
+      'I used an AI-generated Chinese landscape painting (山水画) as the background, with ink trails and an aura following the performer. To me, the soft ink strokes reflect the breathy sound of the xiao, while the sharper edges echo the plucked notes of a guzheng. I added colour inversions to accompany changes in the music.',
       'I built the piece in TypeScript and Web Audio with AI-assisted programming. Wrist-mounted phone sensors and MediaPipe pose tracking supply the motion, and shaders link each gesture to both the phrase and the image.',
     ],
     details: [
@@ -86,13 +87,14 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     title: '蝶戀花',
     subtitle: 'Butterflies in Love with Flowers',
     category: 'interactive music / visual landscape',
-    summary: 'A four-bar exchange between the performer and Notate.',
+    summary:
+      'I explore music as a conversation between a performer and Notate.',
     description: [
-      'I made Butterflies in Love with Flowers after reading Su Shi’s poem “蝶戀花·春景”. The performer and Notate take turns with a melody, four bars at a time. A reply has to recognise the phrase it answers and still leave the next turn open.',
+      'I made Butterflies in Love with Flowers after reading Su Shi’s poem “蝶戀花·春景”. I wanted to explore music as back-and-forth communication, with a performer and Notate taking turns to develop a melody in four-bar phrases. I was interested in how a reply could recognise an earlier phrase while leaving room for interpretation.',
       'I developed Notate with AI-assisted, human-led programming and connected it to that interface. The current model is a 44.3M-parameter encoder–decoder transformer with eight attention heads. Bidirectional attention is in the encoder, which reads the phrase around a gap; the decoder uses causal self-attention to write the reply. I pretrained it on classical performances, fine-tuned it on selected contemporary pieces, and used a REMI-style tokenizer for time signatures, timing, and dynamics in MIDI.',
-      'The performer clicks and drags. Vertical cursor position sets the pitch. Horizontal movement sets the pace of the melody. Faster movements, and faster note progressions, change the dynamics. After four bars, Notate writes a four-bar reply and hands the next turn back.',
-      'The lead voices are guqin and guzheng, with xiao in the background and percussion from the jiangu and daluo. Those are the Chinese instrumental colours I remember from pop songs in my mother’s car.',
-      'A painted branch grows across the screen as the turns continue, picking up leaves, blossoms, and butterflies.',
+      'I designed the interface around clicking and dragging: vertical cursor position adjusts pitch, while horizontal movement controls the pace of the melody. Faster movements and note progressions introduce changes in dynamics. Every four bars, control alternates between the performer and Notate.',
+      'I chose guqin and guzheng as the lead voices, with xiao ambience and percussion from the jiangu and daluo. These sounds remind me of the Chinese instrumental textures in pop songs I listened to in my mother’s car, and I wanted to bring that familiar atmosphere to the piece.',
+      'I paired the exchange with a painted branch that grows across the screen, adding leaves, blossoms, and butterflies. I wanted the changing image to give the musical exchange a visible form.',
     ],
     details: [
       { label: 'Interaction', value: 'Click and drag to play a melody' },
@@ -146,13 +148,13 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     id: 'regrets',
     title: 'Regrets',
     category: 'songwriting / production',
-    summary: 'A 90 BPM R&B ballad about holding on after loss.',
+    summary: 'I wrote Regrets about the difficulty of letting go after loss.',
     description: [
-      'Regrets is about how hard it is to let go. The song sits in the pull between moving on and keeping a memory close: a mid-tempo R&B ballad at 90 BPM in 4/4, opening on a faded sunset and moments passing.',
-      'Layered piano and spatial delay open that uncertain space between remembering and imagining. The lyric comes back to laughter, old messages, things left unsaid, and broken promises, and the swing between acceptance and resistance gets more insistent as the song goes on.',
-      'I recorded acoustic guitar and shaped the EQ so it sits warmer and closer than the delayed piano.',
-      'Soft sine-wave textures from Serum, with echo and delay, stay underneath. Bass, kicks, snares, hi-hats, toms, shakers, risers, and crashes bring the arrangement forward without covering those textures.',
-      'Short violin fragments and the repeated line “come let me sing for you” end the song with the longing still open.',
+      'I wrote Regrets about the difficulty of letting go after loss. To me, part of that difficulty is wanting to move forward while fearing the loss of important memories. I chose a mid-tempo R&B ballad at 90 BPM in 4/4, opening with a faded sunset and passing moments to suggest the struggle to accept loss.',
+      'I opened the track with layered piano sounds and spatial delay to suggest the space between remembering and imagining. I wrote the lyrics to move repeatedly between recognising the loss and resisting it: memories of laughter, old messages, things left unsaid, and broken promises. As the song progresses, the lyrics become more desperate, reflecting the attempt to hold on to a memory as it slips away.',
+      'I added live-recorded acoustic guitar and adjusted its EQ to bring a warmer, more intimate sound to the arrangement.',
+      'To complement the guitar and the floating piano textures, I created soft sine-wave synth sounds in Serum and added echo and delay. I gradually brought in bass, kicks, snares, hi-hats, toms, shakers, risers, and crashes to give the arrangement more movement.',
+      'I included short violin fragments and repeated “come let me sing for you” towards the end of the song. I wanted to leave the longing unresolved.',
     ],
     details: [
       { label: 'Work', value: 'Original song' },

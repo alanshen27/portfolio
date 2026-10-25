@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'A learning-management system for classes, assignments, feedback, and gradebooks.',
+      'I started Studious to help teachers keep classes, assignments, feedback, and gradebooks in one place.',
     link: 'https://studious.ac',
     image: '/media/projects/studious.png',
     id: 'project1',
@@ -141,13 +141,13 @@ export const PROJECTS: Project[] = [
     points: [
       'I lead seven students on the Next.js frontend and tRPC backend.',
       'The platform covers scheduling, assignments, worksheets, feedback, and the gradebook, plus AI Labs for course design.',
-      'Teachers are testing it at Colegiul Economic Partenie Cosma. Four further school pilots are planned, and I have made inquiries at other schools. Those inquiries and planned pilots are not live deployments.',
+      'Teachers are testing it at Colegiul Economic Partenie Cosma. I have also been speaking with other schools, and four further school pilots are planned.',
     ],
   },
   {
     name: 'Scribe',
     description:
-      'A study app for guides, visualisations, and practice. First place at HackHarvard China.',
+      'I built Scribe with friends to give students more room to work through ideas, with guides, visualisations, and practice.',
     link: 'https://www.scribe.study',
     image: '/media/projects/scribe.png',
     id: 'project2',
@@ -170,7 +170,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Notate',
     description:
-      'An encoder–decoder that infills a musical phrase and writes the next one.',
+      'I developed Notate to explore how a model can recognise, infill, and continue a musical phrase.',
     link: 'https://github.com/alanshen27/notate',
     repo: 'https://github.com/alanshen27/notate',
     id: 'project-notate',
@@ -188,7 +188,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Foundry',
     description:
-      'An AI workspace from a product brief to CAD and a storefront, built with three teammates at Penn ESAP.',
+      'I built Foundry with three teammates at Penn ESAP to connect a product brief with CAD tools and a storefront.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
@@ -207,7 +207,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Nomad',
     description:
-      'A campus planner for prerequisites, classmates, and student communities.',
+      'I worked on Nomad, a campus planner for prerequisites, classmates, and student communities.',
     link: 'https://www.youtube.com/watch?v=zUIMYg8ByNI',
     devpost: 'https://devpost.com/software/nomad-j58qea',
     repo: 'https://github.com/usenomad',
@@ -227,7 +227,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Synapse',
     description:
-      'A HackHarvard 2025 messaging app that estimates emotional cues from speech and can play them back.',
+      'At HackHarvard 2025, I worked on Synapse to explore how emotional cues from speech could carry into messages and playback.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     devpost: 'https://devpost.com/software/synapse-n7hwr3',
     repo: 'https://github.com/gosynapse',
@@ -250,7 +250,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Hive',
     description:
-      'Study groups with a shared chat and an AI assistant, built at Empower 3.0 Hacks.',
+      'I worked on Hive at Empower 3.0 Hacks, bringing study groups together with a shared chat and an AI assistant.',
     link: 'https://www.youtube.com/watch?v=HJVGiYUyQoI',
     devpost: 'https://devpost.com/software/hive-140hcn',
     repo: 'https://github.com/alanshen27/hive',
@@ -700,18 +700,21 @@ export const HEADLINE =
   'Student at Institut Le Rosey · education software, music, and swimming'
 
 export const TAGLINE =
-  'I build education software, contribute to research on AI and language learning, and write and perform music.'
+  'I explore how frontier technologies, especially AI, can contribute to more equitable education, and how technology can intertwine with music.'
 
 export const SUMMARY =
-  'I am a student at Institut Le Rosey. I started Studious and founded Scribe with friends, and I contribute to research on AI and language learning with Professor Feng Xiao. I also swim, play violin and piano, and write music.'
+  'I am a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. I build education software, contribute to research on AI and language learning, and write and perform music.'
 
 /** One-sentence positioning — the first thing a reader should absorb. */
 export const HOME_INTRO =
   'I build education software, contribute to research on AI and language learning, and write and perform music.'
 
+export const MUSIC_INTRO =
+  'I have played violin and piano for more than eight years each. I perform with the orchestra and compose my own music.'
+
 /** Slightly longer bio for the About block. */
 export const HOME_BIO =
-  'I am taking the IB Diploma at Institut Le Rosey. I started Studious, a learning-management system for teachers, and I founded Scribe with friends as a study app. I also work with Professor Feng Xiao at Pomona College on AI for pragmatics assessment. Away from the screen I play violin and piano, write songs, and swim freestyle and butterfly for the school team.'
+  'I am a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. I spend my time shipping EdTech platforms like Scribe and Studious, experimenting with new app ideas, and conducting AI-related research. Away from the screen, I play the violin and piano, work on singing and songwriting, swim for my school team, and practise Sanda, a Chinese martial art.'
 
 /** Proof strip — six numbers a reader can verify in ten seconds. */
 export type Highlight = {
@@ -1180,16 +1183,16 @@ export const ROLL_NOTES: RollNote[] = [
 
 /** Lines in Alan's own words, from earlier versions of this site's copy. */
 export const LINES = {
-  code: 'Most of my time goes to education software, music, and the school swim team.',
+  code: 'Most of my time is spent tinkering with computers, making music, and swimming.',
   systems:
-    'The notes below are the stack behind Studious, Scribe, Notate, and the VEX robot.',
+    'I enjoy figuring out how things work, from the software I build to the robots I programme.',
 }
 
 /** First-person notes for the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
     'I started Studious in September 2023 so teachers could keep scheduling, assignments, worksheets, feedback, and the gradebook in one place. I lead seven students. I work on the Next.js frontend and the tRPC backend, and I added AI Labs so teachers can try simulations, assignments, and course design.',
-    'Teachers are testing it at Colegiul Economic Partenie Cosma in Romania. Separately, I have made inquiries at other schools: during a service trip I spoke with students at Liceul de Arte Oradea, and I have also spoken with students at Chinese high schools about how they study. Four further school pilots are planned, including one in Nepal. The inquiries and the planned pilots are not live deployments.',
+    'Teachers are testing it at Colegiul Economic Partenie Cosma in Romania. During a service trip, I spoke with students at Liceul de Arte Oradea about how they study, and I have had similar conversations with students at Chinese high schools. I have also been speaking with other schools about Studious, with four further pilots planned, including one in Nepal.',
   ],
   scribe: [
     'I started Scribe with friends towards the end of Grade 10, in 2025, so we could practise a topic in more depth. I lead three students on interactive learning aids, visualisations, and guided summaries. The exercises ask students to explain an idea in their own words, and I revised the navigation after feedback from classmates.',
@@ -1220,6 +1223,6 @@ export const FACTS: { label: string; value: string; href?: string }[] = [
 
 export const NAME = 'Alan Shen'
 
-export const LOCATION = 'Geneva Metropolitan Area'
+export const LOCATION = 'Rolle, Switzerland'
 
 export const ROLE = 'Student · Developer · Violinist'
