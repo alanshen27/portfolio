@@ -18,6 +18,8 @@ const NOTE_KEY: Record<string, keyof typeof NOTES> = {
   project1: 'studious',
   project2: 'scribe',
   'project-notate': 'notate',
+  'project-foundry': 'foundry',
+  project3: 'synapse',
 }
 
 const shot = (src: string, label: string, alt = label): Shot => ({

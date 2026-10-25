@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Studious',
     description:
-      'I started Studious to make coursework easier to organise, then added AI tools to help teachers plan lessons and give feedback.',
+      'Studious began as an LMS to simplify coursework organisation.',
     link: 'https://studious.ac',
     image: '/media/projects/studious.png',
     id: 'project1',
@@ -139,10 +139,10 @@ export const PROJECTS: Project[] = [
     outcome: 'teacher testing at Colegiul Economic Partenie Cosma',
     tags: ['Next.js, tRPC, Supabase and Pusher'],
     points: [
-      'Lead seven students on the project and work on the Next.js frontend and tRPC backend.',
+      'Led seven students from different disciplines to develop, research, and design its features.',
       'Built tools for scheduling classes, organising assignments, creating worksheets, managing grades, viewing class statistics, and sharing files, plus a marketplace for teaching materials.',
       'Created AI Labs to help teachers design simulations, create assignments, and monitor student performance, and added automated feedback.',
-      'Started teacher testing at Colegiul Economic Partenie Cosma in Romania. Four more school pilots are planned, including one in Nepal.',
+      'Started teacher testing at Colegiul Economic Partenie Cosma in Romania. Four more school pilots are planned, all in Nepal.',
     ],
   },
   {
@@ -172,7 +172,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Notate',
     description:
-      'Notate can recognize, infill, and continue musical phrases across many genres.',
+      'I developed Notate as an AI co-writing tool for composition. It autocompletes phrases and fills gaps between written passages.',
     link: 'https://github.com/alanshen27/notate',
     repo: 'https://github.com/alanshen27/notate',
     id: 'project-notate',
@@ -190,7 +190,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Foundry',
     description:
-      'I worked with Jason Xiao, William Sun, and Zhiheng Li on Foundry, an AI engineering workspace, for our final project at Penn ESAP.',
+      'I built Foundry, an AI engineering workspace, with Jason Xiao, William Sun, and Zhiheng Li at the Penn ESAP summer programme as our final project.',
     link: 'https://github.com/alanshen27/foundry',
     repo: 'https://github.com/alanshen27/foundry',
     id: 'project-foundry',
@@ -229,7 +229,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Synapse',
     description:
-      'I worked on Synapse at HackHarvard 2025 to explore how a message could carry more of the way someone said it.',
+      'I built Synapse at HackHarvard to explore how a message could augment humanity by enhancing our digital communications, preserving more human characteristics while keeping the convenient typing interface unchanged.',
     link: 'https://youtu.be/nuEoH_5YOi4',
     devpost: 'https://devpost.com/software/synapse-n7hwr3',
     repo: 'https://github.com/gosynapse',
@@ -285,7 +285,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     bullets: [
       'Led seven students in starting teacher testing at Colegiul Economic Partenie Cosma.',
       'Added AI tools for course design and automated feedback.',
-      'Planned pilots with four more schools, including one in Nepal.',
+      'Planned pilots with four more schools, all in Nepal.',
       'Work on the Next.js frontend and tRPC backend, using Pusher, Supabase, Render, and Vercel.',
       'Spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform the project.',
     ],
@@ -908,7 +908,7 @@ export const ROLL_NOTES: RollNote[] = [
     start: '2023-09',
     end: 'now',
     detail:
-      'project initiator and lead app developer — teacher testing in Romania; four further pilots planned',
+      'project initiator and lead app developer — teacher testing in Romania; four further pilots planned in Nepal',
     href: '#note-studious',
   },
   {
@@ -1194,9 +1194,10 @@ export const LINES = {
 /** Notes on the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'Studious began as an LMS to simplify coursework organisation. I started it in September 2023, and I now lead seven students on the project while working on the Next.js frontend and tRPC backend.',
-    'The platform brings together class scheduling, assignment organisation, worksheet creation, gradebook management, class statistics, and file sharing, along with a marketplace for teachers to share materials. I later added AI Labs so teachers could use AI to design simulations, create assignments, and monitor student performance, as well as give automated feedback.',
-    'To help shape the project, I spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools about how they learn. We have begun teacher testing at Colegiul Economic Partenie Cosma in Romania, with four more school pilots planned, including one in Nepal.',
+    'Studious began as an LMS to simplify coursework organisation. I led seven students of different disciplines during the project to develop, research, and design different features.',
+    'The platform combines class scheduling, assignment organisation, worksheet creation, gradebook management, class statistics, and file sharing, along with a marketplace for teachers to share materials.',
+    'I later added AI Labs so teachers could use AI to design simulations, create assignments, and monitor student performance, as well as give automated feedback.',
+    'To help shape the project, I spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools about how they learn. We have begun teacher testing at Colegiul Economic Partenie Cosma in Romania, with four more school pilots planned in Nepal.',
   ],
   scribe: [
     'I started Scribe with a group of friends towards the end of Grade 10, in 2025. We wanted more ways to practise topics in depth than we had found in other study apps. I led three students in designing interactive learning aids, visuals, and guided summaries.',
@@ -1205,10 +1206,17 @@ export const NOTES: Record<string, string[]> = {
     'Scribe has reached 5,000+ users across 27 countries and approximately US$5,000 ARR, with 47,600+ practice artifacts and 5,630+ study activities generated. Our team took first place overall at HackHarvard China in August 2025.',
   ],
   notate: [
-    'I developed Notate with AI-assisted programming to recognise, fill gaps in, and continue musical phrases across different genres. The current model is a 44.3M-parameter encoder-decoder transformer with eight attention heads.',
-    'I pretrained it on classical performances and fine-tuned it on selected contemporary pieces. It uses a REMI-style tokenizer to preserve time signature, variations, and dynamics in its MIDI outputs.',
-    'The encoder uses bidirectional attention to read both sides of a gap, while the decoder uses causal self-attention to write what comes next. The repository also has an earlier, separate decoder-only continuation model of about 21 million parameters.',
-    'In Butterflies in Love with Flowers, Notate and the performer take turns playing four-bar phrases. Moving the cursor vertically changes pitch, while horizontal movement sets the pace. Faster movements and note progressions change the dynamics.',
+    'I developed Notate as an AI co-writing tool for composition. It autocompletes phrases and fills gaps between written passages.',
+    'The flagship model is a 44.3M-parameter bidirectional transformer, which was pretrained and fine-tuned through multiple stages using open-source datasets. It performs autoregressive and bidirectional generation effectively, and can adapt and return to some repeating themes as well as adapt to the music around it.',
+  ],
+  foundry: [
+    'I built Foundry, an AI engineering workspace, with Jason Xiao, William Sun, and Zhiheng Li at the Penn ESAP summer programme as our final project.',
+    'We built a multi-stage, tool-based workspace that allows agents to create physical engineering projects involving CAD, multiple components, schematics, simulations, PCB design, and marketing.',
+    'Our goal was to explore and apply “vibe-coding” in physical engineering, experimenting with the limits of novel models and agent harness paradigms.',
+  ],
+  synapse: [
+    'I built Synapse at HackHarvard to explore how a message could augment humanity by enhancing our digital communications, preserving more human characteristics while keeping the convenient typing interface unchanged.',
+    'To do this, we transcribed voice messages into text and used neural networks to classify vocal cues and facial features. This let users see the estimated mood in which a message was sent. We also added realistic voice replication, using the emotion labels applied to sent texts to shape the playback.',
   ],
   competition: [
     'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in Dallas. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
