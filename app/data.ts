@@ -1194,10 +1194,9 @@ export const LINES = {
 /** Notes on the major projects and research contributions. */
 export const NOTES: Record<string, string[]> = {
   studious: [
-    'I started Studious in September 2023 to make coursework easier to organise. I now lead seven students on the project and work on the Next.js frontend and tRPC backend.',
-    'Teachers can use it to schedule classes, organise assignments, create worksheets, manage grades, view class statistics, and share files. I also built a marketplace for sharing teaching materials.',
-    'I later added AI Labs to help teachers design simulations, create assignments, and monitor student performance with AI assistance, along with automated feedback.',
-    'We started teacher testing at Colegiul Economic Partenie Cosma in Romania. I spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools to inform the project. Four more school pilots are planned, including one in Nepal.',
+    'Studious began as an LMS to simplify coursework organisation. I started it in September 2023, and I now lead seven students on the project while working on the Next.js frontend and tRPC backend.',
+    'The platform brings together class scheduling, assignment organisation, worksheet creation, gradebook management, class statistics, and file sharing, along with a marketplace for teachers to share materials. I later added AI Labs so teachers could use AI to design simulations, create assignments, and monitor student performance, as well as give automated feedback.',
+    'To help shape the project, I spoke with students at Liceul de Arte Oradea during a service trip and at Chinese high schools about how they learn. We have begun teacher testing at Colegiul Economic Partenie Cosma in Romania, with four more school pilots planned, including one in Nepal.',
   ],
   scribe: [
     'I started Scribe with a group of friends towards the end of Grade 10, in 2025. We wanted more ways to practise topics in depth than we had found in other study apps. I led three students in designing interactive learning aids, visuals, and guided summaries.',
