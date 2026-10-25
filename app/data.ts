@@ -717,7 +717,7 @@ export const MUSIC_INTRO =
 
 /** Slightly longer bio for the About block. */
 export const HOME_BIO =
-  'I’m a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. I spend my time building EdTech platforms like Scribe and Studious, experimenting with new app ideas, and contributing to AI research. Away from the screen, I play the violin and piano, work on singing and songwriting, swim for my school team, and practise Sanda, a Chinese martial art.'
+  'I’m a student based in Rolle, Switzerland, taking the IB Diploma at Institut Le Rosey. My projects explore how AI can support education, from helping students work through their ideas to giving teachers freedom in planning courses. I built Scribe with a group of friends because our experiences with study apps made us want more opportunities to practice topics in depth. Studious began as an LMS to simplify coursework organization. I also contribute to research on AI and language learning. Away from the screen, I play the violin and piano, work on singing and songwriting, swim for my school team, and practise Sanda, a Chinese martial art.'
 
 /** Proof strip — six numbers a reader can verify in ten seconds. */
 export type Highlight = {
