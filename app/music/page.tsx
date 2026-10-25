@@ -19,13 +19,13 @@ const STAGE: Tile[][] = [
     {
       src: '/media/music/violin-portrait.jpg',
       alt: 'Alan playing violin on stage, close-up',
-      caption: 'violin, close-up',
+      caption: 'playing violin',
       ratio: 'aspect-square',
     },
     {
       src: '/media/music/orchestra-hall.jpg',
       alt: 'The orchestra playing with a conductor in a concert hall',
-      caption: 'the orchestra, in the hall',
+      caption: 'with the orchestra',
       ratio: 'aspect-[3/2]',
     },
   ],
@@ -49,7 +49,7 @@ const STAGE: Tile[][] = [
     {
       src: '/media/music/violin-performance.png',
       alt: 'Alan playing violin on a dark stage',
-      caption: 'at the stand',
+      caption: 'violin performance',
       ratio: 'aspect-[16/9]',
       position: '40% center',
     },

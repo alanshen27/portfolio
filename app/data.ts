@@ -640,7 +640,7 @@ export const STAGE_PHOTOS: { src: string; alt: string; caption: string }[] = [
   {
     src: '/media/music/violin-portrait.jpg',
     alt: 'Alan Shen playing violin on stage, close-up',
-    caption: 'violin · close-up',
+    caption: 'playing violin',
   },
   {
     src: '/media/site/banner.jpg',

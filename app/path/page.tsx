@@ -139,8 +139,8 @@ export default function PathPage() {
               className="md:col-span-6"
               src="/media/loops/reel.jpg"
               video="/media/swim/reel.mp4"
-              alt="Racing at a swim meet"
-              caption="race footage"
+              alt="Alan swimming in an indoor pool in China"
+              caption="swimming in China"
               ratio="aspect-[16/9]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -148,8 +148,8 @@ export default function PathPage() {
               className="md:col-span-6"
               src="/media/loops/freestyle.jpg"
               video="/media/loops/freestyle.mp4"
-              alt="Alan swimming butterfly down a lane"
-              caption="butterfly"
+              alt="Alan swimming butterfly in an indoor pool in China"
+              caption="swimming butterfly in China"
               ratio="aspect-[16/9]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -162,7 +162,10 @@ export default function PathPage() {
               '/media/swim/lake-medals.webp',
               'Team with medals after the 2026 MLS open water relay',
             ],
-            ['/media/swim/medals-rooftop.png', 'Swimming medals'],
+            [
+              '/media/swim/medals-rooftop.png',
+              'The swim team wearing their medals',
+            ],
           ].map(([src, alt], i) => (
             <div
               key={src}

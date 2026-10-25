@@ -113,18 +113,18 @@ export const PORTFOLIO_WORKS: PortfolioWork[] = [
     gallery: [
       {
         src: '/media/music-technology/wenda/opening.webp',
-        alt: 'A mostly bare ink branch stretches across the pale screen beside a vertical pitch guide.',
-        caption: 'The ink branch and pitch guide.',
+        alt: 'An ink branch with small leaves grows across the pale screen during a Notate reply.',
+        caption: 'The opening — a branch begins to grow with the music.',
       },
       {
         src: '/media/music-technology/wenda/conversation.webp',
-        alt: 'An ink branch curves upwards beside a vertical pitch guide and a circular cursor.',
-        caption: 'The branch growing upwards beside the pitch guide.',
+        alt: 'A rising ink branch follows the player’s melody beside a vertical pitch guide.',
+        caption: 'The player’s turn — shaping the melody with the cursor.',
       },
       {
         src: '/media/music-technology/wenda/blossoms.webp',
-        alt: 'Red, yellow and purple blossoms appear along the curved ink branch.',
-        caption: 'Blossoms along the ink branch.',
+        alt: 'Red, yellow and purple blossoms appear on the ink branch as Notate plays its answer.',
+        caption: 'Notate’s reply — colour and blossoms join the scroll.',
       },
       {
         src: '/media/music-technology/wenda/interactive-pitch-indicator.png',

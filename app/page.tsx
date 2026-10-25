@@ -100,8 +100,8 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/loops/reel.jpg',
       video: '/media/swim/reel.mp4',
-      alt: 'Racing at a swim meet',
-      caption: 'race footage, Le Rosey',
+      alt: 'Alan swimming in an indoor pool in China',
+      caption: 'swimming in China',
       ratio: 'aspect-[4/5]',
     },
     {
@@ -128,7 +128,7 @@ const MASONRY: Tile[][] = [
     {
       src: '/media/swim/medals-rooftop.png',
       alt: 'The swim team with their medals on a rooftop',
-      caption: 'medals, on the roof',
+      caption: 'with the swim team',
       ratio: 'aspect-[4/3]',
     },
   ],

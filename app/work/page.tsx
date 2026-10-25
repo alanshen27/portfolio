@@ -37,22 +37,22 @@ const SHOTS: Record<string, Shot[]> = {
     ),
   ],
   'project-foundry': [
-    shot('/media/projects/foundry/landing.jpg', 'start from a sentence'),
-    shot('/media/projects/foundry/brief.jpg', 'the product brief'),
+    shot('/media/projects/foundry/landing.jpg', 'creating a project'),
+    shot('/media/projects/foundry/brief.jpg', 'project brief'),
     shot('/media/projects/foundry/cad.jpg', 'mechanical CAD'),
-    shot('/media/projects/foundry/pcb.jpg', 'the PCB workspace'),
-    shot('/media/projects/foundry/firmware.jpg', 'firmware in the editor'),
+    shot('/media/projects/foundry/pcb.jpg', 'PCB design'),
+    shot('/media/projects/foundry/firmware.jpg', 'firmware editor'),
     shot(
       '/media/projects/foundry/renders.jpg',
       'generating product images and videos',
     ),
-    shot('/media/projects/foundry/storefront.jpg', 'the storefront editor'),
+    shot('/media/projects/foundry/storefront.jpg', 'storefront editor'),
   ],
   'project-nomad': [
-    shot('/media/projects/nomad/calendar.jpg', 'the week'),
-    shot('/media/projects/nomad/plan.jpg', 'a plan as a prerequisite graph'),
-    shot('/media/projects/nomad/feed.jpg', 'the feed'),
-    shot('/media/projects/nomad/group.jpg', 'a community page'),
+    shot('/media/projects/nomad/calendar.jpg', 'weekly calendar'),
+    shot('/media/projects/nomad/plan.jpg', 'course prerequisites'),
+    shot('/media/projects/nomad/feed.jpg', 'community feed'),
+    shot('/media/projects/nomad/group.jpg', 'community page'),
     shot('/media/projects/nomad/communities.jpg', 'communities'),
     shot('/media/projects/nomad/courses.jpg', 'courses and classmates'),
   ],
@@ -78,9 +78,9 @@ const SHOTS: Record<string, Shot[]> = {
   ],
   project4: [
     shot('/media/projects/hive/explore.jpg', 'study groups to join'),
-    shot('/media/projects/hive/overview.jpg', 'a group overview'),
+    shot('/media/projects/hive/overview.jpg', 'study group overview'),
     shot('/media/projects/hive/group.jpg', 'group chat'),
-    shot('/media/projects/hive/chat.jpg', 'the assistant in a group'),
+    shot('/media/projects/hive/chat.jpg', 'AI assistant in a study group'),
   ],
 }
 
@@ -96,7 +96,7 @@ function Gallery({ p }: { p: Project }) {
       <figure className="md:max-w-[58rem]">
         <PianoRoll className="aspect-[21/9] w-full" />
         <figcaption className="label mt-2">
-          illustration: a phrase in ink and a possible continuation in amber
+          illustration of a musical phrase and continuation
         </figcaption>
       </figure>
     )

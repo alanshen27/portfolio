@@ -72,12 +72,12 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/robot-build.jpg',
       alt: 'The VEX robot partway through its build',
-      caption: 'the robot, mid-build',
+      caption: 'building the robot',
       ratio: 'aspect-[3/4]',
     },
     {
       src: '/media/tech/hall.jpg',
-      alt: 'A wide, bright competition hall',
+      alt: 'The competition hall with robotics fields and team areas',
       caption: 'the competition hall',
       ratio: 'aspect-[4/3]',
     },
@@ -99,7 +99,7 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/robot-close.jpg',
       alt: 'A close-up of the robot’s metal frame and wheels',
-      caption: 'the frame, up close',
+      caption: 'robot frame',
       ratio: 'aspect-[4/3]',
       grow: true,
     },
@@ -108,7 +108,7 @@ const ROBOT: Tile[][] = [
     {
       src: '/media/tech/drivetrain-pair.jpg',
       alt: 'Two drivetrain modules side by side',
-      caption: 'the drivetrain, left and right',
+      caption: 'drivetrain assembly',
       ratio: 'aspect-[3/4]',
     },
     {
@@ -269,7 +269,7 @@ export default function TechPage() {
             [
               '/media/hackathons/hackmit-workspace.jpg',
               'Laptops and hardware on the HackMIT China workspace',
-              'the HackMIT China table',
+              'working at HackMIT China',
             ],
             [
               '/media/tech/pair-coding.jpg',
