@@ -18,36 +18,8 @@ import {
   LINES,
   MUSIC_INTRO,
   MUSIC_RELEASES,
-  PROJECTS,
   SOCIAL_LINKS,
 } from './data'
-
-const SELECTED: { id: string; year: string }[] = [
-  { id: 'project1', year: '2023 —' },
-  { id: 'project2', year: '2025' },
-  { id: 'project-notate', year: '2026' },
-  { id: 'project-foundry', year: '2026' },
-  { id: 'project-nomad', year: '2026' },
-]
-
-const WORK_PHOTOS = [
-  {
-    src: '/media/projects/studious/home.jpg',
-    alt: 'Studious teacher dashboard',
-    caption: 'Studious, teacher dashboard',
-    position: 'top left',
-  },
-  {
-    src: '/media/hackathons/hackharvard-china.jpg',
-    alt: 'The Scribe team on stage for the first-place award at HackHarvard China',
-    caption: 'Scribe, first-place award at HackHarvard China',
-  },
-  {
-    src: '/media/hackathons/hackmit-workspace.jpg',
-    alt: 'Laptops and hardware on the HackMIT China workspace',
-    caption: 'laptops and hardware, HackMIT China',
-  },
-]
 
 const MOMENTS = [
   {
@@ -183,42 +155,6 @@ export default function Home() {
         <Masonry columns={MASONRY} />
       </section>
 
-      <Block
-        id="work"
-        label="selected work"
-        aside={
-          <Link href="/work" className="hover:text-ink transition-colors">
-            all work →
-          </Link>
-        }
-      >
-        {SELECTED.map(({ id, year }) => {
-          const p = PROJECTS.find((x) => x.id === id)!
-          return (
-            <BigRow
-              key={id}
-              title={p.name}
-              detail={p.description}
-              meta={year}
-              href={`/work#${id}`}
-            />
-          )
-        })}
-        <div className="mt-10 grid gap-3 md:mt-14 md:grid-cols-3">
-          {WORK_PHOTOS.map((ph, i) => (
-            <Fade key={ph.src} delay={i * 0.06}>
-              <Media
-                src={ph.src}
-                alt={ph.alt}
-                caption={ph.caption}
-                position={ph.position}
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </Fade>
-          ))}
-        </div>
-      </Block>
-
       <Drift
         text="build — compete — research — play —"
         className="py-6 md:py-10"
@@ -256,28 +192,34 @@ export default function Home() {
         />
         <div className="mt-3 grid grid-cols-3 gap-3">
           {[
-            [
-              '/media/music/violin-performance.png',
-              'Alan playing violin on a dark stage',
-              'solo',
-            ],
-            [
-              '/media/music/orchestra-ensemble.jpg',
-              'Alan with the orchestra ensemble',
-              'orchestra',
-            ],
-            [
-              '/media/music/violin-group.png',
-              'The violin section in performance',
-              'the violin section',
-            ],
-          ].map(([src, alt, caption]) => (
+            {
+              src: '/media/music/violin-performance.png',
+              alt: 'Alan playing violin on a dark stage',
+              caption: 'solo',
+              position: '35% center',
+            },
+            {
+              src: '/media/music/orchestra-ensemble.jpg',
+              alt: 'Alan with the orchestra ensemble',
+              caption: 'orchestra',
+            },
+            {
+              src: '/media/music/violin-group.png',
+              alt: 'Close-up of Alan playing violin',
+              caption: 'playing violin',
+              ratio: 'aspect-[4/5]',
+              position: '13% center',
+              zoom: 1.2,
+            },
+          ].map(({ src, alt, caption, ratio, position, zoom }) => (
             <Media
               key={src}
               src={src}
               alt={alt}
               caption={caption}
-              ratio="aspect-[4/3]"
+              ratio={ratio ?? 'aspect-[4/5]'}
+              position={position}
+              zoom={zoom}
               sizes="33vw"
             />
           ))}

@@ -10,6 +10,7 @@ export type Tile = {
   /** stretches to meet the bottom of the tallest column */
   grow?: boolean
   position?: string
+  zoom?: number
 }
 
 /**
@@ -33,6 +34,7 @@ export function Masonry({ columns }: { columns: Tile[][] }) {
                 alt={m.alt}
                 caption={m.caption}
                 position={m.position}
+                zoom={m.zoom}
                 ratio={
                   m.grow
                     ? `${m.ratio} md:aspect-auto md:min-h-0 md:flex-1`
