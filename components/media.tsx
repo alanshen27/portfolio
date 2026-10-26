@@ -15,6 +15,7 @@ export function Media({
   caption,
   ratio = 'aspect-[4/3]',
   position = 'center',
+  zoom = 1,
   travel = 0,
   sizes = '(max-width: 768px) 100vw, 50vw',
   className = '',
@@ -26,12 +27,18 @@ export function Media({
   caption?: string
   ratio?: string
   position?: string
+  /** display-only crop, preserving the original photograph */
+  zoom?: number
   /** parallax drift of the picture inside its frame, as a fraction */
   travel?: number
   sizes?: string
   className?: string
 }) {
   const reduce = useReducedMotion()
+  const imageStyle = {
+    objectPosition: position,
+    transform: zoom === 1 ? undefined : `scale(${zoom})`,
+  }
   const picture =
     video && !reduce ? (
       <video
@@ -44,7 +51,7 @@ export function Media({
         preload="metadata"
         aria-label={alt}
         className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: position }}
+        style={imageStyle}
       />
     ) : (
       <Image
@@ -52,7 +59,7 @@ export function Media({
         alt={alt}
         fill
         className="object-cover"
-        style={{ objectPosition: position }}
+        style={imageStyle}
         sizes={sizes}
       />
     )

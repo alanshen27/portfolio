@@ -31,11 +31,11 @@ const STAGE: Tile[][] = [
   ],
   [
     {
-      src: '/media/site/banner.jpg',
-      alt: 'Alan performing violin alongside another performer on a lit stage',
-      caption: 'performing on stage',
+      src: '/media/music/violin-performance.png',
+      alt: 'Alan playing violin on a dark stage',
+      caption: 'violin performance',
       ratio: 'aspect-[4/3]',
-      position: '35% center',
+      position: '40% center',
     },
     {
       src: '/media/music/violin-stage.png',
@@ -47,22 +47,17 @@ const STAGE: Tile[][] = [
   ],
   [
     {
-      src: '/media/music/violin-performance.png',
-      alt: 'Alan playing violin on a dark stage',
-      caption: 'violin performance',
-      ratio: 'aspect-[16/9]',
-      position: '40% center',
-    },
-    {
       src: '/media/music/violin-group.png',
-      alt: 'The violin section in performance',
-      caption: 'the violin section',
-      ratio: 'aspect-[16/9]',
+      alt: 'Close-up of Alan playing violin',
+      caption: 'playing violin',
+      ratio: 'aspect-[4/5]',
+      position: '13% center',
+      zoom: 1.2,
     },
     {
-      src: '/media/music/orchestra.png',
-      alt: 'Alan playing in an orchestra violin section',
-      caption: 'orchestra',
+      src: '/media/music/violin-wide.png',
+      alt: 'Alan playing violin with the band on a lit stage',
+      caption: 'on stage',
       ratio: 'aspect-[16/9]',
       grow: true,
     },
