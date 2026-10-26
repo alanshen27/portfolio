@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Path',
+  title: 'Record',
   description:
-    'Experience, athletics, awards, and research — Alan Shen’s path as founder, competitor, and student.',
+    'I work on projects and research, swim with my school team, and volunteer alongside my studies. Here is a record of that work.',
 }
 
 export default function PathLayout({

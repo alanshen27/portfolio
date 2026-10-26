@@ -34,10 +34,7 @@ export function ThemeSwitch({ size = 'md', className }: ThemeSwitchProps) {
 
   if (!mounted) {
     return (
-      <div
-        className={cn('inline-flex gap-1 opacity-0', className)}
-        aria-hidden
-      >
+      <div className={cn('inline-flex gap-1 opacity-0', className)} aria-hidden>
         {options.map((o) => (
           <span key={o.id} className={buttonSize} />
         ))}

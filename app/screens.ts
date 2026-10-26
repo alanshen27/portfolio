@@ -1,0 +1,152 @@
+import type { Screen } from '@/components/app-plate'
+
+/**
+ * Product screens for the programme notes. Captured from the live apps in
+ * September 2026 — Studious on a teacher demo account (the teacher dashboard), Scribe on Alan's own
+ * workspace with the account rail cropped away — and exported in greyscale
+ * so they read as ink on paper.
+ */
+
+export const STUDIOUS_SCREENS: Screen[] = [
+  {
+    src: '/media/projects/studious/home.jpg',
+    alt: 'Studious teacher dashboard: grading counts, the week, up-next assignments, classes and messages',
+    route: 'home',
+    label: 'teacher dashboard, demo account',
+    callouts: [
+      {
+        x: 24.9,
+        y: 15.6,
+        tag: 'grading queue',
+        text: 'the term at a glance — 15 submissions to grade, 41 missing, across two classes',
+      },
+      {
+        x: 72.8,
+        y: 71.4,
+        tag: 'up next',
+        text: 'grading progress per assignment; one click into the submissions',
+      },
+      {
+        x: 88.4,
+        y: 87.5,
+        tag: 'messages',
+        text: 'student and faculty chat inside the same tool',
+      },
+    ],
+  },
+  {
+    src: '/media/projects/studious/assignment.jpg',
+    alt: 'A Studious assignment: instructions, AI-use level, and a submissions table with statuses and grades',
+    route: 'assignment',
+    label: 'assignment submissions',
+    callouts: [
+      {
+        x: 60.5,
+        y: 31.7,
+        tag: 'AI-use level',
+        text: 'an AI-use level set per assignment — this one is independent work, no AI',
+      },
+      {
+        x: 57.3,
+        y: 79.7,
+        tag: 'submissions',
+        text: 'late, submitted, returned — each student’s state and grade in one table',
+      },
+      {
+        x: 8.3,
+        y: 46.1,
+        tag: 'class rail',
+        text: 'a class rail: assignments, quizzes, modules, worksheets, grades, attendance, AI labs',
+      },
+    ],
+  },
+  {
+    src: '/media/projects/studious/class.jpg',
+    alt: 'A Studious class overview: a post composer and the class stream',
+    route: 'class',
+    label: 'class posts',
+    callouts: [
+      {
+        x: 51.8,
+        y: 32.8,
+        tag: 'class stream',
+        text: 'the class stream — posts with attachments, formatting and an equation button',
+      },
+      {
+        x: 89,
+        y: 23.4,
+        tag: 'up next',
+        text: 'up next: upcoming assignments and their due dates',
+      },
+    ],
+  },
+]
+
+export const SCRIBE_SCREENS: Screen[] = [
+  {
+    src: '/media/projects/scribe/chat.jpg',
+    alt: 'A Scribe workspace chat: the assistant poses an integration-by-parts question and offers a study session',
+    route: 'chat',
+    label: 'study chat',
+    callouts: [
+      {
+        x: 19.5,
+        y: 47.1,
+        tag: 'practice question',
+        text: 'a chat that teaches — one practice question at a time, in typeset maths',
+      },
+      {
+        x: 36.6,
+        y: 79.7,
+        tag: 'study session',
+        text: 'the same conversation assembles a 30-minute study session',
+      },
+      {
+        x: 85.5,
+        y: 24.4,
+        tag: 'materials',
+        text: 'the workspace’s materials and sessions, kept at the side',
+      },
+    ],
+  },
+  {
+    src: '/media/projects/scribe/guide.jpg',
+    alt: 'A Scribe study guide on integration by parts, with derived and boxed formulae',
+    route: 'guide',
+    label: 'generated study guide',
+    callouts: [
+      {
+        x: 34.8,
+        y: 23.6,
+        tag: 'study guide',
+        text: 'a study guide generated from the workspace, structured into sections',
+      },
+      {
+        x: 49.7,
+        y: 61.8,
+        tag: 'rendered maths',
+        text: 'integration by parts derived from the product rule, then boxed — rendered maths',
+      },
+    ],
+  },
+  {
+    src: '/media/projects/scribe/sessions.jpg',
+    alt: 'Scribe study sessions: a continue card and planned sessions with activity tags',
+    route: 'contents',
+    label: 'planned study sessions',
+    callouts: [
+      {
+        x: 11.6,
+        y: 31.7,
+        tag: 'continue',
+        text: 'pick up where you left off — 17% through the reading',
+      },
+      {
+        x: 23.8,
+        y: 64.2,
+        tag: 'session plan',
+        text: 'sessions planned as sequences: reading, questions, a worksheet, flashcards',
+      },
+    ],
+  },
+]

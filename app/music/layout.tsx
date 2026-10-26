@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { MUSIC_INTRO } from '../data'
 
 export const metadata: Metadata = {
   title: 'Music',
-  description:
-    "Alan Shen’s music on DistroKid — listen to the single I'd Stay on Spotify, Apple Music, and more.",
+  description: MUSIC_INTRO,
 }
 
 export default function MusicLayout({

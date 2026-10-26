@@ -1,304 +1,234 @@
-'use client'
-
 import Image from 'next/image'
-import Link from 'next/link'
-import { motion, useReducedMotion } from 'motion/react'
-import {
-  CropFrame,
-  DrawLine,
-  Reveal,
-  Stagger,
-  StaggerItem,
-  easeOut,
-} from '@/components/portfolio-motion'
-import { MegaTicker } from '@/components/mega-ticker'
-import { PageHero } from '@/components/page-hero'
-import { ScrollProgress } from '@/components/scroll-progress'
+import { Block, Fade, Line, Next, PageHead } from '@/components/beats'
+import { Media } from '@/components/media'
+import { dateRange } from '@/lib/utils'
 import {
   AWARDS,
+  EDUCATION,
   PUBLICATIONS,
   VOLUNTEERING,
   WORK_EXPERIENCE,
 } from '../data'
 
+const CONTENTS = [
+  { label: 'honours and recognitions', href: '#honours' },
+  { label: 'publications', href: '#research' },
+  { label: 'experience', href: '#experience' },
+  { label: 'swimming', href: '#athletics' },
+  { label: 'service', href: '#service' },
+]
+
 export default function PathPage() {
   const techWork = WORK_EXPERIENCE.filter(
     (w) => w.company !== 'Institut Le Rosey',
   )
-  const swimming = WORK_EXPERIENCE.find(
-    (w) => w.company === 'Institut Le Rosey',
-  )
-  const reduce = useReducedMotion()
+  const swim = WORK_EXPERIENCE.find((w) => w.company === 'Institut Le Rosey')
+  const meets = (swim?.bullets ?? [])
+    .filter((b) => b.includes(':'))
+    .map((b) => {
+      const at = b.indexOf(':')
+      return {
+        meet: b.slice(0, at).trim(),
+        result: b
+          .slice(at + 1)
+          .trim()
+          .replace(/\.$/, ''),
+      }
+    })
 
   return (
     <>
-      <ScrollProgress />
-      <PageHero
-        label="Path"
-        title="The"
-        titleLine2="Path"
-        description="Founding, competing, research, athletics — the long arc from classroom to podium."
-        image="/alan/graduation.png"
-        ticker={[
-          'Founder',
-          'USACO Gold',
-          'HackHarvard',
-          'HackMIT',
-          'VEX Worlds',
-          'Swimming',
-          'Research',
-        ]}
+      <PageHead
+        title="Record"
+        standfirst="Alongside my studies, I build apps, contribute to research, swim with my school team, and volunteer."
+        contents={CONTENTS}
       />
 
-      <section className="overflow-x-clip border-b border-line bg-bg-elevated py-16 md:py-24">
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="text-xs tracking-[0.28em] text-accent uppercase">
-              Experience
-            </p>
-            <h2 className="display-smash mt-4 max-w-3xl text-[clamp(2.4rem,7vw,4.5rem)] text-ink">
-              Founding.
-              <span className="mt-2 block text-accent">Building. Competing.</span>
-            </h2>
-          </Reveal>
+      <Block id="honours" label="honours and recognitions">
+        {AWARDS.map((a) => (
+          <Line
+            key={a.id}
+            date={a.date}
+            title={a.title}
+            detail={a.description}
+          />
+        ))}
+      </Block>
 
-          <div className="relative mt-14">
-            <DrawLine className="absolute top-2 bottom-2 left-[7px] hidden w-px md:block" />
-
-            <div className="divide-y divide-line">
-              {techWork.map((job, index) => (
-                <Reveal key={job.id} delay={index * 0.04}>
-                  <article className="group relative grid gap-4 py-12 md:grid-cols-12 md:gap-8">
-                    <div className="absolute top-14 left-0 z-10 hidden md:block">
-                      <motion.span
-                        className="block h-4 w-4 rounded-full border-2 border-accent bg-bg-elevated"
-                        initial={reduce ? false : { opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.4,
-                          delay: 0.1,
-                          ease: easeOut,
-                        }}
-                      />
-                    </div>
-
-                    <div className="relative z-10 md:col-span-4 md:pl-10">
-                      <h3 className="display-smash text-3xl text-accent normal-case md:text-4xl">
-                        {job.company}
-                      </h3>
-                      <p className="mt-2 text-sm text-ink-soft">{job.title}</p>
-                      <p className="mt-3 text-sm tracking-wide text-ink-faint uppercase">
-                        {job.start} – {job.end}
-                        {job.location ? ` · ${job.location}` : ''}
-                      </p>
-                      {job.link && (
-                        <a
-                          href={job.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-block text-sm font-semibold tracking-[0.12em] text-accent uppercase hover:text-accent-deep"
-                        >
-                          Visit →
-                        </a>
-                      )}
-                    </div>
-
-                    <Stagger
-                      className="relative z-10 space-y-3 md:col-span-8"
-                      delay={0.06}
-                      stagger={0.04}
-                    >
-                      {job.bullets?.map((bullet) => (
-                        <StaggerItem key={bullet}>
-                          <p className="relative border-l-2 border-accent/35 pl-4 text-base leading-relaxed text-ink-soft">
-                            {bullet}
-                          </p>
-                        </StaggerItem>
-                      ))}
-                    </Stagger>
-                  </article>
-                </Reveal>
-              ))}
+      <Block id="research" label="publications">
+        {PUBLICATIONS.map((pub) => (
+          <Fade key={pub.id}>
+            <div className="border-line grid gap-x-8 gap-y-3 border-t py-8 md:grid-cols-12 md:py-10">
+              <p className="label md:col-span-2 md:pt-2">
+                {pub.date}
+                <br />
+                <span className="text-accent">{pub.status}</span>
+              </p>
+              <div className="md:col-span-10">
+                <p className="display-soft text-[clamp(1.4rem,2.4vw,2.25rem)] leading-[1.15]">
+                  {pub.title}
+                </p>
+                <p className="text-ink-soft mt-4 text-[15px]">{pub.authors}</p>
+                <p className="label">{pub.venue}</p>
+                {pub.description && (
+                  <p className="text-ink-soft mt-3 max-w-[62ch] text-[15px] leading-relaxed">
+                    {pub.description}
+                  </p>
+                )}
+                {pub.presentation && (
+                  <p className="text-ink mt-2 text-[15px]">
+                    presented at {pub.presentation}
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
+          </Fade>
+        ))}
+      </Block>
 
-          {swimming && (
-            <Reveal className="mt-12">
-              <CropFrame
-                fill="mist"
-                tone="accent"
-                className="panel-bokeh overflow-hidden p-0"
-              >
-                <div className="grid md:grid-cols-12">
-                  <div className="relative min-h-[220px] md:col-span-4 md:min-h-full">
-                    <Image
-                      src="/alan/swim-team.jpg"
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="33vw"
-                    />
-                    <div className="absolute inset-0 bg-ink/35" />
-                  </div>
-                  <div className="p-6 md:col-span-8 md:p-10">
-                    <p className="text-xs tracking-[0.28em] text-accent uppercase">
-                      Athletics
-                    </p>
-                    <h3 className="display-smash mt-3 text-3xl text-ink normal-case md:text-5xl">
-                      Competitive Swimming
-                    </h3>
-                    <p className="mt-2 text-sm text-ink-soft">
-                      {swimming.title} · {swimming.start} – {swimming.end}
-                      {swimming.location ? ` · ${swimming.location}` : ''}
-                    </p>
-                    <Stagger
-                      className="mt-6 grid gap-3 sm:grid-cols-2"
-                      stagger={0.05}
+      <Block id="experience" label="experience">
+        {techWork.map((job) => (
+          <Fade key={job.id}>
+            <div className="border-line grid gap-x-8 gap-y-2 border-t py-6 md:grid-cols-12">
+              <p className="label md:col-span-2 md:pt-1">
+                {dateRange(job.start, job.end)}
+              </p>
+              <div className="md:col-span-7">
+                <p className="text-ink text-[20px] leading-snug font-medium">
+                  {job.company}
+                </p>
+                <p className="text-ink-soft text-[15px]">{job.title}</p>
+                <ul className="mt-3 space-y-1">
+                  {job.bullets?.map((b) => (
+                    <li
+                      key={b}
+                      className="text-ink-soft text-[15px] leading-snug"
                     >
-                      {swimming.bullets?.slice(0, 6).map((bullet) => (
-                        <StaggerItem key={bullet}>
-                          <p className="border-l-2 border-accent/40 pl-3 text-sm leading-relaxed text-ink-soft">
-                            {bullet}
-                          </p>
-                        </StaggerItem>
-                      ))}
-                    </Stagger>
-                  </div>
-                </div>
-              </CropFrame>
-            </Reveal>
-          )}
-        </div>
-      </section>
-
-      <div className="border-y border-line bg-bg py-4">
-        <MegaTicker
-          items={['Podium', 'Gold', 'Worlds', 'Research', 'Impact']}
-          tone="accent"
-        />
-      </div>
-
-      <section className="overflow-x-clip bg-bg py-16 md:py-24">
-        <div className="section-max section-pad">
-          <Reveal>
-            <p className="text-xs tracking-[0.28em] text-accent uppercase">
-              Recognition
-            </p>
-            <h2 className="display-smash mt-4 max-w-3xl text-[clamp(2.4rem,7vw,4.5rem)] text-ink">
-              Awards.
-              <span className="mt-2 block text-accent">Research. Honors.</span>
-            </h2>
-          </Reveal>
-
-          <div className="relative mt-12 grid min-w-0 gap-8 lg:grid-cols-12">
-            <CropFrame
-              fill="white"
-              tone="accent"
-              className="min-w-0 p-1 lg:col-span-7"
-            >
-              <ul>
-                {AWARDS.map((award) => (
-                  <li
-                    key={award.id}
-                    className="flex min-w-0 items-start gap-4 border-b border-line px-5 py-6 last:border-b-0 md:px-7"
-                  >
-                    {award.image && (
-                      <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden bg-panel-wash">
-                        <Image
-                          src={award.image}
-                          alt=""
-                          fill
-                          className="object-contain p-1"
-                          sizes="48px"
-                        />
-                      </div>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="text-lg font-semibold break-words text-accent">
-                          {award.title}
-                        </h3>
-                        {award.date && (
-                          <span className="shrink-0 text-sm text-ink-faint">
-                            {award.date}
-                          </span>
-                        )}
-                      </div>
-                      {award.description && (
-                        <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                          {award.description}
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </CropFrame>
-
-            <div className="min-w-0 space-y-6 lg:col-span-5">
-              <Reveal delay={0.08}>
-                <CropFrame fill="ink" tone="white" className="p-7">
-                  <h3 className="display-smash text-2xl text-white normal-case">
-                    Publications
-                  </h3>
-                  <ul className="mt-5 space-y-5">
-                    {PUBLICATIONS.map((pub) => (
-                      <li key={pub.id}>
-                        <p className="font-medium text-white">{pub.title}</p>
-                        {pub.description && (
-                          <p className="mt-1 text-sm leading-relaxed text-white/65">
-                            {pub.description}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </CropFrame>
-              </Reveal>
-              <Reveal delay={0.12}>
-                <CropFrame fill="lake" tone="accent" className="p-7">
-                  <h3 className="display-smash text-2xl text-ink normal-case">
-                    Volunteering
-                  </h3>
-                  <ul className="mt-5 space-y-5">
-                    {VOLUNTEERING.map((v) => (
-                      <li key={v.id}>
-                        <p className="font-medium text-ink">
-                          {v.role} · {v.organization}
-                        </p>
-                        <p className="mt-1 text-sm text-ink-faint">
-                          {v.start} – {v.end}
-                          {v.cause ? ` · ${v.cause}` : ''}
-                        </p>
-                        {v.description && (
-                          <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                            {v.description}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </CropFrame>
-              </Reveal>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          </Fade>
+        ))}
+        <div className="mt-12">
+          <h3 className="text-ink mb-4 text-[20px] font-medium">education</h3>
+          {EDUCATION.map((e) => (
+            <Line
+              key={e.id}
+              date={dateRange(e.start, e.end)}
+              title={e.institution}
+              detail={`${e.degree}${e.location ? ` · ${e.location}` : ''}`}
+            />
+          ))}
         </div>
-      </section>
+      </Block>
 
-      <section className="spine-pad bg-accent py-16 text-center text-white md:py-20">
-        <div className="section-pad">
-          <p className="display-smash text-[clamp(2rem,6vw,4rem)]">
-            Meet the person behind it
+      <Block id="athletics" label="swimming">
+        <div className="border-line border-t pt-8 md:pt-10">
+          <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
+            I swim freestyle and butterfly for the Le Rosey team and help my
+            teammates with their technique. I’ve won fourteen medals across
+            ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions. I’ve
+            also set a school record and been named school MVP three times in a
+            row.
           </p>
-          <Link
-            href="/about"
-            className="mt-8 inline-flex items-center bg-white px-6 py-3.5 text-sm font-semibold tracking-[0.14em] text-ink uppercase transition-colors hover:bg-mist"
-          >
-            About & connect →
-          </Link>
+          <div className="mt-10 grid gap-3 md:grid-cols-12">
+            <Media
+              className="md:col-span-6"
+              src="/media/loops/reel.jpg"
+              video="/media/swim/reel.mp4"
+              alt="Alan training in an indoor pool in China"
+              caption="training in China"
+              ratio="aspect-[16/9]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <Media
+              className="md:col-span-6"
+              src="/media/loops/freestyle.jpg"
+              video="/media/loops/freestyle.mp4"
+              alt="Alan training butterfly in an indoor pool in China"
+              caption="training in China"
+              ratio="aspect-[16/9]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         </div>
-      </section>
+        <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
+          {[
+            ['/media/swim/team.jpg', 'Le Rosey swim team'],
+            [
+              '/media/swim/lake-medals.webp',
+              'Team with medals after the 2026 MLS open water relay',
+            ],
+            [
+              '/media/swim/medals-rooftop.png',
+              'The swim team wearing their medals',
+            ],
+          ].map(([src, alt], i) => (
+            <div
+              key={src}
+              className={`bg-mist relative aspect-[4/3] overflow-hidden ${i === 0 ? 'col-span-2 md:col-span-1' : ''}`}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 33vw"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="mt-12">
+          <h3 className="text-ink mb-4 text-[20px] font-medium">
+            meet by meet
+          </h3>
+          {meets.map((m) => (
+            <Line key={m.meet} date={m.meet} title={m.result} />
+          ))}
+        </div>
+      </Block>
+
+      <Block id="service" label="service">
+        {VOLUNTEERING.map((v) => (
+          <Fade key={v.id}>
+            <div className="border-line grid gap-x-8 gap-y-3 border-t py-8 md:grid-cols-12">
+              <p className="label md:col-span-2 md:pt-1">
+                {dateRange(v.start, v.end)}
+                <br />
+                {v.cause}
+              </p>
+              <div className="md:col-span-7">
+                <p className="text-ink text-[20px] leading-snug font-medium">
+                  {v.organization}
+                </p>
+                <p className="text-ink-soft text-[15px]">{v.role}</p>
+                {v.description && (
+                  <p className="text-ink-soft mt-3 max-w-[62ch] text-[15px] leading-relaxed">
+                    {v.description}
+                  </p>
+                )}
+                {v.bullets && (
+                  <ul className="mt-3 space-y-1">
+                    {v.bullets.map((b) => (
+                      <li
+                        key={b}
+                        className="text-ink-soft text-[15px] leading-snug"
+                      >
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </Fade>
+        ))}
+      </Block>
+
+      <Next href="/music" label="Music" />
     </>
   )
 }

@@ -1,134 +1,235 @@
-'use client'
-
 import Image from 'next/image'
-import Link from 'next/link'
-import { CropFrame, Reveal } from '@/components/portfolio-motion'
-import { MegaTicker } from '@/components/mega-ticker'
+import {
+  Block,
+  Drift,
+  Fade,
+  Next,
+  PageHead,
+  Rise,
+  SmartLink,
+  Words,
+} from '@/components/beats'
+import { Masonry, type Tile } from '@/components/masonry'
+import { Media } from '@/components/media'
 import { MusicVisualizer } from '@/components/music-visualizer'
-import { PageHero } from '@/components/page-hero'
-import { ScrollProgress } from '@/components/scroll-progress'
-import { DISTROKID_ARTIST, MUSIC_RELEASES, NAME } from '../data'
+import { MUSIC_INTRO, MUSIC_RELEASES } from '../data'
+
+const STAGE: Tile[][] = [
+  [
+    {
+      src: '/media/music/violin-portrait.jpg',
+      alt: 'Alan playing violin on stage, close-up',
+      caption: 'playing violin',
+      ratio: 'aspect-square',
+    },
+    {
+      src: '/media/music/orchestra-hall.jpg',
+      alt: 'The orchestra playing with a conductor in a concert hall',
+      caption: 'with the orchestra',
+      ratio: 'aspect-[3/2]',
+    },
+  ],
+  [
+    {
+      src: '/media/site/banner.jpg',
+      alt: 'Alan performing violin alongside another performer on a lit stage',
+      caption: 'performing on stage',
+      ratio: 'aspect-[4/3]',
+      position: '35% center',
+    },
+    {
+      src: '/media/music/violin-stage.png',
+      alt: 'Alan performing violin in a dark hall',
+      caption: 'recital',
+      ratio: 'aspect-[16/9]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/music/violin-performance.png',
+      alt: 'Alan playing violin on a dark stage',
+      caption: 'violin performance',
+      ratio: 'aspect-[16/9]',
+      position: '40% center',
+    },
+    {
+      src: '/media/music/violin-group.png',
+      alt: 'The violin section in performance',
+      caption: 'the violin section',
+      ratio: 'aspect-[16/9]',
+    },
+    {
+      src: '/media/music/orchestra.png',
+      alt: 'Alan playing in an orchestra violin section',
+      caption: 'orchestra',
+      ratio: 'aspect-[16/9]',
+      grow: true,
+    },
+  ],
+]
 
 export default function MusicPage() {
-  const streamLinks = MUSIC_RELEASES.flatMap((r) =>
-    r.links.map((l) => ({ ...l, release: r.title })),
-  )
-
   return (
     <>
-      <ScrollProgress />
-      <PageHero
-        label="Music"
-        title="Off"
-        titleLine2="Stage"
-        description={`Releases as ${NAME} on DistroKid (${DISTROKID_ARTIST}) — local previews with a live visualizer.`}
-        image="/alan/orchestra-hall.jpg"
-        ticker={[
-          "I'd Stay",
-          'Dreams of the Blue',
-          'Violin',
-          'Piano',
-          'DistroKid',
-          'HyperFollow',
+      <PageHead
+        title="Music"
+        standfirst={MUSIC_INTRO}
+        contents={[
+          { label: 'music & technology portfolio', href: '/music-technology' },
+          { label: 'releases', href: '#releases' },
+          { label: 'listen', href: '#listen' },
+          { label: 'on stage', href: '#stage' },
         ]}
       />
 
-      <section className="overflow-x-clip bg-bg py-10 md:py-16">
-        <div className="section-max section-pad">
-          <Reveal>
-            <MusicVisualizer tracks={MUSIC_RELEASES} />
-          </Reveal>
-
-          <div className="mt-16 grid gap-0 overflow-hidden border border-line lg:grid-cols-12">
-            <Reveal className="relative min-h-[340px] lg:col-span-7 lg:min-h-[480px]">
-              <Image
-                src="/alan/orchestra-ensemble.jpg"
-                alt="Alan Shen with orchestra ensemble"
-                fill
-                className="object-cover object-[center_35%]"
-                sizes="(max-width: 1024px) 100vw, 58vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-              <div className="absolute inset-5 border border-white/25" />
-            </Reveal>
-
-            <Reveal className="bg-ink p-8 text-white md:p-10 lg:col-span-5" delay={0.08}>
-              <p className="text-xs tracking-[0.28em] text-lake uppercase">
-                DistroKid
-              </p>
-              <h3 className="display-smash mt-4 text-4xl text-white normal-case md:text-5xl">
-                {DISTROKID_ARTIST}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
-                Stream beyond this page — HyperFollow routes every major store.
-              </p>
-
-              <ul className="mt-8 space-y-1 border-t border-white/15 pt-6">
-                {MUSIC_RELEASES.filter((r) => r.hyperfollow).map((r) => (
-                  <li key={r.id}>
-                    <a
-                      href={r.hyperfollow}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between py-3 text-sm text-white/75 transition-colors hover:text-white"
-                    >
-                      <span>{r.title} · HyperFollow</span>
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-300 group-hover:translate-x-1.5"
-                      >
-                        →
-                      </span>
-                    </a>
-                  </li>
-                ))}
-                {streamLinks.map((link) => (
-                  <li key={`${link.release}-${link.label}`}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between py-3 text-sm text-white/75 transition-colors hover:text-white"
-                    >
-                      <span>
-                        {link.label}
-                        <span className="text-white/35"> · {link.release}</span>
-                      </span>
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-300 group-hover:translate-x-1.5"
-                      >
-                        →
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <div className="spine-pad bg-accent py-4">
-        <MegaTicker
-          items={['Play it loud', 'Write it honest', 'Ship the song']}
-          tone="white"
-        />
-      </div>
-
-      <section className="spine-pad bg-ink py-16 text-center text-white md:py-20">
-        <div className="section-pad">
-          <p className="display-smash text-[clamp(2rem,6vw,4rem)]">
-            Still curious? <span className="text-accent">Path</span>
-          </p>
-          <Link
-            href="/path"
-            className="mt-8 inline-flex items-center bg-white px-6 py-3.5 text-sm font-semibold tracking-[0.14em] text-ink uppercase transition-colors hover:bg-mist"
+      <section className="section-max section-pad pb-12 md:pb-16">
+        <SmartLink
+          href="/music-technology"
+          className="group border-line grid gap-4 border-y py-6 md:grid-cols-12 md:items-center md:gap-8"
+        >
+          <span className="text-ink-soft text-sm md:col-span-3">
+            selected portfolio
+          </span>
+          <span className="md:col-span-8">
+            <span className="display-soft block text-3xl md:text-4xl">
+              Music &amp; technology
+            </span>
+            <span className="text-ink-soft mt-3 block text-base">
+              I explore movement, musical exchange, and songwriting in Inkform
+              拳墨, 蝶戀花 — Butterflies in Love with Flowers, and Regrets.
+            </span>
+          </span>
+          <span
+            aria-hidden
+            className="text-2xl transition-transform group-hover:translate-x-1 md:text-right"
           >
-            Open path →
-          </Link>
-        </div>
+            →
+          </span>
+        </SmartLink>
       </section>
+
+      <Block id="releases" label="releases">
+        <p className="text-ink-soft max-w-[62ch] pb-2 text-[17px] leading-relaxed">
+          I have composed five songs using Logic Pro X, Ableton Live, and
+          Melodyne, and released two as singles. On @alan.music27, I have also
+          made covers for more than 20 pop and R&amp;B videos. The channel has
+          600+ followers, 11,000 likes, and more than 300,000 views.
+        </p>
+        {MUSIC_RELEASES.map((r, i) => (
+          <div
+            key={r.id}
+            className="border-line grid items-end gap-6 border-t py-8 md:grid-cols-12 md:gap-8 md:py-10"
+          >
+            <Fade className="w-40 md:col-span-3 md:w-auto">
+              <div className="bg-mist relative aspect-square max-w-[15rem] overflow-hidden">
+                <Image
+                  src={r.cover}
+                  alt={`${r.title} cover`}
+                  fill
+                  className="object-cover"
+                  sizes="240px"
+                />
+              </div>
+            </Fade>
+            <div className="md:col-span-9">
+              <p className="label">
+                {String(i + 1).padStart(2, '0')} · {r.type} · {r.artist}
+              </p>
+              <Rise className="mt-2">
+                <span className="display block text-[clamp(3rem,9vw,9rem)]">
+                  {r.title}
+                </span>
+              </Rise>
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[15px]">
+                {r.hyperfollow && (
+                  <SmartLink
+                    href={r.hyperfollow}
+                    className="text-ink hover-line"
+                  >
+                    every store →
+                  </SmartLink>
+                )}
+                {r.links.map((l) => (
+                  <SmartLink
+                    key={l.href}
+                    href={l.href}
+                    className="text-ink-soft hover:text-ink transition-colors"
+                  >
+                    {l.label}
+                  </SmartLink>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </Block>
+
+      <section
+        id="listen"
+        className="section-max section-pad scroll-mt-16 pb-16 md:pb-24"
+      >
+        <Fade>
+          <MusicVisualizer tracks={MUSIC_RELEASES} />
+        </Fade>
+      </section>
+
+      <Media
+        src="/media/music/orchestra-ensemble.jpg"
+        alt="Alan with the orchestra ensemble"
+        ratio="h-[70vh] min-h-[360px]"
+        position="center 35%"
+        travel={0.18}
+        sizes="100vw"
+      />
+
+      <Drift
+        text="violin — piano — orchestra — songs —"
+        className="py-10 md:py-16"
+      />
+
+      <section className="section-max section-pad py-16 md:py-28">
+        <Words
+          text="I have played in concert halls and during visits to schools and orphanages in Oradea, Romania. On one visit, I wrote and performed a song for more than sixty students."
+          className="display-soft max-w-[24ch] text-[clamp(2rem,4.8vw,4.75rem)]"
+        />
+      </section>
+
+      <Block id="stage" label="on stage">
+        <div className="border-line border-t pt-8 md:pt-10">
+          <div className="text-ink-soft mb-10 max-w-[62ch] space-y-3 text-[17px] leading-relaxed">
+            <p>
+              I am concertmaster of the Le Rosey Orchestra and Camerata in
+              Grades 11 and 12, leading more than 40 musicians. We have played
+              at Carnal Hall, Saanen Church, and Karina, and performed three
+              times with the International Menuhin Music Academy.
+            </p>
+            <p>
+              With the SGIS Symphony Orchestra, I sat first desk when Le Rosey
+              hosted in 2024 and second desk when Basel hosted. I also played
+              second violin with the Singapore Kids Philharmonic Orchestra at
+              Our Tampines Hub, and guitar in the School of Rock band programme,
+              where I was selected to perform for Fête de Noël.
+            </p>
+          </div>
+          <Masonry columns={STAGE} />
+        </div>
+      </Block>
+
+      <section className="section-max section-pad pb-8">
+        <Fade>
+          <Media
+            src="/media/tech/midi.jpg"
+            alt="A MIDI keyboard and boxed audio equipment on a wooden floor"
+            caption="MIDI keyboard and audio equipment"
+            ratio="aspect-[16/9] md:aspect-[21/9]"
+            travel={0.1}
+            sizes="(max-width: 1536px) 100vw, 1536px"
+          />
+        </Fade>
+      </section>
+
+      <Next href="/" label="Home" />
     </>
   )
 }

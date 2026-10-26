@@ -4,8 +4,7 @@ import dynamic from 'next/dynamic'
 import type { DeviceModel } from '@/components/devices-3d'
 
 const ProjectDeviceCanvas = dynamic(
-  () =>
-    import('@/components/devices-3d').then((m) => m.ProjectDeviceCanvas),
+  () => import('@/components/devices-3d').then((m) => m.ProjectDeviceCanvas),
   {
     ssr: false,
     loading: () => (

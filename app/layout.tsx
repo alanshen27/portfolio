@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Sans, Syne } from 'next/font/google'
+import { Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
+import { HOME_INTRO, SUMMARY } from './data'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f3f6f8',
+  themeColor: '#f4f4f1',
 }
 
 export const metadata: Metadata = {
@@ -16,23 +17,42 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Alan Shen — Founder, Developer & Student',
+    default: 'Alan Shen',
     template: '%s | Alan Shen',
   },
-  description:
-    'High school student at Institut Le Rosey. 2× founder (Studious, Scribe), USACO Gold ’26, VEX Worlds Qualifier, hackathon podium finisher, and research author forthcoming with Cambridge University Press 2026.',
+  description: SUMMARY,
+  openGraph: {
+    type: 'website',
+    url: 'https://alanshen.me/',
+    title: 'Alan Shen | Student, Developer & Musician',
+    description: HOME_INTRO,
+    images: [
+      {
+        url: '/media/site/banner.jpg',
+        width: 4032,
+        height: 3024,
+        alt: 'Alan Shen performing violin on stage',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/media/site/banner.jpg'],
+  },
 }
 
-const syne = Syne({
-  variable: '--font-syne',
+const jetbrains = JetBrains_Mono({
+  variable: '--font-jetbrains',
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
+  weight: ['400', '500'],
 })
 
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
+const instrument = Instrument_Sans({
+  variable: '--font-instrument',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: 'variable',
+  style: ['normal', 'italic'],
+  axes: ['wdth'],
 })
 
 export default function RootLayout({
@@ -41,9 +61,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${syne.variable} ${dmSans.variable} antialiased`}>
-        <div className="flex min-h-screen flex-col">
+    <html lang="en" className={`${instrument.variable} ${jetbrains.variable}`}>
+      <body className="antialiased">
+        <div id="top" className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

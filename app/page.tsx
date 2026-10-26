@@ -1,358 +1,396 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
 import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'motion/react'
-import { useRef } from 'react'
-import { Magnetic } from '@/components/ui/magnetic'
-import { MegaTicker } from '@/components/mega-ticker'
-import { NowPlaying } from '@/components/now-playing'
-import { WorldPanel } from '@/components/world-panel'
+  BigRow,
+  Block,
+  Drift,
+  Fade,
+  Rise,
+  SmartLink,
+  Words,
+} from '@/components/beats'
+import { Masonry, type Tile } from '@/components/masonry'
+import { Media } from '@/components/media'
 import {
-  AnimatedCorners,
-  Reveal,
-  ScrollCue,
-  SplitChars,
-  easeOut,
-  easeSnap,
-} from '@/components/portfolio-motion'
-import { ScrollProgress } from '@/components/scroll-progress'
-import {
+  AWARDS,
   EMAIL,
+  HOME_BIO,
+  HOME_INTRO,
+  LINES,
+  MUSIC_INTRO,
   MUSIC_RELEASES,
-  TAGLINE,
+  PROJECTS,
+  SOCIAL_LINKS,
 } from './data'
 
-const FEATURED = MUSIC_RELEASES[0]
+const SELECTED: { id: string; year: string }[] = [
+  { id: 'project1', year: '2023 —' },
+  { id: 'project2', year: '2025' },
+  { id: 'project-notate', year: '2026' },
+  { id: 'project-foundry', year: '2026' },
+  { id: 'project-nomad', year: '2026' },
+]
 
-const WHO_MOSAIC = [
-  { src: '/alan/orchestra.png', pos: '70% 28%', className: 'md:col-span-2 md:row-span-2' },
-  { src: '/alan/graduation.png', pos: 'center 18%', className: '' },
-  { src: '/alan/hackmit.jpg', pos: 'center 45%', className: '' },
-  { src: '/alan/medals-rooftop.png', pos: 'center 30%', className: 'md:col-span-2' },
+const WORK_PHOTOS = [
+  {
+    src: '/media/projects/studious/home.jpg',
+    alt: 'Studious teacher dashboard',
+    caption: 'Studious, teacher dashboard',
+    position: 'top left',
+  },
+  {
+    src: '/media/hackathons/hackharvard-china.jpg',
+    alt: 'The Scribe team on stage for the first-place award at HackHarvard China',
+    caption: 'Scribe, first-place award at HackHarvard China',
+  },
+  {
+    src: '/media/hackathons/hackmit-workspace.jpg',
+    alt: 'Laptops and hardware on the HackMIT China workspace',
+    caption: 'laptops and hardware, HackMIT China',
+  },
+]
+
+const MOMENTS = [
+  {
+    src: '/media/hackathons/hackharvard-win.jpg',
+    alt: 'Alan holding a certificate in front of the HackHarvard backdrop',
+    caption: 'HackHarvard China, 2025',
+    place: 'md:col-span-7',
+    ratio: 'aspect-[3/2]',
+  },
+  {
+    src: '/media/portrait/award-ceremony.png',
+    alt: 'Alan walking back from the stage at a school prize-giving',
+    caption: 'prize-giving',
+    place: 'md:col-span-5',
+    ratio: 'aspect-[3/2] md:aspect-auto md:h-full',
+  },
+  {
+    src: '/media/service/romania-housing.png',
+    alt: 'Volunteers wearing hard hats at a housing construction site near Oradea, Romania',
+    caption: 'with the housing volunteers near Oradea, Romania, 2025',
+    place: 'md:col-span-12',
+    ratio: 'aspect-[16/9] md:aspect-[21/8]',
+  },
+]
+
+const MASONRY: Tile[][] = [
+  [
+    {
+      src: '/media/loops/driver.jpg',
+      video: '/media/vex/driver.mp4',
+      alt: 'The VEX robot driving across the field',
+      caption: 'driver control, VEX team 15520X',
+      ratio: 'aspect-[16/10]',
+    },
+    {
+      src: '/media/swim/team.jpg',
+      alt: 'The Le Rosey swim team on deck',
+      caption: 'the Le Rosey swim team',
+      ratio: 'aspect-[1290/941]',
+    },
+    {
+      src: '/media/swim/lake-medals.webp',
+      alt: 'The team with medals after the 2026 MLS open water relay',
+      caption: 'after the 2026 MLS open water relay',
+      ratio: 'aspect-[4/3]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/loops/reel.jpg',
+      video: '/media/swim/reel.mp4',
+      alt: 'Alan training in an indoor pool in China',
+      caption: 'training in China',
+      ratio: 'aspect-[4/5]',
+    },
+    {
+      src: '/media/vex/worlds-arena.jpeg',
+      alt: 'The arena at the VEX Robotics World Championship',
+      caption: 'the VEX World Championship arena',
+      ratio: 'aspect-[4/3]',
+      grow: true,
+    },
+  ],
+  [
+    {
+      src: '/media/vex/team.png',
+      alt: 'VEX team 15520X with their robot',
+      caption: 'team 15520X',
+      ratio: 'aspect-square',
+    },
+    {
+      src: '/media/vex/worlds-team.jpeg',
+      alt: 'The team at the VEX World Championship',
+      caption: 'at Worlds',
+      ratio: 'aspect-[16/9]',
+    },
+    {
+      src: '/media/swim/medals-rooftop.png',
+      alt: 'The swim team with their medals on a rooftop',
+      caption: 'with the swim team',
+      ratio: 'aspect-[4/3]',
+    },
+  ],
+]
+
+const FACTS = [
+  ['school', 'Institut Le Rosey, Rolle'],
+  ['programme', 'IB Diploma, class of 2027'],
+  ['summer 2026', 'Penn ESAP, AI track'],
+  ['languages', 'TypeScript, C++, Python'],
 ]
 
 export default function Home() {
-  const reduce = useReducedMotion()
-  const ref = useRef<HTMLElement>(null)
-  const whoRef = useRef<HTMLElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '28%'])
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-
-  const { scrollYProgress: whoProgress } = useScroll({
-    target: whoRef,
-    offset: ['start end', 'end start'],
-  })
-  const mosaicA = useTransform(whoProgress, [0, 1], ['10%', '-12%'])
-  const mosaicB = useTransform(whoProgress, [0, 1], ['-8%', '14%'])
-
   return (
-    <>
-      <ScrollProgress />
-
-      <section
-        ref={ref}
-        className="noise-overlay relative min-h-[100svh] overflow-hidden bg-ink"
-      >
-        <motion.div
-          className="absolute inset-0 scale-[1.15]"
-          style={reduce ? undefined : { y: imageY }}
-        >
-          <Image
-            src="/alan/orchestra.png"
-            alt="Alan Shen playing violin in orchestra"
-            fill
-            priority
-            className="object-cover object-[72%_28%]"
-            sizes="100vw"
-          />
-        </motion.div>
-
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/50 to-ink/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/35" />
-
-        <div className="pointer-events-none absolute inset-5 border border-white/20 md:inset-8 md:left-[calc(4rem+1.5rem)] lg:left-[calc(4.5rem+1.5rem)]" />
-        <AnimatedCorners tone="accent" inset="1.25rem" />
-        <ScrollCue />
-
-        <motion.div
-          style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-          className="relative flex min-h-[100svh] flex-col justify-end px-5 pb-10 pt-20 sm:px-8 md:pb-12 md:pl-24 lg:pl-28"
-        >
-          <div className="relative z-10 grid gap-8 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <h1 className="display-smash text-white">
-                <span className="block overflow-hidden">
-                  <SplitChars
-                    text="Alan"
-                    delay={0.1}
-                    className="whitespace-nowrap text-[clamp(2.8rem,14vw,6.5rem)]"
-                  />
-                </span>
-                <span className="mt-0.5 block overflow-hidden">
-                  <SplitChars
-                    text="Shen"
-                    delay={0.26}
-                    className="whitespace-nowrap text-[clamp(2.8rem,14vw,6.5rem)]"
-                  />
-                </span>
-              </h1>
-
-              <motion.p
-                className="mt-5 max-w-md text-base leading-relaxed text-white/80 md:text-lg"
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.5, ease: easeSnap }}
-              >
-                {TAGLINE}
-              </motion.p>
-
-              <motion.div
-                className="mt-8 flex flex-wrap items-center gap-3"
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7, ease: easeOut }}
-              >
-                <Magnetic intensity={0.28} range={90}>
-                  <Link
-                    href="/work"
-                    className="inline-flex items-center bg-accent px-5 py-3 text-xs font-semibold tracking-[0.14em] text-white uppercase transition-colors hover:bg-accent-deep"
-                  >
-                    Work
-                  </Link>
-                </Magnetic>
-                <Magnetic intensity={0.22} range={90}>
-                  <Link
-                    href="/music"
-                    className="inline-flex items-center border border-white/45 px-5 py-3 text-xs font-semibold tracking-[0.14em] text-white uppercase transition-colors hover:bg-white/10"
-                  >
-                    Music
-                  </Link>
-                </Magnetic>
-              </motion.div>
-            </div>
-
-            <div className="lg:col-span-5">
-              {FEATURED?.audio && <NowPlaying track={FEATURED} />}
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      <div className="border-y border-line bg-bg py-2 md:pl-16 lg:pl-[4.5rem]">
-        <MegaTicker
-          speed={16}
-          items={[
-            'Alan Shen',
-            'Studious',
-            'Scribe',
-            'USACO',
-            'VEX',
-            'Violin',
-            'HackHarvard',
-            'Le Rosey',
-          ]}
-        />
-      </div>
-
-      {/* Mosaic who — images woven through, facts not paragraphs */}
-      <section
-        ref={whoRef}
-        className="overflow-x-clip border-b border-line bg-bg md:pl-16 lg:pl-[4.5rem]"
-      >
-        <div className="grid md:grid-cols-12">
-          <div className="relative grid grid-cols-2 gap-0 md:col-span-7 md:grid-cols-4 md:grid-rows-2">
-            {WHO_MOSAIC.map((shot, i) => (
-              <motion.div
-                key={shot.src}
-                className={`relative min-h-[160px] overflow-hidden sm:min-h-[200px] ${shot.className}`}
-                style={
-                  reduce
-                    ? undefined
-                    : { y: i % 2 === 0 ? mosaicA : mosaicB }
-                }
-              >
-                <Image
-                  src={shot.src}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: shot.pos }}
-                  sizes="(max-width: 768px) 50vw, 30vw"
-                />
-              </motion.div>
-            ))}
-          </div>
-
-          <Reveal className="flex flex-col justify-center px-5 py-12 sm:px-8 md:col-span-5 md:px-8 lg:px-10">
-            <p className="text-[10px] tracking-[0.28em] text-accent uppercase">
-              About
+    <div className="bg-bg text-ink">
+      {/* cover */}
+      <section className="section-max section-pad flex min-h-[100svh] flex-col justify-end pt-28 pb-10 md:pb-14">
+        <div className="mb-8 grid gap-6 md:mb-12 md:grid-cols-12">
+          <Fade delay={0.5} className="md:col-span-5">
+            <p className="text-ink text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug">
+              {HOME_INTRO}
             </p>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.75rem,3.2vw,2.4rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-ink uppercase">
-              Student at Le Rosey.
-              <span className="mt-1 block text-accent">Builder everywhere else.</span>
-            </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
-              I build education products, compete in CS and robotics, swim for
-              the school, and play violin and piano — same person across all of
-              it.
-            </p>
-            <ul className="mt-6 space-y-3 border-t border-line pt-5">
-              {[
-                { k: 'Founded', v: 'Studious LMS' },
-                { k: 'Co-built', v: 'Scribe' },
-                { k: 'Podium', v: '3× hackathon' },
-                { k: 'Athletic', v: 'Competitive swim' },
-                { k: 'Research', v: 'Cambridge UP ’26' },
-              ].map((row) => (
-                <li key={row.k} className="flex gap-4 text-sm">
-                  <span className="w-20 text-[10px] tracking-[0.14em] text-ink-faint uppercase">
-                    {row.k}
-                  </span>
-                  <span className="font-medium text-ink">{row.v}</span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/about"
-              className="mt-8 text-xs font-semibold tracking-[0.14em] text-accent uppercase hover:text-accent-deep"
-            >
-              Full bio →
-            </Link>
-          </Reveal>
+          </Fade>
+          <Fade
+            delay={0.6}
+            className="label md:col-span-3 md:col-start-10 md:text-right"
+          >
+            <p>Institut Le Rosey</p>
+            <p>class of 2027</p>
+          </Fade>
+        </div>
+        <h1 className="sr-only">Alan Shen</h1>
+        <div aria-hidden>
+          <Rise now delay={0.05}>
+            <span className="display -ml-[0.04em] block text-[clamp(4rem,26vw,26rem)] leading-[0.8] whitespace-nowrap">
+              Alan Shen
+            </span>
+          </Rise>
         </div>
       </section>
 
-      <div className="border-b border-line bg-bg px-5 py-10 sm:px-8 md:pl-24 lg:pl-28">
-        <Reveal>
-          <p className="text-[10px] tracking-[0.28em] text-accent uppercase">
-            Explore
+      {/* statement */}
+      <section className="section-max section-pad py-28 md:py-44">
+        <Words
+          text={LINES.code}
+          className="display-soft max-w-[22ch] text-[clamp(2.25rem,5.6vw,5.75rem)]"
+        />
+      </section>
+
+      {/* robotics and swimming, as a masonry */}
+      <section className="section-max section-pad pb-12 md:pb-20">
+        <Masonry columns={MASONRY} />
+      </section>
+
+      <Block
+        id="work"
+        label="selected work"
+        aside={
+          <Link href="/work" className="hover:text-ink transition-colors">
+            all work →
+          </Link>
+        }
+      >
+        {SELECTED.map(({ id, year }) => {
+          const p = PROJECTS.find((x) => x.id === id)!
+          return (
+            <BigRow
+              key={id}
+              title={p.name}
+              detail={p.description}
+              meta={year}
+              href={`/work#${id}`}
+            />
+          )
+        })}
+        <div className="mt-10 grid gap-3 md:mt-14 md:grid-cols-3">
+          {WORK_PHOTOS.map((ph, i) => (
+            <Fade key={ph.src} delay={i * 0.06}>
+              <Media
+                src={ph.src}
+                alt={ph.alt}
+                caption={ph.caption}
+                position={ph.position}
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </Fade>
+          ))}
+        </div>
+      </Block>
+
+      <Drift
+        text="build — compete — research — play —"
+        className="py-6 md:py-10"
+      />
+
+      {/* music */}
+      <Block
+        id="music"
+        label="music"
+        aside={
+          <Link href="/music" className="hover:text-ink transition-colors">
+            listen →
+          </Link>
+        }
+      >
+        <Fade className="border-line border-t pt-8 md:pt-10">
+          <p className="display-soft max-w-[24ch] text-[clamp(2rem,4.4vw,4.5rem)]">
+            {MUSIC_INTRO}
           </p>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.6rem,3vw,2.2rem)] font-extrabold tracking-[-0.03em] text-ink uppercase">
-            Three worlds.
-          </h2>
-          <p className="mt-3 max-w-lg text-sm leading-relaxed text-ink-soft md:text-base">
-            Products I ship, music I release, and the path that connects
-            classrooms to podiums.
-          </p>
-        </Reveal>
-      </div>
-
-      <WorldPanel
-        href="/work"
-        index="01"
-        title="Build"
-        lede="Education products and hackathon builds — Studious for schools, Scribe and Nomad from the floor."
-        image="/alan/hackmit.jpg"
-        imagePosition="center 45%"
-        facts={[
-          { label: 'Studious', value: 'Modern LMS' },
-          { label: 'Scribe', value: 'HackHarvard 1st' },
-          { label: 'Nomad', value: 'HackMIT 3rd' },
-          { label: 'Stack', value: 'Next · tRPC · AI' },
-        ]}
-        previews={[
-          { src: '/alan/hackharvard-win.jpg', position: 'center 30%' },
-          { src: '/hackharvardchina.JPG', position: 'center 25%' },
-          { src: '/alan/vex-team.png', position: 'center 30%' },
-        ]}
-        cta="See projects"
-      />
-
-      <WorldPanel
-        href="/music"
-        index="02"
-        title="Stage"
-        invert
-        flip
-        lede="Singles as Alan Shen, plus live orchestra and ABRSM Grade 8 violin and piano."
-        image="/alan/orchestra-hall.jpg"
-        imagePosition="center 40%"
-        facts={[
-          { label: 'Single', value: "I'd Stay" },
-          { label: 'Single', value: 'Dreams of the Blue' },
-          { label: 'Grade', value: 'ABRSM 8' },
-          { label: 'Live', value: 'Orchestra · Solo' },
-        ]}
-        previews={[
-          { src: '/alan/orchestra-ensemble.jpg', position: 'center 35%' },
-          { src: '/alan/orchestra.png', position: '72% 28%' },
-          { src: '/alan/violin-stage.png', position: '55% 25%' },
-        ]}
-        cta="Open music"
-      />
-
-      <WorldPanel
-        href="/path"
-        index="03"
-        title="Path"
-        lede="Competition, research, and athletics — the long arc from classroom to podium."
-        image="/alan/graduation.png"
-        imagePosition="center 18%"
-        facts={[
-          { label: 'USACO', value: 'Gold ’26' },
-          { label: 'VEX', value: 'Worlds qualifier' },
-          { label: 'Swim', value: 'Medals · Team' },
-          { label: 'Paper', value: 'Cambridge UP ’26' },
-        ]}
-        previews={[
-          { src: '/alan/medals-rooftop.png', position: 'center 30%' },
-          { src: '/alan/lake-medals.webp', position: 'center 40%' },
-          { src: '/alan/swim-team.jpg', position: 'center 25%' },
-        ]}
-        cta="Open path"
-      />
-
-      <section className="spine-pad relative overflow-hidden bg-ink py-16 text-white md:py-20">
-        <Image
-          src="/alan/violin-stage.png"
-          alt=""
-          fill
-          className="object-cover object-[55%_25%] opacity-30"
+          <Link
+            href="/music-technology"
+            className="rule-link mt-6 inline-block text-base"
+          >
+            Music &amp; technology portfolio — view selected work →
+          </Link>
+        </Fade>
+        <Media
+          className="mt-12 md:mt-16"
+          src="/media/site/banner.jpg"
+          alt="Alan Shen performing violin on stage"
+          ratio="aspect-[4/5] md:aspect-[21/9]"
+          position="35% center"
+          travel={0.16}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-ink/70" />
-        <div className="relative z-10 px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="text-[10px] tracking-[0.28em] text-lake uppercase">
-                Next
-              </p>
-              <p className="mt-2 font-[family-name:var(--font-display)] text-[clamp(1.5rem,3vw,2rem)] font-extrabold uppercase">
-                Always building the next thing.
-              </p>
-              <p className="mt-2 max-w-md text-sm text-white/65">
-                More on education, competition, and how to reach me.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
+        <div className="mt-3 grid grid-cols-3 gap-3">
+          {[
+            [
+              '/media/music/violin-performance.png',
+              'Alan playing violin on a dark stage',
+              'solo',
+            ],
+            [
+              '/media/music/orchestra-ensemble.jpg',
+              'Alan with the orchestra ensemble',
+              'orchestra',
+            ],
+            [
+              '/media/music/violin-group.png',
+              'The violin section in performance',
+              'the violin section',
+            ],
+          ].map(([src, alt, caption]) => (
+            <Media
+              key={src}
+              src={src}
+              alt={alt}
+              caption={caption}
+              ratio="aspect-[4/3]"
+              sizes="33vw"
+            />
+          ))}
+        </div>
+        <div className="mt-10 md:mt-14">
+          {MUSIC_RELEASES.map((r) => (
+            <BigRow
+              key={r.id}
+              title={r.title}
+              detail={`${r.type} · ${r.artist}`}
+              meta="listen"
+              href={r.hyperfollow ?? '/music'}
+            />
+          ))}
+        </div>
+      </Block>
+
+      {/* moments */}
+      <Block id="moments" label="moments">
+        <div className="border-line grid gap-3 border-t pt-8 md:grid-cols-12 md:pt-10">
+          {MOMENTS.map((m, i) => (
+            <Fade key={m.src} className={m.place} delay={(i % 2) * 0.08}>
+              <Media
+                src={m.src}
+                alt={m.alt}
+                caption={m.caption}
+                ratio={m.ratio}
+                className="flex h-full flex-col [&>div]:flex-1"
+              />
+            </Fade>
+          ))}
+        </div>
+      </Block>
+
+      {/* about */}
+      <Block id="about" label="about">
+        <div className="border-line grid gap-12 border-t pt-8 md:pt-10 lg:grid-cols-12 lg:gap-8">
+          <Fade className="lg:col-span-6">
+            <p className="display-soft text-[clamp(1.4rem,2.2vw,2.1rem)] leading-[1.3]">
+              {HOME_BIO}
+            </p>
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4">
+              {FACTS.map(([k, v]) => (
+                <div key={k} className="border-line border-t pt-3">
+                  <dt className="label">{k}</dt>
+                  <dd className="text-ink mt-1 text-sm">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Fade>
+          <Fade className="lg:col-span-5 lg:col-start-8" delay={0.1}>
+            <aside
+              id="record"
+              className="scroll-mt-24"
+              aria-labelledby="home-honours-title"
+            >
+              <h3 id="home-honours-title" className="label mb-5">
+                honours and recognitions
+              </h3>
+              <ul>
+                {AWARDS.map((award) => (
+                  <li
+                    key={award.id}
+                    className="border-line grid grid-cols-[4.5rem_1fr] gap-4 border-t py-4"
+                  >
+                    <span className="label pt-0.5">{award.date}</span>
+                    <p className="text-ink text-base leading-snug">
+                      {award.title}
+                    </p>
+                  </li>
+                ))}
+              </ul>
               <Link
-                href="/about"
-                className="bg-white px-5 py-3 text-xs font-semibold tracking-[0.14em] text-ink uppercase hover:bg-mist"
+                href="/path#honours"
+                className="rule-link mt-5 inline-block text-sm"
               >
-                About
+                full record →
               </Link>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="border border-white/35 px-5 py-3 text-xs font-semibold tracking-[0.14em] text-white uppercase hover:bg-white/10"
-              >
-                {EMAIL}
-              </a>
-            </div>
-          </div>
+            </aside>
+          </Fade>
+        </div>
+      </Block>
+
+      {/* contact */}
+      <section
+        id="contact"
+        className="section-max section-pad scroll-mt-16 pt-16 pb-24 md:pt-24 md:pb-32"
+      >
+        <h2 className="display-soft text-ink mb-6 text-[clamp(1.75rem,2.6vw,2.5rem)]">
+          contact
+        </h2>
+        <a href={`mailto:${EMAIL}`} className="group block">
+          <Rise>
+            <span className="display group-hover:text-accent block text-[clamp(3.5rem,13vw,14rem)] transition-colors">
+              Say hello.
+            </span>
+          </Rise>
+          <span className="text-ink-soft group-hover:text-ink mt-6 block text-[clamp(1.125rem,2vw,1.75rem)] break-all transition-colors">
+            {EMAIL}
+          </span>
+        </a>
+        <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+          {SOCIAL_LINKS.filter((l) => l.label !== 'email').map((l) => (
+            <SmartLink
+              key={l.label}
+              href={l.link}
+              className="text-ink-soft hover:text-ink transition-colors"
+            >
+              {l.label}
+            </SmartLink>
+          ))}
         </div>
       </section>
-    </>
+    </div>
   )
 }
