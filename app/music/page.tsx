@@ -114,7 +114,7 @@ export default function MusicPage() {
           I have composed five songs using Logic Pro X, Ableton Live, and
           Melodyne, and released two as singles. On @alan.music27, I have also
           made covers for more than 20 pop and R&amp;B videos. The channel has
-          900+ followers, 11,000 likes, and more than 300,000 views.
+          600+ followers, 11,000 likes, and more than 300,000 views.
         </p>
         {MUSIC_RELEASES.map((r, i) => (
           <div

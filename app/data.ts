@@ -508,7 +508,7 @@ export const PUBLICATIONS: Publication[] = [
     status: 'forthcoming',
     date: 'expected March 2027',
     presentation:
-      'CALICO — Computer Assisted Language Instruction Consortium · May 30, 2025 (preliminary study)',
+      'CALICO — Computer Assisted Language Instruction Consortium · 2026',
     description:
       'I worked with Professor Feng Xiao at Pomona College on fine-tuning and evaluation pipelines for pragmatics assessment. I am the fourth author of this forthcoming chapter.',
     id: 'pub-pragmatics',
@@ -758,7 +758,7 @@ export const HIGHLIGHTS: Highlight[] = [
     value: 'Forthcoming',
     compact: true,
     label: 'Cambridge Univ. Press',
-    detail: 'Training AI for Pragmatics Assessment · CALICO 2025 talk',
+    detail: 'Training AI for Pragmatics Assessment · CALICO 2026 talk',
     href: '/#research',
   },
   {
@@ -818,7 +818,7 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'Training AI for Pragmatics Assessment',
     subtitle:
-      'fourth author of a forthcoming chapter; preliminary work presented at CALICO 2025',
+      'fourth author of a forthcoming chapter; work presented at CALICO 2026',
     right: 'Cambridge University Press · forthcoming',
     href: '#note-research',
   },
@@ -852,7 +852,7 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'swimming, Le Rosey',
     subtitle:
-      'fourteen medals at ADISR and MLS (Mountain and Lakes Schools) competitions',
+      'fourteen medals at ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions',
     right: 'three-time team MVP · one school record',
     href: '#honours',
   },
@@ -1034,10 +1034,11 @@ export const ROLL_NOTES: RollNote[] = [
     id: 'r-calico',
     row: 'research',
     label: 'CALICO talk · Cambridge UP',
-    start: '2025-05',
+    start: '2026',
+    precision: 'year',
     result: true,
     detail:
-      'preliminary pragmatics assessment study — CALICO 2025 talk; related chapter forthcoming, Cambridge University Press',
+      '“Training AI for Pragmatics Assessment” — CALICO 2026 talk; forthcoming, Cambridge University Press',
     href: '#note-research',
   },
   {
@@ -1222,7 +1223,7 @@ export const NOTES: Record<string, string[]> = {
     'I scored 1000 / 1000 in the February 2026 USACO Silver contest and was promoted to Gold. With VEX team 15520X, I help design the robot and program its autonomous routines and driver controls. Our team received the Excellence Award at Alpine Robo Games 2026 and qualified for the World Championship in St. Louis. We also placed third in skills and in the qualifiers at Alpine Robo Games, and fourth in skills and seventh overall at the Swiss Regional.',
   ],
   research: [
-    'I worked with Professor Feng Xiao at Pomona College on AI and pragmatics assessment in second-language learning, building fine-tuning and evaluation pipelines. I am the fourth author of “Training AI for Pragmatics Assessment”, a chapter in Generative AI for Pragmatics: Research, Teaching, and Assessment, edited by Naoko Taguchi and forthcoming from Cambridge University Press. Preliminary work was presented at CALICO in May 2025. I also contributed to a published piece on API endpoints in Chinese international education and a conference paper on Luduan.ai.',
+    'I worked with Professor Feng Xiao at Pomona College on AI and pragmatics assessment in second-language learning, building fine-tuning and evaluation pipelines. I am the fourth author of “Training AI for Pragmatics Assessment”, a chapter in Generative AI for Pragmatics: Research, Teaching, and Assessment, edited by Naoko Taguchi and forthcoming from Cambridge University Press. The work was presented at CALICO in 2026. I also contributed to a published piece on API endpoints in Chinese international education and a conference paper on Luduan.ai.',
   ],
 }
 

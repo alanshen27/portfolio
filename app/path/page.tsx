@@ -129,10 +129,10 @@ export default function PathPage() {
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
             I swim freestyle and butterfly for the Le Rosey team and help my
-            teammates with their technique. I’ve won fourteen medals, set a
-            school record, and been named school MVP three times in a row. The
-            results below include ADISR and MLS (Mountain and Lakes Schools)
-            competitions.
+            teammates with their technique. I’ve won fourteen medals across
+            ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions. I’ve
+            also set a school record and been named school MVP three times in a
+            row.
           </p>
           <div className="mt-10 grid gap-3 md:grid-cols-12">
             <Media
