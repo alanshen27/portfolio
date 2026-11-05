@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Block, Fade, Line, Next, PageHead } from '@/components/beats'
 import { Media } from '@/components/media'
+import { MedalBars } from '@/components/viz/medal-bars'
 import { dateRange } from '@/lib/utils'
 import {
   AWARDS,
@@ -22,19 +23,6 @@ export default function PathPage() {
   const techWork = WORK_EXPERIENCE.filter(
     (w) => w.company !== 'Institut Le Rosey',
   )
-  const swim = WORK_EXPERIENCE.find((w) => w.company === 'Institut Le Rosey')
-  const meets = (swim?.bullets ?? [])
-    .filter((b) => b.includes(':'))
-    .map((b) => {
-      const at = b.indexOf(':')
-      return {
-        meet: b.slice(0, at).trim(),
-        result: b
-          .slice(at + 1)
-          .trim()
-          .replace(/\.$/, ''),
-      }
-    })
 
   return (
     <>
@@ -129,11 +117,11 @@ export default function PathPage() {
         <div className="border-line border-t pt-8 md:pt-10">
           <p className="text-ink-soft max-w-[52ch] text-[18px] leading-relaxed">
             I swim freestyle and butterfly for the Le Rosey team and help my
-            teammates with their technique. I’ve won fourteen medals across
-            ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions. I’ve
-            also set a school record and been named school MVP three times in a
-            row.
+            teammates with their technique. I compete at ADISR, MLS (Mountain
+            and Lakes Schools), and SGIS meets. I’ve also set a school record
+            and been named school MVP three times in a row.
           </p>
+          <MedalBars className="mt-10" />
           <div className="mt-10 grid gap-3 md:grid-cols-12">
             <Media
               className="md:col-span-6"
@@ -179,14 +167,6 @@ export default function PathPage() {
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
             </div>
-          ))}
-        </div>
-        <div className="mt-12">
-          <h3 className="text-ink mb-4 text-[20px] font-medium">
-            meet by meet
-          </h3>
-          {meets.map((m) => (
-            <Line key={m.meet} date={m.meet} title={m.result} />
           ))}
         </div>
       </Block>

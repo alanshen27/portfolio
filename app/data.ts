@@ -274,6 +274,102 @@ export const PROJECT_KIND_LABEL: Record<ProjectKind, string> = {
   build: 'build',
 }
 
+export type SwimResult = {
+  place: 1 | 2 | 3
+  event: string
+  detail?: string
+  medals?: number
+}
+
+export type SwimMeet = {
+  id: string
+  name: string
+  year: string
+  venue?: string
+  note?: string
+  results: SwimResult[]
+}
+
+export const SWIM_MEETS: SwimMeet[] = [
+  {
+    id: 'mls-beau-soleil-2026',
+    name: 'MLS',
+    year: '2026',
+    venue: 'Beau Soleil',
+    results: [
+      { place: 1, event: '4×50 m medley relay', detail: 'Butterfly leg' },
+      { place: 2, event: '50 m freestyle' },
+      { place: 2, event: '100 m freestyle' },
+      { place: 2, event: '100 m individual medley' },
+      { place: 2, event: '50 m butterfly' },
+      { place: 2, event: '4×50 m freestyle relay' },
+    ],
+  },
+  {
+    id: 'mls-open-water-2026',
+    name: 'MLS open water',
+    year: '2026',
+    note: 'About 150 m per lap',
+    results: [{ place: 1, event: 'Open water relay', detail: 'Team win' }],
+  },
+  {
+    id: 'adisr-2025',
+    name: 'ADISR',
+    year: '2025',
+    venue: 'EHL',
+    results: [
+      { place: 1, event: '4×50 m freestyle relay' },
+      { place: 2, event: '50 m freestyle' },
+    ],
+  },
+  {
+    id: 'mls-2025',
+    name: 'MLS',
+    year: '2025',
+    note: 'June / July',
+    results: [
+      { place: 1, event: '100 m freestyle' },
+      { place: 1, event: '200 m freestyle relay' },
+      { place: 1, event: '200 m medley relay' },
+      { place: 2, event: 'Individual medley' },
+    ],
+  },
+  {
+    id: 'adisr-2024',
+    name: 'ADISR',
+    year: '2024',
+    venue: 'EHL',
+    results: [
+      { place: 1, event: 'Medley relay' },
+      { place: 1, event: 'Freestyle relay' },
+      { place: 3, event: '100 m freestyle' },
+    ],
+  },
+  {
+    id: 'mls-2024',
+    name: 'MLS',
+    year: '2024',
+    venue: 'Beau Soleil',
+    results: [
+      { place: 2, event: '4×50 m medley relay', detail: 'Freestyle leg' },
+    ],
+  },
+  {
+    id: 'adisr-2023',
+    name: 'ADISR',
+    year: '2023',
+    venue: 'EHL',
+    note: '1st in the moyen category · Le Rosey school record',
+    results: [{ place: 1, event: 'Three gold medals', medals: 3 }],
+  },
+]
+
+export const SWIM_MEDAL_TOTAL = SWIM_MEETS.reduce(
+  (total, meet) =>
+    total + meet.results.reduce((count, result) => count + (result.medals ?? 1), 0),
+  0,
+)
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Studious',
@@ -344,12 +440,15 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     bullets: [
       'I received the Le Rosey swimming MVP award three consecutive times.',
       'Events: Individual Medley, Freestyle (100 m, 200 m relay, 50×4 IM relay), Medley Relay, Open Water.',
-      'ADISR 2025 EHL: Silver 50 m Free; Gold 4×50 Free.',
-      'MLS 2025 June/July: Silver (IM); Gold — 100 m Free | 200 m Freestyle Relay | 200 m Medley Relay.',
-      'ADISR 2024 EHL: Bronze — 100 m Free; Gold — IM Relay & Freestyle Relay.',
-      'MLS 2024 Beau Soleil: Silver — 50×4 IM Relay (Freestyle leg).',
-      '2026 MLS open water relay: team 1st place, about 150 m a lap.',
-      'ADISR 2023 EHL: 1st Place (Moyen Category) — 3 Gold Medals + 1 New School Record (Le Rosey).',
+      ...SWIM_MEETS.map((meet) => {
+        const title = [meet.name, meet.year, meet.venue].filter(Boolean).join(' ')
+        const results = meet.results.map((result) => {
+          const medal = { 1: 'Gold', 2: 'Silver', 3: 'Bronze' }[result.place]
+          const detail = result.detail ? ` (${result.detail})` : ''
+          return `${medal} — ${result.event}${detail}`
+        })
+        return `${title}: ${results.join('; ')}.${meet.note ? ` ${meet.note}.` : ''}`
+      }),
     ],
     id: 'work5',
   },
@@ -852,7 +951,7 @@ export const PROGRAMME: ProgrammeEntry[] = [
   {
     title: 'swimming, Le Rosey',
     subtitle:
-      'fourteen medals at ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions',
+      `${SWIM_MEDAL_TOTAL} medals at ADISR, MLS (Mountain and Lakes Schools), and SGIS competitions`,
     right: 'three-time team MVP · one school record',
     href: '#honours',
   },
@@ -1082,6 +1181,17 @@ export const ROLL_NOTES: RollNote[] = [
     href: '#interval',
   },
   // athletics
+  {
+    id: 'r-mls-beau-soleil-2026',
+    row: 'athletics',
+    label: 'MLS Beau Soleil · 6 medals',
+    start: '2026',
+    precision: 'year',
+    result: true,
+    detail:
+      'Gold, 4×50 m medley relay (butterfly leg); silver, 50 m freestyle, 100 m freestyle, 100 m individual medley, 50 m butterfly and 4×50 m freestyle relay',
+    href: '/path#athletics',
+  },
   {
     id: 'r-swim',
     row: 'athletics',
